@@ -1,0 +1,184 @@
+<!doctype html>
+<head>
+	<meta name="description" content="" />
+	<meta name="robots" content="index, follow" />
+	<meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+	<meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+	<link rel="canonical" href="https://mattcasmith.net/2018/04/29/automatically-generating-soc-emails-with-a-python-script/" />
+	<meta property="og:locale" content="en_GB" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Automatically generating SOC emails with a Python script | MattCASmith" />
+	<meta property="og:description" content="" />
+	<meta property="og:url" content="https://mattcasmith.net/2018/04/29/automatically-generating-soc-emails-with-a-python-script/" />
+	<meta property="og:site_name" content="MattCASmith" />
+	<meta property="article:published_time" content="2020-05-02T11:05:40+00:00" />
+	<meta property="og:image" content="https://mattcasmith.net/wp-content/uploads/2018/04/typing-516x270.jpg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:creator" content="@mattcasmith" />
+	<meta name="twitter:site" content="@mattcasmith" />
+</head>
+	<head>
+		<title>Automatically generating SOC emails with a Python script | MattCASmith</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="shortcut icon" href="/assets/images/favicon.png">
+		<link rel="stylesheet" href="/assets/css/styles.css">
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+		
+	</head>
+	
+	<body>
+		<div id="site-container" class="post">
+		<div id="header">
+			<div id="header_left">
+				<a href="/"><img class="site_logo light" src="/assets/images/mcas_site_logo.png"></a>
+				<a href="/"><img class="site_logo dark" src="/assets/images/mcas_site_logo_dark.png"></a>
+				<a href="/"><h2>MattCASmith</h2></a>
+			</div>
+			<div id="header_right">
+				<a target="_blank" href="https://twitter.com/mattcasmith"><img class="link_icon_twitter" src="/assets/images/twitter_icon.png"></a>
+				<a target="_blank" href="mailto:mattcasmith@protonmail.com"><img class="link_icon_email light" src="/assets/images/email_icon.png"></a>
+				<a target="_blank" href="mailto:mattcasmith@protonmail.com"><img class="link_icon_email dark" src="/assets/images/email_icon_dark.png"></a>
+			</div>
+		</div>
+		
+		<div class="title">
+			<h1 class="entry-title">Automatically generating SOC emails with a Python script</h1>
+		</div>
+		
+		<div class="meta">
+			<span class="year_label">2018-04-29</span> |&nbsp;&nbsp;&nbsp; 
+				
+				
+					<a href="/category/cyber-security.html">Cyber Security</a>,&nbsp;&nbsp;
+				
+					<a href="/category/programming.html">Programming</a>
+				
+			
+		</div>
+		
+		<img src="/wp-content/uploads/2018/04/typing-516x270.jpg" alt="Automatically generating SOC emails with a Python script" />
+		
+		<p>The life of a SOC analyst – as is the case with many other jobs – can involve a lot of repetitive tasks, including the process of writing tens of similar emails each day. But what if this could be automated, saving time and reducing the potential for error?<!--more--></p>
+
+<h3 id="the-email-template">The email template</h3>
+
+<p>The most common email that a cyber security analyst has to send is to tell someone that there’s something wrong with their computer. The template looks something like this:</p>
+
+<blockquote>
+  <p>Dear Bob,</p>
+
+  <p>We have detected the following suspicious activity on your computer, BOB_PC: Internet Explorer was run on Monday 16th April 2018 at 12:37:20 BST. Internet Explorer can be a legitimate application, but its use instead of an alternative like Firefox or Internet Explorer is not representative of normal user activity.</p>
+
+  <p>Date and time: 16th April 2018 at 12:37:20 BST<br />
+Hostname: BOB_PC<br />
+File: C:\Program Files (x86)\Internet Explorer\iexplore.exe<br />
+File hash: 259e27152180b895df395ed3e412b90e</p>
+
+  <p>Your computer has been disconnected from the network and will require reimaging. Please contact IT to arrange this.</p>
+
+  <p>Kind regards,<br />
+Matt</p>
+</blockquote>
+
+<p>It’s a simple enough format, but when sending many of these each day (or even several at the same time) all that copying and pasting can take a while and lead to errors. What if I change the hostname in the list of technical details but forget to change it in the first sentence, for example? Some simple Python, involving little more than input prompts and variables, can help. Here’s how it works…</p>
+
+<h3 id="getting-information-from-the-user">Getting information from the user</h3>
+
+<p>First, let’s get the details we need from our SOC analyst. In this case, the email template includes the user’s name, the hostname, a description of the activity, the date and time it was detected, the file involved, and the file hash. To add a little complexity, let’s also assume there’s another possible scenario where the analyst is just asking for information.</p>
+
+<blockquote>
+  <p>user_name = raw_input(“User name: “)<br />
+detection_hostname = raw_input(“Hostname: “)<br />
+detection_description = raw_input(“We detected… “)<br />
+detection_date = raw_input(“Detection date: “)<br />
+detection_time = raw_input(“Detection time: “)<br />
+detection_file = raw_input(“File path: “)<br />
+detection_hash = raw_input(“File hash: “)<br />
+disconnected = raw_input(“Disconnected? (Y/N): “)</p>
+</blockquote>
+
+<h3 id="setting-up-the-message-template">Setting up the message template</h3>
+
+<p>Now the analyst has entered the necessary information, let’s establish the template and insert those variables. If your SOC has more than one email template then you could build in a menu or prompt to ask the user to choose between them, but in this case I’m going to move forward with just the one to keep this walkthrough a bit simpler.</p>
+
+<blockquote>
+  <p>message_1 = (“Dear %s,” % user_name)<br />
+message_2 = (“We have detected the following suspicious activity on your computer, %s: %s” % (detection_hostname, detection_description))<br />
+message_3 = (“Date and time: %s at %s” % (detection_date, detection_time))<br />
+message_4 = (“Hostname: %s” % detection_hostname)<br />
+message_5 = (“File: %s” % detection_file)<br />
+message_6 = (“File hash: %s” % detection_hash)<br />
+message_7a = (“Your computer has been disconnected from the network and will require reimaging. Please contact IT to arrange this.”)<br />
+message_7b = (“Are you aware of this activity and do you know why it took place?”)<br />
+message_8 = (“Kind regards,”)<br />
+message_9 = (“Matt”)</p>
+</blockquote>
+
+<h3 id="putting-the-pieces-together">Putting the pieces together</h3>
+
+<p>The final step is as simple as printing the relevant parts of the generated email to the screen (or a file, if you’d prefer) while using some simple logic to select the correct elements. To demonstrate how this works, I’ll use both the previous decision between disconnecting and questioning the user, and I’ll assume that our security tools don’t always give us a file hash.</p>
+
+<blockquote>
+  <p>print message_1<br />
+print message_2<br />
+print message_3<br />
+print message_4<br />
+print message_5</p>
+
+  <p>if detection_hash == “”:<br />
+     pass<br />
+else:<br />
+     print message_6</p>
+
+  <p>if disconnected == “Y” or disconnected == “y”:<br />
+     print message_7a<br />
+else:<br />
+     print message_7b</p>
+
+  <p>print message_8<br />
+print message_9</p>
+</blockquote>
+
+<p>The hash line is only printed if a hash exists and the disconnection line is only printed if the analyst says the endpoint was disconnected. I’ve removed the empty print lines to save space here, but feel free to add some to give your message some neat spacing.</p>
+
+<h3 id="output">Output</h3>
+
+<p>The result is a nice, automatically generated message that can be copied and pasted into an email or a SOC tool. The automated process speeds things up and reduces the chances that the analyst will make an error when sending many emails each day.</p>
+
+<p><img class="aligncenter size-full wp-image-562" src="https://i2.wp.com/mattcasmith.net/wp-content/uploads/2018/04/soc_message.png?resize=640%2C309" alt="" width="640" height="309" srcset="https://i2.wp.com/mattcasmith.net/wp-content/uploads/2018/04/soc_message.png?w=640&amp;ssl=1 640w, https://i2.wp.com/mattcasmith.net/wp-content/uploads/2018/04/soc_message.png?resize=300%2C145&amp;ssl=1 300w, https://i2.wp.com/mattcasmith.net/wp-content/uploads/2018/04/soc_message.png?resize=559%2C270&amp;ssl=1 559w" sizes="(max-width: 640px) 100vw, 640px" data-recalc-dims="1" /></p>
+
+<p>Of course, this could all be taken a few steps further: the details of the detection could be pulled from a security tool API, for example, or the email could be automatically sent or fed to a SOC tool that would send it to the user. Perhaps I’ll look into that in a future post.</p>
+
+<div style="background: #ffffd8 !important; float: left; margin-bottom: 20px;">
+  <p style="padding: 20px; margin: 0;">
+    A note: I&#8217;m only just delving into the world of Python, and these posts are as much to get things straight in my own head as they are to show them to others. If anything looks wrong, or there&#8217;s a more efficient way of doing something, please let me know!
+  </p>
+</div>
+
+<hr />
+
+<p><em>Photo from <a href="https://www.pexels.com/photo/person-touching-open-macbook-on-table-839465/" target="_blank">Pexels</a> <a href="https://creativecommons.org/share-your-work/public-domain/cc0/" target="_blank">(CC0)</a>. Cropped.</em></p>
+
+		
+		<div id="prev_next">
+			<div class="prev">
+				    
+						<a href="/2018/04/08/incident-triage-identifying-the-source-of-a-malware-infection/">&laquo;&nbsp;Incident triage: Identifying the source of a malware infection</a>
+					
+			</div>
+			<div class="next">
+				    
+						<a href="/2018/05/05/how-to-tame-the-indycar-beast-in-project-cars-2/">How to tame the IndyCar beast in Project Cars 2&nbsp;&raquo;</a>
+					
+			</div>
+		</div>
+		
+		<div id="footer">
+			&copy; 2017-20 MattCASmith
+			<span class="home-link"><a href="/">Go home</a></span>
+		</div>
+		
+		</div>
+	
+	</body>
+</html>

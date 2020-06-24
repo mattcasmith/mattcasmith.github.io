@@ -1,0 +1,168 @@
+<!doctype html>
+<head>
+	<meta name="description" content="" />
+	<meta name="robots" content="index, follow" />
+	<meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+	<meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+	<link rel="canonical" href="https://mattcasmith.net/2017/11/24/fetching-and-filtering-tweets-in-python-with-tweepy/" />
+	<meta property="og:locale" content="en_GB" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Fetching and filtering tweets in Python with Tweepy | MattCASmith" />
+	<meta property="og:description" content="" />
+	<meta property="og:url" content="https://mattcasmith.net/2017/11/24/fetching-and-filtering-tweets-in-python-with-tweepy/" />
+	<meta property="og:site_name" content="MattCASmith" />
+	<meta property="article:published_time" content="2020-05-02T11:05:40+00:00" />
+	<meta property="og:image" content="https://mattcasmith.net/wp-content/uploads/2017/11/tube-CC-516x270.jpg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:creator" content="@mattcasmith" />
+	<meta name="twitter:site" content="@mattcasmith" />
+</head>
+	<head>
+		<title>Fetching and filtering tweets in Python with Tweepy | MattCASmith</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="shortcut icon" href="/assets/images/favicon.png">
+		<link rel="stylesheet" href="/assets/css/styles.css">
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+		
+	</head>
+	
+	<body>
+		<div id="site-container" class="post">
+		<div id="header">
+			<div id="header_left">
+				<a href="/"><img class="site_logo light" src="/assets/images/mcas_site_logo.png"></a>
+				<a href="/"><img class="site_logo dark" src="/assets/images/mcas_site_logo_dark.png"></a>
+				<a href="/"><h2>MattCASmith</h2></a>
+			</div>
+			<div id="header_right">
+				<a target="_blank" href="https://twitter.com/mattcasmith"><img class="link_icon_twitter" src="/assets/images/twitter_icon.png"></a>
+				<a target="_blank" href="mailto:mattcasmith@protonmail.com"><img class="link_icon_email light" src="/assets/images/email_icon.png"></a>
+				<a target="_blank" href="mailto:mattcasmith@protonmail.com"><img class="link_icon_email dark" src="/assets/images/email_icon_dark.png"></a>
+			</div>
+		</div>
+		
+		<div class="title">
+			<h1 class="entry-title">Fetching and filtering tweets in Python with Tweepy</h1>
+		</div>
+		
+		<div class="meta">
+			<span class="year_label">2017-11-24</span> |&nbsp;&nbsp;&nbsp; 
+				
+				
+					<a href="/category/programming.html">Programming</a>
+				
+			
+		</div>
+		
+		<img src="/wp-content/uploads/2017/11/tube-CC-516x270.jpg" alt="Fetching and filtering tweets in Python with Tweepy" />
+		
+		<p>If you hadn’t already heard, I’ve been experimenting with some Python recently, trying to build on the foundation that I picked up at <a href="http://mattcasmith.net/2017/03/27/finishing-line-ive-passed-my-gcih-exam/">the SANS Cyber Retraining Academy</a>. While I’d already had some success playing around with isolated little scripts, I decided it was time to start pulling data from external sources – starting with Twitter.<!--more--></p>
+
+<p>As an exercise to familiarise myself with these kinds of functions, I attempted to build a simple app that would pull the most recent tweets about the London Underground’s Northern line and give an idea of how it’s running at any particular time. Here’s what I cobbled together using Tweepy and a few handy online tutorials.</p>
+
+<h3 id="setting-everything-up">Setting everything up</h3>
+
+<p>Before we get started, we’ve got some setup to do. First, we’ll import both Tweepy itself and HTMLParser (we’ll see what that’s used for a bit later on).</p>
+
+<blockquote>
+  <p>import tweepy<br />
+import HTMLParser</p>
+
+  <p>auth = tweepy.OAuthHandler(“KEY_HERE”, “KEY_HERE”)<br />
+auth.set_access_token(“KEY_HERE”, “KEY_HERE”)<br />
+api = tweepy.API(auth)</p>
+</blockquote>
+
+<p>To communicate with Twitter correctly, Tweepy needs a few details. To get these, you’ll need to set up a Twitter app through the social network’s developer website. The keys needed here are available through the app developer dashboard (make sure they’re not accessible if you’re developing something that’ll be used beyond your own computer).</p>
+
+<h3 id="fetching-the-tweets">Fetching the tweets</h3>
+
+<p>Next, it’s time to pull the @NorthernLine tweets from Twitter’s API. Luckily, Tweepy makes it easy to grab a user’s tweets in just a single line of code.</p>
+
+<blockquote>
+  <p># Gets ten most recent tweets from @NorthernLine<br />
+nl_tweets = api.user_timeline(“northernline”, count = 10)<br />
+tweetno = 1</p>
+</blockquote>
+
+<p>If it’s not already obvious, the first line gets the tweets. If you’re looking to use posts from another user, simply substitute “northernline” for their username. The count attribute tells Tweepy how many tweets we want. Although my target is to display three tweets, some may be replies or retweets that I want to filter out, so I’m fetching ten.</p>
+
+<p>Next I establish the tweetno variable. This number will keep track of how many tweets we successfully print so I can limit the number displayed on-screen to three.</p>
+
+<h3 id="filtering-the-tweets">Filtering the tweets</h3>
+
+<p>Now we want to parse the text, filter out replies, and only print the first three relevant tweets. To do that, we’ll start by iterating through each tweet in our data.</p>
+
+<blockquote>
+  <p>for tweet in nl_tweets:</p>
+
+  <p># Gets and parses each tweet’s text<br />
+currenttweet = HTMLParser.HTMLParser().unescape(tweet.text)</p>
+
+  <p># Filters out tweets beginning with @ (replies)<br />
+if currenttweet[:1].startswith(‘@’):<br />
+continue</p>
+
+  <p># Breaks the loop if more than three tweets printed<br />
+elif tweetno &gt; 3:<br />
+break</p>
+</blockquote>
+
+<p>For each tweet, HTMLParser is used to convert HTML character codes into the relevant symbols. This is done by unescaping Tweepy’s tweet.text, which means all our quotes, ampersands and other symbols are displayed correctly in our output.</p>
+
+<p>Next, I filter out replies by checking to see if the tweet begins with an @ symbol. If this check comes back positive, we can assume that the tweet is a reply and continue with the iteration, leaving this one out and moving onto the next to be processed.</p>
+
+<p>Finally, I check how many tweets we’ve already printed by querying the tweetno variable. If this value is greater than three, we’re finished and we stop the iteration.</p>
+
+<h3 id="printing-the-filtered-tweets">Printing the filtered tweets</h3>
+
+<p>Now we’re left with the tweets we actually want – original tweets (not retweets or replies) with their proper symbols – we want to print them in a neat little list.</p>
+
+<blockquote>
+  <p>    # Prints tweets that meet the criteria<br />
+else:<br />
+print tweet.created_at<br />
+print currenttweet<br />
+print(”)<br />
+tweetno = tweetno + 1</p>
+</blockquote>
+
+<p>My else statement prints the tweet’s date and time with Tweepy’s tweet.created_at, prints the contents of my currenttweet variable, and adds a blank line as a space between the returned tweets. Finally, we advance the tweetno counter by one.</p>
+
+<h3 id="output">Output</h3>
+
+<p>If everything works correctly, this will give us a neat little list of the three most recent tweets from @NorthernLine – perfect for checking for any transport issues before I leave my flat!</p>
+
+<p><img class="aligncenter wp-image-196" src="https://i2.wp.com/mattcasmith.net/wp-content/uploads/2017/11/NorthernLinetweets.png?w=100%25" alt="" srcset="https://i2.wp.com/mattcasmith.net/wp-content/uploads/2017/11/NorthernLinetweets.png?w=704&amp;ssl=1 704w, https://i2.wp.com/mattcasmith.net/wp-content/uploads/2017/11/NorthernLinetweets.png?resize=300%2C131&amp;ssl=1 300w, https://i2.wp.com/mattcasmith.net/wp-content/uploads/2017/11/NorthernLinetweets.png?resize=604%2C263&amp;ssl=1 604w" sizes="(max-width: 704px) 100vw, 704px" data-recalc-dims="1" /></p>
+
+<div style="background: #ffffd8 !important; float: left; margin-bottom: 20px;">
+  <p style="padding: 20px; margin: 0;">
+    A note: I&#8217;m only just delving into the world of Python, and these posts are as much to get things straight in my own head as they are to show them to others. If anything looks wrong, or there&#8217;s a more efficient way of doing something, please let me know!
+  </p>
+</div>
+
+<p><em>Photo © <a href="https://www.flickr.com/photos/barneymoss/23286620585/in/photolist-BtL21n-87P7QM-FwfNmt-6sPFXT-Fd38M5-2skGP-kbY41D-qQ1oxk-pT1kk7-5SZE2-eJZ7qh-kbYqme-9jGm2E-kbZWSd-kbZTCN-9jDgF6-6orJoD-R2QBcn-983pk-4fituu-qxs6rw-qxymdT-kbXM14-9jGmiw-bd5M4H-kbX2Vr-ftY66d-ftY5MN-ftHKNk-ftHL5p-bd5GgZ-bd5Bmx-kbXkiH-kbZEiS-kbXbqc-e2avhG-bd5DVe-cbFUhb-e2av1s-kbY7Fp-cbFUbo-bd5JTk-ixFUGj-kbZjgh-gtBC2w-pNte2Z-kbZQyw-bp8msV-6reMsi-5oeWa9" target="_blank" rel="noopener">Barney Moss</a> (<a href="https://creativecommons.org/licenses/by/2.0/" target="_blank" rel="noopener">CC BY 2.0</a>). Cropped.</em></p>
+
+		
+		<div id="prev_next">
+			<div class="prev">
+				    
+						<a href="/2017/11/18/three-of-the-best-cyber-security-podcasts-around/">&laquo;&nbsp;Three of the best cyber security podcasts around</a>
+					
+			</div>
+			<div class="next">
+				    
+						<a href="/2017/11/26/the-day-instagram-advertisingread-my-mind/">The day Instagram advertising read my mind&nbsp;&raquo;</a>
+					
+			</div>
+		</div>
+		
+		<div id="footer">
+			&copy; 2017-20 MattCASmith
+			<span class="home-link"><a href="/">Go home</a></span>
+		</div>
+		
+		</div>
+	
+	</body>
+</html>

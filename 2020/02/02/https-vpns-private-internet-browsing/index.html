@@ -1,0 +1,163 @@
+<!doctype html>
+<head>
+	<meta name="description" content="" />
+	<meta name="robots" content="index, follow" />
+	<meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+	<meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+	<link rel="canonical" href="https://mattcasmith.net/2020/02/02/https-vpns-private-internet-browsing/" />
+	<meta property="og:locale" content="en_GB" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Long-form &#8211; HTTPS and VPNs: How private is your internet browsing? | MattCASmith" />
+	<meta property="og:description" content="" />
+	<meta property="og:url" content="https://mattcasmith.net/2020/02/02/https-vpns-private-internet-browsing/" />
+	<meta property="og:site_name" content="MattCASmith" />
+	<meta property="article:published_time" content="2020-05-02T11:05:40+00:00" />
+	<meta property="og:image" content="https://mattcasmith.net/wp-content/uploads/2020/02/privacy.jpg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:creator" content="@mattcasmith" />
+	<meta name="twitter:site" content="@mattcasmith" />
+</head>
+	<head>
+		<title>Long-form &#8211; HTTPS and VPNs: How private is your internet browsing? | MattCASmith</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="shortcut icon" href="/assets/images/favicon.png">
+		<link rel="stylesheet" href="/assets/css/styles.css">
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+		
+	</head>
+	
+	<body>
+		<div id="site-container" class="post">
+		<div id="header">
+			<div id="header_left">
+				<a href="/"><img class="site_logo light" src="/assets/images/mcas_site_logo.png"></a>
+				<a href="/"><img class="site_logo dark" src="/assets/images/mcas_site_logo_dark.png"></a>
+				<a href="/"><h2>MattCASmith</h2></a>
+			</div>
+			<div id="header_right">
+				<a target="_blank" href="https://twitter.com/mattcasmith"><img class="link_icon_twitter" src="/assets/images/twitter_icon.png"></a>
+				<a target="_blank" href="mailto:mattcasmith@protonmail.com"><img class="link_icon_email light" src="/assets/images/email_icon.png"></a>
+				<a target="_blank" href="mailto:mattcasmith@protonmail.com"><img class="link_icon_email dark" src="/assets/images/email_icon_dark.png"></a>
+			</div>
+		</div>
+		
+		<div class="title">
+			<h1 class="entry-title">Long-form &#8211; HTTPS and VPNs: How private is your internet browsing?</h1>
+		</div>
+		
+		<div class="meta">
+			<span class="year_label">2020-02-02</span> |&nbsp;&nbsp;&nbsp; 
+				
+				
+					<a href="/category/cyber-security.html">Cyber Security</a>,&nbsp;&nbsp;
+				
+					<a href="/category/technology.html">Technology</a>
+				
+			
+		</div>
+		
+		<img src="/wp-content/uploads/2020/02/privacy.jpg" alt="Long-form &#8211; HTTPS and VPNs: How private is your internet browsing?" />
+		
+		<p>Web browsing privacy is of increasing concern as people’s business and personal lives become ever more entwined with the internet. This essay examines various connection scenarios to establish how secure your data really is.</p>
+
+<h3 id="introduction">Introduction</h3>
+
+<p>After years of industry concern, web browsing privacy is finally becoming a matter of interest to the public. There may be several factors behind this, including the Edward Snowden leaks, which revealed the extent to which western governments monitor their citizens’ online activity, and various headline-grabbing data leaks. Although these do not exactly align to web browsing for the most part, there is no doubt they have increased awareness of cyber security and privacy.</p>
+
+<p>Virtual private network (VPN) providers have been quick to capitalise on this, and have entered the public eye so emphatically that NordVPN was even unveiled as the “official cyber security partner” of 2019 Premier League runners-up Liverpool FC. It is not uncommon in the United Kingdom to see dramatic television adverts that imply that hackers can own users instantly if they are not using a VPN. But what exactly does a VPN hide? And how private is your browsing otherwise?</p>
+
+<p>This essay will explore web browsing privacy for users utilising various combinations of a range of technologies, including HTTPS-encrypted connections and VPNs. For each scenario, I will consider what a user’s internet service provider (ISP) and VPN provider can see, as well as the owners of the websites visited and any malicious actors monitoring traffic crossing the network.</p>
+
+<h3 id="assumptions">Assumptions</h3>
+
+<p>In order to focus on the issue of web browsing privacy, it is necessary to make a few assumptions about our theoretical hosts sending and receiving the internet traffic.</p>
+
+<p>Firstly, I will assume that the user’s endpoint is not compromised. If a malicious actor has successfully installed malware on a user’s machine, no number of network protections will ensure their privacy. The hacker may be able to record the user’s keystrokes, record which URLs they visit, take screenshots, and retrieve files, usernames, passwords, and other data from the computer.</p>
+
+<p>I will also assume that the various service providers involved have not been compromised. If a cyber criminal has “owned” the user’s ISP or VPN provider then they would be able to access all the data visible to those organisations. This essay will detail what data those corporations can see – just assume that if they were compromised then the attackers would see the same.</p>
+
+<p>Lastly, there’s the matter of the website the user is browsing to, which again I will assume is secure. There are several factors at play here, including the webmaster’s backend security and the user’s choice of password and/or multi-factor authentication if it is a web service with an account. It is safe to say that if the website is compromised then the user’s browsing activity and any data sent to the site (e.g. information entered in forms) will be visible to the attacker.</p>
+
+<h3 id="http-browsing">HTTP browsing</h3>
+
+<p>Until recent years, the internet was solely reliant on the HyperText Transfer Protocol (HTTP). While most websites have now switched to the encrypted version – HyperText Transfer Protocol Secure (HTTPS) – some less vigilant webmasters are still serving pages via HTTP. The issue here is that as HTTP is not encrypted, anybody in the middle can see all the browsing data, which is why most modern web browsers flag HTTP connections with a warning message.</p>
+
+<p><img src="/wp-content/uploads/2020/02/http_v2.png" /></p>
+
+<p>This means the ISP can see exactly which page was requested by the user, as well as any additional information they enter – for instance via forms. While it is unlikely that an ISP will actively monitor this data (at least in the UK), HTTP also leaves it open to other observers on its route to the web server.</p>
+
+<p>The real concern here is that any attacker sniffing traffic (i.e. collecting and reading the packets of data sent over the network) can also see everything. This raises privacy concerns if, for example, they can see what Google searches were made or which Facebook profiles were visited, but it can also be disastrous for security – as the attacker can see all data sent over HTTP, this means they can collect any usernames and passwords entered and use them to access or hijack the user’s accounts.</p>
+
+<p>As such, HTTP should be avoided at all costs. Luckily, in 2020 nearly all mainstream websites and apps used in the western world – Google, Facebook, Twitter, and Instagram, for example – have moved to HTTPS, which encrypts web traffic. Those that have not (and they are surprisingly common outside of the English language internet, at least based on my experience) should be avoided.</p>
+
+<h3 id="https-browsing">HTTPS browsing</h3>
+
+<p>So what happens if the user accesses a site over HTTPS? In this case, Transport Layer Security (TLS) is used to encrypt the data sent and received to shield it from prying eyes.</p>
+
+<p>A new TLS connection is made with each website the user browses to over HTTPS. When the user’s computer contacts the server, they exchange “hello” messages containing random data. The computer verifies the server’s Secure Socket Layer (SSL) certificate is legitimate and the client sends a premaster secret, encrypted with the public key from the server’s SSL certificate.</p>
+
+<p>The server decrypts the premaster secret using its private key, and both systems generate session keys using the client/server random data and premaster secret. Then both systems send “ready” messages encrypted with this session key, signifying that the handshake is complete and the encrypted connection is ready for use. All data sent from this point is encrypted.</p>
+
+<p><img src="/wp-content/uploads/2020/02/https_v2.png" /></p>
+
+<p>What does that encrypted connection mean for browsing privacy? All data sent between the client and the server is encrypted, meaning it cannot be understood by the user’s ISP or anybody eavesdropping on network traffic. However, it is worth noting that the initial Domain Name Service (DNS) request, which looks up the IP address that corresponds to a domain, will still be in plain text, so the domain visited (e.g. MattCASmith.net) can be picked out and used to track browsing activity.</p>
+
+<p>To combat this, a new system called DNS over HTTPS is being tested. However, this will not necessarily completely hide the site the user is visiting – it will just make it slightly more difficult to decipher. While the domain name in the DNS request will be encrypted and unreadable, third parties monitoring the site content packets sent and received will still be able to see the source and destination IP addresses on each – namely the user’s host and the web server. From there, a reverse DNS lookup can be performed on the server’s IP address to find the associated domain.</p>
+
+<p>So with HTTPS the ISP and anybody listening can see the domain requested but none of the content… and that’s about it. As always, the website itself can see all requests and submissions made to it, but it is clear that HTTPS is a massive step up from HTTP in terms of privacy.</p>
+
+<h3 id="vpn-browsing">VPN browsing</h3>
+
+<p>Next we will take a look at what happens when the user connects via a virtual private network (VPN).</p>
+
+<p>These are the services we discussed earlier, often marketed with vague promises about encryption and security. But what exactly do they do? Essentially, a VPN creates an encrypted tunnel between the user’s computer and the VPN provider’s server. This means all data transmitted between those two points – including DNS requests and content sent over HTTP – is encrypted and cannot be read by the user’s ISP or anybody sniffing packets from the network between these two points.</p>
+
+<p>As connections are made via the VPN server, this also masks the user’s IP address and location from the destination website. This is how some people use VPNs to access Netflix content intended for other nations – if the VPN server is in the Netherlands, for example, then Netflix’s server sees a viewer browsing from that server’s Dutch IP address and returns Dutch content.</p>
+
+<p><img src="/wp-content/uploads/2020/02/vpn_v2.png" /></p>
+
+<p>However, a VPN still has its limitations and does not provide bulletproof privacy. As always, the website visited will know which pages were requested and can store any information the user enters. Even though it can only see the VPN server’s IP address, the site will know who the user is if they log in or have cookies stored on their computer from previous visits.</p>
+
+<p>It is also worth noting that the protocol used for the final leg of the route – between the VPN server and the web server – depends on whether the web server supports HTTPS. If it does not, this connection will be over HTTP and the usual warnings about packet sniffing apply.</p>
+
+<p>However, the biggest risk with a VPN lies with the VPN provider itself. By using a VPN, a user is essentially transferring their trust from their ISP to the VPN provider, as all of their browsing data passes through its servers. If the VPN provider is untrustworthy or has been breached, then malicious actors could potentially see everything that the user does online (potentially even data sent and received from web servers over HTTPS with a successful man in the middle attack).</p>
+
+<p>Logging is also a consideration. While many VPN providers claim not to keep logs of their users’ browsing activity, it is not always wise to take their word for it, as some users have previously discovered. Not only do some VPN providers – especially the free ones – stand to profit from selling such data to advertisers, they may also be required to hand them over to law enforcement if requested, depending on the country the data is stored in. Be sure to do your research before signing up.</p>
+
+<h3 id="how-to-keep-your-web-browsing-private">How to keep your web browsing private</h3>
+
+<p>So what’s the best approach for users who want to avoid revealing their browsing habits to the world? Browsing over HTTP is certainly a no-no, but there are pros and cons to be weighed up when it comes to choosing between a VPN and good old-fashioned HTTPS (which should still be used wherever possible).</p>
+
+<p>HTTPS encrypts all web content, and while the DNS request domain will be visible, that probably will not be of much concern for the average user as “google.com” or “bbc.co.uk” does not give away much about their activity. However, while the bulk of mainstream sites are up-to-date, some websites still use HTTP connections, which do not offer the same privacy and may pose a potential risk.</p>
+
+<p>A VPN, on the other hand, encrypts all data between the user’s computer and the VPN server, even when communicating with sites over HTTP. However, the user essentially entrusts all of their data to the VPN provider, and choosing a trustworthy one can be tricky. A bad choice (or a successful attack on the provider) could spill all of their secrets to an attacker or law enforcement agency anyway.</p>
+
+<p>And again, it is worth underlining here that none of these technologies protect data sent to a website. The web server will always know which pages the user browsed to and what data they submitted. If a VPN is used then this activity will be logged against the VPN server’s IP address, but at the end of the day user data is at the mercy of the site’s privacy policies and security defences.</p>
+
+<p>In all likelihood, taking basic security precautions and sticking to websites that support HTTPS should provide enough privacy for the typical user. However, if you are likely to be using HTTP (or are simply uncomfortable with your ISP knowing which domains you visit) then a VPN can provide an extra layer of privacy – just make sure you choose one that you can trust. As with many choices in cyber security, it all comes down to your personal risk profile and how much you’re willing to spend.</p>
+
+<p><em>Photo from <a href="https://www.pexels.com/@junior-teixeira-1064069?utm_content=attributionCopyText&amp;utm_medium=referral&amp;utm_source=pexels" target="_blank" rel="noopener noreferrer">Junior Teixeira</a> on <a href="https://www.pexels.com/photo/semi-opened-laptop-computer-turned-on-on-table-2047905/?utm_content=attributionCopyText&amp;utm_medium=referral&amp;utm_source=pexels" target="_blank" rel="noopener noreferrer">Pexels</a></em></p>
+
+		
+		<div id="prev_next">
+			<div class="prev">
+				    
+						<a href="/2019/12/20/edinburgh-castle-museum-star-wars/">&laquo;&nbsp;A slightly geeky trip to Edinburgh: Castles, museums, and Star Wars</a>
+					
+			</div>
+			<div class="next">
+				    
+						<a href="/2020/02/15/pi-hole-samsung-smart-tv/">Setting up Pi-hole to rein in an extremely noisy Samsung Smart TV&nbsp;&raquo;</a>
+					
+			</div>
+		</div>
+		
+		<div id="footer">
+			&copy; 2017-20 MattCASmith
+			<span class="home-link"><a href="/">Go home</a></span>
+		</div>
+		
+		</div>
+	
+	</body>
+</html>

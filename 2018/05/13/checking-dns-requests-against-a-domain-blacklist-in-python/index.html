@@ -1,0 +1,192 @@
+<!doctype html>
+<head>
+	<meta name="description" content="" />
+	<meta name="robots" content="index, follow" />
+	<meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+	<meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+	<link rel="canonical" href="https://mattcasmith.net/2018/05/13/checking-dns-requests-against-a-domain-blacklist-in-python/" />
+	<meta property="og:locale" content="en_GB" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Checking DNS requests against a domain blacklist in Python | MattCASmith" />
+	<meta property="og:description" content="" />
+	<meta property="og:url" content="https://mattcasmith.net/2018/05/13/checking-dns-requests-against-a-domain-blacklist-in-python/" />
+	<meta property="og:site_name" content="MattCASmith" />
+	<meta property="article:published_time" content="2020-05-02T11:05:40+00:00" />
+	<meta property="og:image" content="https://mattcasmith.net/wp-content/uploads/2018/05/ethernet-516x270.jpg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:creator" content="@mattcasmith" />
+	<meta name="twitter:site" content="@mattcasmith" />
+</head>
+	<head>
+		<title>Checking DNS requests against a domain blacklist in Python | MattCASmith</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="shortcut icon" href="/assets/images/favicon.png">
+		<link rel="stylesheet" href="/assets/css/styles.css">
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+		
+	</head>
+	
+	<body>
+		<div id="site-container" class="post">
+		<div id="header">
+			<div id="header_left">
+				<a href="/"><img class="site_logo light" src="/assets/images/mcas_site_logo.png"></a>
+				<a href="/"><img class="site_logo dark" src="/assets/images/mcas_site_logo_dark.png"></a>
+				<a href="/"><h2>MattCASmith</h2></a>
+			</div>
+			<div id="header_right">
+				<a target="_blank" href="https://twitter.com/mattcasmith"><img class="link_icon_twitter" src="/assets/images/twitter_icon.png"></a>
+				<a target="_blank" href="mailto:mattcasmith@protonmail.com"><img class="link_icon_email light" src="/assets/images/email_icon.png"></a>
+				<a target="_blank" href="mailto:mattcasmith@protonmail.com"><img class="link_icon_email dark" src="/assets/images/email_icon_dark.png"></a>
+			</div>
+		</div>
+		
+		<div class="title">
+			<h1 class="entry-title">Checking DNS requests against a domain blacklist in Python</h1>
+		</div>
+		
+		<div class="meta">
+			<span class="year_label">2018-05-13</span> |&nbsp;&nbsp;&nbsp; 
+				
+				
+					<a href="/category/cyber-security.html">Cyber Security</a>,&nbsp;&nbsp;
+				
+					<a href="/category/programming.html">Programming</a>
+				
+			
+		</div>
+		
+		<img src="/wp-content/uploads/2018/05/ethernet-516x270.jpg" alt="Checking DNS requests against a domain blacklist in Python" />
+		
+		<p>A while ago I wrote a post about <a href="http://mattcasmith.net/2017/12/18/grabbing-domains-and-urls-from-tcpdump-data-using-python/" target="_blank" rel="noopener">using Python to parse tcpdump output for domains and URLs</a>. Recently, I started to wonder if I could take that a step further. What if the DNS requests I saw could be checked against a blacklist in real time? And what if the output was presented in a more useful format? Here’s how I got these new features working.<!--more--></p>
+
+<h3 id="setting-everything-up">Setting everything up</h3>
+
+<p>As usual, we have some Python modules to import before we get started, and we’re also going to define a main() function and a couple of useful variables.</p>
+
+<pre class="prettyprint">from __future__ import print_function
+import time
+import os
+import subprocess as sub
+
+def main():
+    clear = "\b"*300
+    keyword = 'AAA?'
+</pre>
+
+<p>The top print_function line will allow us to use Python 3-style print statements, time will let us fetch the date and time, os is necessary to run tcpdump, and subprocess makes it possible to do this in the background and analyse the results as they are generated.</p>
+
+<p>Within our main() function, the clear variable contains a load of backspaces and will be used to update text on the screen to show progress. The keyword variable will be used to locate AAA DNS requests in the tcpdump output so we can find some domains.</p>
+
+<h3 id="getting-domains-from-tcpdump">Getting domains from tcpdump</h3>
+
+<p>It’s time to get tcpdump running! The top line uses the subprocess module to run tcpdump in the background and pipe the output to our Python script so we can analyse it.</p>
+
+<pre class="prettyprint">tcpdump = sub.Popen(('sudo', 'tcpdump', '-l'), stdout=sub.PIPE)
+
+    for line in iter(tcpdump.stdout.readline, b''):
+        if keyword in line:
+            current_domain = line.split("AAA? ", 1)[1]
+            current_domain = current_domain[:-7]</pre>
+
+<p>The next section begins iterating over this data line by line (notice the readline attribute). If our keyword, “AAA?”, is in the line, the domain that comes after that text will be pulled into the current_domain variable, after which seven characters of extra data that comes afterwards is filtered out. After this, we’re left with a nice string like “google.com”.</p>
+
+<h3 id="checking-domains-against-the-blacklist">Checking domains against the blacklist</h3>
+
+<p>Something to note here: You’ll likely realise that this section of code refers to a blacklist variable that does not yet exist. It’s a Python list containing known malicious domains – we’ll see how it’s set up (and where all that lovely data comes from) later.</p>
+
+<pre class="prettyprint">blacklist_detector = 0
+            for domain in blacklist:
+                if domain in current_domain:
+                    current_blackliststatus = "Y"
+		    blacklist_detector = 1
+                else:
+                    pass
+            if blacklist_detector == 0:
+                current_blackliststatus = "N"
+            else:
+                pass</pre>
+
+<p>So what’s happening here? The script takes each domain in the blacklist list and compares it to the current domain. If the blacklist entry is present, this is flagged in a variable and blacklist_detector is set to 1. If no blacklist entries match, blacklist_detector remains at 0 and the last if statement adds this information to current_blackliststatus.</p>
+
+<h3 id="adding-log-information-and-saving">Adding log information and saving</h3>
+
+<p>There’s a little more information we need to turn this data into a useful log entry, so this section grabs the current date and time and combines it with the current domain and the blacklist_status into a single event variable, with each field separated by commas and a return at the end so we can send the output to a CSV file.</p>
+
+<pre class="prettyprint">current_date = time.strftime("%d/%m/%Y")
+            current_time = time.strftime("%H:%M:%S")
+            current_log = current_date + "," + current_time + "," + current_domain + "," + current_blackliststatus + "\n"
+            database_file.write(current_log)
+            print (clear, current_domain, " added", end="", sep="")
+
+        else:
+            pass</pre>
+
+<p>And that’s just what we do when the script appends the log event to the database_file (another variable we’ll set up in a moment). So we can be sure the script is working, it also prints data to the screen in the format “google.com added”. By removing the new line from the end attribute and printing the backspaces in our clear variable first, we can write over existing data on the screen on the same line rather than printing a huge list.</p>
+
+<p>Finally, we close up the line iteration for loop from the first section by including an else statement. If the line doesn’t contain our keyword, we’ll pass and move onto the next one.</p>
+
+<h3 id="file-and-blacklist-initialisation">File and blacklist initialisation</h3>
+
+<p>Here, outside of the main() function, we set up those variables we saw earlier. This is the first code that will run and handles some critical setup that allows the main function to work.</p>
+
+<pre class="prettyprint">database_file = open("weblog.csv", "a")
+blacklist_file = open("blacklist.txt", "r")
+
+blacklist = []
+for line in blacklist_file:
+    line = line[:-1]
+    blacklist.append(line)
+blacklist = blacklist[:-1]
+
+main()</pre>
+
+<p>The top section opens our log CSV file in append mode, to let us add new lines to it. Then we open the blacklist, which is a simple text file with one domain per line. There are a ton of ways you could gather data on malicious domains, but I found <a href="https://isc.sans.edu/suspicious_domains.html" target="_blank" rel="noopener">the resources at the SANS Internet Storm Center</a> to be a useful place to start.</p>
+
+<p>Once we have our blacklist, the next part sets up a Python list and adds each malicious domain as an entry (minus the new line that comes afterwards). Now we’re set up and ready to go, we call our main() function and get to work on our tcpdump data.</p>
+
+<h3 id="output">Output</h3>
+
+<p>So what happens when we put all this together? To demonstrate, I’ve cleared my weblog file and have added a single domain – google.com – to my blacklist. Now I’m going to run the script, browse the internet, and see what happens.</p>
+
+<p><img class="alignnone size-full wp-image-664" src="https://i1.wp.com/mattcasmith.net/wp-content/uploads/2018/05/weblogger.png?resize=640%2C190" alt="" width="640" height="190" srcset="https://i1.wp.com/mattcasmith.net/wp-content/uploads/2018/05/weblogger.png?w=640&amp;ssl=1 640w, https://i1.wp.com/mattcasmith.net/wp-content/uploads/2018/05/weblogger.png?resize=300%2C89&amp;ssl=1 300w, https://i1.wp.com/mattcasmith.net/wp-content/uploads/2018/05/weblogger.png?resize=604%2C179&amp;ssl=1 604w" sizes="(max-width: 640px) 100vw, 640px" data-recalc-dims="1" /><br />
+This is what we see while the script is running – tcpdump’s verbose output is suppressed, but the bottom line updates to show domains that are added to our log file. When we terminate the script, we can open weblog.csv to see every DNS request that was made.</p>
+
+<p><img class="alignnone size-full wp-image-668" src="https://i0.wp.com/mattcasmith.net/wp-content/uploads/2018/05/weblogger1.png?resize=640%2C430" alt="" width="640" height="430" srcset="https://i0.wp.com/mattcasmith.net/wp-content/uploads/2018/05/weblogger1.png?w=640&amp;ssl=1 640w, https://i0.wp.com/mattcasmith.net/wp-content/uploads/2018/05/weblogger1.png?resize=300%2C202&amp;ssl=1 300w, https://i0.wp.com/mattcasmith.net/wp-content/uploads/2018/05/weblogger1.png?resize=402%2C270&amp;ssl=1 402w" sizes="(max-width: 640px) 100vw, 640px" data-recalc-dims="1" /><br />
+Here’s an excerpt from my own random browsing, and look – the script has flagged two visits to domains containing “google.com” that we might want to look into. Had I been running the script for longer and generated more data, I’d be able to filter by column D to more easily see whether any blacklisted malicious domains were accessed.</p>
+
+<p>The next step for this script? Once I have more than one computer to play with, I’d like to try running a tcpdump logger agent on one and sending the extracted domains across the network to be stored in a central log on the other. Watch this space.</p>
+
+<div style="background: #ffffd8 !important; float: left; margin-bottom: 20px;">
+  <p style="padding: 20px; margin: 0;">
+    A note: I&#8217;m only just delving into the world of Python, and these posts are as much to get things straight in my own head as they are to show them to others. If anything looks wrong, or there&#8217;s a more efficient way of doing something, please let me know!
+  </p>
+</div>
+
+<hr />
+
+<p><em>Photo from <a href="https://pixabay.com/en/network-cable-ethernet-computer-1572617/" target="_blank" rel="noopener">Pixabay</a> <a href="https://creativecommons.org/share-your-work/public-domain/cc0/" target="_blank" rel="noopener">(CC0)</a>. Cropped.</em></p>
+
+		
+		<div id="prev_next">
+			<div class="prev">
+				    
+						<a href="/2018/05/07/stuff-i-did-in-april-isle-of-dogs-raf-museum-coffee-and-non-league-football/">&laquo;&nbsp;Stuff I did in April: Isle of Dogs, RAF Museum, coffee and non-league football</a>
+					
+			</div>
+			<div class="next">
+				    
+						<a href="/2018/05/25/how-to-build-and-fly-a-plane-in-kerbal-space-program/">How to build and fly a plane in Kerbal Space Program&nbsp;&raquo;</a>
+					
+			</div>
+		</div>
+		
+		<div id="footer">
+			&copy; 2017-20 MattCASmith
+			<span class="home-link"><a href="/">Go home</a></span>
+		</div>
+		
+		</div>
+	
+	</body>
+</html>

@@ -1,0 +1,244 @@
+<!doctype html>
+<head>
+	<meta name="description" content="" />
+	<meta name="robots" content="index, follow" />
+	<meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+	<meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+	<link rel="canonical" href="https://mattcasmith.net/2018/07/22/security-log-analysis-how-to-group-by-two-fields-in-splunk/" />
+	<meta property="og:locale" content="en_GB" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Security log analysis: How to group by two fields in Splunk | MattCASmith" />
+	<meta property="og:description" content="" />
+	<meta property="og:url" content="https://mattcasmith.net/2018/07/22/security-log-analysis-how-to-group-by-two-fields-in-splunk/" />
+	<meta property="og:site_name" content="MattCASmith" />
+	<meta property="article:published_time" content="2020-05-02T11:05:40+00:00" />
+	<meta property="og:image" content="https://mattcasmith.net/wp-content/uploads/2018/07/data-516x270.jpg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:creator" content="@mattcasmith" />
+	<meta name="twitter:site" content="@mattcasmith" />
+</head>
+	<head>
+		<title>Security log analysis: How to group by two fields in Splunk | MattCASmith</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="shortcut icon" href="/assets/images/favicon.png">
+		<link rel="stylesheet" href="/assets/css/styles.css">
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+		
+	</head>
+	
+	<body>
+		<div id="site-container" class="post">
+		<div id="header">
+			<div id="header_left">
+				<a href="/"><img class="site_logo light" src="/assets/images/mcas_site_logo.png"></a>
+				<a href="/"><img class="site_logo dark" src="/assets/images/mcas_site_logo_dark.png"></a>
+				<a href="/"><h2>MattCASmith</h2></a>
+			</div>
+			<div id="header_right">
+				<a target="_blank" href="https://twitter.com/mattcasmith"><img class="link_icon_twitter" src="/assets/images/twitter_icon.png"></a>
+				<a target="_blank" href="mailto:mattcasmith@protonmail.com"><img class="link_icon_email light" src="/assets/images/email_icon.png"></a>
+				<a target="_blank" href="mailto:mattcasmith@protonmail.com"><img class="link_icon_email dark" src="/assets/images/email_icon_dark.png"></a>
+			</div>
+		</div>
+		
+		<div class="title">
+			<h1 class="entry-title">Security log analysis: How to group by two fields in Splunk</h1>
+		</div>
+		
+		<div class="meta">
+			<span class="year_label">2018-07-22</span> |&nbsp;&nbsp;&nbsp; 
+				
+				
+					<a href="/category/cyber-security.html">Cyber Security</a>
+				
+			
+		</div>
+		
+		<img src="/wp-content/uploads/2018/07/data-516x270.jpg" alt="Security log analysis: How to group by two fields in Splunk" />
+		
+		<p>Splunk is a powerful tool, but with so many available functions and hit-and-miss coverage on forums it can sometimes take some trial and error to get queries right. Here’s what I pieced together to perform a count on a subset of events and group the data by two fields…<!--more--></p>
+
+<p>As an example, let’s imagine that we’re investigating some incoming traffic from a certain IP address and want to see its targets according to destination IP and port. A query to retrieve that information and present it in a readable format would look like this:</p>
+
+<blockquote>
+  <table>
+    <tbody>
+      <tr>
+        <td>src_ip=”8.8.8.8″</td>
+        <td>stats count by dest_port dest_ip</td>
+        <td>stats list(dest_port), list(count) by dest_ip</td>
+        <td>sort -list(count)</td>
+      </tr>
+    </tbody>
+  </table>
+</blockquote>
+
+<p>Let’s look in a little bit more detail at how that query is put together…</p>
+
+<h3 id="src_ip8888">src_ip=”8.8.8.8″</h3>
+
+<p>This is our base query, which works in much the same way as any standard search you’d run in Splunk. In this case, I’m looking for all events that have the source IP 8.8.8.8, but this can be any search that returns the data you want to perform the other operations on.</p>
+
+<h3 id="stats-count-by-dest_port-dest_ip">stats count by dest_port dest_ip</h3>
+
+<p>Next we run stats, which is Splunk’s aggregation function and allows us to generate various statistics from our data. We list the fields we want Splunk to return at the end of the function – here, I want to see the results by destination IP address and destination port.</p>
+
+<h3 id="stats-listdest_port-listcount-by-dest_ip">stats list(dest_port), list(count) by dest_ip</h3>
+
+<p>Now it’s time to arrange the results so we can see the counts on a per-IP basis. First we list by destination port, and then we list the event counts by destination IP, which leaves us with our (almost) final list of properly arranged destination IP addresses and ports.</p>
+
+<h3 id="sort--listcount">sort -list(count)</h3>
+
+<p>Finally, let’s sort our results so we can see what the most common destination IP addresses are. This is achieved using Splunk’s sort function, which defaults to ascending order. The hyphen before the word list makes it descending.</p>
+
+<p>After all of that, Splunk will give us something that looks like this:</p>
+
+<table style="margin-bottom: 30px;" width="100%">
+  <tr>
+    <td>
+      <strong>Destination IP</strong>
+    </td>
+    
+    <td>
+      <strong>Destination port</strong>
+    </td>
+    
+    <td>
+      <strong>Count</strong>
+    </td>
+  </tr>
+  
+  <tr>
+    <td>
+      1.2.3.4
+    </td>
+    
+    <td>
+      21<br /> 20<br /> 80
+    </td>
+    
+    <td>
+      12<br /> 7<br /> 4
+    </td>
+  </tr>
+  
+  <tr>
+    <td>
+      1.2.3.0
+    </td>
+    
+    <td>
+      12<br /> 6
+    </td>
+    
+    <td>
+      6<br /> 3
+    </td>
+  </tr>
+  
+  <tr>
+    <td>
+      1.2.3.6
+    </td>
+    
+    <td>
+      21<br /> 40
+    </td>
+    
+    <td>
+      1<br /> 1
+    </td>
+  </tr>
+</table>
+
+<p>That’s pretty useful to see what’s happening. We have a clear view of which systems are being targeted and which services on those systems may be affected. However, if we need to do any further analysis, Splunk throws us something of a curve ball.</p>
+
+<p>Unfortunately, asking Splunk to export an Excel file containing this data will give us an inconsistently space-delimited sheet that’s very difficult to use without some manual rearrangement. It looks something like this:</p>
+
+<table style="margin-bottom: 30px;" width="100%">
+  <tr>
+    <td>
+      <strong>Destination IP</strong>
+    </td>
+    
+    <td>
+      <strong>Destination port</strong>
+    </td>
+    
+    <td>
+      <strong>Count</strong>
+    </td>
+  </tr>
+  
+  <tr>
+    <td>
+      1.2.3.4
+    </td>
+    
+    <td>
+      21 20 80
+    </td>
+    
+    <td>
+      12 7 4
+    </td>
+  </tr>
+  
+  <tr>
+    <td>
+      1.2.3.0
+    </td>
+    
+    <td>
+      12 6
+    </td>
+    
+    <td>
+      6 3
+    </td>
+  </tr>
+  
+  <tr>
+    <td>
+      1.2.3.6
+    </td>
+    
+    <td>
+      21 40
+    </td>
+    
+    <td>
+      1 1
+    </td>
+  </tr>
+</table>
+
+<p>For now, this is just a case of working through the sheet and rearranging the data into rows and columns that make more sense, but it’s something I may write some Python for in future, because it feels like it would be handy to have a script tucked away ready for when I need to do some analysis in a rush when investigating an incident.</p>
+
+<hr />
+
+<p><em>Photo by <a href="https://unsplash.com/photos/1K6IQsQbizI?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Franki Chamaki</a> on <a href="https://unsplash.com/search/photos/table-data?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></em></p>
+
+		
+		<div id="prev_next">
+			<div class="prev">
+				    
+						<a href="/2018/07/13/muse-drones-world-tour-a-fast-paced-spectacle-thats-very-very-loud/">&laquo;&nbsp;Muse: Drones World Tour &#8211; a fast-paced spectacle that&#8217;s very, very loud</a>
+					
+			</div>
+			<div class="next">
+				    
+						<a href="/2018/07/28/i-just-found-a-huge-collection-of-cheap-cyber-security-learning-materials/">I just found a huge collection of cheap cyber security learning materials&nbsp;&raquo;</a>
+					
+			</div>
+		</div>
+		
+		<div id="footer">
+			&copy; 2017-20 MattCASmith
+			<span class="home-link"><a href="/">Go home</a></span>
+		</div>
+		
+		</div>
+	
+	</body>
+</html>

@@ -1,0 +1,185 @@
+<!doctype html>
+<head>
+	<meta name="description" content="" />
+	<meta name="robots" content="index, follow" />
+	<meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+	<meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+	<link rel="canonical" href="https://mattcasmith.net/2018/11/23/python-forensics-tools-windows-prefetch/" />
+	<meta property="og:locale" content="en_GB" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Python tools for Windows forensics: Parsing Prefetch program data | MattCASmith" />
+	<meta property="og:description" content="" />
+	<meta property="og:url" content="https://mattcasmith.net/2018/11/23/python-forensics-tools-windows-prefetch/" />
+	<meta property="og:site_name" content="MattCASmith" />
+	<meta property="article:published_time" content="2020-05-02T11:05:40+00:00" />
+	<meta property="og:image" content="https://mattcasmith.net/wp-content/uploads/2018/11/fetch-516x270.jpg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:creator" content="@mattcasmith" />
+	<meta name="twitter:site" content="@mattcasmith" />
+</head>
+	<head>
+		<title>Python tools for Windows forensics: Parsing Prefetch program data | MattCASmith</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="shortcut icon" href="/assets/images/favicon.png">
+		<link rel="stylesheet" href="/assets/css/styles.css">
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+		
+	</head>
+	
+	<body>
+		<div id="site-container" class="post">
+		<div id="header">
+			<div id="header_left">
+				<a href="/"><img class="site_logo light" src="/assets/images/mcas_site_logo.png"></a>
+				<a href="/"><img class="site_logo dark" src="/assets/images/mcas_site_logo_dark.png"></a>
+				<a href="/"><h2>MattCASmith</h2></a>
+			</div>
+			<div id="header_right">
+				<a target="_blank" href="https://twitter.com/mattcasmith"><img class="link_icon_twitter" src="/assets/images/twitter_icon.png"></a>
+				<a target="_blank" href="mailto:mattcasmith@protonmail.com"><img class="link_icon_email light" src="/assets/images/email_icon.png"></a>
+				<a target="_blank" href="mailto:mattcasmith@protonmail.com"><img class="link_icon_email dark" src="/assets/images/email_icon_dark.png"></a>
+			</div>
+		</div>
+		
+		<div class="title">
+			<h1 class="entry-title">Python tools for Windows forensics: Parsing Prefetch program data</h1>
+		</div>
+		
+		<div class="meta">
+			<span class="year_label">2018-11-23</span> |&nbsp;&nbsp;&nbsp; 
+				
+				
+					<a href="/category/cyber-security.html">Cyber Security</a>,&nbsp;&nbsp;
+				
+					<a href="/category/programming.html">Programming</a>
+				
+			
+		</div>
+		
+		<img src="/wp-content/uploads/2018/11/fetch-516x270.jpg" alt="Python tools for Windows forensics: Parsing Prefetch program data" />
+		
+		<p>Bit by bit, I’m going to build a Python tool to scrape a Windows system disk image for common forensic artefacts and build a CSV timeline from the evidence gathered. In this first post, I’ll parse and add the data stored in Windows Prefetch files.<!--more--></p>
+
+<p>On <a href="https://mattcasmith.net/2018/10/19/sans-for500-windows-forensic-analysis/" target="_blank" rel="noopener">my recent SANS course on Windows forensics</a> I learnt about all kinds of forensic artefacts that can be retrieved from Windows systems to determine what the user was doing, which applications they were running, which files they were opening, and much more. All the while, I was wondering whether it would be possible to develop a Python tool to grab common forensic artefacts from a Windows disk image and automatically generate a forensic timeline.</p>
+
+<p>Now things have settled down a bit I’m going to start building one. It would be overwhelming to take on every artefact at once, so I’m going to take a modular approach and build in one artefact at a time, beginning with a relatively easy one: Windows Prefetch file data.</p>
+
+<h3 id="what-is-prefetch-and-how-does-it-help-our-investigation">What is Prefetch and how does it help our investigation?</h3>
+
+<p>Prefetch is one of the ways Microsoft has attempted to speed up your Windows experience. Basically, when you first run an application, Windows will store data about it in a PF file in the directory C:\Windows\Prefetch. These files’ names will be the executable’s name followed by a dash and a hash of its location – something like CHROME.EXE-CCF9F3F5.pf.</p>
+
+<p>How does this help a forensic investigator? Well, the file created and file modified times of these PF files are set to the times the program was first and last run. Furthermore, multiple files with the same name could indicate that multiple versions of the program have been run, or that identical files were run from different directories on the system.</p>
+
+<h3 id="setting-things-up">Setting things up</h3>
+
+<p>To successfully parse the information contained in the Prefetch folder, we’ll need to import a few libraries. We’ll get to what exactly each of these is used for a little later.</p>
+
+<p> </p>
+
+<pre class="prettyprint">import os, time, csv, operator
+timeline_csv = open("timeline.csv", "a")
+
+windows_drive = raw_input("Enter Windows drive letter: ")
+prefetch_directory = windows_drive + ":\Windows\Prefetch\\"
+print "Prefetch directory is %s." % prefetch_directory</pre>
+
+<p>We’ll also open a CSV file to save our forensic timeline entries to, and ask the investigator which drive the Windows directory sits on. This means it will be possible to use the tool if a forensic image of a drive is mounted on a non-standard drive letter on a system.</p>
+
+<h3 id="iterating-through-pf-files-and-getting-program-names">Iterating through .pf files and getting program names</h3>
+
+<p>Now we know where the Prefetch folder is, we need to navigate to it, get a list of the files inside, and determine which we’d like to pay attention to based on their extension.</p>
+
+<p> </p>
+
+<pre class="prettyprint">prefetch_files = os.listdir(prefetch_directory)
+for pf_file in prefetch_files:
+    if pf_file[-2:] == "pf":
+        full_path = prefetch_directory + pf_file</pre>
+
+<p>To achieve this, I’ve used nested conditional statements. First, the os library’s listdir function is used to get a list of files in the Prefetch directory. We then iterate over each file, asking whether the last two characters in its name are “pf”. If that test is successful, we proceed. We also save the file’s full path to the full_path variable. We’ll use this in a moment.</p>
+
+<h3 id="extracting-program-name-and-first-and-last-executed-times">Extracting program name and first and last executed times</h3>
+
+<p>It’s time to get the information we need from each Prefetch file – namely the application’s name and the first and last times it was executed on the system.</p>
+
+<p> </p>
+
+<pre class="prettyprint">app_name = pf_file[:-12]
+
+        first_executed = os.path.getctime(full_path)
+        first_executed = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(first_executed))
+
+        last_executed = os.path.getmtime(full_path)
+        last_executed = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(last_executed))</pre>
+
+<p>The application name can be retrieved by simply trimming the directory hash from the end of the Prefetch filename. For the first executed time, I used the os library’s getctime function to retrieve the timestamp and then the time library’s strftime function to convert it to a readable format. This process is repeated with getmtime to get the last executed time.</p>
+
+<h3 id="writing-the-results-to-a-csv-timeline">Writing the results to a CSV timeline</h3>
+
+<p>To add this information to the forensic timeline we’ll need to create comma-delimited lines to add to a CSV. I’m going to create two entries per file – one for the program’s first execution and one for its most recent – but I’ll include all the available information in each.</p>
+
+<p> </p>
+
+<pre class="prettyprint">first_executed_line = first_executed + "," + app_name + "," + first_executed + "," + last_executed + "," + "Program first executed" + "," + "Prefetch - " + pf_file + "\n"
+        last_executed_line = last_executed + "," + app_name + "," + first_executed + "," + last_executed + "," + "Program last executed" + "," + "Prefetch - " + pf_file + "\n"
+
+        timeline_csv.write(first_executed_line)
+        timeline_csv.write(last_executed_line)
+
+timeline_csv.close()</pre>
+
+<p>There’s not much to this other than stringing all of our data together into a single variable with commas between each field, then appending this line to the CSV file. Then we close it.</p>
+
+<h3 id="sorting-the-csv-timeline-by-date-and-time">Sorting the CSV timeline by date and time</h3>
+
+<p>A forensic timeline isn’t much use if it’s not in chronological order. Our final step (for now) is to take the data and sort it according to the timestamp in the first column.</p>
+
+<p> </p>
+
+<pre class="prettyprint">with open("timeline.csv") as f:
+    timeline_csv = csv.reader(f, delimiter=",")
+    sorted_timeline = sorted(timeline_csv, key=operator.itemgetter(0), reverse=True)
+
+with open("timeline.csv", "wb") as f:
+    fileWriter = csv.writer(f, delimiter=",")
+    header_row = "Artefact timestamp", "Filename", "First executed", "Last executed", "Action", "Source"
+    fileWriter.writerow(header_row)
+    for row in sorted_timeline:
+        fileWriter.writerow(row)</pre>
+
+<p>There are two elements at play here. First, I reopen the timeline file and use the sorted function to reorder it according to the first column, where the timestamp is stored. Then I use fileWriter to add a header row and overwrite the CSV file with the sorted data.</p>
+
+<h3 id="the-output">The output</h3>
+
+<p>The result is a CSV file that clearly shows the times at which the Prefetch data shows each application ran, whether that’s the first time it was run or the most recent. For my system, this stretches all the way back to <a href="https://mattcasmith.net/2018/06/29/how-to-design-and-build-your-own-pc-and-why-you-should/" target="_blank" rel="noopener">when I finished building my PC in June</a>.</p>
+
+<p><a href="https://i1.wp.com/mattcasmith.net/wp-content/uploads/2018/11/pfdata.png?ssl=1" target="_blank" rel="noopener"><img class="alignnone size-full wp-image-1685" src="https://i1.wp.com/mattcasmith.net/wp-content/uploads/2018/11/pfdata.png?resize=1122%2C224&#038;ssl=1" alt="" width="1122" height="224" srcset="https://i1.wp.com/mattcasmith.net/wp-content/uploads/2018/11/pfdata.png?w=1122&amp;ssl=1 1122w, https://i1.wp.com/mattcasmith.net/wp-content/uploads/2018/11/pfdata.png?resize=300%2C60&amp;ssl=1 300w, https://i1.wp.com/mattcasmith.net/wp-content/uploads/2018/11/pfdata.png?resize=768%2C153&amp;ssl=1 768w, https://i1.wp.com/mattcasmith.net/wp-content/uploads/2018/11/pfdata.png?resize=1024%2C204&amp;ssl=1 1024w, https://i1.wp.com/mattcasmith.net/wp-content/uploads/2018/11/pfdata.png?resize=604%2C121&amp;ssl=1 604w" sizes="(max-width: 1000px) 100vw, 1000px" data-recalc-dims="1" /></a><br />
+Now that the Prefetch data is in our CSV timeline, it’s time to turn our attention to the next type of forensic artefact. I’ll be exploring how to add other Windows artefacts – including those stored in the registry – to the timeline in future posts.</p>
+
+<hr />
+
+<p><em>Photo by <a href="https://unsplash.com/photos/Pzu9f6Nby5w" target="_blank" rel="noopener">Mitchell Orr</a> on Unsplash</em></p>
+
+		
+		<div id="prev_next">
+			<div class="prev">
+				    
+						<a href="/2018/11/17/5-reasons-to-try-huel/">&laquo;&nbsp;5 reasons to try Huel &#8211; the convenient and nutritious powdered food</a>
+					
+			</div>
+			<div class="next">
+				    
+						<a href="/2018/12/01/formula-1-world-championship-2018/">Formula 1 World Championship 2018 review &#8211; the closest race in years&nbsp;&raquo;</a>
+					
+			</div>
+		</div>
+		
+		<div id="footer">
+			&copy; 2017-20 MattCASmith
+			<span class="home-link"><a href="/">Go home</a></span>
+		</div>
+		
+		</div>
+	
+	</body>
+</html>

@@ -1,0 +1,221 @@
+<!doctype html>
+<head>
+	<meta name="description" content="" />
+	<meta name="robots" content="index, follow" />
+	<meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+	<meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+	<link rel="canonical" href="https://mattcasmith.net/2019/02/08/raspberry-pi-home-hub-news-weather/" />
+	<meta property="og:locale" content="en_GB" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Raspberry Pi Home Hub: Building the news and weather screen | MattCASmith" />
+	<meta property="og:description" content="" />
+	<meta property="og:url" content="https://mattcasmith.net/2019/02/08/raspberry-pi-home-hub-news-weather/" />
+	<meta property="og:site_name" content="MattCASmith" />
+	<meta property="article:published_time" content="2020-05-02T11:05:40+00:00" />
+	<meta property="og:image" content="https://mattcasmith.net/wp-content/uploads/2019/02/news.jpg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:creator" content="@mattcasmith" />
+	<meta name="twitter:site" content="@mattcasmith" />
+</head>
+	<head>
+		<title>Raspberry Pi Home Hub: Building the news and weather screen | MattCASmith</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="shortcut icon" href="/assets/images/favicon.png">
+		<link rel="stylesheet" href="/assets/css/styles.css">
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+		
+	</head>
+	
+	<body>
+		<div id="site-container" class="post">
+		<div id="header">
+			<div id="header_left">
+				<a href="/"><img class="site_logo light" src="/assets/images/mcas_site_logo.png"></a>
+				<a href="/"><img class="site_logo dark" src="/assets/images/mcas_site_logo_dark.png"></a>
+				<a href="/"><h2>MattCASmith</h2></a>
+			</div>
+			<div id="header_right">
+				<a target="_blank" href="https://twitter.com/mattcasmith"><img class="link_icon_twitter" src="/assets/images/twitter_icon.png"></a>
+				<a target="_blank" href="mailto:mattcasmith@protonmail.com"><img class="link_icon_email light" src="/assets/images/email_icon.png"></a>
+				<a target="_blank" href="mailto:mattcasmith@protonmail.com"><img class="link_icon_email dark" src="/assets/images/email_icon_dark.png"></a>
+			</div>
+		</div>
+		
+		<div class="title">
+			<h1 class="entry-title">Raspberry Pi Home Hub: Building the news and weather screen</h1>
+		</div>
+		
+		<div class="meta">
+			<span class="year_label">2019-02-08</span> |&nbsp;&nbsp;&nbsp; 
+				
+				
+					<a href="/category/programming.html">Programming</a>
+				
+			
+		</div>
+		
+		<img src="/wp-content/uploads/2019/02/news.jpg" alt="Raspberry Pi Home Hub: Building the news and weather screen" />
+		
+		<p>Last month I introduced my new project for 2019 – building a Raspberry Pi Home Hub with Python. Now it’s time to start coding the modules to generate the information screens, starting with the latest news, weather, and Tube updates.</p>
+
+<h3 id="how-the-news-screen-will-work">How the news screen will work</h3>
+
+<p>As per the specifications defined in <a href="https://mattcasmith.net/2019/01/11/raspberry-pi-home-hub-intro-objectives/" target="_blank" rel="noopener">my introductory post</a>, the Raspberry Pi Home Hub’s news and weather screen will fetch and display the following information:</p>
+
+<ul>
+  <li>The latest UK news headlines (via a BBC News RSS feed)</li>
+  <li>Weather information for today and tomorrow (via the Met Office’s API)</li>
+  <li>London Underground status (via the Transport for London API)</li>
+</ul>
+
+<p>The module’s script will use settings from the <code class="language-plaintext highlighter-rouge">config.ini</code> file, including the RSS feed URL, the Met Office API key and location, and the name of the Tube line we want updates on. The file looks like this:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="p">[</span><span class="n">NEWS</span><span class="p">]</span>
+<span class="n">BBCNewsFeedURL</span> <span class="o">=</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">feeds</span><span class="p">.</span><span class="n">bbci</span><span class="p">.</span><span class="n">co</span><span class="p">.</span><span class="n">uk</span><span class="o">/</span><span class="n">news</span><span class="o">/</span><span class="n">uk</span><span class="o">/</span><span class="n">rss</span><span class="p">.</span><span class="n">xml</span>
+<span class="n">MetOfficeLocationID</span> <span class="o">=</span> <span class="mi">354160</span>
+<span class="n">MetOfficeApiKey</span> <span class="o">=</span> <span class="n">XXXXXXXX</span><span class="o">-</span><span class="n">XXXX</span><span class="o">-</span><span class="n">XXXX</span><span class="o">-</span><span class="n">XXXX</span><span class="o">-</span><span class="n">XXXXXXXXXXXX</span>
+<span class="n">TubeLine</span> <span class="o">=</span> <span class="n">northern</span><span class="o">&lt;/</span><span class="n">pre</span><span class="o">&gt;</span></code></pre></figure>
+
+<p>Once it has fetched the necessary data, the script will populate an HTML template file filled with tags that dictate where different variables will be displayed. Here’s an extract to give you a feel for it:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="p">[</span><span class="n">div</span> <span class="n">class</span><span class="o">=</span><span class="s">"sidebar_element"</span> <span class="n">style</span><span class="o">=</span><span class="s">"background-image: url(../imgs/weather/{$weather_today_type})"</span><span class="p">]</span>
+    <span class="p">[</span><span class="n">h2</span><span class="p">]{</span><span class="err">$</span><span class="n">today_temp</span><span class="p">}</span><span class="o">&amp;</span><span class="n">deg</span><span class="p">;</span><span class="n">C</span><span class="p">[</span><span class="o">/</span><span class="n">h2</span><span class="p">]</span>
+    <span class="p">[</span><span class="n">h3</span><span class="p">]{</span><span class="err">$</span><span class="n">today_day</span><span class="p">}[</span><span class="o">/</span><span class="n">h3</span><span class="p">]</span>
+<span class="p">[</span><span class="o">/</span><span class="n">div</span><span class="p">]</span></code></pre></figure>
+
+<p>For now we’ll just focus on the Python script that generates the news and weather page, but later we’ll build one that displays it in a web browser and automatically cycles between all the screens we add.</p>
+
+<h3 id="setting-things-up">Setting things up</h3>
+
+<p>As always, the first step is to import the libraries we’re going to use in our module’s main function. <code class="language-plaintext highlighter-rouge">Feedparser</code>, <code class="language-plaintext highlighter-rouge">ssl</code>, <code class="language-plaintext highlighter-rouge">requests</code>, and <code class="language-plaintext highlighter-rouge">json</code> will all help us to fetch and parse the required data from the web. <code class="language-plaintext highlighter-rouge">String</code> and <code class="language-plaintext highlighter-rouge">datetime</code> will be used to manipulate that data and convert it to the correct format, while the <code class="language-plaintext highlighter-rouge">os</code> library will be used to replace any existing HTML file with the latest output.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">feedparser</span><span class="p">,</span> <span class="n">ssl</span><span class="p">,</span> <span class="n">requests</span><span class="p">,</span> <span class="n">json</span><span class="p">,</span> <span class="n">os</span><span class="p">,</span> <span class="n">string</span><span class="p">,</span> <span class="n">datetime</span></code></pre></figure>
+
+<p>Now let’s populate some basic variables. As I mentioned, the main script fetches certain parameters from a <code class="language-plaintext highlighter-rouge">config.ini</code> file and passes them to each module’s function, so we can simply insert these arguments in the right places to build the URLs that the news script will query.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">weather_feed_url</span> <span class="o">=</span> <span class="s">"http://datapoint.metoffice.gov.uk/public/data/val/wxfcs/all/xml/"</span> <span class="o">+</span> <span class="n">weather_location_id</span> <span class="o">+</span> <span class="s">"?res=daily&amp;key="</span> <span class="o">+</span> <span class="n">weather_api_key</span>
+<span class="n">tube_feed_url</span> <span class="o">=</span> <span class="s">"https://api.tfl.gov.uk/Line/"</span> <span class="o">+</span> <span class="n">tube_line</span> <span class="o">+</span> <span class="s">"/Status"</span></code></pre></figure>
+
+<p>For the Met Office’s API, this involves inserting the correct weather location ID for London and the API key I was granted after registering for an account. For updates from Transport for London, it’s as simple as substituting the name of my Tube line into the status URL.</p>
+
+<h3 id="fetching-the-news-headlines-from-the-bbc">Fetching the news headlines from the BBC</h3>
+
+<p>Let’s start with the news. First, we use the <code class="language-plaintext highlighter-rouge">ssl</code> and <code class="language-plaintext highlighter-rouge">feedparser</code> modules to fetch the BBC News UK RSS feed (again, the URL comes from the <code class="language-plaintext highlighter-rouge">config.ini</code> file) and pass the data to the <code class="language-plaintext highlighter-rouge">news_data</code> variable.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">ssl</span><span class="p">,</span> <span class="s">'_create_unverified_context'</span><span class="p">):</span>
+    <span class="n">ssl</span><span class="p">.</span><span class="n">_create_default_https_context</span> <span class="o">=</span> <span class="n">ssl</span><span class="p">.</span><span class="n">_create_unverified_context</span>
+<span class="n">news_data</span> <span class="o">=</span> <span class="n">feedparser</span><span class="p">.</span><span class="n">parse</span><span class="p">(</span><span class="n">news_feed_url</span><span class="p">)</span></code></pre></figure>
+
+<p>Next, we need to fetch the correct parts of each story’s entry in the RSS feed and use them to populate variables. These will eventually be used to fill out our HTML template.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">news_story_1_headline</span> <span class="o">=</span> <span class="n">news_data</span><span class="p">[</span><span class="s">'entries'</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">'title'</span><span class="p">]</span>
+<span class="n">news_story_1_thumb</span> <span class="o">=</span> <span class="n">news_data</span><span class="p">[</span><span class="s">'entries'</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">'media_thumbnail'</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">'url'</span><span class="p">]</span>
+<span class="n">news_story_1_summary</span> <span class="o">=</span> <span class="n">news_data</span><span class="p">[</span><span class="s">'entries'</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">'summary'</span><span class="p">]</span>
+<span class="n">news_story_2</span> <span class="o">=</span> <span class="n">news_data</span><span class="p">[</span><span class="s">'entries'</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="s">'title'</span><span class="p">]</span>
+<span class="p">...</span></code></pre></figure>
+
+<p>In the extract above, the number in brackets refers to the story number in the RSS feed (for example, <code class="language-plaintext highlighter-rouge">[0]</code> fetches the first story). The various elements referenced (for example, <code class="language-plaintext highlighter-rouge">title</code>, <code class="language-plaintext highlighter-rouge">media_thumbnail</code>, and <code class="language-plaintext highlighter-rouge">summary</code>) are pretty self-explanatory. I’ve repeated this process for six stories, although only the first has a summary and thumbnail URL. You’ll see why when we look at the output HTML file.</p>
+
+<h3 id="fetching-weather-information-from-the-met-office">Fetching weather information from the Met Office</h3>
+
+<p>Now let’s get the latest weather from the Met Office. This is achieved using the <code class="language-plaintext highlighter-rouge">requests</code> library and the <code class="language-plaintext highlighter-rouge">weather_feed_url</code> variable that we constructed at the beginning of the function.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">weather_data</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">weather_feed_url</span><span class="p">)</span>
+<span class="n">weather_data</span> <span class="o">=</span> <span class="n">weather_data</span><span class="p">.</span><span class="n">content</span></code></pre></figure>
+
+<p>The output from this query is kind of awkward, and as you can see below I’ve had to manually extract the required data using the split function. <code class="language-plaintext highlighter-rouge">Weather_today_temp</code> is today’s temperature in degrees Celsius and <code class="language-plaintext highlighter-rouge">today_weather_type</code> is a number referring to <a href="https://www.metoffice.gov.uk/datapoint/support/documentation/code-definitions">the Met Office’s long list of weather types</a>.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">weather_today_temp</span> <span class="o">=</span> <span class="n">weather_data</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">'FDm=</span><span class="se">\"</span><span class="s">'</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">weather_today_temp</span> <span class="o">=</span> <span class="n">weather_today_temp</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">'</span><span class="se">\"</span><span class="s">'</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">weather_today_type</span> <span class="o">=</span> <span class="n">weather_data</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">'W=</span><span class="se">\"</span><span class="s">'</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">weather_today_type</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">weather_today_type</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">'</span><span class="se">\"</span><span class="s">'</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span></code></pre></figure>
+
+<p>Later, we’ll use <code class="language-plaintext highlighter-rouge">weather_today_type</code> to insert an appropriate weather icon. The process above is repeated to populate equivalent variables beginning with <code class="language-plaintext highlighter-rouge">weather_tomorrow_</code>. All we need now are the names of the correct days to be displayed alongside this data on the news screen.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">today</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="n">date</span><span class="p">.</span><span class="n">today</span><span class="p">()</span>
+<span class="n">weather_today_day</span> <span class="o">=</span> <span class="p">(</span><span class="n">today</span><span class="p">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">"%A"</span><span class="p">))[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">tomorrow</span> <span class="o">=</span> <span class="n">today</span> <span class="o">+</span> <span class="n">datetime</span><span class="p">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">weather_tomorrow_day</span> <span class="o">=</span> <span class="p">(</span><span class="n">tomorrow</span><span class="p">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">"%A"</span><span class="p">))[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span></code></pre></figure>
+
+<p>The code above gets today’s date using <code class="language-plaintext highlighter-rouge">datetime</code>, then trims the day’s name to the first three letters (for example, FRI) and stores it in the <code class="language-plaintext highlighter-rouge">weather_today_day</code> variable. Again, it repeats the process for <code class="language-plaintext highlighter-rouge">weather_tomorrow_day</code>, and we now have all the weather information we need.</p>
+
+<h3 id="fetching-tube-travel-updates-from-transport-for-london">Fetching Tube travel updates from Transport for London</h3>
+
+<p>Transport for London’s Tube status updates can be retrieved in much the same way as the Met Office weather data, using the requests library and the <code class="language-plaintext highlighter-rouge">tube_feed_url</code> we constructed earlier.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">transport_data</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">tube_feed_url</span><span class="p">)</span>
+<span class="n">northern_line_status</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">json</span><span class="p">.</span><span class="n">loads</span><span class="p">(</span><span class="n">transport_data</span><span class="p">.</span><span class="n">content</span><span class="p">))</span>
+<span class="n">northern_line_status</span> <span class="o">=</span> <span class="n">northern_line_status</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">'u</span><span class="se">\'</span><span class="s">statusSeverityDescription'</span><span class="p">,</span><span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">northern_line_status</span> <span class="o">=</span> <span class="n">northern_line_status</span><span class="p">[</span><span class="mi">5</span><span class="p">:]</span>
+<span class="n">northern_line_status</span> <span class="o">=</span> <span class="n">northern_line_status</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">'</span><span class="se">\'</span><span class="s">'</span><span class="p">,</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></code></pre></figure>
+
+<p>The data can be manipulated using the split function – <code class="language-plaintext highlighter-rouge">statusSeverityDescription</code> is the term we’re interested in here – and trimmed to leave us with a nice string like “Good Service”.</p>
+
+<h3 id="populating-the-html-template">Populating the HTML template</h3>
+
+<p>We’ve now fetched all the information we need for the news and weather screen, so it’s time to populate the HTML template. Before that, though, we’ll check the output directory to see if a file called <code class="language-plaintext highlighter-rouge">news.htm</code> already exists. If it does, we’ll delete it to make space for our new one.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">try</span><span class="p">:</span>
+    <span class="n">os</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span><span class="s">"temp/news.htm"</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="k">pass</span></code></pre></figure>
+
+<p>Let’s open our template file to read and create a new HTML file, which we’ll open to append to.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">template_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">'html/templates/news.htm'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span>
+<span class="n">html_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">'temp/news.htm'</span><span class="p">,</span> <span class="s">'a'</span><span class="p">)</span></code></pre></figure>
+
+<p>To build the HTML page, we’ll take each line of the template in turn and scan it for dynamic content tags. In the example below, any instance of <code class="language-plaintext highlighter-rouge">{$headline_thumb}</code> or <code class="language-plaintext highlighter-rouge">{$headline_title}</code> is replaced by the contents of <code class="language-plaintext highlighter-rouge">news_story_1_thumb</code> and <code class="language-plaintext highlighter-rouge">news_story_1_headline</code> respectively.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">template_file</span><span class="p">:</span>
+    <span class="k">if</span> <span class="s">"{$headline_thumb}"</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="n">string</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="s">'{$headline_thumb}'</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">news_story_1_thumb</span><span class="p">))</span>
+    <span class="k">if</span> <span class="s">"{$headline_title}"</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="n">string</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="s">'{$headline_title}'</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">news_story_1_headline</span><span class="p">))</span>
+<span class="p">...</span></code></pre></figure>
+
+<p>The only slightly different tag is <code class="language-plaintext highlighter-rouge">{$weather_today_type}</code> which populates a CSS <code class="language-plaintext highlighter-rouge">background-image</code> URL. In this case, the script also checks the contents of <code class="language-plaintext highlighter-rouge">weather_today_type</code> and inserts an appropriate image as the weather icon for that day. For example, a <code class="language-plaintext highlighter-rouge">weather_today_type</code> of ``, <code class="language-plaintext highlighter-rouge">1</code>, or <code class="language-plaintext highlighter-rouge">4</code> (the Met Office’s codes for clear night, sunny day, and not used) will return <code class="language-plaintext highlighter-rouge">sun.png</code> from the images folder.</p>
+
+<p>Finally, we write the HTML line – complete with substituted dynamic values – to the output file. When this process has been repeated for every line in the template, the files are closed.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">html_file</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+<span class="n">template_file</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">html_file</span><span class="p">.</span><span class="n">close</span><span class="p">()</span></code></pre></figure>
+
+<p>There we have it – our news and weather screen HTML file is complete and populated with up-to-date data. We’ll go into how this function is called and how the file is displayed in a future post.</p>
+
+<h3 id="the-output">The output</h3>
+
+<p>What comes out of the other side? The HTML template, populated by our new Python script and formatted with a CSS stylesheet, displays the latest news, weather, and travel information in an easy-to-read format – and at 800 by 480 pixels, it’s the perfect size for the Home Hub’s screen.</p>
+
+<p><a href="/wp-content/uploads/2019/02/raspihomehub_newsweather.png"><img src="/wp-content/uploads/2019/02/raspihomehub_newsweather.png" /></a></p>
+
+<p>With the news and weather screen sorted, next month I’ll take a look at how to take this information and turn it into a personal email briefing that is automatically sent every morning.</p>
+
+<p>Meanwhile, I’ve just ordered the hardware components to build the Home Hub itself, so I’m looking forward to putting the device together and running my Python on the real thing. Look out for a blog post about that in the near future, and be sure to <a href="https://mattcasmith.net/tag/raspberry-pi-home-hub" target="_blank" rel="noopener">visit the project page</a> if you didn’t catch the first post.</p>
+
+<p><em>Photo from <a href="https://www.pexels.com/photo/photography-of-a-person-reading-newspaper-1068530/" target="_blank">rawpixel.com</a> on Pexels</em></p>
+
+		
+		<div id="prev_next">
+			<div class="prev">
+				    
+						<a href="/2019/02/01/sql-alter-table-add-modify-drop-columns/">&laquo;&nbsp;SQL ALTER TABLE: Adding, modifying, and dropping columns in a SQL table</a>
+					
+			</div>
+			<div class="next">
+				    
+						<a href="/2019/02/15/python-windows-forensics-google-chrome-history/">Python tools for Windows forensics: Extracting a user&#8217;s Google Chrome history&nbsp;&raquo;</a>
+					
+			</div>
+		</div>
+		
+		<div id="footer">
+			&copy; 2017-20 MattCASmith
+			<span class="home-link"><a href="/">Go home</a></span>
+		</div>
+		
+		</div>
+	
+	</body>
+</html>

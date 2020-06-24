@@ -1,0 +1,195 @@
+<!doctype html>
+<head>
+	<meta name="description" content="" />
+	<meta name="robots" content="index, follow" />
+	<meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+	<meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+	<link rel="canonical" href="https://mattcasmith.net/2018/10/12/basic-sql-queries-select-from-where-operators/" />
+	<meta property="og:locale" content="en_GB" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Basic SQL queries: SELECT, FROM, WHERE and other operators | MattCASmith" />
+	<meta property="og:description" content="" />
+	<meta property="og:url" content="https://mattcasmith.net/2018/10/12/basic-sql-queries-select-from-where-operators/" />
+	<meta property="og:site_name" content="MattCASmith" />
+	<meta property="article:published_time" content="2020-05-02T11:05:40+00:00" />
+	<meta property="og:image" content="https://mattcasmith.net/wp-content/uploads/2018/10/records-516x270.jpg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:creator" content="@mattcasmith" />
+	<meta name="twitter:site" content="@mattcasmith" />
+</head>
+	<head>
+		<title>Basic SQL queries: SELECT, FROM, WHERE and other operators | MattCASmith</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="shortcut icon" href="/assets/images/favicon.png">
+		<link rel="stylesheet" href="/assets/css/styles.css">
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+		
+	</head>
+	
+	<body>
+		<div id="site-container" class="post">
+		<div id="header">
+			<div id="header_left">
+				<a href="/"><img class="site_logo light" src="/assets/images/mcas_site_logo.png"></a>
+				<a href="/"><img class="site_logo dark" src="/assets/images/mcas_site_logo_dark.png"></a>
+				<a href="/"><h2>MattCASmith</h2></a>
+			</div>
+			<div id="header_right">
+				<a target="_blank" href="https://twitter.com/mattcasmith"><img class="link_icon_twitter" src="/assets/images/twitter_icon.png"></a>
+				<a target="_blank" href="mailto:mattcasmith@protonmail.com"><img class="link_icon_email light" src="/assets/images/email_icon.png"></a>
+				<a target="_blank" href="mailto:mattcasmith@protonmail.com"><img class="link_icon_email dark" src="/assets/images/email_icon_dark.png"></a>
+			</div>
+		</div>
+		
+		<div class="title">
+			<h1 class="entry-title">Basic SQL queries: SELECT, FROM, WHERE and other operators</h1>
+		</div>
+		
+		<div class="meta">
+			<span class="year_label">2018-10-12</span> |&nbsp;&nbsp;&nbsp; 
+				
+				
+					<a href="/category/programming.html">Programming</a>
+				
+			
+		</div>
+		
+		<img src="/wp-content/uploads/2018/10/records-516x270.jpg" alt="Basic SQL queries: SELECT, FROM, WHERE and other operators" />
+		
+		<p>I recently dipped my toe into the world of SQL for the first time and got my head around the basic operators and statements. Here’s a summary of how to construct basic queries.<!--more--></p>
+
+<p>I’d had brushes with SQL before. Even when I was a journalist, I would do the occasional WordPress web development, which would involve setting up SQL databases to store sites’ posts and making sure the content management system could query and write to them. But somehow I always avoided sitting down and actually getting to grips with SQL itself.</p>
+
+<p>With this in mind, I was almost starting from scratch recently when I needed to query a database manually. I’d used similar tools like <a href="https://mattcasmith.net/2018/07/22/security-log-analysis-how-to-group-by-two-fields-in-splunk/" target="_blank" rel="noopener">Splunk</a> before, but all I had was this limited experience and whatever I could piece together from Google. The good news, then, is that basic SQL database queries aren’t actually that difficult to put together.</p>
+
+<h3 id="select-and-from">SELECT and FROM</h3>
+
+<p>The two most basic elements of an SQL query are SELECT and FROM. SELECT tells the system which columns we want to see, and FROM tells it which table we want them from.</p>
+
+<p>Let’s imagine we have a database full of employee information, with fields like firstname, lastname, jobtitle, address, country, emailaddress, phonenumber, and salary. However, we only want to extract a list of people to send personalised emails to, so we’re just interested in returning the firstname and emailaddress fields to give us the data we need to achieve this.</p>
+
+<pre class="prettyprint">SELECT firstname, emailaddress
+FROM employeedata</pre>
+
+<p>The SQL query above would return the columns firstname and email address from the table employeedata. It’s really that simple! Now let’s complicate things a bit…</p>
+
+<h3 id="where">WHERE</h3>
+
+<p>Let’s say our email is UK-specific, and therefore we only want to send it to employees in the UK. There are a couple of ways that we can do this, and both of them involve a WHERE statement, which specifies criteria for the records that are returned.</p>
+
+<p>The simplest way to achieve this, assuming our data is nice and standardised, is to add a WHERE condition that filters the data based on the country field.</p>
+
+<pre class="prettyprint">SELECT firstname, emailaddress
+FROM employeedata
+WHERE country = "United Kingdom"</pre>
+
+<p>Another potential solution is to use a wildcard (more on those later) to filter the data for email addresses ending in .co.uk – assuming all UK employees’ addresses match this format.</p>
+
+<pre class="prettyprint">SELECT firstname, emailaddress
+FROM employeedata
+WHERE emailaddress LIKE "*.co.uk"</pre>
+
+<p>But the marketing department have changed their minds again, and now they only want to send emails to managers and assistant managers in the UK.</p>
+
+<h3 id="and-and-or-conditions">AND and OR conditions</h3>
+
+<p>To achieve this, we can use an AND statement (which specifies additional conditions that must all be true) and an OR statement (which specifies that one of a set of conditions must be true). Note the brackets that specify which conditions are part of the OR statement.</p>
+
+<pre class="prettyprint">SELECT firstname, emailaddress
+FROM employeedata
+WHERE country = "United Kingdom"
+AND (jobtitle = "Manager" OR jobtitle = "Assistant Manager")</pre>
+
+<p>A simpler way to do this would be with the IN operator, which specifies that a field must match one of a series of values listed between brackets.</p>
+
+<pre class="prettyprint">SELECT firstname, emailaddress
+FROM employeedata
+WHERE country = "United Kingdom"
+AND jobtitle IN ("Manager", "Assistant Manager")</pre>
+
+<p>But wait a minute – this is an email about payments that only affects managers and assistant managers earning between £30,000 and £50,000. Let’s add another condition.</p>
+
+<h3 id="between">BETWEEN</h3>
+
+<p>If we want to search for records with a field value that sits between two numbers, then we can use (you guessed it) the BETWEEN function. In our example, it looks like this…</p>
+
+<pre class="prettyprint">SELECT firstname, emailaddress
+FROM employeedata
+WHERE country = "United Kingdom"
+AND jobtitle IN ("Manager", "Assistant Manager")
+AND salary BETWEEN 30000 AND 50000
+</pre>
+
+<p>However, on reviewing the output it seems that a large number of French employees have accidentally been entered with “United Kingdom” as their country. How can we fix this?</p>
+
+<h3 id="not">NOT</h3>
+
+<p>The solution is a NOT statement, which excludes records that match the condition it precedes. In this case, let’s use another wildcard to exclude any staff with .fr email addresses.</p>
+
+<pre class="prettyprint">SELECT firstname, emailaddress
+FROM employeedata
+WHERE country = "United Kingdom"
+AND jobtitle IN ("Manager", "Assistant Manager")
+AND salary BETWEEN 30000 AND 50000
+AND emailaddress NOT LIKE "*.fr"</pre>
+
+<p>This will refine our search by excluding any record with a value in the emailaddress field ending in “.fr”, which means we now have an accurate list of email addresses.</p>
+
+<h3 id="order-by">ORDER BY</h3>
+
+<p>Finally, let’s arrange our results nicely, first sorting by the employee’s first name and secondly by email address if two names are the same. We can use ORDER BY for this.</p>
+
+<pre class="prettyprint">SELECT firstname, emailaddress
+FROM employeedata
+WHERE country = "United Kingdom"
+AND jobtitle IN ("Manager", "Assistant Manager")
+AND salary BETWEEN 30000 AND 50000
+AND emailaddress NOT LIKE "*.fr"
+ORDER BY firstname ASC, emailaddress ASC</pre>
+
+<p>The multiple levels of sorting are separated by commas, and the ASC means the sorting is ascending. We could also use DESC to sort the records returned in descending order.</p>
+
+<p>And there we go – a nice, neat list of first names and email addresses for marketing to use. Before we finish, though, let’s take a closer look at how wildcards work.</p>
+
+<h3 id="like-and-wildcards">LIKE and wildcards</h3>
+
+<p>As we’ve seen, there are characters that can be used to match against fields based on only part of the values they contain. The two main ones are the asterisk, which is a placeholder for one or more characters, and the underscore, which is a placeholder for only one character.</p>
+
+<p>For example, the “*.fr” in the last query would match “email@email.fr” or “a.fr”, while “_.fr” would match only “a.fr”. If we were looking for any email address, we could use multiple wildcards to search for “*@*.*”, which would match any potential email address format, including “email@email.fr” or “example@example.co.uk”.</p>
+
+<pre class="prettyprint">SELECT *
+FROM employeedata
+WHERE emailaddress LIKE "*@*.*"
+</pre>
+
+<p>Note the LIKE, which is used instead of the equals symbol to use wildcards. Also note the wildcard asterisk in the SELECT statement, which will return all fields in the table.</p>
+
+<p>There’s much more to SQL and I’ve got plenty to learn, but these basics should be enough to get started, and hopefully they’ve helped to demystify basic queries for someone else, too!</p>
+
+<hr />
+
+<p>Photo by <a target="_blank" href="https://unsplash.com/photos/0vY082Un2pk?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Edu Grande</a> on <a target="_blank" href="https://unsplash.com/?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></p>
+
+		
+		<div id="prev_next">
+			<div class="prev">
+				    
+						<a href="/2018/10/05/liverpool-win-premier-league-python-predictor/">&laquo;&nbsp;Liverpool will win the Premier League, according to my Python predictor</a>
+					
+			</div>
+			<div class="next">
+				    
+						<a href="/2018/10/19/sans-for500-windows-forensic-analysis/">SANS FOR500: I&#8217;m now a GIAC Certified Forensic Examiner&nbsp;&raquo;</a>
+					
+			</div>
+		</div>
+		
+		<div id="footer">
+			&copy; 2017-20 MattCASmith
+			<span class="home-link"><a href="/">Go home</a></span>
+		</div>
+		
+		</div>
+	
+	</body>
+</html>

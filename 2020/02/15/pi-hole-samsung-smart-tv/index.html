@@ -1,0 +1,139 @@
+<!doctype html>
+<head>
+	<meta name="description" content="" />
+	<meta name="robots" content="index, follow" />
+	<meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+	<meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+	<link rel="canonical" href="https://mattcasmith.net/2020/02/15/pi-hole-samsung-smart-tv/" />
+	<meta property="og:locale" content="en_GB" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Setting up Pi-hole to rein in an extremely noisy Samsung Smart TV | MattCASmith" />
+	<meta property="og:description" content="" />
+	<meta property="og:url" content="https://mattcasmith.net/2020/02/15/pi-hole-samsung-smart-tv/" />
+	<meta property="og:site_name" content="MattCASmith" />
+	<meta property="article:published_time" content="2020-05-02T11:05:40+00:00" />
+	<meta property="og:image" content="https://mattcasmith.net/wp-content/uploads/2020/01/pihole.jpg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:creator" content="@mattcasmith" />
+	<meta name="twitter:site" content="@mattcasmith" />
+</head>
+	<head>
+		<title>Setting up Pi-hole to rein in an extremely noisy Samsung Smart TV | MattCASmith</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="shortcut icon" href="/assets/images/favicon.png">
+		<link rel="stylesheet" href="/assets/css/styles.css">
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+		
+	</head>
+	
+	<body>
+		<div id="site-container" class="post">
+		<div id="header">
+			<div id="header_left">
+				<a href="/"><img class="site_logo light" src="/assets/images/mcas_site_logo.png"></a>
+				<a href="/"><img class="site_logo dark" src="/assets/images/mcas_site_logo_dark.png"></a>
+				<a href="/"><h2>MattCASmith</h2></a>
+			</div>
+			<div id="header_right">
+				<a target="_blank" href="https://twitter.com/mattcasmith"><img class="link_icon_twitter" src="/assets/images/twitter_icon.png"></a>
+				<a target="_blank" href="mailto:mattcasmith@protonmail.com"><img class="link_icon_email light" src="/assets/images/email_icon.png"></a>
+				<a target="_blank" href="mailto:mattcasmith@protonmail.com"><img class="link_icon_email dark" src="/assets/images/email_icon_dark.png"></a>
+			</div>
+		</div>
+		
+		<div class="title">
+			<h1 class="entry-title">Setting up Pi-hole to rein in an extremely noisy Samsung Smart TV</h1>
+		</div>
+		
+		<div class="meta">
+			<span class="year_label">2020-02-15</span> |&nbsp;&nbsp;&nbsp; 
+				
+				
+					<a href="/category/cyber-security.html">Cyber Security</a>,&nbsp;&nbsp;
+				
+					<a href="/category/technology.html">Technology</a>
+				
+			
+		</div>
+		
+		<img src="/wp-content/uploads/2020/01/pihole.jpg" alt="Setting up Pi-hole to rein in an extremely noisy Samsung Smart TV" />
+		
+		<p>A restless mind, a new feature, and a concerning news story had me worried about privacy over Christmas. Here’s how I installed Pi-hole on my home network to try to block requests from my Samsung Smart TV – and what the data it collected revealed…</p>
+
+<p>It was the night before Christmas – or at least some time in December – and I was browsing through the options on my Samsung Smart TV for something to watch when I noticed a Sony PlayStation advert on the main menu. That was odd, I thought. There was never a banner there before (sigh), and how would Samsung know that I play video games? They had no way of knowing which consoles I owned.</p>
+
+<p><img src="/wp-content/uploads/2020/01/pihole0.jpg" /></p>
+
+<p>I didn’t think much of it at the time and so didn’t take a photo (the one above was taken a week or two later when the next banner appeared). PlayStation ads do appear during breaks on prime time TV, after all, so it might not have been tailored at all. I only reached the point of taking action a weeks later, when Reddit alerted me to <a href="https://www.privateinternetaccess.com/blog/2020/01/samsung-smart-tvs-are-set-to-upload-screenshots-of-what-youre-watching/" target="_blank" rel="noopener noreferrer">a disturbing-sounding news story about Samsung Smart TVs</a>:</p>
+
+<blockquote>
+  <p>Samsung’s privacy policy reveals an unnerving reality: that Samsung Smart TVs are sending clips of whatever is playing on the television to be sent back to Samsung. It’s hard to imagine a deeper violation of privacy from a smart TV set than having a screenshot of what you’re watching be uploaded to the cloud for corporate advertising purposes…</p>
+
+  <p>If you enable Samsung’s Internet-Based Advertising service, your TV viewing history will be siphoned up and sent back to Samsung to be shared with third parties that pay Samsung to send advertising directly to your screen.</p>
+</blockquote>
+
+<p>Now I want to be completely clear that I cannot vouch for the source and I have absolutely no idea whether my TV was sending clips to Samsung (one of the most popular posts on this blog, in fact, was about <a href="https://mattcasmith.net/2017/11/26/the-day-instagram-advertisingread-my-mind/" target="_blank" rel="noopener noreferrer">eerily relevant adverts that are likely down to clever data science</a>). But the <a href="https://www.samsung.com/us/account/privacy-policy/" target="_blank" rel="noopener noreferrer">privacy policy</a> concerned me, and however you look at it, retroactively embedding advertising into a product I paid hundreds of pounds for is not cool. So I set out to find a way to put an end to this behaviour…</p>
+
+<h3 id="a-black-hole-for-advertisements">A black hole for advertisements</h3>
+
+<p>Enter <a href="https://pi-hole.net/" target="_blank" rel="noopener noreferrer">Pi-hole</a> – an open-source software package designed to be installed on a Raspberry Pi that can be used to block connections to advertising domains. This can improve the user’s browsing privacy across all devices on the network – even within apps on smartphones and TVs – bolster network security by <a href="https://www.sans.org/reading-room/whitepapers/hsoffice/defense-in-depth-small-office-home-office-39350" target="_blank" rel="noopener noreferrer">blocking potential callouts to malware command and control servers</a>, and (in theory, at least) boost internet browsing speeds by saving endpoints the effort of downloading all those banner ads.</p>
+
+<p>So how exactly does this magic box work? Every time you try to connect to a website – let’s say you enter “example.xyz” in Firefox – your computer sends a domain name system (DNS) request asking a DNS server for the IP address corresponding to that domain. If the DNS server replies and tells your computer that example.xyz’s IP address is 1.2.3.4, your computer will then make a connection to 1.2.3.4 and ask for the data that makes up the web page you requested.</p>
+
+<p>Pi-hole sits on your network and acts as the designated DNS server for all your devices. Your router passes all DNS requests to the Pi-hole and it checks the domains against blacklists of advertising and malware domains. If the domain is a match, the DNS request is blocked and never returned. If it checks out, the DNS request is passed to a DNS server on the internet for a response.</p>
+
+<p>So the Pi-hole effectively prevents your computer from knowing where advertising servers are located, meaning banner ads and tracking scripts fail to load. An added benefit for data geeks like me is that it logs all this data and displays it on a neat web interface that acts as a rough approximation of a record of all browsing activity on your home network – interesting for tinkering and analysis, although the data can be anonymised and turned down for the privacy-conscious among us.</p>
+
+<p><img src="/wp-content/uploads/2020/02/piholedash.png" /></p>
+
+<h3 id="setup-and-dns-log-analysis">Setup and DNS log analysis</h3>
+
+<p>Setup was… not smooth. It turned out that my provider’s cheap router (which I’m planning on replacing) doesn’t like setting changes, and more than once it went non-responsive and showed a configuration of lights that internet forums informed me meant it was bricked and would need to be replaced. Luckily they were wrong, and within a few hours I had both a functional router and a Pi-hole ready for action.</p>
+
+<p>I took the extra measure of setting up the Pi-hole as a dynamic host configuration protocol (DHCP) server, making it responsible for handing out IP addresses to devices on my network. This way it can be set to assign static IP addresses and custom names to known devices, making it a lot easier to keep track of which device is responsible for which DNS requests in the Pi-hole’s logs.</p>
+
+<p>The next step was to find out what domains my smart TV was making requests to so I could block them. This might sound like it would require intricate detective work, but it was actually extremely easy, because once I filtered the Pi-hole logs for requests from my TV I could see that it was calling out to several domains, some of them as frequently as <em>every couple of seconds</em>.</p>
+
+<blockquote>
+  <p>samsungcloudsolution.com<br />
+samsungrm.net<br />
+samsungelectronics.com</p>
+</blockquote>
+
+<p>The first of those was the main culprit, but there may be more – I’m keeping an eye on it for now and will update my settings accordingly. A quick blacklisting later and my Pi-hole was set to reject any DNS requests for these domains. It was time to switch everything back on and take a look at the results…</p>
+
+<p><img src="/wp-content/uploads/2020/01/pihole1.png" /></p>
+
+<p>Look at the graph above and guess when I turned on my Samsung Smart TV. It’s not a trick question – after blacklisting the domain names above, the percentage of the total DNS requests on my network that were blocked shot up to more than 50 per cent, including 7,000 during that football match alone!</p>
+
+<h3 id="project-in-review">Project in review</h3>
+
+<p>So what is my TV actually doing over all these attempted connections? Is it really taking screen captures of my viewing and sending them back to Samsung for analysis? That’s a question that goes beyond the scope of my project. Even if I allowed the connection and intercepted the packets, it’s likely (hopefully) that their contents would be encrypted and unreadable, so it’s hard to say.</p>
+
+<p>It is likely, however, that these calls out to Samsung’s servers are used for at least some kind of tracking or metrics purposes, because that’s what tech firms do (because they’re full of data geeks like myself). And I can say for certain that they’re non-essential, because since I blocked them the functionality of my smart TV hasn’t been affected at all. Funnily enough, I haven’t seen any more ads, either.</p>
+
+<p>So was this a slightly paranoid exercise? Maybe. But I’d been wanting to experiment with a Pi-hole for a little while, so it gave me an excuse to set one up, and helped me to both learn a little bit more about network behaviour and put what I already knew into practice. The Pi-hole is also a source of some potentially interesting logs – so perhaps look out for some analysis in a future post.</p>
+
+		
+		<div id="prev_next">
+			<div class="prev">
+				    
+						<a href="/2020/02/02/https-vpns-private-internet-browsing/">&laquo;&nbsp;Long-form &#8211; HTTPS and VPNs: How private is your internet browsing?</a>
+					
+			</div>
+			<div class="next">
+				    
+						<a href="/2020/03/28/sans-for508-incident-response-threat-hunting-digital-forensics/">SANS FOR508: I&#8217;m now a GIAC Certified Forensic Analyst&nbsp;&raquo;</a>
+					
+			</div>
+		</div>
+		
+		<div id="footer">
+			&copy; 2017-20 MattCASmith
+			<span class="home-link"><a href="/">Go home</a></span>
+		</div>
+		
+		</div>
+	
+	</body>
+</html>
