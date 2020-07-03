@@ -12,7 +12,7 @@
 	<meta property="og:url" content="https://mattcasmith.net/2018/10/12/basic-sql-queries-select-from-where-operators/" />
 	<meta property="og:site_name" content="MattCASmith" />
 	<meta property="article:published_time" content="2020-05-02T11:05:40+00:00" />
-	<meta property="og:image" content="https://mattcasmith.net/wp-content/uploads/2018/10/records-516x270.jpg" />
+	<meta property="og:image" content="https://mattcasmith.net/wp-content/uploads/2018/10/records.jpg" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:creator" content="@mattcasmith" />
 	<meta name="twitter:site" content="@mattcasmith" />
@@ -46,7 +46,7 @@
 		</div>
 		
 		<div class="meta">
-			<span class="year_label">2018-10-12</span> |&nbsp;&nbsp;&nbsp; 
+			<span class="year_label">2018-10-12</span>&nbsp; 
 				
 				
 					<a href="/category/programming.html">Programming</a>
@@ -54,7 +54,9 @@
 			
 		</div>
 		
-		<img src="/wp-content/uploads/2018/10/records-516x270.jpg" alt="Basic SQL queries: SELECT, FROM, WHERE and other operators" />
+		
+			<img src="/wp-content/uploads/2018/10/records.jpg" alt="Basic SQL queries: SELECT, FROM, WHERE and other operators" />
+		
 		
 		<p>I recently dipped my toe into the world of SQL for the first time and got my head around the basic operators and statements. Here’s a summary of how to construct basic queries.<!--more--></p>
 
@@ -68,8 +70,8 @@
 
 <p>Let’s imagine we have a database full of employee information, with fields like firstname, lastname, jobtitle, address, country, emailaddress, phonenumber, and salary. However, we only want to extract a list of people to send personalised emails to, so we’re just interested in returning the firstname and emailaddress fields to give us the data we need to achieve this.</p>
 
-<pre class="prettyprint">SELECT firstname, emailaddress
-FROM employeedata</pre>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">SELECT</span> <span class="n">firstname</span><span class="p">,</span> <span class="n">emailaddress</span>
+<span class="n">FROM</span> <span class="n">employeedata</span></code></pre></figure>
 
 <p>The SQL query above would return the columns firstname and email address from the table employeedata. It’s really that simple! Now let’s complicate things a bit…</p>
 
@@ -79,15 +81,15 @@ FROM employeedata</pre>
 
 <p>The simplest way to achieve this, assuming our data is nice and standardised, is to add a WHERE condition that filters the data based on the country field.</p>
 
-<pre class="prettyprint">SELECT firstname, emailaddress
-FROM employeedata
-WHERE country = "United Kingdom"</pre>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">SELECT</span> <span class="n">firstname</span><span class="p">,</span> <span class="n">emailaddress</span>
+<span class="n">FROM</span> <span class="n">employeedata</span>
+<span class="n">WHERE</span> <span class="n">country</span> <span class="o">=</span> <span class="s">"United Kingdom"</span></code></pre></figure>
 
 <p>Another potential solution is to use a wildcard (more on those later) to filter the data for email addresses ending in .co.uk – assuming all UK employees’ addresses match this format.</p>
 
-<pre class="prettyprint">SELECT firstname, emailaddress
-FROM employeedata
-WHERE emailaddress LIKE "*.co.uk"</pre>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">SELECT</span> <span class="n">firstname</span><span class="p">,</span> <span class="n">emailaddress</span>
+<span class="n">FROM</span> <span class="n">employeedata</span>
+<span class="n">WHERE</span> <span class="n">emailaddress</span> <span class="n">LIKE</span> <span class="s">"*.co.uk"</span></code></pre></figure>
 
 <p>But the marketing department have changed their minds again, and now they only want to send emails to managers and assistant managers in the UK.</p>
 
@@ -95,17 +97,17 @@ WHERE emailaddress LIKE "*.co.uk"</pre>
 
 <p>To achieve this, we can use an AND statement (which specifies additional conditions that must all be true) and an OR statement (which specifies that one of a set of conditions must be true). Note the brackets that specify which conditions are part of the OR statement.</p>
 
-<pre class="prettyprint">SELECT firstname, emailaddress
-FROM employeedata
-WHERE country = "United Kingdom"
-AND (jobtitle = "Manager" OR jobtitle = "Assistant Manager")</pre>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">SELECT</span> <span class="n">firstname</span><span class="p">,</span> <span class="n">emailaddress</span>
+<span class="n">FROM</span> <span class="n">employeedata</span>
+<span class="n">WHERE</span> <span class="n">country</span> <span class="o">=</span> <span class="s">"United Kingdom"</span>
+<span class="n">AND</span> <span class="p">(</span><span class="n">jobtitle</span> <span class="o">=</span> <span class="s">"Manager"</span> <span class="n">OR</span> <span class="n">jobtitle</span> <span class="o">=</span> <span class="s">"Assistant Manager"</span><span class="p">)</span></code></pre></figure>
 
 <p>A simpler way to do this would be with the IN operator, which specifies that a field must match one of a series of values listed between brackets.</p>
 
-<pre class="prettyprint">SELECT firstname, emailaddress
-FROM employeedata
-WHERE country = "United Kingdom"
-AND jobtitle IN ("Manager", "Assistant Manager")</pre>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">SELECT</span> <span class="n">firstname</span><span class="p">,</span> <span class="n">emailaddress</span>
+<span class="n">FROM</span> <span class="n">employeedata</span>
+<span class="n">WHERE</span> <span class="n">country</span> <span class="o">=</span> <span class="s">"United Kingdom"</span>
+<span class="n">AND</span> <span class="n">jobtitle</span> <span class="n">IN</span> <span class="p">(</span><span class="s">"Manager"</span><span class="p">,</span> <span class="s">"Assistant Manager"</span><span class="p">)</span></code></pre></figure>
 
 <p>But wait a minute – this is an email about payments that only affects managers and assistant managers earning between £30,000 and £50,000. Let’s add another condition.</p>
 
@@ -113,12 +115,11 @@ AND jobtitle IN ("Manager", "Assistant Manager")</pre>
 
 <p>If we want to search for records with a field value that sits between two numbers, then we can use (you guessed it) the BETWEEN function. In our example, it looks like this…</p>
 
-<pre class="prettyprint">SELECT firstname, emailaddress
-FROM employeedata
-WHERE country = "United Kingdom"
-AND jobtitle IN ("Manager", "Assistant Manager")
-AND salary BETWEEN 30000 AND 50000
-</pre>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">SELECT</span> <span class="n">firstname</span><span class="p">,</span> <span class="n">emailaddress</span>
+<span class="n">FROM</span> <span class="n">employeedata</span>
+<span class="n">WHERE</span> <span class="n">country</span> <span class="o">=</span> <span class="s">"United Kingdom"</span>
+<span class="n">AND</span> <span class="n">jobtitle</span> <span class="n">IN</span> <span class="p">(</span><span class="s">"Manager"</span><span class="p">,</span> <span class="s">"Assistant Manager"</span><span class="p">)</span>
+<span class="n">AND</span> <span class="n">salary</span> <span class="n">BETWEEN</span> <span class="mi">30000</span> <span class="n">AND</span> <span class="mi">50000</span></code></pre></figure>
 
 <p>However, on reviewing the output it seems that a large number of French employees have accidentally been entered with “United Kingdom” as their country. How can we fix this?</p>
 
@@ -126,12 +127,12 @@ AND salary BETWEEN 30000 AND 50000
 
 <p>The solution is a NOT statement, which excludes records that match the condition it precedes. In this case, let’s use another wildcard to exclude any staff with .fr email addresses.</p>
 
-<pre class="prettyprint">SELECT firstname, emailaddress
-FROM employeedata
-WHERE country = "United Kingdom"
-AND jobtitle IN ("Manager", "Assistant Manager")
-AND salary BETWEEN 30000 AND 50000
-AND emailaddress NOT LIKE "*.fr"</pre>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">SELECT</span> <span class="n">firstname</span><span class="p">,</span> <span class="n">emailaddress</span>
+<span class="n">FROM</span> <span class="n">employeedata</span>
+<span class="n">WHERE</span> <span class="n">country</span> <span class="o">=</span> <span class="s">"United Kingdom"</span>
+<span class="n">AND</span> <span class="n">jobtitle</span> <span class="n">IN</span> <span class="p">(</span><span class="s">"Manager"</span><span class="p">,</span> <span class="s">"Assistant Manager"</span><span class="p">)</span>
+<span class="n">AND</span> <span class="n">salary</span> <span class="n">BETWEEN</span> <span class="mi">30000</span> <span class="n">AND</span> <span class="mi">50000</span>
+<span class="n">AND</span> <span class="n">emailaddress</span> <span class="n">NOT</span> <span class="n">LIKE</span> <span class="s">"*.fr"</span></code></pre></figure>
 
 <p>This will refine our search by excluding any record with a value in the emailaddress field ending in “.fr”, which means we now have an accurate list of email addresses.</p>
 
@@ -139,13 +140,13 @@ AND emailaddress NOT LIKE "*.fr"</pre>
 
 <p>Finally, let’s arrange our results nicely, first sorting by the employee’s first name and secondly by email address if two names are the same. We can use ORDER BY for this.</p>
 
-<pre class="prettyprint">SELECT firstname, emailaddress
-FROM employeedata
-WHERE country = "United Kingdom"
-AND jobtitle IN ("Manager", "Assistant Manager")
-AND salary BETWEEN 30000 AND 50000
-AND emailaddress NOT LIKE "*.fr"
-ORDER BY firstname ASC, emailaddress ASC</pre>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">SELECT</span> <span class="n">firstname</span><span class="p">,</span> <span class="n">emailaddress</span>
+<span class="n">FROM</span> <span class="n">employeedata</span>
+<span class="n">WHERE</span> <span class="n">country</span> <span class="o">=</span> <span class="s">"United Kingdom"</span>
+<span class="n">AND</span> <span class="n">jobtitle</span> <span class="n">IN</span> <span class="p">(</span><span class="s">"Manager"</span><span class="p">,</span> <span class="s">"Assistant Manager"</span><span class="p">)</span>
+<span class="n">AND</span> <span class="n">salary</span> <span class="n">BETWEEN</span> <span class="mi">30000</span> <span class="n">AND</span> <span class="mi">50000</span>
+<span class="n">AND</span> <span class="n">emailaddress</span> <span class="n">NOT</span> <span class="n">LIKE</span> <span class="s">"*.fr"</span>
+<span class="n">ORDER</span> <span class="n">BY</span> <span class="n">firstname</span> <span class="n">ASC</span><span class="p">,</span> <span class="n">emailaddress</span> <span class="n">ASC</span></code></pre></figure>
 
 <p>The multiple levels of sorting are separated by commas, and the ASC means the sorting is ascending. We could also use DESC to sort the records returned in descending order.</p>
 
@@ -157,19 +158,20 @@ ORDER BY firstname ASC, emailaddress ASC</pre>
 
 <p>For example, the “*.fr” in the last query would match “email@email.fr” or “a.fr”, while “_.fr” would match only “a.fr”. If we were looking for any email address, we could use multiple wildcards to search for “*@*.*”, which would match any potential email address format, including “email@email.fr” or “example@example.co.uk”.</p>
 
-<pre class="prettyprint">SELECT *
-FROM employeedata
-WHERE emailaddress LIKE "*@*.*"
-</pre>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">SELECT</span> <span class="o">*</span>
+<span class="n">FROM</span> <span class="n">employeedata</span>
+<span class="n">WHERE</span> <span class="n">emailaddress</span> <span class="n">LIKE</span> <span class="s">"*@*.*"</span></code></pre></figure>
 
 <p>Note the LIKE, which is used instead of the equals symbol to use wildcards. Also note the wildcard asterisk in the SELECT statement, which will return all fields in the table.</p>
 
 <p>There’s much more to SQL and I’ve got plenty to learn, but these basics should be enough to get started, and hopefully they’ve helped to demystify basic queries for someone else, too!</p>
 
-<hr />
-
 <p>Photo by <a target="_blank" href="https://unsplash.com/photos/0vY082Un2pk?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Edu Grande</a> on <a target="_blank" href="https://unsplash.com/?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></p>
 
+		
+		<div id="cta">
+	Looking for the comments? My website doesn't have a comments section because it would take a fair amount of effort to maintain and wouldn't usually present much value to readers. However, if you have thoughts to share I'd love to hear from you - feel free to send me <a href="https://twitter.com/mattcasmith" target="_blank">a tweet</a> or <a href="mailto:mattcasmith@protonmail.com">an email</a>.
+</div>
 		
 		<div id="prev_next">
 			<div class="prev">
@@ -184,10 +186,14 @@ WHERE emailaddress LIKE "*@*.*"
 			</div>
 		</div>
 		
-		<div id="footer">
-			&copy; 2017-20 MattCASmith
+		
+				<div id="footer">
+			&copy; 2016-20 MattCASmith
 			<span class="home-link"><a href="/">Go home</a></span>
 		</div>
+		
+		<script data-goatcounter="https://mattcasmith.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
 		
 		</div>
 	

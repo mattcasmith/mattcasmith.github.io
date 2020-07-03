@@ -28,6 +28,15 @@
 	.meta a {
 		color: #ddd !important;
 	}
+
+	.post tr:nth-child(even) {
+		background: #555 !important;
+	}
+	
+	.highlight, #cta {
+		background: #555 !important;
+		color: #ddd !important;
+	}
 	
 	.light {
 		display: none !important;
@@ -75,6 +84,10 @@ body {
 }
 
 #header_left {
+	float: left;
+}
+
+#header_left a {
 	float: left;
 }
 
@@ -162,7 +175,13 @@ body {
 		border-right: 0 !important;
 		padding-right: 0 !important;
 		border-bottom: 1px solid #ddd !important;
+		padding-bottom: 15px !important;
+		margin-bottom: 0px !important;
     }
+	
+	.home_box:last-of-type {
+		border-bottom: none !important;
+	}
 	
 	.content_image_caption {
 		width: 100% !important;
@@ -173,12 +192,16 @@ body {
 		margin-left: 12% !important;
 	}
 	
+	#home_posts_list {
+		padding-bottom: 5px !important;
+	}
+	
 	#home_posts_list .blog_entry_date {
-		width: 20% !important;
+		width: 30% !important;
 	}
 
 	#home_posts_list .blog_entry_title {
-		width: 80% !important;
+		width: 70% !important;
 	}
 	
 	.home_about_box .home_content_box_title_left {
@@ -195,6 +218,10 @@ body {
 	
 	.non_flex {
 		display: block;
+	}
+	
+	nav {
+		display: none;
 	}
 }
 
@@ -311,9 +338,7 @@ body {
 #prev_next {
 	float: left;
 	width: 100%;
-	border-top: 1px solid #ddd;
-	margin-top: 30px;
-	padding-top: 20px;
+	margin-top: 25px;
 	font-weight: normal;
 	font-style: italic;
 	font-size: 12pt;
@@ -379,6 +404,7 @@ img a {
 
 a {
 	color: rgb(27, 149, 224);
+	color: #009688;
 }
 
 #prev_next a {
@@ -431,6 +457,25 @@ p {
 	padding: 0 0 0 40px;
 	font-size: 12pt;
 	line-height: 1.4em;
+}
+
+.post ol {
+	list-style: none;
+	counter-reset: item;
+}
+
+.post ol li {
+	counter-increment: item;
+}
+
+.post ol li:before {
+	content: counter(item) ". ";
+	color: #009688;
+	font-weight: bold;
+	margin-left: -23px;
+	width: 1.2em;
+	text-align: center;
+	display: inline-block;
 }
 
 .post li {
@@ -507,4 +552,53 @@ blockquote p:first-of-type {
 
 .post td {
 	padding: 5px;
+}
+
+#cta {
+	float: left;
+	background: #ddd;
+	color: #333;
+	padding: 10px 15px;
+	margin: 20px 0 0;
+	border-radius: 10px;
+}
+
+#cta a {
+	color: #009688;
+}
+
+#fourohfour {
+	float: left;
+	width: 100%;
+	border-bottom: 1px solid #ddd;
+	padding-bottom: 20px;
+}
+
+#fourohfour p {
+	padding-top: 5px;
+}
+
+nav {
+	padding: 5px 0;
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	float: left;
+	width: 100%;
+	margin: 5px 0 20px;
+	text-align: center;
+}
+
+nav a {
+	float: left;
+	display: block;
+	padding: 0 10px;
+	margin: 0 auto;
+}
+
+nav a:first-of-type {
+	padding-left: 0;
+}
+
+#home_posts_list a.current {
+	color: #009688 !important;
 }

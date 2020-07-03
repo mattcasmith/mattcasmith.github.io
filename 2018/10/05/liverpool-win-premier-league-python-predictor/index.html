@@ -12,7 +12,7 @@
 	<meta property="og:url" content="https://mattcasmith.net/2018/10/05/liverpool-win-premier-league-python-predictor/" />
 	<meta property="og:site_name" content="MattCASmith" />
 	<meta property="article:published_time" content="2020-05-02T11:05:40+00:00" />
-	<meta property="og:image" content="https://mattcasmith.net/wp-content/uploads/2018/10/premierleague-CC-516x270.jpg" />
+	<meta property="og:image" content="https://mattcasmith.net/wp-content/uploads/2018/10/premierleague-CC.jpg" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:creator" content="@mattcasmith" />
 	<meta name="twitter:site" content="@mattcasmith" />
@@ -46,7 +46,7 @@
 		</div>
 		
 		<div class="meta">
-			<span class="year_label">2018-10-05</span> |&nbsp;&nbsp;&nbsp; 
+			<span class="year_label">2018-10-05</span>&nbsp; 
 				
 				
 					<a href="/category/programming.html">Programming</a>
@@ -54,7 +54,9 @@
 			
 		</div>
 		
-		<img src="/wp-content/uploads/2018/10/premierleague-CC-516x270.jpg" alt="Liverpool will win the Premier League, according to my Python predictor" />
+		
+			<img src="/wp-content/uploads/2018/10/premierleague-CC.jpg" alt="Liverpool will win the Premier League, according to my Python predictor" />
+		
 		
 		<p>I had a week off recently, so for a bit of fun I embarked on my most ambitious and most complex Python project yet: to scientifically (kind of) predict the outcome of the 2018/19 Premier League season based on the results so far. Those who are particularly fond of buzzwords might even call the result machine learning, although I wouldn’t myself.<!--more--></p>
 
@@ -64,7 +66,7 @@
 
 <p>This is all just for fun, of course, and if the limitations of this approach aren’t already obvious then they will be when I go into more detail in a moment. The output will become more accurate as more results come in, but it’ll interesting to see how close the table below is to the final results when the curtain comes down at the end of the year.</p>
 
-<p><img class="alignnone size-full wp-image-1381" style="width: 49% !important; min-width: 150px !important; margin-left: 0 !important; margin-right: 0 !important; padding-left: 0 !important; padding-right: 0 !important; margin-bottom: 5px !important;" src="https://i2.wp.com/mattcasmith.net/wp-content/uploads/2018/10/prem11.png?ssl=1" alt="" data-recalc-dims="1" /><img class="alignnone size-full wp-image-1382" style="width: 49% !important; min-width: 150px !important; margin-left: 0 !important; margin-right: 0 !important; padding-left: 0 !important; padding-right: 0 !important; margin-bottom: 5px !important;" src="https://i2.wp.com/mattcasmith.net/wp-content/uploads/2018/10/prem22.png?ssl=1" alt="" data-recalc-dims="1" /></p>
+<p><img class="alignnone size-full wp-image-1381" style="width: 49% !important; min-width: 150px !important; margin-left: 0 !important; margin-right: 0 !important; padding-left: 0 !important; padding-right: 0 !important; margin-bottom: 5px !important;" src="/wp-content/uploads/2018/10/prem11.png" alt="" data-recalc-dims="1" /><img class="alignnone size-full wp-image-1382" style="width: 49% !important; min-width: 150px !important; margin-left: 0 !important; margin-right: 0 !important; padding-left: 0 !important; padding-right: 0 !important; margin-bottom: 5px !important;" src="/wp-content/uploads/2018/10/prem22.png" alt="" data-recalc-dims="1" /></p>
 
 <p>So how exactly does the script work? Here are the main functions in order of execution. The full script is about 400 lines long, so these are just highlights, but feel free to <a href="https://mattcasmith.net/uploads/python/pl_predictor_0.2.py" target="_blank">download the full Python file</a> to look it over if you wish – I’d be interested to hear your thoughts!</p>
 
@@ -72,19 +74,15 @@
 
 <p>The first step was to create the grid that will hold all of the result data. I used the ultra-useful pandas library for this, so it was a matter of creating a column for each team with twenty rows and creating a dataframe that I could query and amend in each of the following functions.</p>
 
-<?prettify linenums=true?>
-
-<pre class="prettyprint">vals = {'ARS':["","","","","","","","","","","","","","","","","","","",""],
-        [...]
-       }
-df = pandas.DataFrame(data=vals)</pre>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">vals</span> <span class="o">=</span> <span class="p">{</span><span class="s">'ARS'</span><span class="p">:[</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">],</span>
+        <span class="p">[...]</span>
+       <span class="p">}</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pandas</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">vals</span><span class="p">)</span><span class="o">&lt;/</span><span class="n">pre</span><span class="o">&gt;</span></code></pre></figure>
 
 <p>I then iterated through the cells where the column and row numbers were equal, adding an X to each one so the script never attempted to make teams play themselves.</p>
 
-<?prettify linenums=true?>
-
-<pre class="prettyprint">for i in range(0,20):
-   df.iloc[i][i] = "X"</pre>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">):</span>
+   <span class="n">df</span><span class="p">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s">"X"</span><span class="o">&lt;/</span><span class="n">pre</span><span class="o">&gt;</span></code></pre></figure>
 
 <p>With a grid in place, I could begin parsing the existing real-world results.</p>
 
@@ -92,23 +90,19 @@ df = pandas.DataFrame(data=vals)</pre>
 
 <p>I scraped the results from a sports website and put them in a CSV file in the format: “Chelsea,1,Liverpool,1”. I could then iterate through each line in the CSV, splitting the score into each team’s name (which I replaced with an ID number) and goal counts.</p>
 
-<?prettify linenums=true?>
-
-<pre class="prettyprint">score = score.split(",")
-home_team, home_score = score[0], score[1]
-away_team, away_score = score[2], score[3]</pre>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">score</span> <span class="o">=</span> <span class="n">score</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">","</span><span class="p">)</span>
+<span class="n">home_team</span><span class="p">,</span> <span class="n">home_score</span> <span class="o">=</span> <span class="n">score</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">score</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">away_team</span><span class="p">,</span> <span class="n">away_score</span> <span class="o">=</span> <span class="n">score</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">score</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">&lt;/</span><span class="n">pre</span><span class="o">&gt;</span></code></pre></figure>
 
 <p>I then calculated whether each result was a win, loss, or draw for the home team and added the team IDs and result to a line that I added to a new CSV of parsed results.</p>
 
-<?prettify linenums=true?>
-
-<pre class="prettyprint">if home_score &gt; away_score:
-    line = home_team + ",W," + away_team + "\n"
-elif home_score == away_score:
-    line = home_team + ",D," + away_team + "\n"
-else:
-    line = home_team + ",L," + away_team + "\n"
-    scores_parsed.write(line)</pre>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">if</span> <span class="n">home_score</span> <span class="o">&gt;</span> <span class="n">away_score</span><span class="p">:</span>
+    <span class="n">line</span> <span class="o">=</span> <span class="n">home_team</span> <span class="o">+</span> <span class="s">",W,"</span> <span class="o">+</span> <span class="n">away_team</span> <span class="o">+</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span>
+<span class="k">elif</span> <span class="n">home_score</span> <span class="o">==</span> <span class="n">away_score</span><span class="p">:</span>
+    <span class="n">line</span> <span class="o">=</span> <span class="n">home_team</span> <span class="o">+</span> <span class="s">",D,"</span> <span class="o">+</span> <span class="n">away_team</span> <span class="o">+</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">line</span> <span class="o">=</span> <span class="n">home_team</span> <span class="o">+</span> <span class="s">",L,"</span> <span class="o">+</span> <span class="n">away_team</span> <span class="o">+</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span>
+    <span class="n">scores_parsed</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">line</span><span class="p">)</span></code></pre></figure>
 
 <p>I was now left with a CSV file full of parsed results in the format: “5,D,11”, where the two numbers are the team IDs for Chelsea and Liverpool and the D signifies a draw.</p>
 
@@ -116,14 +110,12 @@ else:
 
 <p>To make it possible to query and add to those results it was necessary to add them to my pandas dataframe, so I iterated through the new CSV to split them into team IDs (which correspond to the grid coordinates) and added the results to the relevant cells.</p>
 
-<?prettify linenums=true?>
-
-<pre class="prettyprint">for score in scores_parsed:
-    score_parts = score.split(",")
-    h = int(score_parts[0])
-    r = score_parts[1]
-    a = int(score_parts[2])
-    df.iloc[h][a] = r</pre>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">for</span> <span class="n">score</span> <span class="ow">in</span> <span class="n">scores_parsed</span><span class="p">:</span>
+    <span class="n">score_parts</span> <span class="o">=</span> <span class="n">score</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">","</span><span class="p">)</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">score_parts</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">score_parts</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">score_parts</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">df</span><span class="p">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">h</span><span class="p">][</span><span class="n">a</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span><span class="o">&lt;/</span><span class="n">pre</span><span class="o">&gt;</span></code></pre></figure>
 
 <p>By now I had a results grid containing all of the Premier League results so far this season and it was time for the tricky part: predicting the results of the remaining matches.</p>
 
@@ -131,18 +123,16 @@ else:
 
 <p>To do this, first the script needed to identify which grid cells were empty and needed analysing. So I started by iterating through the cells and finding the blank spaces.</p>
 
-<?prettify linenums=true?>
-
-<pre class="prettyprint">for i in range(0,20):
-    for n in range(0,20):
-        h = i
-        a = n
-        cell = df.iat[h,a]
-        if cell == "":
-            analysis()
-            df.iloc[h][a] = result
-        else:
-            pass</pre>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">):</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="n">i</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">n</span>
+        <span class="n">cell</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">iat</span><span class="p">[</span><span class="n">h</span><span class="p">,</span><span class="n">a</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">cell</span> <span class="o">==</span> <span class="s">""</span><span class="p">:</span>
+            <span class="n">analysis</span><span class="p">()</span>
+            <span class="n">df</span><span class="p">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">h</span><span class="p">][</span><span class="n">a</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">pass</span></code></pre></figure>
 
 <p>If a cell has anything in it (i.e. it has a real-world result, or an X because the row team and the column team are the same) it is ignored. When a blank cell is identified, the analysis() function is run. This function populates the result variable, which is fed into the empty cell.</p>
 
@@ -152,35 +142,29 @@ else:
 
 <p>After some consideration, I decided to use a points system based on a comparison of the teams’ results. I iterated through each Premier League team and compared how many points the home and away teams had won against them. For example, if Liverpool had beaten Arsenal but Chelsea had lost to Arsenal, I would award some overall points to Liverpool.</p>
 
-<?prettify linenums=true?>
-
-<pre class="prettyprint">if h_pts &gt; a_pts:
-    h_main_pts += 3
-elif a_pts &gt; h_pts:
-    a_main_pts += 3</pre>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">if</span> <span class="n">h_pts</span> <span class="o">&gt;</span> <span class="n">a_pts</span><span class="p">:</span>
+    <span class="n">h_main_pts</span> <span class="o">+=</span> <span class="mi">3</span>
+<span class="k">elif</span> <span class="n">a_pts</span> <span class="o">&gt;</span> <span class="n">h_pts</span><span class="p">:</span>
+    <span class="n">a_main_pts</span> <span class="o">+=</span> <span class="mi">3</span></code></pre></figure>
 
 <p>I then checked to see whether the two teams in question had already played each other in the reverse fixture. If they had, I awarded a slightly higher number of points to the winner.</p>
 
-<?prettify linenums=true?>
-
-<pre class="prettyprint">a_h_res = df.iat[a,h]
-if a_h_res == "W":
-    a_main_pts += 4
-elif a_h_res == "L":
-    h_main_pts += 4</pre>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">a_h_res</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">iat</span><span class="p">[</span><span class="n">a</span><span class="p">,</span><span class="n">h</span><span class="p">]</span>
+<span class="k">if</span> <span class="n">a_h_res</span> <span class="o">==</span> <span class="s">"W"</span><span class="p">:</span>
+    <span class="n">a_main_pts</span> <span class="o">+=</span> <span class="mi">4</span>
+<span class="k">elif</span> <span class="n">a_h_res</span> <span class="o">==</span> <span class="s">"L"</span><span class="p">:</span>
+    <span class="n">h_main_pts</span> <span class="o">+=</span> <span class="mi">4</span><span class="o">&lt;/</span><span class="n">pre</span><span class="o">&gt;</span></code></pre></figure>
 
 <p>To begin with, this was all the result was calculated on, but I realised that the table that was produced was purely by the numbers and didn’t account for some of the nuances of Premier League football. Unfortunately, there’s no way to program factors like form, injuries, and drama into an algorithm, so I introduced some randomness and upsets by awarding the home team in each fixture some bonus points to give them a greater chance of winning.</p>
 
 <p>You can guess what happens next: The two teams’ points totals are compared and if the difference is great enough then a winner is declared. Otherwise, the game is a draw.</p>
 
-<?prettify linenums=true?>
-
-<pre class="prettyprint">if h_main_pts - a_main_pts &gt; 3:
-    result = "W"
-elif a_main_pts - h_main_pts &gt; 3:
-    result = "L"
-else:
-    result = "D"</pre>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">if</span> <span class="n">h_main_pts</span> <span class="o">-</span> <span class="n">a_main_pts</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="s">"W"</span>
+<span class="k">elif</span> <span class="n">a_main_pts</span> <span class="o">-</span> <span class="n">h_main_pts</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="s">"L"</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="s">"D"</span><span class="o">&lt;/</span><span class="n">pre</span><span class="o">&gt;</span></code></pre></figure>
 
 <p>Note the variables at play here. How many points should a team get if they have better results against an opponent than the other? How many points should they get for beating the other team earlier in the season? How many points should they get as a home advantage? And how great should the difference between the tallies be before a win, rather than a draw, is given?</p>
 
@@ -192,16 +176,14 @@ else:
 
 <p>This function pretty much speaks for itself. It iterates through each team’s row, adding three points to their total for each win and one for each draw, as per the FA rules.</p>
 
-<?prettify linenums=true?>
-
-<pre class="prettyprint">for n in range (0,20):
-    cell = df.iat[i,n]
-    if cell == "W":
-        points += 3
-    elif cell == "D":
-        points += 1
-    else:
-        pass</pre>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">):</span>
+    <span class="n">cell</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">iat</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">n</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">cell</span> <span class="o">==</span> <span class="s">"W"</span><span class="p">:</span>
+        <span class="n">points</span> <span class="o">+=</span> <span class="mi">3</span>
+    <span class="k">elif</span> <span class="n">cell</span> <span class="o">==</span> <span class="s">"D"</span><span class="p">:</span>
+        <span class="n">points</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">pass</span></code></pre></figure>
 
 <p>The process is then repeated in reverse for the team’s column to add points won on the road, and the total is added to a dictionary of team names and their corresponding tallies.</p>
 
@@ -209,19 +191,15 @@ else:
 
 <p>Naturally, the last step was to compile and print my complete Premier League table. Firstly, I created another pandas dataframe with two columns – one for names and one for points.</p>
 
-<?prettify linenums=true?>
-
-<pre class="prettyprint">final_data = {'A':["","","","","","","","","","","","","","","","","","","",""],
-              'B':["","","","","","","","","","","","","","","","","","","",""]
-              }
-df1 = pandas.DataFrame(data=final_data)</pre>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">final_data</span> <span class="o">=</span> <span class="p">{</span><span class="s">'A'</span><span class="p">:[</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">],</span>
+              <span class="s">'B'</span><span class="p">:[</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">,</span><span class="s">""</span><span class="p">]</span>
+              <span class="p">}</span>
+<span class="n">df1</span> <span class="o">=</span> <span class="n">pandas</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">final_data</span><span class="p">)</span></code></pre></figure>
 
 <p>I then worked through the teams for the final time, reassigning recognisable names and adding them to the data frame along with their points totals. The last step was to sort this data by points (descending) and then team name (ascending) and print it to the screen.</p>
 
-<?prettify linenums=true?>
-
-<pre class="prettyprint">df1 = df1.sort_values(by=['B','A'],ascending=[False,True])
-print df1.to_string(index=False,header=False)</pre>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">df1</span> <span class="o">=</span> <span class="n">df1</span><span class="p">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s">'B'</span><span class="p">,</span><span class="s">'A'</span><span class="p">],</span><span class="n">ascending</span><span class="o">=</span><span class="p">[</span><span class="bp">False</span><span class="p">,</span><span class="bp">True</span><span class="p">])</span>
+<span class="k">print</span> <span class="n">df1</span><span class="p">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span></code></pre></figure>
 
 <p>And there you have it – definitive scientific proof (not really) of how the 2018/19 Premier League season will finish! Perhaps I should have wrapped this post in spoiler tags…</p>
 
@@ -231,16 +209,14 @@ print df1.to_string(index=False,header=False)</pre>
 
 <p>That said, I tried to be as fair and scientific as I could, and I’ll certainly be revisiting this prediction in May next year to see just how good my script was. In the meantime, I’d be interested to hear if anyone’s tried anything like this before and what approach you took. Leave a comment below and let me know what you think!</p>
 
-<div style="background: #ffffd8 !important; float: left; margin-bottom: 20px;">
-  <p style="padding: 20px; margin: 0;">
-    A note: I&#8217;m only just delving into the world of Python, and these posts are as much to get things straight in my own head as they are to show them to others. If anything looks wrong, or there&#8217;s a more efficient way of doing something, please let me know!
-  </p>
-</div>
-
-<hr />
+<p><em>A note: I’m only just delving into the world of Python, and these posts are as much to get things straight in my own head as they are to show them to others. If anything looks wrong, or there’s a more efficient way of doing something, please let me know!</em></p>
 
 <p><em>Photo © <a href="https://www.flickr.com/photos/kane-brooker/37633000485/" target="_blank">Kane Brooker</a> (<a href="https://creativecommons.org/licenses/by/2.0/" target="_blank">CC BY 2.0</a>). Cropped.</em></p>
 
+		
+		<div id="cta">
+	Looking for the comments? My website doesn't have a comments section because it would take a fair amount of effort to maintain and wouldn't usually present much value to readers. However, if you have thoughts to share I'd love to hear from you - feel free to send me <a href="https://twitter.com/mattcasmith" target="_blank">a tweet</a> or <a href="mailto:mattcasmith@protonmail.com">an email</a>.
+</div>
 		
 		<div id="prev_next">
 			<div class="prev">
@@ -255,10 +231,14 @@ print df1.to_string(index=False,header=False)</pre>
 			</div>
 		</div>
 		
-		<div id="footer">
-			&copy; 2017-20 MattCASmith
+		
+				<div id="footer">
+			&copy; 2016-20 MattCASmith
 			<span class="home-link"><a href="/">Go home</a></span>
 		</div>
+		
+		<script data-goatcounter="https://mattcasmith.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
 		
 		</div>
 	

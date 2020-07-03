@@ -12,7 +12,7 @@
 	<meta property="og:url" content="https://mattcasmith.net/2018/06/23/how-passwords-work-a-simple-demonstration-in-python/" />
 	<meta property="og:site_name" content="MattCASmith" />
 	<meta property="article:published_time" content="2020-05-02T11:05:40+00:00" />
-	<meta property="og:image" content="https://mattcasmith.net/wp-content/uploads/2018/06/keys-516x270.jpg" />
+	<meta property="og:image" content="https://mattcasmith.net/wp-content/uploads/2018/06/keys.jpg" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:creator" content="@mattcasmith" />
 	<meta name="twitter:site" content="@mattcasmith" />
@@ -46,7 +46,7 @@
 		</div>
 		
 		<div class="meta">
-			<span class="year_label">2018-06-23</span> |&nbsp;&nbsp;&nbsp; 
+			<span class="year_label">2018-06-23</span>&nbsp; 
 				
 				
 					<a href="/category/cyber-security.html">Cyber Security</a>,&nbsp;&nbsp;
@@ -56,26 +56,22 @@
 			
 		</div>
 		
-		<img src="/wp-content/uploads/2018/06/keys-516x270.jpg" alt="How passwords work &#8211; a simple demonstration in Python" />
+		
+			<img src="/wp-content/uploads/2018/06/keys.jpg" alt="How passwords work &#8211; a simple demonstration in Python" />
+		
 		
 		<p>We all use passwords every day, but how exactly do they work? It would be easy to assume that the services we use all hold huge databases with our usernames and passwords side by side, but the reality is much more interesting – and, of course, much more secure.<!--more--></p>
 
 <p>It’s easy to see that storing passwords in the aforementioned manner would be a security nightmare, albeit one that we’ve unfortunately seen in real life in the past. The alternative? Complex mathematical algorithms that generate irreversible hashes of our passwords. Here’s how these password systems use them to keep our credentials secure…</p>
 
-<div style="background:#ffe6e6; float: left; margin-bottom: 30px;">
-  <p style="padding: 20px; margin: 0;">
-    Disclaimer: The basic Python code in this post is intended to demonstrate the concepts behind the way passwords are stored and verified, but it is not secure in itself and should not be used for any kind of real password processing or storage. I&#8217;ll cover some of the ways in which the code is flawed and how it could be improved later in the post.
-  </p>
-</div>
+<p><em>Disclaimer: The basic Python code in this post is intended to demonstrate the concepts behind the way passwords are stored and verified, but it is not secure in itself and should not be used for any kind of real password processing or storage. I’ll cover some of the ways in which the code is flawed and how it could be improved later in the post.</em></p>
 
 <h3 id="setting-things-up">Setting things up</h3>
 
 <p>As with any Python project, the first step is to import any libraries we’ll need to call on later in the code. In this case, we’ll be importing two very useful modules.</p>
 
-<?prettify linenums=true?>
-
-<pre class="prettyprint">import hashlib
-import getpass</pre>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">hashlib</span>
+<span class="kn">import</span> <span class="nn">getpass</span></code></pre></figure>
 
 <p>Hashlib allows us to generate hashes, which is the way passwords are (or at least should be) stored. If passwords were stored in plain text, which is a terrible security practice but does happen, they are immediately compromised if the database is accessed.</p>
 
@@ -87,13 +83,11 @@ import getpass</pre>
 
 <p>In order to check the user’s password, first we’re going to have to ask them to set one. After they enter a password, we’ll generate a hash and store that in a variable.</p>
 
-<?prettify linenums=true?>
-
-<pre class="prettyprint">def new_password():
-&nbsp;&nbsp;&nbsp;&nbsp;global pass_hash
-&nbsp;&nbsp;&nbsp;&nbsp;password = getpass.getpass("Enter a new password: ")
-&nbsp;&nbsp;&nbsp;&nbsp;pass_hash = hashlib.md5(password).hexdigest()
-&nbsp;&nbsp;&nbsp;&nbsp;password = ''</pre>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">new_password</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">pass_hash</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="n">getpass</span><span class="p">.</span><span class="n">getpass</span><span class="p">(</span><span class="s">"Enter a new password: "</span><span class="p">)</span>
+    <span class="n">pass_hash</span> <span class="o">=</span> <span class="n">hashlib</span><span class="p">.</span><span class="n">md5</span><span class="p">(</span><span class="n">password</span><span class="p">).</span><span class="n">hexdigest</span><span class="p">()</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="s">''</span></code></pre></figure>
 
 <p>As you can see, this function loads the global variable pass_hash before asking the user for a password and generating an MD5 hash of the string. The hash is stored and the plain text password is forgotten so it’s not lying around waiting for someone to find it.</p>
 
@@ -101,18 +95,16 @@ import getpass</pre>
 
 <p>When called, the following function will check the password by generating a hash from the user’s input and comparing it to the stored hash of their password.</p>
 
-<?prettify linenums=true?>
-
-<pre class="prettyprint">def pass_entry():
-&nbsp;&nbsp;&nbsp;&nbsp;global pass_hash
-&nbsp;&nbsp;&nbsp;&nbsp;pass_attempt = getpass.getpass("Enter your password to continue: ")
-&nbsp;&nbsp;&nbsp;&nbsp;pass_attempt_hash = hashlib.md5(pass_attempt).hexdigest()
-&nbsp;&nbsp;&nbsp;&nbsp;pass_attempt = ''
-&nbsp;&nbsp;&nbsp;&nbsp;if pass_attempt_hash == pass_hash:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print "Successful login."
-&nbsp;&nbsp;&nbsp;&nbsp;else:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print "Unsuccessful login."
-&nbsp;&nbsp;&nbsp;&nbsp;pass_attempt_hash = ''</pre>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">pass_entry</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">pass_hash</span>
+    <span class="n">pass_attempt</span> <span class="o">=</span> <span class="n">getpass</span><span class="p">.</span><span class="n">getpass</span><span class="p">(</span><span class="s">"Enter your password to continue: "</span><span class="p">)</span>
+    <span class="n">pass_attempt_hash</span> <span class="o">=</span> <span class="n">hashlib</span><span class="p">.</span><span class="n">md5</span><span class="p">(</span><span class="n">pass_attempt</span><span class="p">).</span><span class="n">hexdigest</span><span class="p">()</span>
+    <span class="n">pass_attempt</span> <span class="o">=</span> <span class="s">''</span>
+    <span class="k">if</span> <span class="n">pass_attempt_hash</span> <span class="o">==</span> <span class="n">pass_hash</span><span class="p">:</span>
+    <span class="k">print</span> <span class="s">"Successful login."</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s">"Unsuccessful login."</span>
+        <span class="n">pass_attempt_hash</span> <span class="o">=</span> <span class="s">''</span></code></pre></figure>
 
 <p>When the user enters their password, the generated hash is stored in the variable pass_attempt_hash and the entered password is discarded. If the attempt hash matches the stored hash, the login is successful. If it is not, the test fails.</p>
 
@@ -120,7 +112,7 @@ import getpass</pre>
 
 <p>Here’s what the user sees. To make things easier to follow, I’ve removed the getpass functionality and added lines that show the hashes that are being generated to make it clear what is happening behind the scenes at each stage.</p>
 
-<p><img src="https://i2.wp.com/mattcasmith.net/wp-content/uploads/2018/06/passwords1.png?resize=570%2C296" alt="" width="570" height="296" class="aligncenter size-full wp-image-901" srcset="https://i2.wp.com/mattcasmith.net/wp-content/uploads/2018/06/passwords1.png?w=571&amp;ssl=1 571w, https://i2.wp.com/mattcasmith.net/wp-content/uploads/2018/06/passwords1.png?resize=300%2C156&amp;ssl=1 300w, https://i2.wp.com/mattcasmith.net/wp-content/uploads/2018/06/passwords1.png?resize=521%2C270&amp;ssl=1 521w" sizes="(max-width: 570px) 100vw, 570px" data-recalc-dims="1" /></p>
+<p><img src="/wp-content/uploads/2018/06/passwords1.png" /></p>
 
 <p>A hash is generated when the user sets their password, and a further hash is created for each password entry and checked against it. If a match is detected, the login is successful.</p>
 
@@ -137,18 +129,18 @@ A user could enter absolutely anything as their password for this system, whethe
 <p><strong>3. Hashing alone is not enough</strong><br />
 Hashing algorithms are necessary, but they are not secure on their own. If two users had identical passwords, an attacker would only need to crack one to gain access to both accounts because their hashes would be identical. To combat this, random strings called salts are added to each user’s password before the hashing process. These are unique to each user and mean each user’s hash is different, even if their passwords are not.</p>
 
-<p><img src="https://i0.wp.com/mattcasmith.net/wp-content/uploads/2018/06/passwords2.png?resize=570%2C146" alt="" width="570" height="146" class="aligncenter size-full wp-image-903" srcset="https://i0.wp.com/mattcasmith.net/wp-content/uploads/2018/06/passwords2.png?w=570&amp;ssl=1 570w, https://i0.wp.com/mattcasmith.net/wp-content/uploads/2018/06/passwords2.png?resize=300%2C77&amp;ssl=1 300w" sizes="(max-width: 570px) 100vw, 570px" data-recalc-dims="1" /></p>
+<p><img src="/wp-content/uploads/2018/06/passwords2.png" /></p>
 
 <p>In the screenshot above, I’ve manually added salts to the end of two identical passwords. Note that the hashes generated are different – if an attacker cracked one of these passwords, they wouldn’t be able to determine the second based on its hash alone.</p>
 
-<div style="background: #ffffd8 !important; float: left; margin-bottom: 20px;">
-  <p style="padding: 20px; margin: 0;">
-    A note: I&#8217;m only just delving into the world of Python, and these posts are as much to get things straight in my own head as they are to show them to others. If anything looks wrong, or there&#8217;s a more efficient way of doing something, please let me know!
-  </p>
-</div>
+<p><em>A note: I’m only just delving into the world of Python, and these posts are as much to get things straight in my own head as they are to show them to others. If anything looks wrong, or there’s a more efficient way of doing something, please let me know!</em></p>
 
 <p><em>Photo from <a href="https://www.pexels.com/photo/keys-5930/" target="_blank" rel="noopener">Pixabay</a> <a href="https://creativecommons.org/share-your-work/public-domain/cc0/" target="_blank" rel="noopener">(CC0)</a>. Cropped.</em></p>
 
+		
+		<div id="cta">
+	Looking for the comments? My website doesn't have a comments section because it would take a fair amount of effort to maintain and wouldn't usually present much value to readers. However, if you have thoughts to share I'd love to hear from you - feel free to send me <a href="https://twitter.com/mattcasmith" target="_blank">a tweet</a> or <a href="mailto:mattcasmith@protonmail.com">an email</a>.
+</div>
 		
 		<div id="prev_next">
 			<div class="prev">
@@ -163,10 +155,14 @@ Hashing algorithms are necessary, but they are not secure on their own. If two u
 			</div>
 		</div>
 		
-		<div id="footer">
-			&copy; 2017-20 MattCASmith
+		
+				<div id="footer">
+			&copy; 2016-20 MattCASmith
 			<span class="home-link"><a href="/">Go home</a></span>
 		</div>
+		
+		<script data-goatcounter="https://mattcasmith.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
 		
 		</div>
 	
