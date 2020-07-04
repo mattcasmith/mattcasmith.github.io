@@ -1,5 +1,6 @@
 html {
 	display: block;
+	overflow-y: scroll;
 }
 
 #home_content_boxes {
