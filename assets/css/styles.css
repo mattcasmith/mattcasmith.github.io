@@ -1,3 +1,7 @@
+html {
+	display: block;
+}
+
 #home_content_boxes {
 	display: none !important;
 }
@@ -454,9 +458,15 @@ p {
 .post ol, .post ul {
 	float: left;
 	margin: 30px 0 -5px;
-	padding: 0 0 0 40px;
+	padding: 0 0 0 5%;
 	font-size: 12pt;
 	line-height: 1.4em;
+	width: 95%;
+}
+
+.post ol p, .post ul p {
+	padding: 0 !important;
+	margin: 0 !important;
 }
 
 .post ol {
@@ -466,6 +476,7 @@ p {
 
 .post ol li {
 	counter-increment: item;
+	width: 100%;
 }
 
 .post ol li:before {
@@ -559,7 +570,7 @@ blockquote p:first-of-type {
 	background: #ddd;
 	color: #333;
 	padding: 10px 15px;
-	margin: 20px 0 0;
+	margin: 50px 0 0;
 	border-radius: 10px;
 }
 
