@@ -50,6 +50,22 @@ html {
 	.dark {
 		display: inline !important;
 	}
+	
+	#header, #home_about_boxes, #fourohfour, nav {
+		border-bottom: 1px solid #555 !important;
+	}
+	
+	#home_about_boxes, #footer, nav {
+		border-top: 1px solid #555 !important;
+	}
+	
+	.home_about_box, .home_content_box {
+		border-right: 1px solid #555 !important;
+	}
+
+	.home_about_box:last-of-type, .home_content_box:last-of-type {
+		border-right: none !important;
+	}
 }
 
 .dark {
@@ -227,6 +243,16 @@ body {
 	
 	nav {
 		display: none;
+	}
+}
+
+@media screen and (max-width: 749px) and (prefers-color-scheme: dark) {
+	.home_box {
+		border-bottom: 1px solid #555 !important;
+    }
+	
+	.home_box:last-of-type {
+		border-bottom: none !important;
 	}
 }
 
