@@ -1,0 +1,238 @@
+<!doctype html>
+<head>
+	<meta name="description" content="" />
+	<meta name="robots" content="index, follow" />
+	<meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+	<meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+	<link rel="canonical" href="https://mattcasmith.net/2020/07/13/technicolor-tg582n-event-logging-manual" />
+	<meta property="og:locale" content="en_GB" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Technicolor TG582n router&#58; The missing event logging manual | MattCASmith" />
+	<meta property="og:description" content="" />
+	<meta property="og:url" content="https://mattcasmith.net/2020/07/13/technicolor-tg582n-event-logging-manual" />
+	<meta property="og:site_name" content="MattCASmith" />
+	<meta property="article:published_time" content="2020-05-02T11:05:40+00:00" />
+	<meta property="og:image" content="https://mattcasmith.net/wp-content/uploads/2020/07/technicolor-tg582n-router.jpg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:creator" content="@mattcasmith" />
+	<meta name="twitter:site" content="@mattcasmith" />
+</head>
+	<head>
+		<style>
+			html {
+				display: none;
+			}
+		</style>
+		<title>Technicolor TG582n router&#58; The missing event logging manual | MattCASmith</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="shortcut icon" href="/assets/images/favicon.png">
+		<link rel="stylesheet" href="/assets/css/styles.css">
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+		
+	</head>
+	
+	<body>
+		<div id="site-container" class="post">
+		<div id="header">
+			<div id="header_left">
+				<a href="/"><img class="site_logo light" src="/assets/images/mcas_site_logo.png"></a>
+				<a href="/"><img class="site_logo dark" src="/assets/images/mcas_site_logo_dark.png"></a>
+				<a href="/"><h2>MattCASmith</h2></a>
+			</div>
+			<div id="header_right">
+				<a target="_blank" href="https://twitter.com/mattcasmith"><img class="link_icon_twitter" src="/assets/images/twitter_icon.png"></a>
+				<a target="_blank" href="mailto:mattcasmith@protonmail.com"><img class="link_icon_email light" src="/assets/images/email_icon.png"></a>
+				<a target="_blank" href="mailto:mattcasmith@protonmail.com"><img class="link_icon_email dark" src="/assets/images/email_icon_dark.png"></a>
+			</div>
+		</div>
+		
+		<div class="title">
+			<h1 class="entry-title">Technicolor TG582n router&#58; The missing event logging manual</h1>
+		</div>
+		
+		<div class="meta">
+			<span class="year_label">2020-07-13</span>&nbsp; 
+				
+				
+					<a href="/category/cyber-security.html">Cyber security</a>,&nbsp;&nbsp;
+				
+					<a href="/category/technology.html">Technology</a>
+				
+			
+		</div>
+		
+		
+			<img src="/wp-content/uploads/2020/07/technicolor-tg582n-router.jpg" alt="Technicolor TG582n router&#58; The missing event logging manual" />
+		
+		
+		<p>What started as curiosity has turned into something of a labour of love. Online information about the Technicolor TG582n router’s event logging capabilities is scarce, and scattered across a number of forums. I’ve used that information along with some analysis of my own to compile this - the missing event logging manual - in the hope that it might help others to expore their routers’ event logs in future.</p>
+
+<h3 id="contents">Contents</h3>
+<p>1. <a href="#background">Background</a><br />
+2. <a href="#forwarding-technicolor-tg582n-event-logs">Forwarding Technicolor TG582n event logs</a><br />
+3. <a href="#useful-events-from-the-technicolor-tg582n">Useful events from the Technicolor TG582n</a><br />
+          a. <a href="#internet-connection-events">Internet connection events</a><br />
+          b. <a href="#wifi-authentication-events">WiFi authentication events</a><br />
+          c. <a href="#admin-authentication-events">Admin authentication events</a><br />
+          d. <a href="#firewall-events">Firewall events</a><br />
+          e. <a href="#intrusion-detection-system-ids-events">Intrusion detection system (IDS) events</a><br />
+4. <a href="#example-investigation-using-technicolor-tg582n-events">Example investigation using Technicolor TG582n events</a><br />
+5. <a href="#contribute">Contribute</a></p>
+
+<h3 id="background">Background</h3>
+
+<p>The Technicolor TG582n is a common sight in British homes - and, if internet forums are a fair reflection of reality, homes in several other countries, too. It is, or was, the default ADSL router for a number of internet service providers (ISPs) and seems to be a common option to distribute to customers on bog standard tariffs who haven’t earned the Home Hubs and Sky Hubs of this world.</p>
+
+<p>I used this router for several years (hence why I had one laying around) and as I grew more interested in cyber security I remember searching around several times for any information I could find regarding its logging capabilities and finding very little. So with a little more digging and the additional knowledge I’ve gained via experience since then, I thought I might be able to assemble something of a manual for anyone still using this router who wants to explore its event log and monitor their network activity.</p>
+
+<p>With that mission in mind, and safe in the knowledge that even bricking the device would have no repercussions for my internet access now I had a new router, I set out to find how to gather logs from the Technicolor TG282n and to aggregate enough of them that I could give an overview of some of the most common events generated by the little box, which until then had been gathering dust in a cupboard.</p>
+
+<h3 id="forwarding-technicolor-tg582n-event-logs">Forwarding Technicolor TG582n event logs</h3>
+
+<p>While there may not be a manual for the Technicolor TG582n router’s event logging capabilities, there <em>is</em> <a href="https://www.manualslib.com/products/Technicolor-Tg582n-3530624.html" target="_blank">a manual for its Telnet interface</a>. That’s right - the manufacturer is forcing us to send our administrative credentials over an unencrypted protocol to configure the router, so make sure you don’t do this if there’s a chance anyone malicious is on your network. When we log in, we’re greeted with some nice ASCII art.</p>
+
+<p><img src="/wp-content/uploads/2020/07/technicolor-tg582n.png" /></p>
+
+<p>Beautiful. Now let’s turn our attention to turning on the event log. If you’re in a hurry and just want to grab recent events, you can use the command below to send whatever events are in the router’s cache to your analysis machine via syslog. Make sure you have something listening on port 514 to receive them.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">syslog</span> <span class="n">msgbuf</span> <span class="n">send</span> <span class="n">dest</span><span class="o">=&lt;</span><span class="n">destination_ip</span><span class="o">&gt;</span></code></pre></figure>
+
+<p>But we’re looking for something a little longer lasting. Luckily, the Technicolor TG582n has a system for managing event log rules and a series of commands to view the rules, add new rules, remove rules, and start and stop the logging service. To set all events to be transmitted via syslog regardless of the service that generated them or their severity, enter the following commands.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">syslog</span> <span class="n">ruleadd</span> <span class="n">fac</span><span class="o">=</span><span class="nb">all</span> <span class="n">sev</span><span class="o">=</span><span class="n">debug</span> <span class="n">dest</span><span class="o">=&lt;</span><span class="n">destination_ip</span><span class="o">&gt;</span>
+<span class="n">syslog</span> <span class="nb">list</span>
+<span class="n">syslog</span> <span class="n">config</span> <span class="n">activate</span><span class="o">=</span><span class="n">enabled</span></code></pre></figure>
+
+<p>The first command adds a syslog rule on the router. It gathers events from all facilities (or services) and at all severity levels (debug being the lowest) and transmits them via syslog to the destination IP address specified. The second command displays the list of syslog rules so we can make sure the rule was added correctly, and the final one enables the syslog service so events will begin to be transmitted.</p>
+
+<p>Naturally, this means that once again we’ll need a service listening on port 514 on the destination system. If you’re sending logs for a quick check then <a href="https://www.wireshark.org/" target="_blank">Wireshark</a> is probably enough. I was looking to gather events from a longer period of time to identify as many event types as possible, so I set up <a href="https://www.elastic.co/logstash" target="_blank">Logstash</a> to receive the syslog and write the events to a file I could analyse later. A syslog server is another alternative.</p>
+
+<h3 id="useful-events-from-the-technicolor-tg582n">Useful events from the Technicolor TG582n</h3>
+
+<p>After leaving the syslog service and Logstash running for about a week, I opened the log file in Excel and manipulated the contents into a format that would enable me to filter them down to unique event types. What follows are some of the most useful and/or interesting events I picked out from the logs.</p>
+
+<h4 id="internet-connection-events">Internet connection events</h4>
+
+<p>Let’s start with the basics. Most times you check your router logs, you’re likely to be investigating connectivity issues and checking to see whether you have an internet connection. These events relating to the point-to-point protocol (PPP) will hopefully provide you with an answer.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">PPP</span> <span class="n">link</span> <span class="n">down</span> <span class="p">(</span><span class="n">Internet</span><span class="p">)</span> <span class="p">[</span><span class="o">&lt;</span><span class="n">source_ip</span><span class="o">&gt;</span><span class="p">]</span>
+<span class="n">PPP</span> <span class="n">CHAP</span> <span class="n">receive</span> <span class="n">challenge</span> <span class="p">(</span><span class="n">rhost</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">destination_hostname</span><span class="o">&gt;</span><span class="p">)</span>
+<span class="n">PPP</span> <span class="n">CHAP</span> <span class="n">chap</span> <span class="n">receive</span> <span class="n">success</span> <span class="p">:</span> <span class="n">authentication</span> <span class="n">ok</span>
+<span class="n">PPP</span> <span class="n">link</span> <span class="n">up</span> <span class="p">(</span><span class="n">Internet</span><span class="p">)</span> <span class="p">[</span><span class="o">&lt;</span><span class="n">source_ip</span><span class="o">&gt;</span><span class="p">]</span></code></pre></figure>
+
+<p>The first event is the one you’ll hope not to see. As the <code>link down</code> message suggests, this event is generated when your internet connection fails and you no longer have a connection to your ISP.</p>
+
+<p>The next two events are generated when you try to reconnect and relate to the challenge-handshake authentication protocol (CHAP). Your router recieves an authentication challenge from your ISP, provides your credentials, and gets an <code>authentication ok</code> response if everything checks out. Then you’ll see the final <code>link up</code> event when the internet connection is back up and running.</p>
+
+<h4 id="wifi-authentication-events">WiFi authentication events</h4>
+
+<p>As soon as I started scanning the logs, one event stood out as potentially useful in catching perhaps the most common of wireless network attacks: unauthorised attempts to access the WiFi network.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">LOGIN</span> <span class="n">wireless</span> <span class="n">station</span> <span class="p">[</span><span class="o">&lt;</span><span class="n">mac_address</span><span class="o">&gt;</span><span class="p">]</span> <span class="n">can</span><span class="s">'t get authorized</span></code></pre></figure>
+
+<p>There’s some debate online about exactly what this event means, and people have seen it pop up in all sorts of unexpected ways (including one forum user whose stolen PlayStation 3 was apparently haunting his router and failing to connect to the network on a regular basis).</p>
+
+<p>Although it sounds like it might refer to an access point, a “wireless station” in networking jargon is actually a device that can join the wireless network. In my case these events all featured the MAC address of an Apple device - and not one of my own - so that would be an obvious one to block, just to be safe.</p>
+
+<h4 id="admin-authentication-events">Admin authentication events</h4>
+
+<p>The bread and butter of security event logging is authentication: who is logging in and out of your system and who is failing to log in using an incorrect password? This is doubly important for admin accounts, and the Technicolor TG582n’s syslog has got you covered with a few takes on these common events.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">LOGIN</span> <span class="n">User</span> <span class="o">&lt;</span><span class="n">username</span><span class="o">&gt;</span> <span class="n">logged</span> <span class="ow">in</span> <span class="n">on</span> <span class="n">TELNET</span> <span class="p">(</span><span class="o">&lt;</span><span class="n">source_ip</span><span class="o">&gt;</span><span class="p">)</span>
+<span class="n">LOGOUT</span> <span class="n">User</span> <span class="o">&lt;</span><span class="n">username</span><span class="o">&gt;</span> <span class="n">logged</span> <span class="n">out</span> <span class="n">on</span> <span class="n">TELNET</span> <span class="p">(</span><span class="o">&lt;</span><span class="n">source_ip</span><span class="o">&gt;</span><span class="p">)</span>
+<span class="n">LOGIN</span> <span class="n">User</span> <span class="o">&lt;</span><span class="n">username</span><span class="o">&gt;</span> <span class="n">tried</span> <span class="n">to</span> <span class="n">log</span> <span class="ow">in</span> <span class="n">on</span> <span class="n">TELNET</span> <span class="p">(</span><span class="o">&lt;</span><span class="n">source_ip</span><span class="o">&gt;</span><span class="p">)</span>
+<span class="n">SESSION</span> <span class="n">TIMEOUT</span> <span class="n">Timeout</span><span class="err">!</span> <span class="p">(</span><span class="n">after</span> <span class="mi">600</span> <span class="n">sec</span><span class="p">)</span></code></pre></figure>
+
+<p>The first two events are what you would expect to see for a normal administrative session - one for when the user logs in and one for when they log out. The important thing is that Technicolor has included the username and the source IP address, which are key details if you’re planning to apply any kind of detection logic to these logs or even manually trying to investigate potential attacks.</p>
+
+<p>The third event is misleading. A user “tried to” log in? Many devices would follow this up with an authentication success or failure event, but in this case it actually signifies a failed login by itself. Unfortunately, while we again get the username and source IP address, we do not get one critical detail: whether the failure was due to a bad username or an incorrect password.</p>
+
+<p>Finally, we have an event that may help to track user sessions that do not end with a <code>LOGOUT</code> event. When the Telnet connection is left idle for a while, the Technicolor TG582n eventually closes it, and it seems that’s when this event is created. It’s unlikely to pop up too often, but still potentially useful to know.</p>
+
+<h4 id="firewall-events">Firewall events</h4>
+
+<p>The firewall is in charge of allowing or denying traffic based on its source and destination and the connection type. First up, here the the events that the Technicolor TG582n generates when somebody makes changes to its firewall rules. As you can see, they’re fairly self-explanatory.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">FIREWALL</span> <span class="n">event</span> <span class="p">(</span><span class="n">x</span> <span class="n">of</span> <span class="n">x</span><span class="p">):</span> <span class="n">created</span> <span class="n">rules</span>
+<span class="n">FIREWALL</span> <span class="n">event</span> <span class="p">(</span><span class="n">x</span> <span class="n">of</span> <span class="n">x</span><span class="p">):</span> <span class="n">modified</span> <span class="n">rules</span>
+<span class="n">FIREWALL</span> <span class="n">event</span> <span class="p">(</span><span class="n">x</span> <span class="n">of</span> <span class="n">x</span><span class="p">):</span> <span class="n">deleted</span> <span class="n">rules</span></code></pre></figure>
+
+<p>As you might suspect, these are generated when firewall rules are created, modified, and deleted respectively. One thing to watch out for with these, however, is that all three events seem to be generated in this order when a connection to the internet is established. So don’t be surprised if you see them crop up at points in the logs that you weren’t expecting them if the router was connecting to your ISP. Their effect will also require some investigation, as they don’t actually state <em>which</em> rules were changed.</p>
+
+<p>Next, let’s look at the firewall in action. In the week the router was active, the firewall sprung into action on the following three occasions, all of which related to internet control message protocol (ICMP) traffic.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">FIREWALL</span> <span class="n">replay</span> <span class="n">check</span> <span class="p">(</span><span class="o">&lt;</span><span class="n">x</span><span class="o">&gt;</span> <span class="n">of</span> <span class="o">&lt;</span><span class="n">x</span><span class="o">&gt;</span><span class="p">):</span> <span class="n">Protocol</span><span class="p">:</span> <span class="n">ICMP</span>  <span class="n">Src</span> <span class="n">ip</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">source_ip</span><span class="o">&gt;</span> <span class="n">Dst</span> <span class="n">ip</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">destination_ip</span><span class="o">&gt;</span> <span class="n">Type</span><span class="p">:</span> <span class="n">Destination</span> <span class="n">Unreachable</span> <span class="n">Code</span><span class="p">:</span> <span class="n">Port</span> <span class="n">Unreacheable</span>
+<span class="n">FIREWALL</span> <span class="n">icmp</span> <span class="n">check</span> <span class="p">(</span><span class="o">&lt;</span><span class="n">x</span><span class="o">&gt;</span> <span class="n">of</span> <span class="o">&lt;</span><span class="n">x</span><span class="o">&gt;</span><span class="p">):</span> <span class="n">Protocol</span><span class="p">:</span> <span class="n">ICMP</span>  <span class="n">Src</span> <span class="n">ip</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">source_ip</span><span class="o">&gt;</span> <span class="n">Dst</span> <span class="n">ip</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">destination_ip</span><span class="o">&gt;</span> <span class="n">Type</span><span class="p">:</span> <span class="n">Destination</span> <span class="n">Unreachable</span> <span class="n">Code</span><span class="p">:</span> <span class="n">Port</span> <span class="n">Unreacheable</span>
+<span class="n">FIREWALL</span> <span class="n">icmp</span> <span class="n">check</span> <span class="p">(</span><span class="o">&lt;</span><span class="n">x</span><span class="o">&gt;</span> <span class="n">of</span> <span class="o">&lt;</span><span class="n">x</span><span class="o">&gt;</span><span class="p">):</span> <span class="n">Protocol</span><span class="p">:</span> <span class="n">ICMP</span>  <span class="n">Src</span> <span class="n">ip</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">source_ip</span><span class="o">&gt;</span> <span class="n">Dst</span> <span class="n">ip</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">destination_ip</span><span class="o">&gt;</span> <span class="n">Type</span><span class="p">:</span> <span class="n">Echo</span> <span class="n">Reply</span> <span class="n">Code</span><span class="p">:</span> <span class="mi">0</span></code></pre></figure>
+
+<p>Unfortunately there’s no authority on what these actually mean. I’d expect a “replay check” to attempt to stop replay attacks, but the leading theory on the forums seems to be that this event means the firewall has prevented your router from providing a response to an ICMP ping from an attacker performing reconnaissance and attempting to discover information about your network. I have, however, also seen this occurring on outbound traffic to DNS servers from <a href="/2020/02/15/pi-hole-samsung-smart-tv/">my Pi-hole</a>, so your guess is as good as mine and any additional information anyone might be able to share would be appreciated.</p>
+
+<h4 id="intrusion-detection-system-ids-events">Intrusion detection system (IDS) events</h4>
+
+<p>There’s a reason they say to start with your home network if you want to learn about cyber security. Looking through the IDS log will give you a nice insight into all the potentially nasty stuff targeting your network and give you a newfound appreciation for all the work your little Technicolor TG582n does.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">IDS</span> <span class="n">dos</span> <span class="n">parser</span> <span class="p">:</span> <span class="n">idp</span> <span class="n">flood</span> <span class="p">(</span><span class="mi">1</span> <span class="n">of</span> <span class="mi">1</span><span class="p">)</span> <span class="p">:</span> <span class="o">&lt;</span><span class="n">source_ip</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">destination_ip</span><span class="o">&gt;</span> <span class="mi">0801</span> <span class="n">UDP</span> <span class="o">&lt;</span><span class="n">source_port</span><span class="o">&gt;-&gt;&lt;</span><span class="n">destination_port</span><span class="o">&gt;</span>
+<span class="n">IDS</span> <span class="n">rate</span> <span class="n">parser</span> <span class="p">:</span> <span class="n">tcp</span> <span class="n">rate</span> <span class="n">limiting</span> <span class="p">(</span><span class="mi">1</span> <span class="n">of</span> <span class="mi">1</span><span class="p">)</span> <span class="p">:</span> <span class="o">&lt;</span><span class="n">source_ip</span><span class="o">&gt;</span>   <span class="o">&lt;</span><span class="n">destination_ip</span><span class="o">&gt;</span>   <span class="mi">0040</span> <span class="n">TCP</span> <span class="o">&lt;</span><span class="n">source_port</span><span class="o">&gt;-&gt;&lt;</span><span class="n">destination_port</span><span class="o">&gt;</span> <span class="p">[</span><span class="n">S</span><span class="p">.....]</span> <span class="n">seq</span> <span class="mi">100</span> <span class="n">win</span> <span class="mi">1024</span>
+<span class="n">IDS</span> <span class="n">scan</span> <span class="n">parser</span> <span class="p">:</span> <span class="n">tcp</span> <span class="n">port</span> <span class="n">scan</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">destination_ip</span><span class="o">&gt;</span> <span class="n">scanned</span> <span class="n">at</span> <span class="n">least</span> <span class="mi">10</span> <span class="n">ports</span> <span class="n">at</span> <span class="o">&lt;</span><span class="n">destination_ip</span><span class="o">&gt;</span><span class="p">.</span>  <span class="p">(</span><span class="mi">1</span> <span class="n">of</span> <span class="mi">1</span><span class="p">)</span> <span class="p">:</span> <span class="o">&lt;</span><span class="n">source_ip</span><span class="o">&gt;</span>   <span class="o">&lt;</span><span class="n">destination_ip</span><span class="o">&gt;</span>   <span class="mi">0040</span> <span class="n">TCP</span> <span class="o">&lt;</span><span class="n">source_port</span><span class="o">&gt;-&gt;&lt;</span><span class="n">destination_port</span><span class="o">&gt;</span> <span class="p">[...</span><span class="n">R</span><span class="p">..]</span> <span class="n">seq</span> <span class="mi">11694198</span> <span class="n">win</span> <span class="mi">0</span>
+<span class="n">IDS</span> <span class="n">scan</span> <span class="n">parser</span> <span class="p">:</span> <span class="n">udp</span> <span class="n">port</span> <span class="n">scan</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">source_ip</span><span class="o">&gt;</span> <span class="n">scanned</span> <span class="n">at</span> <span class="n">least</span> <span class="mi">20</span> <span class="n">ports</span> <span class="n">at</span> <span class="o">&lt;</span><span class="n">destination_ip</span><span class="o">&gt;</span><span class="p">.</span>  <span class="p">(</span><span class="mi">1</span> <span class="n">of</span> <span class="mi">1</span><span class="p">)</span> <span class="p">:</span> <span class="o">&lt;</span><span class="n">source_ip</span><span class="o">&gt;</span>  <span class="o">&lt;</span><span class="n">destination_ip</span><span class="o">&gt;</span>   <span class="mi">0441</span> <span class="n">UDP</span> <span class="o">&lt;</span><span class="n">source_port</span><span class="o">&gt;-&gt;&lt;</span><span class="n">destination_port</span><span class="o">&gt;</span>
+<span class="n">IDS</span> <span class="n">scan</span> <span class="n">parser</span> <span class="p">:</span> <span class="n">tcp</span> <span class="n">syn</span> <span class="n">scan</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">source_ip</span><span class="o">&gt;</span> <span class="n">scanned</span> <span class="n">at</span> <span class="n">least</span> <span class="mi">20</span> <span class="n">ports</span> <span class="n">at</span> <span class="o">&lt;</span><span class="n">destination_ip</span><span class="o">&gt;</span><span class="p">.</span>  <span class="p">(</span><span class="mi">1</span> <span class="n">of</span> <span class="mi">1</span><span class="p">)</span> <span class="p">:</span> <span class="o">&lt;</span><span class="n">source_ip</span><span class="o">&gt;</span>   <span class="o">&lt;</span><span class="n">destination_ip</span><span class="o">&gt;</span>   <span class="mi">0040</span> <span class="n">TCP</span> <span class="o">&lt;</span><span class="n">source_port</span><span class="o">&gt;-&gt;&lt;</span><span class="n">destination_port</span><span class="o">&gt;</span> <span class="p">[</span><span class="n">S</span><span class="p">.....]</span> <span class="n">seq</span> <span class="mi">97417629</span> <span class="n">win</span> <span class="mi">1024</span>
+<span class="n">IDS</span> <span class="n">proto</span> <span class="n">parser</span> <span class="p">:</span> <span class="n">tcp</span> <span class="n">null</span> <span class="n">port</span> <span class="p">(</span><span class="mi">1</span> <span class="n">of</span> <span class="mi">1</span><span class="p">)</span> <span class="p">:</span> <span class="o">&lt;</span><span class="n">source_ip</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">destination_ip</span><span class="o">&gt;</span>   <span class="mi">0040</span> <span class="n">TCP</span> <span class="o">&lt;</span><span class="n">source_port</span><span class="o">&gt;-&gt;&lt;</span><span class="n">destination_port</span><span class="o">&gt;</span> <span class="p">[</span><span class="n">S</span><span class="p">.....]</span> <span class="n">seq</span> <span class="mi">2505992964</span> <span class="n">win</span> <span class="mi">1024</span></code></pre></figure>
+
+<p>The IDS appears to have detection rules for potential denial of service (DoS) attacks. In the first event, too many UDP packets were detected between the same IP addresses. This typically appears to be followed up by a UDP rate limiting event as the router attempts to protect the network against the perceived attack. What’s pretty cool is that this also appears to apply to outgoing traffic, so if your devices become infected and form part of a botnet they are prevented from spamming the attackers’ targets with packets.</p>
+
+<p>The second event in my sample concerns TCP rate limiting and in my logs was applied to an IP address from Russia. An IDS applies rate limiting when it receives a large number of connection requests from a particular IP address and applies a temporary block to avoid a denial of service (DoS) condition. Note that this wouldn’t stop a distributed denial of service (DDoS) attack, which achieves the same result by sending a smaller number of packets from each of a large number of IP addresses.</p>
+
+<p>Then we have various types of detected port scans - in my case detected from IP addresses belonging to organisations as varied as Akamai, Amazon, GoDaddy, and Twitch, as well as a few IP addresses that looked like Russian hackers. Not much you can do about that, but it’s interesting stuff nonetheless.</p>
+
+<p>Finally, we have a TCP null port packet detection (in my logs the destination port showed up as 0). I couldn’t find too much information about this, but it’s likely to be a sign that an attacker is crafting nonsensical packets in an attempt to elicit an abnormal response from the router.</p>
+
+<h3 id="example-investigation-using-technicolor-tg582n-events">Example investigation using Technicolor TG582n events</h3>
+
+<p>Where does knowing all this get you? Having visibility of your router events and understanding what they mean can help you to troubleshoot network issues and identify potential cyber attacks - anything from sophisticated intruders to neighbours hijacking your broadband connection.</p>
+
+<p>As an example of how the Technicolor TG582n’s event logs can come in useful, during the week I was running the router I noticed a potential problem. Like many others during the COVID-19 pandemic, I was working from home, and my Skype video calls would drop out seemingly randomly. I decided to do some digging in the new logs for any clues, and here’s what I found at around the time of one of my failed calls…</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">IDS</span> <span class="n">dos</span> <span class="n">parser</span> <span class="p">:</span> <span class="n">udp</span> <span class="n">flood</span> <span class="p">(</span><span class="mi">1</span> <span class="n">of</span> <span class="mi">1</span><span class="p">):</span> <span class="o">&lt;</span><span class="n">my_ip</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">company_server_ip</span><span class="o">&gt;</span> <span class="mi">0801</span> <span class="n">UDP</span> <span class="o">&lt;</span><span class="n">source_port</span><span class="o">&gt;-&gt;&lt;</span><span class="n">destination_port</span><span class="o">&gt;</span>
+<span class="n">IDS</span> <span class="n">rate</span> <span class="n">parser</span> <span class="p">:</span> <span class="n">udp</span> <span class="n">rate</span> <span class="n">limiting</span> <span class="p">(</span><span class="mi">1</span> <span class="n">of</span> <span class="mi">1</span><span class="p">):</span> <span class="o">&lt;</span><span class="n">my_ip</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">company_server_ip</span><span class="o">&gt;</span> <span class="mi">1072</span> <span class="n">UDP</span> <span class="o">&lt;</span><span class="n">source_port</span><span class="o">&gt;-&gt;&lt;</span><span class="n">destination_port</span><span class="o">&gt;</span>
+<span class="n">PPP</span> <span class="n">link</span> <span class="n">down</span> <span class="p">(</span><span class="n">Internet</span><span class="p">)</span> <span class="p">[</span><span class="o">&lt;</span><span class="n">my_ip</span><span class="o">&gt;</span><span class="p">]</span>
+<span class="n">PPP</span> <span class="n">CHAP</span> <span class="n">Receive</span> <span class="n">challenge</span> <span class="p">(</span><span class="n">rhost</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">host</span><span class="o">&gt;</span><span class="p">)</span>
+<span class="n">PPP</span> <span class="n">CHAP</span> <span class="n">Chap</span> <span class="n">receive</span> <span class="n">success</span> <span class="p">:</span> <span class="n">authentication</span> <span class="n">ok</span>
+<span class="n">PPP</span> <span class="n">link</span> <span class="n">up</span> <span class="p">(</span><span class="n">Internet</span><span class="p">)</span> <span class="p">[</span><span class="o">&lt;</span><span class="n">my_ip</span><span class="o">&gt;</span><span class="p">]</span></code></pre></figure>
+
+<p>My best theory is this: The router spotted the large number of UDP datagrams being sent between my system and the Skype server and assumed this was a DoS attack. To put a stop to it, it applied rate limiting to the connection, which disrupted the call. Somewhere along the line this upset <em>something</em>, and that <em>something</em> failing took the connection down, meaning I had to wait for the broadband connection to resume before signing back into Skype, reconnecting to the call, and giving my apologies.</p>
+
+<p>Unfortunately, there’s little that you could do about this particular issue. The Technicolor TG582n gives you the option of turning the IDS on or off, and there is no configuration to be done beyond that - you’re either protected or you’re not. I suppose that means I should be glad that I’ve since upgraded.</p>
+
+<h3 id="contribute">Contribute</h3>
+
+<p>Event enumeration without proper documentation is often very hit-and-miss. I left the Technicolor TG582n router running for about a week to generate as many different events as possible, but if a certain type of event simply didn’t occur, it won’t have shown up in my analysis. If you have important and/or interesting events to add to this list, please get in touch via the links below and I’ll add them in (with credit!).</p>
+
+		
+		<div id="cta">
+	Looking for the comments? My website doesn't have a comments section because it would take a fair amount of effort to maintain and wouldn't usually present much value to readers. However, if you have thoughts to share I'd love to hear from you - feel free to send me <a href="https://twitter.com/mattcasmith" target="_blank">a tweet</a> or <a href="mailto:mattcasmith@protonmail.com">an email</a>.
+</div>
+		
+		<div id="prev_next">
+			<div class="prev">
+				    
+						<a href="/2020/06/30/new-website-new-philosophy/">&laquo;&nbsp;Welcome to a new website with a new philosophy</a>
+					
+			</div>
+			<div class="next">
+				    
+			</div>
+		</div>
+		
+		
+				<div id="footer">
+			&copy; 2016-20 MattCASmith
+			<span class="home-link"><a href="/">Go home</a></span>
+		</div>
+		
+		<script data-goatcounter="https://mattcasmith.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+		
+		</div>
+	
+	</body>
+</html>

@@ -482,6 +482,14 @@ p {
 	font-size: 18pt;
 }
 
+.post h4 {
+	float: left;
+	font-size: 12pt;
+	line-height: 1.4em;
+	padding: 40px 0 0 0;
+	margin: 0;
+}
+
 .post ol, .post ul {
 	float: left;
 	margin: 30px 0 -5px;
