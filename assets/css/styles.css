@@ -66,6 +66,11 @@ html {
 	.home_about_box:last-of-type, .home_content_box:last-of-type {
 		border-right: none !important;
 	}
+	
+	.home-link {
+		color: #999 !important;
+		font-style: italic;
+	}
 }
 
 .dark {
@@ -407,6 +412,7 @@ body {
 
 .home-link {
 	float: right;
+	color: #333;
 }
 
 img {
