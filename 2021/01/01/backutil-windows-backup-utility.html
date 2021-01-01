@@ -1,0 +1,309 @@
+<!doctype html>
+<head>
+	<meta name="description" content="" />
+	<meta name="robots" content="index, follow" />
+	<meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+	<meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+	<link rel="canonical" href="https://mattcasmith.net/2021/01/01/backutil-windows-backup-utility" />
+	<meta property="og:locale" content="en_GB" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Introducing Backutil&#58; A Python&#8208;based Windows backup utility | MattCASmith" />
+	<meta property="og:description" content="" />
+	<meta property="og:url" content="https://mattcasmith.net/2021/01/01/backutil-windows-backup-utility" />
+	<meta property="og:site_name" content="MattCASmith" />
+	<meta property="article:published_time" content="2020-05-02T11:05:40+00:00" />
+	<meta property="og:image" content="https://mattcasmith.net" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:creator" content="@mattcasmith" />
+	<meta name="twitter:site" content="@mattcasmith" />
+</head>
+	<head>
+		<style>
+			html {
+				display: none;
+			}
+		</style>
+		<title>Introducing Backutil&#58; A Python&#8208;based Windows backup utility | MattCASmith</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="shortcut icon" href="/assets/images/favicon.png">
+		<link rel="stylesheet" href="/assets/css/styles.css">
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+		
+	</head>
+	
+	<body>
+		<div id="site-container" class="post">
+		<div id="header">
+			<div id="header_left">
+				<a href="/"><img class="site_logo light" src="/assets/images/mcas_site_logo.png"></a>
+				<a href="/"><img class="site_logo dark" src="/assets/images/mcas_site_logo_dark.png"></a>
+				<a href="/"><h2>MattCASmith</h2></a>
+			</div>
+			<div id="header_right">
+				<a target="_blank" href="https://twitter.com/mattcasmith"><img class="link_icon_twitter" src="/assets/images/twitter_icon.png"></a>
+				<a target="_blank" href="mailto:mattcasmith@protonmail.com"><img class="link_icon_email light" src="/assets/images/email_icon.png"></a>
+				<a target="_blank" href="mailto:mattcasmith@protonmail.com"><img class="link_icon_email dark" src="/assets/images/email_icon_dark.png"></a>
+			</div>
+		</div>
+		
+		<div class="title">
+			<h1 class="entry-title">Introducing Backutil&#58; A Python&#8208;based Windows backup utility</h1>
+		</div>
+		
+		<div class="meta">
+			<span class="year_label">2021-01-01</span>&nbsp; 
+				
+				
+					<a href="/category/programming.html">Programming</a>,&nbsp;&nbsp;
+				
+					<a href="/category/technology.html">Technology</a>
+				
+			
+		</div>
+		
+		
+		
+		<p>Back in the spring, I decided that 2020 would be the year I would finally see a coding project through to completion. A recent work project shone a light on backup and recovery, and I realised that I should probably be a bit more consistent with my own backups from my personal PC. Wanting to avoid paying <em>another</em> annual subscription, I decided to write a script myself. Thus Backutil was born - and the project only grew from there as I added more features along the way.</p>
+
+<p>I’m still not quite at the point when I’m ready to release a v1.0, but I told myself a few months ago that I wanted to put together a minimum viable product by the new year - so here it is! It has a few bugs and is missing a couple of features, but Backutil is now a functioning Python-based utility for backing up files on Windows systems, complete with options for incremental backups and backup rotation.</p>
+
+<h3 id="contents">Contents</h3>
+
+<p>1. <a href="#introduction">Introduction</a><br />
+          a. <a href="#testing-and-limitations">Testing and limitations</a><br />
+2. <a href="#configuration">Configuration</a><br />
+          a. <a href="#configuration-file">Configuration file</a><br />
+          b. <a href="#backup-list-file">Backup list file</a><br />
+          a. <a href="#command-line-options">Command line options</a><br />
+3. <a href="#download">Download</a><br />
+4. <a href="#future-development">Future development</a></p>
+
+<h3 id="introduction">Introduction</h3>
+
+<p>Backutil is a simple, Python-based utility for backing up files from Windows systems to compressed, password-protected local archives. It has features for performing incremental backups and automatically rotating backup files. This is achieved using <code>robocopy</code> and 7-Zip, which must be installed.</p>
+
+<p style="float: left; width: 90%; padding: 5px; padding-left: 15px; padding-right: 5%; margin: 30px 0 10px 0; font-style: italic; border-left: 5px solid red; background: #ff9999; color: #333;">Backutil is a learning/hobby project and some aspects of its code may not follow best practices. While you're welcome to use it, you do so at your own risk. Make sure you take a manual backup of your files before trying it out, and don't go relying on it to back up your production servers.</p>
+
+<p>To back up your files, simply ensure you have configured Backutil (see the sections below) and run <code>backutil.exe</code> from the Command Prompt or PowerShell. The utility will report on its progress until the backup is successfully completed. More detail can also be found in <code>backutil_log.csv</code>.</p>
+
+<p><img src="/wp-content/uploads/2020/12/backutil-1.png" /></p>
+
+<p>When the utility is finished, you should find your complete backup files in your designated backup folder. The number and size of these backup files can be configured using the incremental backup and rotation settings, which are set in the configuration file or as command line options.</p>
+
+<p><img src="/wp-content/uploads/2020/12/backutil-2.png" /></p>
+
+<p>As Backutil automatically manages your backup files, it can be configured to run automatically at the desired interval using the Windows Task Scheduler. Backutil’s features can be used to generate rolling full or incremental backups as required by your backup objectives and disk size.</p>
+
+<h4 id="testing-and-limitations">Testing and limitations</h4>
+
+<p>Aside from all the testing that comes naturally during the development process, I have been using Backutil to back up my personal files for the last month or so using a Windows scheduled task to run the utility on a weekly basis. My configuration performs incremental backups on a five-file rotation and so far has worked without a hitch, to a level where I occasionally even forgot it was running.</p>
+
+<p>One slight limitation, which will be improved with <a href="#future-development">future development</a>, is the speed of the backup process. My current backups include around 83GB of data (about 50GB once compressed), and the initial “big” backup can take a couple of hours to run. For this reason, I recommend using Backutil to back up a focused set of directories rather than your whole hard drive, at least for the moment.</p>
+
+<h3 id="configuration">Configuration</h3>
+
+<p>Backutil can be configured via three main means: a configuration file, a file containing a list of directories to be backed up, and a series of command line options that override other settings. If a configuration file and backup list file are present, Backutil can be run using the following simple command.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="p">.</span>\<span class="n">backutil</span><span class="p">.</span><span class="n">exe</span></code></pre></figure>
+
+<p>In terms of an installation directory, I put the executable and configuration files in <code>C:\backutil\bin\</code> and use <code>C:\backutil\</code> as the staging folder for the temporary files and records. However, you can put these files wherever you like as long as your settings are configured accordingly.</p>
+
+<h4 id="configuration-file">Configuration file</h4>
+
+<p>Backutil automatically loads settings from a file named <code>config.ini</code>, including the location of the list of directories to back up, folders for backups and temporary files, and incremental backup and rotation options. The configuration file should be located in the same folder as <code>backutil.exe</code>.</p>
+
+<p>The contents of an example configuration file are shown below.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="p">[</span><span class="n">LOCAL</span><span class="p">]</span>
+<span class="n">computer_name</span> <span class="o">=</span> <span class="n">matts</span><span class="o">-</span><span class="n">pc</span>
+<span class="n">backup_list</span> <span class="o">=</span> <span class="n">backup</span><span class="o">-</span><span class="nb">list</span><span class="p">.</span><span class="n">txt</span>
+<span class="n">staging_folder</span> <span class="o">=</span> <span class="n">C</span><span class="p">:</span>\<span class="n">backutil</span>\
+<span class="n">archive_pass</span> <span class="o">=</span> <span class="n">supersecretpassword</span>
+<span class="n">incremental</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="n">rotation</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="n">retained</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="p">[</span><span class="n">SERVER</span><span class="p">]</span>
+<span class="n">server_directory</span> <span class="o">=</span> <span class="n">D</span><span class="p">:</span>\<span class="n">backups</span>\</code></pre></figure>
+
+<p>The table below sets out what each option in the <code>config.ini</code> configuration file does. Note that all directories supplied via the configuration file must include the trailing backslash.</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td><strong>Section</strong></td>
+      <td><strong>Key</strong></td>
+      <td><strong>Purpose</strong></td>
+    </tr>
+    <tr>
+      <td>LOCAL</td>
+      <td>computer_name</td>
+      <td>Sets backup folder/record name</td>
+    </tr>
+    <tr>
+      <td>LOCAL</td>
+      <td>backup_list</td>
+      <td>Sets the backup list filename</td>
+    </tr>
+    <tr>
+      <td>LOCAL</td>
+      <td>staging_folder</td>
+      <td>Sets folder for temporary file storage</td>
+    </tr>
+    <tr>
+      <td>LOCAL</td>
+      <td>archive_pass</td>
+      <td>Sets 7-Zip backup file password</td>
+    </tr>
+    <tr>
+      <td>LOCAL</td>
+      <td>incremental</td>
+      <td>Turns incremental backups on/off (True/False)</td>
+    </tr>
+    <tr>
+      <td>LOCAL</td>
+      <td>rotation</td>
+      <td>Turns backup rotation on/off (True/False)</td>
+    </tr>
+    <tr>
+      <td>LOCAL</td>
+      <td>retained</td>
+      <td>Sets number of backups to retain if rotation is on</td>
+    </tr>
+    <tr>
+      <td>SERVER</td>
+      <td>server_directory</td>
+      <td>Sets folder for backup storage</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="backup-list-file">Backup list file</h4>
+
+<p>The backup list file is a text file containing a list of directories. When Backutil is run, it will automatically generate a list of files to back up by scanning the contents of these directories and all subdirectories. The format of the backup list file should look something like the example below.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">C</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">Matt</span><span class="o">/</span><span class="n">Desktop</span>
+<span class="n">C</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">Matt</span><span class="o">/</span><span class="n">Downloads</span>
+<span class="n">C</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">Matt</span><span class="o">/</span><span class="n">Music</span><span class="o">/</span><span class="n">iTunes</span><span class="o">/</span><span class="n">iTunes</span> <span class="n">Media</span><span class="o">/</span><span class="n">Music</span>
+<span class="n">C</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">Matt</span><span class="o">/</span><span class="n">Pictures</span>
+<span class="n">C</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">Matt</span><span class="o">/</span><span class="n">Videos</span>
+ </code></pre></figure>
+
+<p>Note the empty line at the end of the list of directories. As of v0.51, this is required to ensure that Backutil parses the backup list file correctly (this has been noted as a bug for future development).</p>
+
+<h4 id="command-line-options">Command line options</h4>
+
+<p>Backutil also supports several options if you wish to set certain configuration parameters manually from the Command Prompt or PowerShell. Note that any parameters set via command line options will override the respective parameters in the <code>config.ini</code> configuration file.</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td><strong>Short</strong></td>
+      <td><strong>Long</strong></td>
+      <td><strong>Purpose</strong></td>
+    </tr>
+    <tr>
+      <td>-h</td>
+      <td>--help</td>
+      <td>Displays the help file</td>
+    </tr>
+    <tr>
+      <td>-n &lt;name&gt;</td>
+      <td>--name &lt;name&gt;</td>
+      <td>Manually sets the backup folder/record name</td>
+    </tr>
+    <tr>
+      <td>-l &lt;file&gt;</td>
+      <td>--list &lt;file&gt;</td>
+      <td>Manually sets the backup list file</td>
+    </tr>
+    <tr>
+      <td>-i</td>
+      <td>--incremental</td>
+      <td>Manually turns on incremental backups</td>
+    </tr>
+    <tr>
+      <td>-r &lt;no&gt;</td>
+      <td>--rotate &lt;no&gt;</td>
+      <td>Manually turns on backup rotation and sets number of backups</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The following command shows an example of how the command line options may be used.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="p">.</span>\<span class="n">backutil</span><span class="p">.</span><span class="n">exe</span> <span class="o">-</span><span class="n">n</span> <span class="n">matts</span><span class="o">-</span><span class="n">pc</span> <span class="o">-</span><span class="n">l</span> <span class="n">locations</span><span class="p">.</span><span class="n">txt</span> <span class="o">-</span><span class="n">i</span> <span class="o">-</span><span class="n">r</span> <span class="mi">5</span></code></pre></figure>
+
+<p>Running Backutil with the options above will save backup files to a folder called <code>matts-pc</code> (note that this folder name is also how previous backups are tracked). The list of directories to back up files from will be retrieved from <code>locations.txt</code>. Backups will be incremental (only changed files will be backed up each time Backutil runs) and five previous backups will be retained.</p>
+
+<h3 id="download">Download</h3>
+
+<p>Use the link below to download Backutil. You’re free to run it for personal use - just please let me know if you encounter any bugs so I can work on fixing them in future realeases!</p>
+
+<p style="float: left; width: 90%; padding: 5px; padding-left: 15px; padding-right: 5%; margin: 30px 0 10px 0; font-style: italic; border-left: 5px solid red; background: #ff9999; color: #333;">Backutil is a learning/hobby project and some aspects of its code may not follow best practices. While you're welcome to use it, you do so at your own risk. Make sure you take a manual backup of your files before trying it out, and don't go relying on it to back up your production servers.</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td><a href="https://github.com/mattcasmith/backutil/raw/main/dist/backutil_v0.51.zip"><img src="/assets/images/download.png" style="width: 50px" /></a></td>
+      <td><a href="https://github.com/mattcasmith/backutil/raw/main/dist/backutil_v0.51.zip">Download Backutil v0.51</a><br />36.6MB, ZIP</td>
+      <td>The downloadable archive contains <code>backutil.exe</code> and an example <code>config.ini</code> file. Interested in the source code? The full Python script is available in <a target="_blank" href="https://github.com/mattcasmith/backutil">the Backutil GitHub repository</a>.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="future-development">Future development</h3>
+
+<p>My determination to build a minimum viable product before the end of 2020 means that I have a backlog of bug fixes and new features to add during 2021. These include:</p>
+
+<ul>
+  <li>
+    <p><strong>Speed/efficiency improvements</strong> - As it stands, Backutil generates hashes and copies files via some fairly simple logic. As a next step I hope to implement a multithreading solution to process multiple files at once and reduce the time taken to perform each backup.</p>
+  </li>
+  <li>
+    <p><strong>Improved data storage</strong> - Backutil currently remembers what it has already backed up by recording file hashes in <code>.back</code> text files. I’d like to implement a more sophisticated system that stores this data in a more structured database, likely using SQLite.</p>
+  </li>
+  <li>
+    <p><strong>Inconsistencies and bug fixes</strong> - The more time you spend with a piece of code, the more flaws you find in it. So far my list includes inconsistencies in the <code>--help</code> output and improvements to the way the 7-Zip archive is generated, but I’m sure I’ll spot more along the way as I build other features.</p>
+  </li>
+  <li>
+    <p><strong>Remote backups</strong> - You’ll notice that some parts of Backutil use terminology associated with remote backups (for example, the <code>Server</code> section in the configuration file). This is because Backutil could originally be configured to use WinSCP to send backup files to a remote server. This has been removed for the initial release, but I hope to reinstate it in a future version.</p>
+  </li>
+  <li>
+    <p><strong>Graphical user interface (GUI)</strong> - I’ve played around with Python GUIs a couple of times before, but have never had a script worth implementing one for. Depending on time limitations, I might develop a GUI for Backutil to increase ease of use for less experienced users.</p>
+  </li>
+</ul>
+
+<p>Have you got more ideas for new Backutil features? Or have you found bugs that I haven’t? Please <a href="mailto:mattcasmith@protonmail.com">send me an email</a> to let me know so I can add them to the development backlog.</p>
+
+<p>If you’re interested in the project, check back regularly for new releases. I’ll also announce any updates on <a target="_blank" href="https://twitter.com/mattcasmith">my Twitter account</a>, and may add some form of banner to <a href="https://mattcasmith.net">my site’s homepage</a>.</p>
+
+		
+		<div id="cta">
+	Looking for the comments? My website doesn't have a comments section because it would take a fair amount of effort to maintain and wouldn't usually present much value to readers. However, if you have thoughts to share I'd love to hear from you - feel free to send me <a href="https://twitter.com/mattcasmith" target="_blank">a tweet</a> or <a href="mailto:mattcasmith@protonmail.com">an email</a>.
+</div>
+		
+		<div id="prev_next">
+			<div class="prev">
+				    
+						<a href="/2020/12/22/best-cyber-security-tech-books-2020">&laquo;&nbsp;The best cyber security and technology books I read during 2020</a>
+					
+			</div>
+			<div class="next">
+				    
+			</div>
+		</div>
+		
+		
+				<div id="footer">
+			&copy; 2016-20 MattCASmith
+			<span class="home-link">Personal blog - does not reflect views of employers past or present</span>
+		</div>
+		
+		<script data-goatcounter="https://mattcasmith.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+		
+		</div>
+	
+	</body>
+</html>

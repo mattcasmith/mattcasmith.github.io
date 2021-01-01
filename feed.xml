@@ -1,4 +1,217 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.0">Jekyll</generator><link href="https://mattcasmith.net/feed.xml" rel="self" type="application/atom+xml" /><link href="https://mattcasmith.net/" rel="alternate" type="text/html" /><updated>2020-12-22T09:49:41+00:00</updated><id>https://mattcasmith.net/feed.xml</id><title type="html">MattCASmith</title><subtitle>A blog about cyber security and technology</subtitle><entry><title type="html">The best cyber security and technology books I read during 2020</title><link href="https://mattcasmith.net/2020/12/22/best-cyber-security-tech-books-2020" rel="alternate" type="text/html" title="The best cyber security and technology books I read during 2020" /><published>2020-12-22T00:00:00+00:00</published><updated>2020-12-22T00:00:00+00:00</updated><id>https://mattcasmith.net/2020/12/22/best-cyber-security-tech-books-2020</id><content type="html" xml:base="https://mattcasmith.net/2020/12/22/best-cyber-security-tech-books-2020">&lt;p&gt;One of the few upsides of the whole 2020 situation is that I’ve had a lot more time to read. Periods that I would usually have spent commuting, out with friends, or cramming in chores between getting home and going to bed became downtime that I could devote to good books. It was a small silver lining to a year that became something of an endurance test in staying at home and finding ways to amuse myself.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.0">Jekyll</generator><link href="https://mattcasmith.net/feed.xml" rel="self" type="application/atom+xml" /><link href="https://mattcasmith.net/" rel="alternate" type="text/html" /><updated>2021-01-01T11:24:01+00:00</updated><id>https://mattcasmith.net/feed.xml</id><title type="html">MattCASmith</title><subtitle>A blog about cyber security and technology</subtitle><entry><title type="html">Introducing Backutil: A Python‐based Windows backup utility</title><link href="https://mattcasmith.net/2021/01/01/backutil-windows-backup-utility" rel="alternate" type="text/html" title="Introducing Backutil&amp;#58; A Python&amp;#8208;based Windows backup utility" /><published>2021-01-01T00:00:00+00:00</published><updated>2021-01-01T00:00:00+00:00</updated><id>https://mattcasmith.net/2021/01/01/backutil-python-windows-backup-utility</id><content type="html" xml:base="https://mattcasmith.net/2021/01/01/backutil-windows-backup-utility">&lt;p&gt;Back in the spring, I decided that 2020 would be the year I would finally see a coding project through to completion. A recent work project shone a light on backup and recovery, and I realised that I should probably be a bit more consistent with my own backups from my personal PC. Wanting to avoid paying &lt;em&gt;another&lt;/em&gt; annual subscription, I decided to write a script myself. Thus Backutil was born - and the project only grew from there as I added more features along the way.&lt;/p&gt;
+
+&lt;p&gt;I’m still not quite at the point when I’m ready to release a v1.0, but I told myself a few months ago that I wanted to put together a minimum viable product by the new year - so here it is! It has a few bugs and is missing a couple of features, but Backutil is now a functioning Python-based utility for backing up files on Windows systems, complete with options for incremental backups and backup rotation.&lt;/p&gt;
+
+&lt;h3 id=&quot;contents&quot;&gt;Contents&lt;/h3&gt;
+
+&lt;p&gt;1. &lt;a href=&quot;#introduction&quot;&gt;Introduction&lt;/a&gt;&lt;br /&gt;
+          a. &lt;a href=&quot;#testing-and-limitations&quot;&gt;Testing and limitations&lt;/a&gt;&lt;br /&gt;
+2. &lt;a href=&quot;#configuration&quot;&gt;Configuration&lt;/a&gt;&lt;br /&gt;
+          a. &lt;a href=&quot;#configuration-file&quot;&gt;Configuration file&lt;/a&gt;&lt;br /&gt;
+          b. &lt;a href=&quot;#backup-list-file&quot;&gt;Backup list file&lt;/a&gt;&lt;br /&gt;
+          a. &lt;a href=&quot;#command-line-options&quot;&gt;Command line options&lt;/a&gt;&lt;br /&gt;
+3. &lt;a href=&quot;#download&quot;&gt;Download&lt;/a&gt;&lt;br /&gt;
+4. &lt;a href=&quot;#future-development&quot;&gt;Future development&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
+
+&lt;p&gt;Backutil is a simple, Python-based utility for backing up files from Windows systems to compressed, password-protected local archives. It has features for performing incremental backups and automatically rotating backup files. This is achieved using &lt;code&gt;robocopy&lt;/code&gt; and 7-Zip, which must be installed.&lt;/p&gt;
+
+&lt;p style=&quot;float: left; width: 90%; padding: 5px; padding-left: 15px; padding-right: 5%; margin: 30px 0 10px 0; font-style: italic; border-left: 5px solid red; background: #ff9999; color: #333;&quot;&gt;Backutil is a learning/hobby project and some aspects of its code may not follow best practices. While you're welcome to use it, you do so at your own risk. Make sure you take a manual backup of your files before trying it out, and don't go relying on it to back up your production servers.&lt;/p&gt;
+
+&lt;p&gt;To back up your files, simply ensure you have configured Backutil (see the sections below) and run &lt;code&gt;backutil.exe&lt;/code&gt; from the Command Prompt or PowerShell. The utility will report on its progress until the backup is successfully completed. More detail can also be found in &lt;code&gt;backutil_log.csv&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2020/12/backutil-1.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;When the utility is finished, you should find your complete backup files in your designated backup folder. The number and size of these backup files can be configured using the incremental backup and rotation settings, which are set in the configuration file or as command line options.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2020/12/backutil-2.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;As Backutil automatically manages your backup files, it can be configured to run automatically at the desired interval using the Windows Task Scheduler. Backutil’s features can be used to generate rolling full or incremental backups as required by your backup objectives and disk size.&lt;/p&gt;
+
+&lt;h4 id=&quot;testing-and-limitations&quot;&gt;Testing and limitations&lt;/h4&gt;
+
+&lt;p&gt;Aside from all the testing that comes naturally during the development process, I have been using Backutil to back up my personal files for the last month or so using a Windows scheduled task to run the utility on a weekly basis. My configuration performs incremental backups on a five-file rotation and so far has worked without a hitch, to a level where I occasionally even forgot it was running.&lt;/p&gt;
+
+&lt;p&gt;One slight limitation, which will be improved with &lt;a href=&quot;#future-development&quot;&gt;future development&lt;/a&gt;, is the speed of the backup process. My current backups include around 83GB of data (about 50GB once compressed), and the initial “big” backup can take a couple of hours to run. For this reason, I recommend using Backutil to back up a focused set of directories rather than your whole hard drive, at least for the moment.&lt;/p&gt;
+
+&lt;h3 id=&quot;configuration&quot;&gt;Configuration&lt;/h3&gt;
+
+&lt;p&gt;Backutil can be configured via three main means: a configuration file, a file containing a list of directories to be backed up, and a series of command line options that override other settings. If a configuration file and backup list file are present, Backutil can be run using the following simple command.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;\&lt;span class=&quot;n&quot;&gt;backutil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;exe&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;In terms of an installation directory, I put the executable and configuration files in &lt;code&gt;C:\backutil\bin\&lt;/code&gt; and use &lt;code&gt;C:\backutil\&lt;/code&gt; as the staging folder for the temporary files and records. However, you can put these files wherever you like as long as your settings are configured accordingly.&lt;/p&gt;
+
+&lt;h4 id=&quot;configuration-file&quot;&gt;Configuration file&lt;/h4&gt;
+
+&lt;p&gt;Backutil automatically loads settings from a file named &lt;code&gt;config.ini&lt;/code&gt;, including the location of the list of directories to back up, folders for backups and temporary files, and incremental backup and rotation options. The configuration file should be located in the same folder as &lt;code&gt;backutil.exe&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;The contents of an example configuration file are shown below.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;LOCAL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;computer_name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;matts&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pc&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;backup_list&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;backup&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;txt&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;staging_folder&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;C&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;\&lt;span class=&quot;n&quot;&gt;backutil&lt;/span&gt;\
+&lt;span class=&quot;n&quot;&gt;archive_pass&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;supersecretpassword&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;incremental&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;rotation&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;retained&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SERVER&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;server_directory&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;D&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;\&lt;span class=&quot;n&quot;&gt;backups&lt;/span&gt;\&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;The table below sets out what each option in the &lt;code&gt;config.ini&lt;/code&gt; configuration file does. Note that all directories supplied via the configuration file must include the trailing backslash.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Section&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;strong&gt;Key&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;strong&gt;Purpose&lt;/strong&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;LOCAL&lt;/td&gt;
+      &lt;td&gt;computer_name&lt;/td&gt;
+      &lt;td&gt;Sets backup folder/record name&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;LOCAL&lt;/td&gt;
+      &lt;td&gt;backup_list&lt;/td&gt;
+      &lt;td&gt;Sets the backup list filename&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;LOCAL&lt;/td&gt;
+      &lt;td&gt;staging_folder&lt;/td&gt;
+      &lt;td&gt;Sets folder for temporary file storage&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;LOCAL&lt;/td&gt;
+      &lt;td&gt;archive_pass&lt;/td&gt;
+      &lt;td&gt;Sets 7-Zip backup file password&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;LOCAL&lt;/td&gt;
+      &lt;td&gt;incremental&lt;/td&gt;
+      &lt;td&gt;Turns incremental backups on/off (True/False)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;LOCAL&lt;/td&gt;
+      &lt;td&gt;rotation&lt;/td&gt;
+      &lt;td&gt;Turns backup rotation on/off (True/False)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;LOCAL&lt;/td&gt;
+      &lt;td&gt;retained&lt;/td&gt;
+      &lt;td&gt;Sets number of backups to retain if rotation is on&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;SERVER&lt;/td&gt;
+      &lt;td&gt;server_directory&lt;/td&gt;
+      &lt;td&gt;Sets folder for backup storage&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h4 id=&quot;backup-list-file&quot;&gt;Backup list file&lt;/h4&gt;
+
+&lt;p&gt;The backup list file is a text file containing a list of directories. When Backutil is run, it will automatically generate a list of files to back up by scanning the contents of these directories and all subdirectories. The format of the backup list file should look something like the example below.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;C&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Users&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Matt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Desktop&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;C&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Users&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Matt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Downloads&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;C&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Users&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Matt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Music&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;iTunes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;iTunes&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Media&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Music&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;C&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Users&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Matt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Pictures&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;C&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Users&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Matt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Videos&lt;/span&gt;
+ &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Note the empty line at the end of the list of directories. As of v0.51, this is required to ensure that Backutil parses the backup list file correctly (this has been noted as a bug for future development).&lt;/p&gt;
+
+&lt;h4 id=&quot;command-line-options&quot;&gt;Command line options&lt;/h4&gt;
+
+&lt;p&gt;Backutil also supports several options if you wish to set certain configuration parameters manually from the Command Prompt or PowerShell. Note that any parameters set via command line options will override the respective parameters in the &lt;code&gt;config.ini&lt;/code&gt; configuration file.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Short&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;strong&gt;Long&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;strong&gt;Purpose&lt;/strong&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;-h&lt;/td&gt;
+      &lt;td&gt;--help&lt;/td&gt;
+      &lt;td&gt;Displays the help file&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;-n &amp;lt;name&amp;gt;&lt;/td&gt;
+      &lt;td&gt;--name &amp;lt;name&amp;gt;&lt;/td&gt;
+      &lt;td&gt;Manually sets the backup folder/record name&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;-l &amp;lt;file&amp;gt;&lt;/td&gt;
+      &lt;td&gt;--list &amp;lt;file&amp;gt;&lt;/td&gt;
+      &lt;td&gt;Manually sets the backup list file&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;-i&lt;/td&gt;
+      &lt;td&gt;--incremental&lt;/td&gt;
+      &lt;td&gt;Manually turns on incremental backups&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;-r &amp;lt;no&amp;gt;&lt;/td&gt;
+      &lt;td&gt;--rotate &amp;lt;no&amp;gt;&lt;/td&gt;
+      &lt;td&gt;Manually turns on backup rotation and sets number of backups&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;The following command shows an example of how the command line options may be used.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;\&lt;span class=&quot;n&quot;&gt;backutil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;exe&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;matts&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;locations&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;txt&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Running Backutil with the options above will save backup files to a folder called &lt;code&gt;matts-pc&lt;/code&gt; (note that this folder name is also how previous backups are tracked). The list of directories to back up files from will be retrieved from &lt;code&gt;locations.txt&lt;/code&gt;. Backups will be incremental (only changed files will be backed up each time Backutil runs) and five previous backups will be retained.&lt;/p&gt;
+
+&lt;h3 id=&quot;download&quot;&gt;Download&lt;/h3&gt;
+
+&lt;p&gt;Use the link below to download Backutil. You’re free to run it for personal use - just please let me know if you encounter any bugs so I can work on fixing them in future realeases!&lt;/p&gt;
+
+&lt;p style=&quot;float: left; width: 90%; padding: 5px; padding-left: 15px; padding-right: 5%; margin: 30px 0 10px 0; font-style: italic; border-left: 5px solid red; background: #ff9999; color: #333;&quot;&gt;Backutil is a learning/hobby project and some aspects of its code may not follow best practices. While you're welcome to use it, you do so at your own risk. Make sure you take a manual backup of your files before trying it out, and don't go relying on it to back up your production servers.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://github.com/mattcasmith/backutil/raw/main/dist/backutil_v0.51.zip&quot;&gt;&lt;img src=&quot;/assets/images/download.png&quot; style=&quot;width: 50px&quot; /&gt;&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://github.com/mattcasmith/backutil/raw/main/dist/backutil_v0.51.zip&quot;&gt;Download Backutil v0.51&lt;/a&gt;&lt;br /&gt;36.6MB, ZIP&lt;/td&gt;
+      &lt;td&gt;The downloadable archive contains &lt;code&gt;backutil.exe&lt;/code&gt; and an example &lt;code&gt;config.ini&lt;/code&gt; file. Interested in the source code? The full Python script is available in &lt;a target=&quot;_blank&quot; href=&quot;https://github.com/mattcasmith/backutil&quot;&gt;the Backutil GitHub repository&lt;/a&gt;.&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;future-development&quot;&gt;Future development&lt;/h3&gt;
+
+&lt;p&gt;My determination to build a minimum viable product before the end of 2020 means that I have a backlog of bug fixes and new features to add during 2021. These include:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Speed/efficiency improvements&lt;/strong&gt; - As it stands, Backutil generates hashes and copies files via some fairly simple logic. As a next step I hope to implement a multithreading solution to process multiple files at once and reduce the time taken to perform each backup.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Improved data storage&lt;/strong&gt; - Backutil currently remembers what it has already backed up by recording file hashes in &lt;code&gt;.back&lt;/code&gt; text files. I’d like to implement a more sophisticated system that stores this data in a more structured database, likely using SQLite.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Inconsistencies and bug fixes&lt;/strong&gt; - The more time you spend with a piece of code, the more flaws you find in it. So far my list includes inconsistencies in the &lt;code&gt;--help&lt;/code&gt; output and improvements to the way the 7-Zip archive is generated, but I’m sure I’ll spot more along the way as I build other features.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Remote backups&lt;/strong&gt; - You’ll notice that some parts of Backutil use terminology associated with remote backups (for example, the &lt;code&gt;Server&lt;/code&gt; section in the configuration file). This is because Backutil could originally be configured to use WinSCP to send backup files to a remote server. This has been removed for the initial release, but I hope to reinstate it in a future version.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Graphical user interface (GUI)&lt;/strong&gt; - I’ve played around with Python GUIs a couple of times before, but have never had a script worth implementing one for. Depending on time limitations, I might develop a GUI for Backutil to increase ease of use for less experienced users.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Have you got more ideas for new Backutil features? Or have you found bugs that I haven’t? Please &lt;a href=&quot;mailto:mattcasmith@protonmail.com&quot;&gt;send me an email&lt;/a&gt; to let me know so I can add them to the development backlog.&lt;/p&gt;
+
+&lt;p&gt;If you’re interested in the project, check back regularly for new releases. I’ll also announce any updates on &lt;a target=&quot;_blank&quot; href=&quot;https://twitter.com/mattcasmith&quot;&gt;my Twitter account&lt;/a&gt;, and may add some form of banner to &lt;a href=&quot;https://mattcasmith.net&quot;&gt;my site’s homepage&lt;/a&gt;.&lt;/p&gt;</content><author><name>mattcasmith</name></author><summary type="html">Back in the spring, I decided that 2020 would be the year I would finally see a coding project through to completion. A recent work project shone a light on backup and recovery, and I realised that I should probably be a bit more consistent with my own backups from my personal PC. Wanting to avoid paying another annual subscription, I decided to write a script myself. Thus Backutil was born - and the project only grew from there as I added more features along the way. I’m still not quite at the point when I’m ready to release a v1.0, but I told myself a few months ago that I wanted to put together a minimum viable product by the new year - so here it is! It has a few bugs and is missing a couple of features, but Backutil is now a functioning Python-based utility for backing up files on Windows systems, complete with options for incremental backups and backup rotation. Contents 1. Introduction           a. Testing and limitations 2. Configuration           a. Configuration file           b. Backup list file           a. Command line options 3. Download 4. Future development Introduction Backutil is a simple, Python-based utility for backing up files from Windows systems to compressed, password-protected local archives. It has features for performing incremental backups and automatically rotating backup files. This is achieved using robocopy and 7-Zip, which must be installed. Backutil is a learning/hobby project and some aspects of its code may not follow best practices. While you're welcome to use it, you do so at your own risk. Make sure you take a manual backup of your files before trying it out, and don't go relying on it to back up your production servers. To back up your files, simply ensure you have configured Backutil (see the sections below) and run backutil.exe from the Command Prompt or PowerShell. The utility will report on its progress until the backup is successfully completed. More detail can also be found in backutil_log.csv. When the utility is finished, you should find your complete backup files in your designated backup folder. The number and size of these backup files can be configured using the incremental backup and rotation settings, which are set in the configuration file or as command line options. As Backutil automatically manages your backup files, it can be configured to run automatically at the desired interval using the Windows Task Scheduler. Backutil’s features can be used to generate rolling full or incremental backups as required by your backup objectives and disk size. Testing and limitations Aside from all the testing that comes naturally during the development process, I have been using Backutil to back up my personal files for the last month or so using a Windows scheduled task to run the utility on a weekly basis. My configuration performs incremental backups on a five-file rotation and so far has worked without a hitch, to a level where I occasionally even forgot it was running. One slight limitation, which will be improved with future development, is the speed of the backup process. My current backups include around 83GB of data (about 50GB once compressed), and the initial “big” backup can take a couple of hours to run. For this reason, I recommend using Backutil to back up a focused set of directories rather than your whole hard drive, at least for the moment. Configuration Backutil can be configured via three main means: a configuration file, a file containing a list of directories to be backed up, and a series of command line options that override other settings. If a configuration file and backup list file are present, Backutil can be run using the following simple command. .\backutil.exe In terms of an installation directory, I put the executable and configuration files in C:\backutil\bin\ and use C:\backutil\ as the staging folder for the temporary files and records. However, you can put these files wherever you like as long as your settings are configured accordingly. Configuration file Backutil automatically loads settings from a file named config.ini, including the location of the list of directories to back up, folders for backups and temporary files, and incremental backup and rotation options. The configuration file should be located in the same folder as backutil.exe. The contents of an example configuration file are shown below. [LOCAL] computer_name = matts-pc backup_list = backup-list.txt staging_folder = C:\backutil\ archive_pass = supersecretpassword incremental = True rotation = True retained = 5 [SERVER] server_directory = D:\backups\ The table below sets out what each option in the config.ini configuration file does. Note that all directories supplied via the configuration file must include the trailing backslash. Section Key Purpose LOCAL computer_name Sets backup folder/record name LOCAL backup_list Sets the backup list filename LOCAL staging_folder Sets folder for temporary file storage LOCAL archive_pass Sets 7-Zip backup file password LOCAL incremental Turns incremental backups on/off (True/False) LOCAL rotation Turns backup rotation on/off (True/False) LOCAL retained Sets number of backups to retain if rotation is on SERVER server_directory Sets folder for backup storage Backup list file The backup list file is a text file containing a list of directories. When Backutil is run, it will automatically generate a list of files to back up by scanning the contents of these directories and all subdirectories. The format of the backup list file should look something like the example below. C:/Users/Matt/Desktop C:/Users/Matt/Downloads C:/Users/Matt/Music/iTunes/iTunes Media/Music C:/Users/Matt/Pictures C:/Users/Matt/Videos Note the empty line at the end of the list of directories. As of v0.51, this is required to ensure that Backutil parses the backup list file correctly (this has been noted as a bug for future development). Command line options Backutil also supports several options if you wish to set certain configuration parameters manually from the Command Prompt or PowerShell. Note that any parameters set via command line options will override the respective parameters in the config.ini configuration file. Short Long Purpose -h --help Displays the help file -n &amp;lt;name&amp;gt; --name &amp;lt;name&amp;gt; Manually sets the backup folder/record name -l &amp;lt;file&amp;gt; --list &amp;lt;file&amp;gt; Manually sets the backup list file -i --incremental Manually turns on incremental backups -r &amp;lt;no&amp;gt; --rotate &amp;lt;no&amp;gt; Manually turns on backup rotation and sets number of backups The following command shows an example of how the command line options may be used. .\backutil.exe -n matts-pc -l locations.txt -i -r 5 Running Backutil with the options above will save backup files to a folder called matts-pc (note that this folder name is also how previous backups are tracked). The list of directories to back up files from will be retrieved from locations.txt. Backups will be incremental (only changed files will be backed up each time Backutil runs) and five previous backups will be retained. Download Use the link below to download Backutil. You’re free to run it for personal use - just please let me know if you encounter any bugs so I can work on fixing them in future realeases! Backutil is a learning/hobby project and some aspects of its code may not follow best practices. While you're welcome to use it, you do so at your own risk. Make sure you take a manual backup of your files before trying it out, and don't go relying on it to back up your production servers. Download Backutil v0.5136.6MB, ZIP The downloadable archive contains backutil.exe and an example config.ini file. Interested in the source code? The full Python script is available in the Backutil GitHub repository. Future development My determination to build a minimum viable product before the end of 2020 means that I have a backlog of bug fixes and new features to add during 2021. These include: Speed/efficiency improvements - As it stands, Backutil generates hashes and copies files via some fairly simple logic. As a next step I hope to implement a multithreading solution to process multiple files at once and reduce the time taken to perform each backup. Improved data storage - Backutil currently remembers what it has already backed up by recording file hashes in .back text files. I’d like to implement a more sophisticated system that stores this data in a more structured database, likely using SQLite. Inconsistencies and bug fixes - The more time you spend with a piece of code, the more flaws you find in it. So far my list includes inconsistencies in the --help output and improvements to the way the 7-Zip archive is generated, but I’m sure I’ll spot more along the way as I build other features. Remote backups - You’ll notice that some parts of Backutil use terminology associated with remote backups (for example, the Server section in the configuration file). This is because Backutil could originally be configured to use WinSCP to send backup files to a remote server. This has been removed for the initial release, but I hope to reinstate it in a future version. Graphical user interface (GUI) - I’ve played around with Python GUIs a couple of times before, but have never had a script worth implementing one for. Depending on time limitations, I might develop a GUI for Backutil to increase ease of use for less experienced users. Have you got more ideas for new Backutil features? Or have you found bugs that I haven’t? Please send me an email to let me know so I can add them to the development backlog. If you’re interested in the project, check back regularly for new releases. I’ll also announce any updates on my Twitter account, and may add some form of banner to my site’s homepage.</summary></entry><entry><title type="html">The best cyber security and technology books I read during 2020</title><link href="https://mattcasmith.net/2020/12/22/best-cyber-security-tech-books-2020" rel="alternate" type="text/html" title="The best cyber security and technology books I read during 2020" /><published>2020-12-22T00:00:00+00:00</published><updated>2020-12-22T00:00:00+00:00</updated><id>https://mattcasmith.net/2020/12/22/best-cyber-security-tech-books-2020%20-%20Copy</id><content type="html" xml:base="https://mattcasmith.net/2020/12/22/best-cyber-security-tech-books-2020">&lt;p&gt;One of the few upsides of the whole 2020 situation is that I’ve had a lot more time to read. Periods that I would usually have spent commuting, out with friends, or cramming in chores between getting home and going to bed became downtime that I could devote to good books. It was a small silver lining to a year that became something of an endurance test in staying at home and finding ways to amuse myself.&lt;/p&gt;
 
 &lt;p&gt;I read more books in 2020 than I have since I was at college or university, so naturally, some of them were more notable, enjoyable, or informative than others. With that in mind, I thought I’d close off the year by sharing some of my favourite cyber security and tech titles. Also, it doesn’t look like my schedule will change any time soon, so if you have any suggestions for my 2021 reading list, please let me know!&lt;/p&gt;
 
@@ -539,58 +752,4 @@
 
 &lt;p&gt;All in all, SANS FOR508: Advanced Incident Response, Threat Hunting, and Digital Forensics was a huge course, a massive challenge, and hugely valuable. I would recommend it to anybody working in incident response, threat hunting, or forensics who is looking to take their skills to the next level.&lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;Photo by &lt;a href=&quot;https://unsplash.com/@olloweb?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;Agence Olloweb&lt;/a&gt; on&lt;/em&gt; &lt;a href=&quot;https://unsplash.com/s/photos/magnifying-glass?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;&lt;em&gt;Unsplash&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;</content><author><name>mattcasmith</name></author><category term="Cyber Security" /><category term="Forensics" /><category term="GCFA" /><category term="GIAC" /><category term="Incident Response" /><category term="Learning" /><category term="Logging" /><category term="Memory" /><category term="NTFS" /><category term="SANS" /><category term="Threat Hunting" /><category term="Windows" /><summary type="html">After two and a half years in incident response it was time for another SANS course – FOR508: Advanced Incident Response, Threat Hunting, and Digital Forensics – with a tough exam I squeezed in just before COVID-19 consigned us all to our homes.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://mattcasmith.net/wp-content/uploads/2020/03/magnifying_glass.jpg" /><media:content medium="image" url="https://mattcasmith.net/wp-content/uploads/2020/03/magnifying_glass.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Setting up Pi-hole to rein in an extremely noisy Samsung Smart TV</title><link href="https://mattcasmith.net/2020/02/15/pi-hole-samsung-smart-tv/" rel="alternate" type="text/html" title="Setting up Pi-hole to rein in an extremely noisy Samsung Smart TV" /><published>2020-02-15T12:00:34+00:00</published><updated>2020-02-15T12:00:34+00:00</updated><id>https://mattcasmith.net/2020/02/15/pi-hole-samsung-smart-tv</id><content type="html" xml:base="https://mattcasmith.net/2020/02/15/pi-hole-samsung-smart-tv/">&lt;p&gt;A restless mind, a new feature, and a concerning news story had me worried about privacy over Christmas. Here’s how I installed Pi-hole on my home network to try to block requests from my Samsung Smart TV – and what the data it collected revealed…&lt;/p&gt;
-
-&lt;p&gt;It was the night before Christmas – or at least some time in December – and I was browsing through the options on my Samsung Smart TV for something to watch when I noticed a Sony PlayStation advert on the main menu. That was odd, I thought. There was never a banner there before (sigh), and how would Samsung know that I play video games? They had no way of knowing which consoles I owned.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2020/01/pihole0.jpg&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;I didn’t think much of it at the time and so didn’t take a photo (the one above was taken a week or two later when the next banner appeared). PlayStation ads do appear during breaks on prime time TV, after all, so it might not have been tailored at all. I only reached the point of taking action a weeks later, when Reddit alerted me to &lt;a href=&quot;https://www.privateinternetaccess.com/blog/2020/01/samsung-smart-tvs-are-set-to-upload-screenshots-of-what-youre-watching/&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;a disturbing-sounding news story about Samsung Smart TVs&lt;/a&gt;:&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Samsung’s privacy policy reveals an unnerving reality: that Samsung Smart TVs are sending clips of whatever is playing on the television to be sent back to Samsung. It’s hard to imagine a deeper violation of privacy from a smart TV set than having a screenshot of what you’re watching be uploaded to the cloud for corporate advertising purposes…&lt;/p&gt;
-
-  &lt;p&gt;If you enable Samsung’s Internet-Based Advertising service, your TV viewing history will be siphoned up and sent back to Samsung to be shared with third parties that pay Samsung to send advertising directly to your screen.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Now I want to be completely clear that I cannot vouch for the source and I have absolutely no idea whether my TV was sending clips to Samsung (one of the most popular posts on this blog, in fact, was about &lt;a href=&quot;https://mattcasmith.net/2017/11/26/the-day-instagram-advertisingread-my-mind/&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;eerily relevant adverts that are likely down to clever data science&lt;/a&gt;). But the &lt;a href=&quot;https://www.samsung.com/us/account/privacy-policy/&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;privacy policy&lt;/a&gt; concerned me, and however you look at it, retroactively embedding advertising into a product I paid hundreds of pounds for is not cool. So I set out to find a way to put an end to this behaviour…&lt;/p&gt;
-
-&lt;h3 id=&quot;a-black-hole-for-advertisements&quot;&gt;A black hole for advertisements&lt;/h3&gt;
-
-&lt;p&gt;Enter &lt;a href=&quot;https://pi-hole.net/&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;Pi-hole&lt;/a&gt; – an open-source software package designed to be installed on a Raspberry Pi that can be used to block connections to advertising domains. This can improve the user’s browsing privacy across all devices on the network – even within apps on smartphones and TVs – bolster network security by &lt;a href=&quot;https://www.sans.org/reading-room/whitepapers/hsoffice/defense-in-depth-small-office-home-office-39350&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;blocking potential callouts to malware command and control servers&lt;/a&gt;, and (in theory, at least) boost internet browsing speeds by saving endpoints the effort of downloading all those banner ads.&lt;/p&gt;
-
-&lt;p&gt;So how exactly does this magic box work? Every time you try to connect to a website – let’s say you enter “example.xyz” in Firefox – your computer sends a domain name system (DNS) request asking a DNS server for the IP address corresponding to that domain. If the DNS server replies and tells your computer that example.xyz’s IP address is 1.2.3.4, your computer will then make a connection to 1.2.3.4 and ask for the data that makes up the web page you requested.&lt;/p&gt;
-
-&lt;p&gt;Pi-hole sits on your network and acts as the designated DNS server for all your devices. Your router passes all DNS requests to the Pi-hole and it checks the domains against blacklists of advertising and malware domains. If the domain is a match, the DNS request is blocked and never returned. If it checks out, the DNS request is passed to a DNS server on the internet for a response.&lt;/p&gt;
-
-&lt;p&gt;So the Pi-hole effectively prevents your computer from knowing where advertising servers are located, meaning banner ads and tracking scripts fail to load. An added benefit for data geeks like me is that it logs all this data and displays it on a neat web interface that acts as a rough approximation of a record of all browsing activity on your home network – interesting for tinkering and analysis, although the data can be anonymised and turned down for the privacy-conscious among us.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2020/02/piholedash.png&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;setup-and-dns-log-analysis&quot;&gt;Setup and DNS log analysis&lt;/h3&gt;
-
-&lt;p&gt;Setup was… not smooth. It turned out that my provider’s cheap router (which I’m planning on replacing) doesn’t like setting changes, and more than once it went non-responsive and showed a configuration of lights that internet forums informed me meant it was bricked and would need to be replaced. Luckily they were wrong, and within a few hours I had both a functional router and a Pi-hole ready for action.&lt;/p&gt;
-
-&lt;p&gt;I took the extra measure of setting up the Pi-hole as a dynamic host configuration protocol (DHCP) server, making it responsible for handing out IP addresses to devices on my network. This way it can be set to assign static IP addresses and custom names to known devices, making it a lot easier to keep track of which device is responsible for which DNS requests in the Pi-hole’s logs.&lt;/p&gt;
-
-&lt;p&gt;The next step was to find out what domains my smart TV was making requests to so I could block them. This might sound like it would require intricate detective work, but it was actually extremely easy, because once I filtered the Pi-hole logs for requests from my TV I could see that it was calling out to several domains, some of them as frequently as &lt;em&gt;every couple of seconds&lt;/em&gt;.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;samsungcloudsolution.com&lt;br /&gt;
-samsungrm.net&lt;br /&gt;
-samsungelectronics.com&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;The first of those was the main culprit, but there may be more – I’m keeping an eye on it for now and will update my settings accordingly. A quick blacklisting later and my Pi-hole was set to reject any DNS requests for these domains. It was time to switch everything back on and take a look at the results…&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/wp-content/uploads/2020/01/pihole1.png&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Look at the graph above and guess when I turned on my Samsung Smart TV. It’s not a trick question – after blacklisting the domain names above, the percentage of the total DNS requests on my network that were blocked shot up to more than 50 per cent, including 7,000 during that football match alone!&lt;/p&gt;
-
-&lt;h3 id=&quot;project-in-review&quot;&gt;Project in review&lt;/h3&gt;
-
-&lt;p&gt;So what is my TV actually doing over all these attempted connections? Is it really taking screen captures of my viewing and sending them back to Samsung for analysis? That’s a question that goes beyond the scope of my project. Even if I allowed the connection and intercepted the packets, it’s likely (hopefully) that their contents would be encrypted and unreadable, so it’s hard to say.&lt;/p&gt;
-
-&lt;p&gt;It is likely, however, that these calls out to Samsung’s servers are used for at least some kind of tracking or metrics purposes, because that’s what tech firms do (because they’re full of data geeks like myself). And I can say for certain that they’re non-essential, because since I blocked them the functionality of my smart TV hasn’t been affected at all. Funnily enough, I haven’t seen any more ads, either.&lt;/p&gt;
-
-&lt;p&gt;So was this a slightly paranoid exercise? Maybe. But I’d been wanting to experiment with a Pi-hole for a little while, so it gave me an excuse to set one up, and helped me to both learn a little bit more about network behaviour and put what I already knew into practice. The Pi-hole is also a source of some potentially interesting logs – so perhaps look out for some analysis in a future post.&lt;/p&gt;</content><author><name>mattcasmith</name></author><category term="Cyber Security" /><category term="Data" /><category term="Linux" /><category term="Log Analysis" /><category term="Logging" /><category term="Networking" /><category term="Pi-hole" /><category term="Privacy" /><category term="Raspberry Pi" /><category term="Samsung" /><category term="TV" /><category term="Web Browsing" /><summary type="html">A restless mind, a new feature, and a concerning news story had me worried about privacy over Christmas. Here’s how I installed Pi-hole on my home network to try to block requests from my Samsung Smart TV – and what the data it collected revealed…</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://mattcasmith.net/wp-content/uploads/2020/01/pihole.jpg" /><media:content medium="image" url="https://mattcasmith.net/wp-content/uploads/2020/01/pihole.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+&lt;p&gt;&lt;em&gt;Photo by &lt;a href=&quot;https://unsplash.com/@olloweb?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;Agence Olloweb&lt;/a&gt; on&lt;/em&gt; &lt;a href=&quot;https://unsplash.com/s/photos/magnifying-glass?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;&lt;em&gt;Unsplash&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;</content><author><name>mattcasmith</name></author><category term="Cyber Security" /><category term="Forensics" /><category term="GCFA" /><category term="GIAC" /><category term="Incident Response" /><category term="Learning" /><category term="Logging" /><category term="Memory" /><category term="NTFS" /><category term="SANS" /><category term="Threat Hunting" /><category term="Windows" /><summary type="html">After two and a half years in incident response it was time for another SANS course – FOR508: Advanced Incident Response, Threat Hunting, and Digital Forensics – with a tough exam I squeezed in just before COVID-19 consigned us all to our homes.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://mattcasmith.net/wp-content/uploads/2020/03/magnifying_glass.jpg" /><media:content medium="image" url="https://mattcasmith.net/wp-content/uploads/2020/03/magnifying_glass.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
