@@ -10,7 +10,7 @@ html {
 @media (prefers-color-scheme: dark) {
 	body {
 		color: #ddd !important;
-		background: #333 !important;
+		background: #222 !important;
 	}
 	
 	#header h2 {
@@ -18,7 +18,7 @@ html {
 	}
 
 	.home_content_box_button {
-		background: #333 !important;
+		background: #222 !important;
 	}
 	
 	.home_content_box_button:hover {
@@ -35,11 +35,11 @@ html {
 	}
 
 	.post tr:nth-child(even) {
-		background: #555 !important;
+		background: #444 !important;
 	}
 	
 	.highlight, #cta {
-		background: #555 !important;
+		background: #444 !important;
 		color: #ddd !important;
 	}
 	
@@ -52,15 +52,15 @@ html {
 	}
 	
 	#header, #home_about_boxes, #fourohfour, nav {
-		border-bottom: 1px solid #555 !important;
+		border-bottom: 1px solid #444 !important;
 	}
 	
 	#home_about_boxes, #footer, nav {
-		border-top: 1px solid #555 !important;
+		border-top: 1px solid #444 !important;
 	}
 	
 	.home_about_box, .home_content_box {
-		border-right: 1px solid #555 !important;
+		border-right: 1px solid #444 !important;
 	}
 
 	.home_about_box:last-of-type, .home_content_box:last-of-type {
