@@ -74,7 +74,8 @@
           b. <a href="#backup-list-file">Backup list file</a><br />
           a. <a href="#command-line-options">Command line options</a><br />
 3. <a href="#download">Download</a><br />
-4. <a href="#future-development">Future development</a></p>
+4. <a href="#changelog">Changelog</a><br />
+5. <a href="#future-development">Future development</a></p>
 
 <h3 id="introduction">Introduction</h3>
 
@@ -187,8 +188,6 @@
 <span class="n">C</span><span class="p">:</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">Matt</span><span class="o">/</span><span class="n">Videos</span>
  </code></pre></figure>
 
-<p>Note the empty line at the end of the list of directories. As of v0.51, this is required to ensure that Backutil parses the backup list file correctly (this has been noted as a bug for future development).</p>
-
 <h4 id="command-line-options">Command line options</h4>
 
 <p>Backutil also supports several options if you wish to set certain configuration parameters manually from the Command Prompt or PowerShell. Note that any parameters set via command line options will override the respective parameters in the <code>config.ini</code> configuration file.</p>
@@ -243,9 +242,26 @@
 <table>
   <tbody>
     <tr>
-      <td><a href="https://github.com/mattcasmith/backutil/raw/main/dist/backutil_v0.51.zip"><img src="/assets/images/download.png" style="width: 50px" /></a></td>
-      <td><a href="https://github.com/mattcasmith/backutil/raw/main/dist/backutil_v0.51.zip">Download Backutil v0.51</a><br />36.6MB, ZIP</td>
+      <td><a href="https://github.com/mattcasmith/backutil/raw/main/dist/backutil_v0.52.zip"><img src="/assets/images/download.png" style="width: 50px" /></a></td>
+      <td><a href="https://github.com/mattcasmith/backutil/raw/main/dist/backutil_v0.52.zip">Download Backutil v0.52</a><br />36.6MB, ZIP</td>
       <td>The downloadable archive contains <code>backutil.exe</code> and an example <code>config.ini</code> file. Interested in the source code? The full Python script is available in <a target="_blank" href="https://github.com/mattcasmith/backutil">the Backutil GitHub repository</a>.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="changelog">Changelog</h3>
+
+<table>
+  <tbody>
+    <tr>
+      <td><strong>Date</strong></td>
+      <td><strong>Version</strong></td>
+      <td><strong>Changes</strong></td>
+    </tr>
+    <tr>
+      <td>19/02/2021</td>
+      <td>v0.52</td>
+      <td>Small bug fixes and improvements from v0.51:<br />- 7-Zip file now generated directly in destination folder<br />- Hash file now only generated after successful backup<br />- Blank line at end of backup list file no longer required<br />- Help page consistent with online documentation<br />- Fixed –help and –incremental arguments</td>
     </tr>
   </tbody>
 </table>
