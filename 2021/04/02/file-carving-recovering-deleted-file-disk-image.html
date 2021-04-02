@@ -1,0 +1,137 @@
+<!doctype html>
+<head>
+	<meta name="description" content="" />
+	<meta name="robots" content="index, follow" />
+	<meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+	<meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+	<link rel="canonical" href="https://mattcasmith.net/2021/04/02/file-carving-recovering-deleted-file-disk-image" />
+	<meta property="og:locale" content="en_GB" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="File carving&#58; Recovering a deleted file from a Windows disk image | MattCASmith" />
+	<meta property="og:description" content="" />
+	<meta property="og:url" content="https://mattcasmith.net/2021/04/02/file-carving-recovering-deleted-file-disk-image" />
+	<meta property="og:site_name" content="MattCASmith" />
+	<meta property="article:published_time" content="2020-05-02T11:05:40+00:00" />
+	<meta property="og:image" content="https://mattcasmith.net" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:creator" content="@mattcasmith" />
+	<meta name="twitter:site" content="@mattcasmith" />
+</head>
+	<head>
+		<style>
+			html {
+				display: none;
+			}
+		</style>
+		<title>File carving&#58; Recovering a deleted file from a Windows disk image | MattCASmith</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="shortcut icon" href="/assets/images/favicon.png">
+		<link rel="stylesheet" href="/assets/css/styles.css">
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+		
+	</head>
+	
+	<body>
+		<div id="site-container" class="post">
+		<div id="header">
+			<div id="header_left">
+				<a href="/"><img class="site_logo light" src="/assets/images/mcas_site_logo.png"></a>
+				<a href="/"><img class="site_logo dark" src="/assets/images/mcas_site_logo_dark.png"></a>
+				<a href="/"><h2>MattCASmith</h2></a>
+			</div>
+			<div id="header_right">
+				<a target="_blank" href="https://twitter.com/mattcasmith"><img class="link_icon_twitter" src="/assets/images/twitter_icon.png"></a>
+				<a target="_blank" href="mailto:mattcasmith@protonmail.com"><img class="link_icon_email light" src="/assets/images/email_icon.png"></a>
+				<a target="_blank" href="mailto:mattcasmith@protonmail.com"><img class="link_icon_email dark" src="/assets/images/email_icon_dark.png"></a>
+			</div>
+		</div>
+		
+		<div class="title">
+			<h1 class="entry-title">File carving&#58; Recovering a deleted file from a Windows disk image</h1>
+		</div>
+		
+		<div class="meta">
+			<span class="year_label">2021-04-02</span>&nbsp; 
+				
+				
+					<a href="/category/cyber-security.html">Cyber security</a>
+				
+			
+		</div>
+		
+		<p>Most computer users assume that when they delete a file and empty the Recycle Bin, it’s gone forever. After all, if Windows doesn’t show us a file, it doesn’t exist anymore, right? Wrong. With the right tools and knowledge, forensics experts can find fragments - or even complete versions - of deleted files that remain on the hard disk long after they disappear from Windows Explorer.</p>
+
+<p>In this post, I’ll run through how to take a disk image and recover deleted files using FTK Imager and a hex editor, explain why this works, and show how certain utilities let you overwrite this remnant data.</p>
+
+<h3 id="what-happens-when-you-delete-a-file">What happens when you delete a file?</h3>
+
+<p>To give myself something to find, I created the text file shown below on a 2GB hard drive partition. I saved it, then closed it, deleted it, and emptied the Recycle Bin to render it inaccessible to any normal Windows user. But what is actually happening in the background when you do this?</p>
+
+<p><img src="/wp-content/uploads/2021/04/deletedfile_file.png" /></p>
+
+<p>At the top of your hard drive is what’s known as the master file table (MFT). This is essentially an index - it contains filenames along with the addresses on the hard drive that these files can be found at. So when I create <code>test_file.txt</code>, an MFT record is created containing that filename and the address where the data (i.e. the file contents) is stored - in this case that’s <code>40009D50h</code>, but we don’t know that yet.</p>
+
+<p>When you delete a file, none of this information is removed from the disk. All deletion does is add a “deleted” flag to the MFT record, telling the computer that the information at the specified address is no longer needed and can be overwritten with new data if necessary - but nothing is actually deleted at this point and the file data is still present on the disk. You can probably guess where this is going…</p>
+
+<h3 id="creating-a-disk-image-with-ftk-imager">Creating a disk image with FTK Imager</h3>
+
+<p>With the right tools, we can access the remnant data. First, we need a physical disk image to work with. <a href="https://accessdata.com/product-download" target="_blank">FTK Imager</a> is a free tool that allows us to create one. We choose a few simple options (I’m generating an image in the <code>E01</code> format) and set it to work. Depending on the size of the disk and your computer’s speed, it will take a little while to generate the image, which is an exact replica of the hard drive.</p>
+
+<p><img src="/wp-content/uploads/2021/04/deletedfile_ftk.png" /></p>
+
+<p>One thing to note is that the image cannot be generated on the same physical hard drive that is being imaged. For this reason, unless the system has multiple hard drives, it is necessary to choose to save the image to a directory on a removable drive or a network share, rather than on the subject computer itself.</p>
+
+<h3 id="recovering-a-deleted-file-with-ftk-imager">Recovering a deleted file with FTK Imager</h3>
+
+<p>FTK Imager can also be useful for the next step in our process - it can actually do the hard work for us and recover the deleted file. If we mount the physical image we created and open the correct partition, we can navigate through the file system to find deleted files, which will be marked with a red cross.</p>
+
+<p><img src="/wp-content/uploads/2021/04/deletedfile_ftkrecover.png" /></p>
+
+<p>As the last place the file was present was the Recycle Bin (read my post about <a href="/2018/12/15/python-windows-forensics-recycle-bin-deleted-files/">Python forensics for the Recycle Bin</a> for more information about the file structure), its MFT entry points to that directory. Here, we can see that the file <code>$RHEYFYA.txt</code> is our test file, and FTK Imager helpfully displays the contents.</p>
+
+<h3 id="recovering-a-deleted-file-with-a-hex-editor">Recovering a deleted file with a hex editor</h3>
+
+<p>But things won’t always be that easy, and we shouldn’t rely on tools to do our forensics for us without knowing how they work. We can find the same data manually by mounting the disk image and opening it in a hex editor - in this example, <a href="https://www.sweetscape.com/010editor/" target="_blank">010 Editor</a>. This displays the entire contents of the hard drive in hex format, and has a helpful feature that will search for strings amongst the data in the image.</p>
+
+<p><img src="/wp-content/uploads/2021/04/deletedfile_hex.png" /></p>
+
+<p>As you can see, I was able to find the text file’s contents by searching for strings. If we were looking for a different type of file, we might search according to its file signature, which indicates what format the file is in (for example, JPEGs start with <code>FF D8 FF E0</code>). Text files don’t normally have signatures, and in this case we can see the file data starts immediately at the address <code>40009D50h</code>.</p>
+
+<h3 id="overwriting-traces-of-deleted-files">Overwriting traces of deleted files</h3>
+
+<p>So we’ve seen that it’s possible to recover deleted files, but is there any way to remove them  from the disk completely? In short: yes, there is. Tools like <a href="https://www.ccleaner.com/" target="_blank">CCleaner</a> can overwrite the free space on a hard drive with nonsense data. If I run CCleaner’s Drive Wiper feature on our partition and repeat the above process, we can see that the address formerly occupied by <code>test_file.txt</code> is now full of zeroes.</p>
+
+<p><img src="/wp-content/uploads/2021/04/deletedfile_ccleaner.png" /></p>
+
+<p>While this prevents a forensic investigator from recovering a file’s contents if done correctly, using some of these tools will arouse suspicion in itself. Some wipers will fill free space with ones, Zs, or random data, and this does not normally occur naturally. If this is observed on a hard drive then questions will be asked over whether the user was trying to hide something and a more thorough search may be conducted.</p>
+
+
+		
+		<div id="cta">
+	Looking for the comments? My website doesn't have a comments section because it would take a fair amount of effort to maintain and wouldn't usually present much value to readers. However, if you have thoughts to share I'd love to hear from you - feel free to send me <a href="https://twitter.com/mattcasmith" target="_blank">a tweet</a> or <a href="mailto:mattcasmith@protonmail.com">an email</a>.
+</div>
+		
+		<div id="prev_next">
+			<div class="prev">
+				    
+						<a href="/2021/03/26/sqlite-databases-python">&laquo;&nbsp;Backutil development&#58; Building and JOINing SQLite databases in Python</a>
+					
+			</div>
+			<div class="next">
+				    
+			</div>
+		</div>
+		
+		
+				<div id="footer">
+			&copy; 2016-21 MattCASmith
+			<span class="home-link">Personal blog - does not reflect views of employers past or present</span>
+		</div>
+		
+		<script data-goatcounter="https://mattcasmith.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+		
+		</div>
+	
+	</body>
+</html>
