@@ -85,7 +85,7 @@
 
 <p>To back up your files, simply ensure you have configured Backutil (see the sections below) and run <code>backutil.exe</code> from the Command Prompt or PowerShell. The utility will report on its progress until the backup is successfully completed. More detail can also be found in <code>backutil_log.csv</code>.</p>
 
-<p><img src="/wp-content/uploads/2020/12/backutil-1.png" /></p>
+<p><img src="/wp-content/uploads/2021/05/backutil_v0_7.png" /></p>
 
 <p>When the utility is finished, you should find your complete backup files in your designated backup folder. The number and size of these backup files can be configured using the incremental backup and rotation settings, which are set in the configuration file or as command line options.</p>
 
@@ -95,9 +95,7 @@
 
 <h4 id="testing-and-limitations">Testing and limitations</h4>
 
-<p>Aside from all the testing that comes naturally during the development process, I have been using Backutil to back up my personal files for the last few months using a Windows scheduled task to run the utility on a weekly basis. My configuration performs incremental backups on a five-file rotation and so far has worked without a hitch, to a level where I occasionally even forgot it was running.</p>
-
-<p>One slight limitation, which will be improved with <a href="#future-development">future development</a>, is the speed of the backup process. My current backups include around 83GB of data (about 50GB once compressed), and the initial “big” backup can take a couple of hours to run. For this reason, I recommend using Backutil to back up a focused set of directories rather than your whole hard drive, at least for the moment.</p>
+<p>Aside from all the testing that comes naturally during the development process, I have been using Backutil to back up my personal files since the start of 2021 using a Windows scheduled task to run the utility on a weekly basis. My configuration performs incremental backups on a five-file rotation and so far has worked without a hitch, to a level where I occasionally even forgot it was running.</p>
 
 <h3 id="configuration">Configuration</h3>
 
@@ -121,6 +119,7 @@
 <span class="n">incremental</span> <span class="o">=</span> <span class="bp">True</span>
 <span class="n">rotation</span> <span class="o">=</span> <span class="bp">True</span>
 <span class="n">retained</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">max_threads</span> <span class="o">=</span> <span class="mi">6</span>
 
 <span class="p">[</span><span class="n">SERVER</span><span class="p">]</span>
 <span class="n">server_directory</span> <span class="o">=</span> <span class="n">D</span><span class="p">:</span>\<span class="n">backups</span>\</code></pre></figure>
@@ -168,6 +167,11 @@
       <td>LOCAL</td>
       <td>retained</td>
       <td>Sets number of backups to retain if rotation is on</td>
+    </tr>
+    <tr>
+      <td>LOCAL</td>
+      <td>max_threads</td>
+      <td>Sets maximum number of threads for multiprocessing</td>
     </tr>
     <tr>
       <td>SERVER</td>
@@ -223,14 +227,19 @@
       <td>--rotate &lt;no&gt;</td>
       <td>Manually turns on backup rotation and sets number of backups</td>
     </tr>
+    <tr>
+      <td>-t &lt;no&gt;</td>
+      <td>--threads &lt;no&gt;</td>
+      <td>Manually sets max threads for multiprocessing</td>
+    </tr>
   </tbody>
 </table>
 
 <p>The following command shows an example of how the command line options may be used.</p>
 
-<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="p">.</span>\<span class="n">backutil</span><span class="p">.</span><span class="n">exe</span> <span class="o">-</span><span class="n">n</span> <span class="n">matts</span><span class="o">-</span><span class="n">pc</span> <span class="o">-</span><span class="n">l</span> <span class="n">locations</span><span class="p">.</span><span class="n">txt</span> <span class="o">-</span><span class="n">i</span> <span class="o">-</span><span class="n">r</span> <span class="mi">5</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="p">.</span>\<span class="n">backutil</span><span class="p">.</span><span class="n">exe</span> <span class="o">-</span><span class="n">n</span> <span class="n">matts</span><span class="o">-</span><span class="n">pc</span> <span class="o">-</span><span class="n">l</span> <span class="n">locations</span><span class="p">.</span><span class="n">txt</span> <span class="o">-</span><span class="n">i</span> <span class="o">-</span><span class="n">r</span> <span class="mi">5</span> <span class="o">-</span><span class="n">t</span> <span class="mi">6</span></code></pre></figure>
 
-<p>Running Backutil with the options above will save backup files to a folder called <code>matts-pc</code> (note that this folder name is also how previous backups are tracked). The list of directories to back up files from will be retrieved from <code>locations.txt</code>. Backups will be incremental (only changed files will be backed up each time Backutil runs) and five previous backups will be retained.</p>
+<p>Running Backutil with the options above will save backup files to a folder called <code>matts-pc</code> (note that this folder name is also how previous backups are tracked). The list of directories to back up files from will be retrieved from <code>locations.txt</code>. Backups will be incremental (only changed files will be backed up each time Backutil runs) and five previous backups will be retained. A maximum of six threads will be used for hash generation and file copy operations.</p>
 
 <h3 id="download">Download</h3>
 
@@ -241,8 +250,8 @@
 <table>
   <tbody>
     <tr>
-      <td><a href="https://github.com/mattcasmith/backutil/raw/main/dist/backutil_v0.61.zip"><img src="/assets/images/download.png" style="width: 50px" /></a></td>
-      <td><a href="https://github.com/mattcasmith/backutil/raw/main/dist/backutil_v0.61.zip">Download Backutil v0.61</a><br />7.5MB, ZIP</td>
+      <td><a href="https://github.com/mattcasmith/backutil/raw/main/dist/backutil_v0.70.zip"><img src="/assets/images/download.png" style="width: 50px" /></a></td>
+      <td><a href="https://github.com/mattcasmith/backutil/raw/main/dist/backutil_v0.70.zip">Download Backutil v0.70</a><br />7.2MB, ZIP</td>
       <td>The downloadable archive contains <code>backutil.exe</code> and an example <code>config.ini</code> file. Interested in the source code? The full Python script is available in <a target="_blank" href="https://github.com/mattcasmith/backutil">the Backutil GitHub repository</a>.</td>
     </tr>
   </tbody>
@@ -256,6 +265,11 @@
       <td><strong>Date</strong></td>
       <td><strong>Version</strong></td>
       <td><strong>Changes</strong></td>
+    </tr>
+    <tr>
+      <td>03/05/2021</td>
+      <td>v0.70</td>
+      <td>Implemented multiprocessing and other improvements:<br />- Faster hash generation and file copying with multiprocessing<br />- Improved terminal output and logging<br />- General code improvements/tidying</td>
     </tr>
     <tr>
       <td>26/03/2021</td>
@@ -275,9 +289,6 @@
 <p>My determination to build a minimum viable product before the end of 2020 means that I have a backlog of bug fixes and new features to add during 2021. These include:</p>
 
 <ul>
-  <li>
-    <p><strong>Speed/efficiency improvements</strong> - As it stands, Backutil generates hashes and copies files via some fairly simple logic. As a next step I hope to implement a multithreading solution to process multiple files at once and reduce the time taken to perform each backup.</p>
-  </li>
   <li>
     <p><strong>Remote backups</strong> - You’ll notice that some parts of Backutil use terminology associated with remote backups (for example, the Server section in the configuration file). This is because Backutil could originally be configured to use WinSCP to send backup files to a remote server. This has been removed for the initial release, but I hope to reinstate it in a future version.</p>
   </li>
