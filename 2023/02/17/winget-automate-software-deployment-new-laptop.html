@@ -1,0 +1,151 @@
+<!doctype html>
+<head>
+	<meta name="description" content="" />
+	<meta name="robots" content="index, follow" />
+	<meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+	<meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+	<link rel="canonical" href="https://mattcasmith.net/2023/02/17/winget-automate-software-deployment-new-laptop" />
+	<meta property="og:locale" content="en_GB" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Using winget to automate software deployment to a new laptop | MattCASmith" />
+	<meta property="og:description" content="" />
+	<meta property="og:url" content="https://mattcasmith.net/2023/02/17/winget-automate-software-deployment-new-laptop" />
+	<meta property="og:site_name" content="MattCASmith" />
+	<meta property="article:published_time" content="2020-05-02T11:05:40+00:00" />
+	<meta property="og:image" content="https://mattcasmith.net/wp-content/uploads/2023/02/winget_1.png" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:creator" content="@mattcasmith" />
+	<meta name="twitter:site" content="@mattcasmith" />
+</head>
+	<head>
+		<style>
+			html {
+				display: none;
+			}
+		</style>
+		<title>Using winget to automate software deployment to a new laptop | MattCASmith</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="shortcut icon" href="/assets/images/favicon.png">
+		<link rel="stylesheet" href="/assets/css/styles.css">
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+		
+	</head>
+	
+	<body>
+		<div id="site-container" class="post">
+		<div id="header">
+			<div id="header_left">
+				<a href="/"><img class="site_logo light" src="/assets/images/mcas_site_logo.png"></a>
+				<a href="/"><img class="site_logo dark" src="/assets/images/mcas_site_logo_dark.png"></a>
+				<a href="/"><h2>MattCASmith</h2></a>
+			</div>
+			<div id="header_right">
+				<a target="_blank" href="https://twitter.com/mattcasmith"><img class="link_icon_twitter" src="/assets/images/twitter_icon.png"></a>
+				<a target="_blank" href="mailto:mattcasmith@protonmail.com"><img class="link_icon_email light" src="/assets/images/email_icon.png"></a>
+				<a target="_blank" href="mailto:mattcasmith@protonmail.com"><img class="link_icon_email dark" src="/assets/images/email_icon_dark.png"></a>
+			</div>
+		</div>
+		
+		<div class="title">
+			<h1 class="entry-title">Using winget to automate software deployment to a new laptop</h1>
+		</div>
+		
+		<div class="meta">
+			<span class="year_label">2023-02-17</span>&nbsp; 
+				
+				
+					<a href="/category/technology.html">Technology</a>,&nbsp;&nbsp;
+				
+					<a href="/category/programming.html">Programming</a>
+				
+			
+		</div>
+		
+		<p>I got my first new laptop in six years this week! The new hardware is definitely exciting, but reviews aren’t really my thing, so while I’ll inevitably <a href="https://twitter.com/mattcasmith" target="_blank">tweet</a> about how the Microsoft Surface Laptop fares, that’s not the purpose of this post. This is more about the mundane job of porting all my usual applications over to a new PC, and a handy new Windows feature that helped to make things a little easier - <code>winget</code>.</p>
+
+<p>Before we get started, I want to acknowledge both that I’m <a href="https://www.bleepingcomputer.com/news/security/winget-how-to-use-windows-10s-new-native-package-manager/" target="_blank">late to the party</a> on <code>winget</code> and that there have been <a href="https://chocolatey.org/" target="_blank">package managers</a> around on Windows for years - but it’s certainly a cool and useful addition to the core operating system, which bucks the trend when you consider how frequently Microsoft <em>removes</em> more advanced features and options these days (or at least applies confusing double UIs).</p>
+
+<p>I’ll also concede that taking the time to write a PowerShell script to automate software deployment is probably overkill for most users - myself included. The time spent on development and testing is <em>probably</em> greater than the amount of time it would take to download and install each package individually, but at the end of the day I now have a pre-baked script I can use to drop my software on any future systems.</p>
+
+<h3 id="initial-research">Initial research</h3>
+
+<p>Before I even got as far as creating a <code>PS1</code> file, my first step was to do some research to identify the software packages I wanted to install. To achieve this, I used the following <code>winget</code> command.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">winget</span> <span class="n">search</span> <span class="o">&lt;</span><span class="n">APP_NAME</span><span class="o">&gt;</span></code></pre></figure>
+
+<p>This ran a search across all the configured repositories (by default, basically the Microsoft Store and <code>winget</code>’s own one). The most important details were in the <code>Id</code> column, which generally follows the format <code>Developer.Product</code>. There were a lot of third-party apps that had the names of popular software in their own names, so this helped to sort the wheat from the chaff and identify the real packages.</p>
+
+<p><img src="/wp-content/uploads/2023/02/winget_0.png" /></p>
+
+<p>During this planning stage, I considered the software I wanted to deploy to my new system and ran the <code>winget search</code> command to find the corresponding packages until I had a complete list.</p>
+
+<h3 id="the-powershell-script">The PowerShell script</h3>
+
+<p>Now I could start writing a PowerShell script to iterate through my list of applications and try to install each of them. Firstly, I created an array to store the list (note that only the <code>Id</code> values here match the repository data - the names are my own more readable ones, for display and logging only).</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="err">$</span><span class="n">install_apps</span> <span class="o">=</span> 
+    <span class="p">(</span><span class="s">"Firefox"</span><span class="p">,</span> <span class="s">"Mozilla.Firefox"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s">"Steam"</span><span class="p">,</span> <span class="s">"Valve.Steam"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s">"Discord"</span><span class="p">,</span> <span class="s">"Discord.Discord"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s">"Netflix"</span><span class="p">,</span> <span class="s">"9WZDNCRFJ3TJ"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s">"Spotify"</span><span class="p">,</span> <span class="s">"Spotify.Spotify"</span><span class="p">)</span></code></pre></figure>
+
+<p>Next, I used a <code>foreach</code> loop to work through each application in <code>$install_apps</code> and attempt to run <code>winget</code> to install the corresponding package according to its <code>Id</code>, using the <code>--silent</code> flag to keep output to a minimum and require as little user interaction as possible to complete the deployment.</p>
+
+<p>There are a number of reasons why installation of any given application might fail - a missing package or insufficient permissions to name just a couple. To prevent missing software from flying under the radar, I used an <code>if</code>/<code>else</code> statement based on the <code>winget</code> exit code (<code>$LASTEXITCODE</code>) to detect any issues.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">foreach</span> <span class="p">(</span><span class="err">$</span><span class="n">app</span> <span class="ow">in</span> <span class="err">$</span><span class="n">install_apps</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">Write</span><span class="o">-</span><span class="n">Host</span> <span class="s">"Installing"</span> <span class="err">$</span><span class="n">app</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="s">"..."</span>
+    <span class="n">winget</span> <span class="n">install</span> <span class="o">--</span><span class="n">silent</span> <span class="o">--</span><span class="nb">id</span> <span class="err">$</span><span class="n">app</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">if</span> <span class="p">(</span><span class="err">$</span><span class="n">LASTEXITCODE</span> <span class="o">-</span><span class="n">eq</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">Write</span><span class="o">-</span><span class="n">Host</span> <span class="err">$</span><span class="n">app</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="s">"installation complete."</span>
+        <span class="n">Write</span><span class="o">-</span><span class="n">Host</span> <span class="s">""</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">Write</span><span class="o">-</span><span class="n">Host</span> <span class="err">$</span><span class="n">app</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="s">"installation failed."</span>
+        <span class="n">Write</span><span class="o">-</span><span class="n">Host</span> <span class="s">""</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>And that’s pretty much all I needed to get going! I also added a section to install Windows Subsystem for Linux (with Ubuntu) and a few extra lines to log failures to a file (in case I missed them in the terminal), but the code above would be perfectly adequate to try to install all the packages in the given list.</p>
+
+<h3 id="the-results">The results</h3>
+
+<p>So how did things go with the new laptop? Did my <code>winget</code> PowerShell script solve all my problems and allow me to kick back and relax as my applications were automatically deployed to my new system?</p>
+
+<p>Well, to tell the complete truth, not quite… But it was very close.</p>
+
+<p><img src="/wp-content/uploads/2023/02/winget_1.png" /></p>
+
+<p>As you can see from the screenshot above, <code>winget</code> undoubtedly made the job much quicker and easier, but it wasn’t <em>entirely</em> hands-off. Spotify was the only app that failed to install for some reason (perhaps because it’s one of those apps that come half-installed on a fresh Windows system?), but there were also a couple of others that required me to hit the <code>Y</code> key to accept licence agreements and terms of use.</p>
+
+<p>Still, it was a fun experiment, saved a lot of time downloading installers from developer websites and running them manually via the GUI, and leaves me with a script that will be easy to repurpose to (almost) automate the setup of any new computers I adopt in future. While <code>winget</code> isn’t the perfect zero-touch solution, I’d definitely recommend giving it a go - particularly if you ever find yourself in a situation where you need to set up multiple systems in a short time and a cheat code would help to preserve your sanity.</p>
+
+		
+		<div id="cta">
+	Looking for the comments? My website doesn't have a comments section because it would take a fair amount of effort to maintain and wouldn't usually present much value to readers. However, if you have thoughts to share I'd love to hear from you - feel free to send me <a href="https://twitter.com/mattcasmith" target="_blank">a tweet</a> or <a href="mailto:mattcasmith@protonmail.com">an email</a>.
+</div>
+		
+		<div id="prev_next">
+			<div class="prev">
+				    
+						<a href="/2023/01/13/2023-new-challenges-sharing-experiences">&laquo;&nbsp;2023&#58; Thoughts on new challenges and sharing experiences</a>
+					
+			</div>
+			<div class="next">
+				    
+			</div>
+		</div>
+		
+		
+				<div id="footer">
+			&copy; 2016-23 MattCASmith
+			<span class="home-link">Personal blog - does not reflect views of employers past or present</span>
+		</div>
+		
+		<script data-goatcounter="https://mattcasmith.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+		
+		</div>
+	
+	</body>
+</html>
