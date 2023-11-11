@@ -68,19 +68,67 @@
 <h3 id="contents">Contents</h3>
 
 <p>1. <a href="#bash_history-behaviours"><code>.bash_history</code> behaviours</a><br />
-          a. <a href="#the-history-command-outputs-a-combined-history-from-bash_history-and-memory">The <code>history</code> command</a><br />
-          b. <a href="#commands-are-written-to-bash_history-in-the-order-terminals-are-closed-not-the-order-they-are-run">Terminal windows and command order</a><br />
-          c. <a href="#commands-run-with-logical-and--appear-as-a-single-entry-in-bash_history">Logical AND (<code>&amp;&amp;</code>)</a><br />
-          d. <a href="#commands-run-within-scripts-are-not-reflected-in-bash_history">Commands within scripts</a><br />
-          e. <a href="#if-a-terminal-is-stopped-with-the-kill-command-commands-are-still-written-to-bash_history">The <code>kill</code> command</a><br />
-          f. <a href="#however-if-the--sigkill-switch-is-used-commands-are-not-written-to-bash_history">The <code>-SIGKILL</code> switch</a><br />
-          g. <a href="#ssh-sessions-behave-in-a-similar-way-to-standard-terminals">SSH sessions</a><br />
+          a. <a href="#first-a-note-on-the-histcontrol-variable">The <code>$HISTCONTROL</code> variable</a><br />
+          b. <a href="#the-history-command-outputs-a-combined-history-from-bash_history-and-memory">The <code>history</code> command</a><br />
+          c. <a href="#commands-are-written-to-bash_history-in-the-order-terminals-are-closed-not-the-order-they-are-run">Terminal windows and command order</a><br />
+          d. <a href="#commands-run-with-logical-and--appear-as-a-single-entry-in-bash_history">Logical AND (<code>&amp;&amp;</code>)</a><br />
+          e. <a href="#commands-run-within-scripts-are-not-reflected-in-bash_history">Commands within scripts</a><br />
+          f. <a href="#if-a-terminal-is-stopped-with-the-kill-command-commands-are-still-written-to-bash_history">The <code>kill</code> command</a><br />
+          g. <a href="#however-if-the--sigkill-switch-is-used-commands-are-not-written-to-bash_history">The <code>-SIGKILL</code> switch</a><br />
+          h. <a href="#ssh-sessions-behave-in-a-similar-way-to-standard-terminals">SSH sessions</a><br />
 2. <a href="#finding-bash-commands-in-memory">Finding Bash commands in memory</a><br />
 3. <a href="#further-reading">Further reading</a><br /></p>
 
 <h3 id="bash_history-behaviours"><code>.bash_history</code> behaviours</h3>
 
 <p>To test exactly when commands are and aren’t recorded to the user’s <code>.bash_history</code> file, I ran a series of tests covering common scenarios in which commands might be run. All of these tests were run on a clean installation of CentOS. Here’s what I found…</p>
+
+<h4 id="first-a-note-on-the-histcontrol-variable">First, a note on the <code>$HISTCONTROL</code> variable…</h4>
+
+<p>It is important to check the contents of the <code>$HISTCONTROL</code> variable on the subject system (after taking images and preserving evidence, so you’re not overwriting <code>.bash_history</code> with your own commands) as this has a potentially significant bearing on which commands will be written to the file.</p>
+
+<blockquote>
+  <p>echo $HISTCONTROL</p>
+</blockquote>
+
+<p>The command above will return one of the following strings. The table below details which commands <code>.bash_history</code> will ignore when each of the possible values is present.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">$HISTCONTROL value</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">ignorespace</td>
+      <td style="text-align: left">Excludes commands with a preceding space</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">ignoredups</td>
+      <td style="text-align: left">Excludes subsequent duplicate commands</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">ignorespace:ignoredups</td>
+      <td style="text-align: left">Excludes both commands with a preceding space and subsequent duplicates</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">ignoreboth</td>
+      <td style="text-align: left">Excludes both commands with a preceding space and subsequent duplicates</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Therefore if the system has one of these values in the <code>$HISTCONTROL</code> variable, there may be commands missing from <code>.bash_history</code>. If it is set to <code>ignorespace</code> and the attacker is aware, they could even just slip in a space before each of their commands and write nothing to the history file at all!</p>
+
+<p>The CentOS system where I performed the testing for this post had <code>$HISTCONTROL</code> set to <code>ignoredups</code>. However, I also performed checks across other Linux distros I had available (namely Kali, Tsurugi, and Windows Subsystem for Linux) and it was set to <code>ignoreboth</code> for them all. So it’s important to check what you’re dealing with on the particular system you’re investigating.</p>
+
+<p>It’s also trivial to change the contents of the <code>$HISTCONTROL</code> variable to exclude more commands from <code>.bash_history</code>, so watch out for evidence it has changed, which will look something like the following:</p>
+
+<blockquote>
+  <p>export HISTCONTROL=ignoreboth</p>
+</blockquote>
 
 <h4 id="the-history-command-outputs-a-combined-history-from-bash_history-and-memory">The <code>history</code> command outputs a combined history from <code>.bash_history</code> and memory.</h4>
 
@@ -175,9 +223,12 @@
 <p>The links below lead to pages that either inspired this post or provided useful information to compile it, including some more in-depth technical information on various features discussed above.</p>
 
 <p>• <a href="https://www.gnu.org/software/bash/manual/html_node/Bash-History-Facilities.html" target="_blank">Bash history manual page</a> (gnu.org)<br />
+• <a href="https://www.geeksforgeeks.org/histcontrol-command-in-linux-with-examples/" target="_blank">$HISTCONTROL command in Linux with examples</a> (geeksforgeeks.org)<br />
 • <a href="https://linuxhandbook.com/sigterm-vs-sigkill/" target="_blank">SIGINT vs SIGKILL</a> (linuxhandbook.com)<br />
 • <a href="https://github.com/volatilityfoundation/volatility/wiki/Linux" target="_blank">Volatility Linux documentation</a> (github.com)<br />
 • <a href="https://www.crowdstrike.com/blog/how-to-extract-memory-information-to-spot-linux-malware/" target="_blank">How to extract memory information to spot Linux malware</a> (crowdstrike.com)</p>
+
+<p><em>Updated 25/02/2022 to add section on the $HISTCONTROL variable.</em></p>
 
 		
 		<div id="cta">
