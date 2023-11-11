@@ -1,0 +1,192 @@
+<!doctype html>
+<head>
+	<meta name="description" content="" />
+	<meta name="robots" content="index, follow" />
+	<meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+	<meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+	<link rel="canonical" href="https://mattcasmith.net/2022/08/21/using-tkinter-gui-python-apps" />
+	<meta property="og:locale" content="en_GB" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Using Tkinter to build simple GUIs for Python apps | MattCASmith" />
+	<meta property="og:description" content="" />
+	<meta property="og:url" content="https://mattcasmith.net/2022/08/21/using-tkinter-gui-python-apps" />
+	<meta property="og:site_name" content="MattCASmith" />
+	<meta property="article:published_time" content="2020-05-02T11:05:40+00:00" />
+	<meta property="og:image" content="https://mattcasmith.net/wp-content/uploads/2022/08/tkinter-python_0.png" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:creator" content="@mattcasmith" />
+	<meta name="twitter:site" content="@mattcasmith" />
+</head>
+	<head>
+		<style>
+			html {
+				display: none;
+			}
+		</style>
+		<title>Using Tkinter to build simple GUIs for Python apps | MattCASmith</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="shortcut icon" href="/assets/images/favicon.png">
+		<link rel="stylesheet" href="/assets/css/styles.css">
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+		
+	</head>
+	
+	<body>
+		<div id="site-container" class="post">
+		<div id="header">
+			<div id="header_left">
+				<a href="/"><img class="site_logo light" src="/assets/images/mcas_site_logo.png"></a>
+				<a href="/"><img class="site_logo dark" src="/assets/images/mcas_site_logo_dark.png"></a>
+				<a href="/"><h2>MattCASmith</h2></a>
+			</div>
+			<div id="header_right">
+				<a target="_blank" href="https://twitter.com/mattcasmith"><img class="link_icon_twitter" src="/assets/images/twitter_icon.png"></a>
+				<a target="_blank" href="mailto:mattcasmith@protonmail.com"><img class="link_icon_email light" src="/assets/images/email_icon.png"></a>
+				<a target="_blank" href="mailto:mattcasmith@protonmail.com"><img class="link_icon_email dark" src="/assets/images/email_icon_dark.png"></a>
+			</div>
+		</div>
+		
+		<div class="title">
+			<h1 class="entry-title">Using Tkinter to build simple GUIs for Python apps</h1>
+		</div>
+		
+		<div class="meta">
+			<span class="year_label">2022-08-21</span>&nbsp; 
+				
+				
+					<a href="/category/programming.html">Programming</a>
+				
+			
+		</div>
+		
+		<p>I’ve written many Python scripts and apps in the past, including my Windows backup utility <a href="/2021/01/01/backutil-windows-backup-utility">Backutil</a>, which is probably the my most complex project to date. But I’ve always designed these to run in the background or on the command line, and haven’t ever tried to build an app with a graphical user interface (GUI).</p>
+
+<p>I was recently studying for a few <a href="/category/cyber-security">cyber security</a> certifications and realised it would be useful to have an app for displaying flashcards. There are probably a million solutions for this online already, but I thought it would be a good opportunity to learn how to add a GUI to control some simple Python functions. So I took to Google, looked up some tutorials, and cobbled something together on a Saturday afternoon.</p>
+
+<p>I’ll share the full code in future via GitHub and another blog post (there are still some more features I want to add), but for now I’ll focus on the GUI-related elements and how they connect to everything else.</p>
+
+<h3 id="introducting-tkinter">Introducting Tkinter</h3>
+
+<p><a href="https://docs.python.org/3/library/tkinter.html" target="_blank">Tkinter</a> is a Python library that allows you to work with the Tcl/Tk GUI toolkit to create applications that will work across Windows, macOS, and Linux. You can visit the link to review the full documentation, but I’ll cover some of the basics I learnt and how I used them for my flashcards app in this post.</p>
+
+<p>As with any Python extension, the first step is to import the library.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="n">ttk</span></code></pre></figure>
+
+<p>To understand what comes next, it’s probably better to see what the end result looks like first, so here’s the very simple GUI that we’ll be constructing in the following code segments for the flashcards app.</p>
+
+<p><img src="/wp-content/uploads/2022/08/tkinter-python_0.png" /></p>
+
+<p>As you can see, we have a main area that displays the content of the current flashcard, a button to flip the card to the other side, previous/next buttons and a counter to show the current position, and a button to reshuffle the deck into a new random order. There are also some keyboard shortcuts so the user doesn’t always need to navigate with the mouse. In the following sections, I’ll go over how each of these work.</p>
+
+<h3 id="setting-up-the-window-and-grid">Setting up the window and grid</h3>
+
+<p>We need a canvas before we can do any painting, and in this case the canvas is the application’s main window - also known as <code>root</code>. We can set this up with a few simple lines of code.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">root</span> <span class="o">=</span> <span class="n">Tk</span><span class="p">()</span>
+<span class="n">root</span><span class="p">.</span><span class="n">title</span><span class="p">(</span><span class="s">"Flashcards!"</span><span class="p">)</span>
+<span class="n">root</span><span class="p">.</span><span class="n">geometry</span><span class="p">(</span><span class="s">"400x400"</span><span class="p">)</span></code></pre></figure>
+
+<p>You can probably already glean the basics just by reading this, but with <code>title</code> we have set the window title to <code>Flashcards!</code>, and with <code>geometry</code> we have set the default window size to 400 by 400 pixels.</p>
+
+<p>Before we can place individual elements in our window, we need to establish a grid, which we’ll call <code>mainframe</code>. The following lines create this frame and centre it with the compass-point <code>sticky</code> attributes.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">mainframe</span> <span class="o">=</span> <span class="n">ttk</span><span class="p">.</span><span class="n">Frame</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+<span class="n">mainframe</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">S</span><span class="p">))</span></code></pre></figure>
+
+<p>With the grid itself set up, we can now apply attributes to the individual rows and columns. My basic GUI will require four rows, but only one of them needs any special configuration. I’m using <code>weight</code> and <code>minsize</code> on the second row to reserve plenty of space for the content of the cards.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">mainframe</span><span class="p">.</span><span class="n">rowconfigure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">minsize</span><span class="o">=</span><span class="mi">295</span><span class="p">)</span></code></pre></figure>
+
+<p>And that’s our grid set up and formatted! To help you to visualise where we’re adding each button and label in the next section, here’s roughly how the grid aligns to the finished GUI.</p>
+
+<p><img src="/wp-content/uploads/2022/08/tkinter-python_1.png" /></p>
+
+<p>Notice how the tweaks we made to the second row ensure there’s plenty of space in the middle in case the user provides lengthy content for their flashcards. You’ll probably also spot that the main card content and the Flip button don’t respect the column layout - we’ll see how to achieve this in a moment.</p>
+
+<h3 id="buttons-labels-and-string-variables">Buttons, labels, and string variables</h3>
+
+<p>Now we can get to placing the window contents - but we still have one more important job to do first. The text in the main card content section and the counter in the top right will need to change based on the user’s input, and to be able to update them we must establish them as <code>StringVar()</code> variables.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">card_content</span> <span class="o">=</span> <span class="n">StringVar</span><span class="p">()</span>
+<span class="n">card_number</span> <span class="o">=</span> <span class="n">StringVar</span><span class="p">()</span></code></pre></figure>
+
+<p>Then we create each button and label individually and assign their attributes.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">ttk</span><span class="p">.</span><span class="n">Button</span><span class="p">(</span><span class="n">mainframe</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s">"Flip"</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="n">flip_card</span><span class="p">).</span><span class="n">grid</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">columnspan</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="p">(</span><span class="n">W</span><span class="p">,</span><span class="n">E</span><span class="p">,</span><span class="n">S</span><span class="p">))</span>
+<span class="n">ttk</span><span class="p">.</span><span class="n">Button</span><span class="p">(</span><span class="n">mainframe</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s">"&lt;&lt;&lt;"</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="n">prev_card</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">15</span><span class="p">).</span><span class="n">grid</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="p">(</span><span class="n">W</span><span class="p">,</span><span class="n">S</span><span class="p">))</span>
+<span class="n">ttk</span><span class="p">.</span><span class="n">Button</span><span class="p">(</span><span class="n">mainframe</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s">"Shuffle"</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="n">randomise_data</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">15</span><span class="p">).</span><span class="n">grid</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="n">S</span><span class="p">)</span>
+<span class="n">ttk</span><span class="p">.</span><span class="n">Button</span><span class="p">(</span><span class="n">mainframe</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s">"&gt;&gt;&gt;"</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="n">next_card</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">15</span><span class="p">).</span><span class="n">grid</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="p">(</span><span class="n">E</span><span class="p">,</span><span class="n">S</span><span class="p">))</span>
+<span class="n">ttk</span><span class="p">.</span><span class="n">Label</span><span class="p">(</span><span class="n">mainframe</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="s">"Verdana"</span><span class="p">,</span> <span class="n">textvariable</span><span class="o">=</span><span class="n">card_content</span><span class="p">,</span> <span class="n">wraplength</span><span class="o">=</span><span class="mi">390</span><span class="p">,</span> <span class="n">anchor</span><span class="o">=</span><span class="s">"center"</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">38</span><span class="p">).</span><span class="n">grid</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">columnspan</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">ttk</span><span class="p">.</span><span class="n">Label</span><span class="p">(</span><span class="n">mainframe</span><span class="p">,</span> <span class="n">textvariable</span><span class="o">=</span><span class="n">card_number</span><span class="p">,</span> <span class="n">anchor</span><span class="o">=</span><span class="s">"e"</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">15</span><span class="p">).</span><span class="n">grid</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">ttk</span><span class="p">.</span><span class="n">Label</span><span class="p">(</span><span class="n">mainframe</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s">"MattCASmith.net"</span><span class="p">,</span> <span class="n">anchor</span><span class="o">=</span><span class="s">"w"</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">17</span><span class="p">).</span><span class="n">grid</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code></pre></figure>
+
+<p>In the brackets after each <code>Button</code> or <code>Label</code> is created, we first state which element it should be placed within (<code>mainframe</code>) and then provide various configurations. There are three that are worth explaining:</p>
+
+<ul>
+  <li>
+    <p><code>textvariable</code> - used to assign the two <code>StringVar()</code> variables we established to their respective labels. This is necessary for dynamic text. If the text is static, <code>text</code> can be used instead</p>
+  </li>
+  <li>
+    <p><code>anchor</code> - sets the alignment of the label text based on compass point values</p>
+  </li>
+  <li>
+    <p><code>command</code> - links buttons to the Python functions that must be executed when they are clicked. For example, clicking the Shuffle button will execute the <code>randomise_data</code> function</p>
+  </li>
+</ul>
+
+<p>In the brackets after <code>grid</code> we establish the placement of each element in the grid we set up earlier. The <code>column</code> and <code>row</code> numbers assign a cell to the element, and <code>sticky</code> sets its alignment within that cell. An interesting attribute here is <code>columnspan</code>, which allows an element to sit across multiple columns - as is the case here with the main content and the Shuffle button.</p>
+
+<h3 id="keyboard-shortcuts">Keyboard shortcuts</h3>
+
+<p>With our GUI mostly in place, we have an issue. When revising using a flashcards app, you’d want to be able to cycle quickly between the cards and flip them instantly to see whether you’re right or wrong. But at the moment our user needs to click on the corresponding buttons each time they want to change the view. So let’s fix that with some keyboard shortcuts so they can study at speed.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">root</span><span class="p">.</span><span class="n">bind</span><span class="p">(</span><span class="s">'&lt;Left&gt;'</span><span class="p">,</span> <span class="n">prev_card</span><span class="p">)</span>
+<span class="n">root</span><span class="p">.</span><span class="n">bind</span><span class="p">(</span><span class="s">'&lt;Right&gt;'</span><span class="p">,</span> <span class="n">next_card</span><span class="p">)</span>
+<span class="n">root</span><span class="p">.</span><span class="n">bind</span><span class="p">(</span><span class="s">'&lt;Return&gt;'</span><span class="p">,</span> <span class="n">flip_card</span><span class="p">)</span></code></pre></figure>
+
+<p>This should be fairly self-explanatory, but essentially what each line achieves is to bind a Python function (<code>prev_card</code>, <code>next_card</code>, <code>flip_card</code>) to a key (the left and right arrows and return, respectively), reducing the work required to cycle through cards and providing a much smoother user experience.</p>
+
+<h3 id="drawing-the-window">Drawing the window</h3>
+
+<p>There’s just a little more admin to do before our application will run properly. Firstly, let’s add some padding to each cell in the grid to space out our buttons and labels a little.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">mainframe</span><span class="p">.</span><span class="n">winfo_children</span><span class="p">():</span> 
+    <span class="n">child</span><span class="p">.</span><span class="n">grid_configure</span><span class="p">(</span><span class="n">padx</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span></code></pre></figure>
+
+<p>Finally, we use <code>mainloop()</code> to run our application and draw the window. When execution reaches this line, the window will be drawn and the app will essentially sit idle awaiting user input, so it’s important this we did the necessary legwork beforehand to make sure everything is in place and presentable.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">root</span><span class="p">.</span><span class="n">mainloop</span><span class="p">()</span></code></pre></figure>
+
+<p>And there you have it - this code (and the functions required to provide the actual functionality) should be all you need to create a very simple GUI application using Python. Flashcards! is currently at the minimum viable product stage - it’s perfectly usable as a study tool, but still rough round the edges. Once I’ve had a chance to spruce it up a bit I’ll be sure to share the full project code. Watch this space!</p>
+
+		
+		<div id="cta">
+	Looking for the comments? My website doesn't have a comments section because it would take a fair amount of effort to maintain and wouldn't usually present much value to readers. However, if you have thoughts to share I'd love to hear from you - feel free to send me <a href="https://twitter.com/mattcasmith" target="_blank">a tweet</a> or <a href="mailto:mattcasmith@protonmail.com">an email</a>.
+</div>
+		
+		<div id="prev_next">
+			<div class="prev">
+				    
+						<a href="/2022/02/22/bash-history-basics-behaviours-forensics">&laquo;&nbsp;Linux .bash&#95;history&#58; Basics, behaviours, and forensics</a>
+					
+			</div>
+			<div class="next">
+				    
+			</div>
+		</div>
+		
+		
+				<div id="footer">
+			&copy; 2016-22 MattCASmith
+			<span class="home-link">Personal blog - does not reflect views of employers past or present</span>
+		</div>
+		
+		<script data-goatcounter="https://mattcasmith.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+		
+		</div>
+	
+	</body>
+</html>
