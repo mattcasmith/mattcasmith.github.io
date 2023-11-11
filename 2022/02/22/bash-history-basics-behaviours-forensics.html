@@ -1,0 +1,210 @@
+<!doctype html>
+<head>
+	<meta name="description" content="" />
+	<meta name="robots" content="index, follow" />
+	<meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+	<meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+	<link rel="canonical" href="https://mattcasmith.net/2022/02/22/bash-history-basics-behaviours-forensics" />
+	<meta property="og:locale" content="en_GB" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Linux .bash&#95;history&#58; Basics, behaviours, and forensics | MattCASmith" />
+	<meta property="og:description" content="" />
+	<meta property="og:url" content="https://mattcasmith.net/2022/02/22/bash-history-basics-behaviours-forensics" />
+	<meta property="og:site_name" content="MattCASmith" />
+	<meta property="article:published_time" content="2020-05-02T11:05:40+00:00" />
+	<meta property="og:image" content="https://mattcasmith.net/wp-content/uploads/2022/02/bash-history_1.png" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:creator" content="@mattcasmith" />
+	<meta name="twitter:site" content="@mattcasmith" />
+</head>
+	<head>
+		<style>
+			html {
+				display: none;
+			}
+		</style>
+		<title>Linux .bash&#95;history&#58; Basics, behaviours, and forensics | MattCASmith</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="shortcut icon" href="/assets/images/favicon.png">
+		<link rel="stylesheet" href="/assets/css/styles.css">
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+		
+	</head>
+	
+	<body>
+		<div id="site-container" class="post">
+		<div id="header">
+			<div id="header_left">
+				<a href="/"><img class="site_logo light" src="/assets/images/mcas_site_logo.png"></a>
+				<a href="/"><img class="site_logo dark" src="/assets/images/mcas_site_logo_dark.png"></a>
+				<a href="/"><h2>MattCASmith</h2></a>
+			</div>
+			<div id="header_right">
+				<a target="_blank" href="https://twitter.com/mattcasmith"><img class="link_icon_twitter" src="/assets/images/twitter_icon.png"></a>
+				<a target="_blank" href="mailto:mattcasmith@protonmail.com"><img class="link_icon_email light" src="/assets/images/email_icon.png"></a>
+				<a target="_blank" href="mailto:mattcasmith@protonmail.com"><img class="link_icon_email dark" src="/assets/images/email_icon_dark.png"></a>
+			</div>
+		</div>
+		
+		<div class="title">
+			<h1 class="entry-title">Linux .bash&#95;history&#58; Basics, behaviours, and forensics</h1>
+		</div>
+		
+		<div class="meta">
+			<span class="year_label">2022-02-22</span>&nbsp; 
+				
+				
+					<a href="/category/cyber-security.html">Cyber security</a>
+				
+			
+		</div>
+		
+		<p>During any incident investigation on a Linux system, one of the most valuable things for responders and forensicators to establish is which commands were run. This is key to finding out what an attacker or malicious user was attempting to do, and what remediation activities are required.</p>
+
+<p>The <code>.bash_history</code> file, located in each user’s home directory, is usually the investigator’s first stop for this information. This file contains a list of Bash commands recently run by the user and may appear relatively simple at first glance, but there are many ins and outs to its behaviours.</p>
+
+<p>Most importantly, commands entered in a running Bash terminal are stored in memory and are only written to the file when the terminal is closed. As you can imagine, this means many caveats can be applied to the file’s contents, and in this post I aim to cover some of the most common scenarios, how they affect <code>.bash_history</code>, and alternatives when it does not contain the activity you are looking for.</p>
+
+<h3 id="contents">Contents</h3>
+
+<p>1. <a href="#bash_history-behaviours"><code>.bash_history</code> behaviours</a><br />
+          a. <a href="#the-history-command-outputs-a-combined-history-from-bash_history-and-memory">The <code>history</code> command</a><br />
+          b. <a href="#commands-are-written-to-bash_history-in-the-order-terminals-are-closed-not-the-order-they-are-run">Terminal windows and command order</a><br />
+          c. <a href="#commands-run-with-logical-and--appear-as-a-single-entry-in-bash_history">Logical AND (<code>&amp;&amp;</code>)</a><br />
+          d. <a href="#commands-run-within-scripts-are-not-reflected-in-bash_history">Commands within scripts</a><br />
+          e. <a href="#if-a-terminal-is-stopped-with-the-kill-command-commands-are-still-written-to-bash_history">The <code>kill</code> command</a><br />
+          f. <a href="#however-if-the--sigkill-switch-is-used-commands-are-not-written-to-bash_history">The <code>-SIGKILL</code> switch</a><br />
+          g. <a href="#ssh-sessions-behave-in-a-similar-way-to-standard-terminals">SSH sessions</a><br />
+2. <a href="#finding-bash-commands-in-memory">Finding Bash commands in memory</a><br />
+3. <a href="#further-reading">Further reading</a><br /></p>
+
+<h3 id="bash_history-behaviours"><code>.bash_history</code> behaviours</h3>
+
+<p>To test exactly when commands are and aren’t recorded to the user’s <code>.bash_history</code> file, I ran a series of tests covering common scenarios in which commands might be run. All of these tests were run on a clean installation of CentOS. Here’s what I found…</p>
+
+<h4 id="the-history-command-outputs-a-combined-history-from-bash_history-and-memory">The <code>history</code> command outputs a combined history from <code>.bash_history</code> and memory.</h4>
+
+<p>On a live Linux system, you might run the <code>history</code> command in a terminal window to review recently executed commands. The output of this command combines both the contents of <code>.bash_history</code> and any commands held in memory from the current session.</p>
+
+<p>In the example below, we can see that the test command <code>doesthiscommandshowinhistory?</code> is returned by the <code>history</code> command on the left, but has not yet been written to disk as shown on the right.</p>
+
+<p><img src="/wp-content/uploads/2022/02/bash-history_0.png" /></p>
+
+<p>Bear in mind that <code>history</code> will show commands from the memory of only the current Bash terminal - it won’t have access to those belonging to other processes. Since you won’t have access to the attacker’s terminal (unless the incident response team directly interrupted a hands-on-keyboard session), this means it won’t usually be much more useful than <code>.bash_history</code> itself.</p>
+
+<h4 id="commands-are-written-to-bash_history-in-the-order-terminals-are-closed-not-the-order-they-are-run">Commands are written to <code>.bash_history</code> in the order terminals are closed, not the order they are run.</h4>
+
+<p>For this test, I opened two Bash terminals and ran example commands containing text stating which terminal they belonged to and in which order they were run. As I closed the first terminal before the second, you can see that both of its commands appear first in <code>.bash_history</code>, even though some of the second terminal’s commands were run first. It is the order the Bash processes end that matters.</p>
+
+<p><img src="/wp-content/uploads/2022/02/bash-history_1.png" /></p>
+
+<p>As was discussed before, note that if we had run the <code>history</code> command in one of these terminals, it would only have returned its own commands because each process has its own space in memory.</p>
+
+<h4 id="commands-run-with-logical-and--appear-as-a-single-entry-in-bash_history">Commands run with logical AND (<code>&amp;&amp;</code>) appear as a single entry in <code>.bash_history</code>.</h4>
+
+<p>If we string several commands together using <code>&amp;&amp;</code> - a technique often used to save time (or in less innocent circumstances to avoid an attacker having to submit commands multiple times and risk attracting unwanted attention) - they will still only appear as one line in <code>.bash_history</code>.</p>
+
+<p><img src="/wp-content/uploads/2022/02/bash-history_1.1.png" /></p>
+
+<p>This is an important detail as investigators and forensicators, as it preserves the original context in which these commands were run. If they were run back-to-back in this manner, this invites the question: “Why?”</p>
+
+<h4 id="commands-run-within-scripts-are-not-reflected-in-bash_history">Commands run within scripts are not reflected in <code>.bash_history</code>.</h4>
+
+<p>To see whether commands in scripts are added to <code>.bash_history</code> or not, I created a script called <code>folder_test.sh</code> that would create a new folder, navigate into it, list the contents, navigate back up a level, and then delete the folder. You can see its contents in the left-hand window below.</p>
+
+<p>On the right, I ran the script with <code>./folder_test.sh</code>. We know it executed successfully because the contents (i.e. nothing) are printed to the terminal. However, when we check the output of the <code>history</code> command we can see that although the command that <em>ran</em> the script was recorded, commands run <em>within</em> the script were not - an important distinction to remember when investigating Linux systems.</p>
+
+<p><img src="/wp-content/uploads/2022/02/bash-history_1.2.png" /></p>
+
+<p>This means that our attacker could potentially download or create a script named something innocuous like <code>file_cleanup.sh</code>, execute it, and we would be none the wiser as to what it did based on the contents of <code>.bash_history</code>. There would likely be artefacts elsewhere on the system to give us a clue as to what they were trying to do, but that’s a different topic for another day.</p>
+
+<h4 id="if-a-terminal-is-stopped-with-the-kill-command-commands-are-still-written-to-bash_history">If a terminal is stopped with the <code>kill</code> command, commands are still written to <code>.bash_history</code>.</h4>
+
+<p>This one was simple enough to test. I ran the command <code>doesthiscommandappearinhistory?</code> in a terminal, then opened a new terminal and killed it using its process ID, then checked <code>.bash_history</code>.</p>
+
+<p>As you can see below, despite the Bash instance being killed, the command was still written to the log (the following <code>echo $$</code> command was the one I used to identify the process ID of that terminal).</p>
+
+<p><img src="/wp-content/uploads/2022/02/bash-history_2.png" /></p>
+
+<h4 id="however-if-the--sigkill-switch-is-used-commands-are-not-written-to-bash_history">However, if the <code>-SIGKILL</code> switch is used, commands are not written to <code>.bash_history</code>.</h4>
+
+<p>More useful for red teamers - and something to bear in mind for blue teamers - is that <code>.bash_history</code> is not written if the terminal is killed with the <code>-SIGKILL</code> switch. Repeating the same experiment as above but with the additional switch meant no commands were written to disk.</p>
+
+<p><img src="/wp-content/uploads/2022/02/bash-history_3.png" /></p>
+
+<p>This is because by default <code>kill</code> sends the <code>SIGTERM</code> signal, which gracefully kills the process and allows Bash to write to <code>.bash_history</code> as it is closing down. <code>SIGKILL</code>, on the other hand, kills the process immediately before the commands can be written to the file.</p>
+
+<h4 id="ssh-sessions-behave-in-a-similar-way-to-standard-terminals">SSH sessions behave in a similar way to standard terminals.</h4>
+
+<p>If we run commands within an SSH session and then quit with <code>exit</code> or by closing the window, <code>.bash_history</code> is written in much the same way as it usually would be. The same also applies if we close the Command Prompt running the SSH session with Task Manager - presumably because Windows gives it time to tear down the connection in the background.</p>
+
+<p><img src="/wp-content/uploads/2022/02/bash-history_4.png" /></p>
+
+<p>Interestingly, if connecting via SSH from a Linux terminal, running a standard <code>kill</code> command against the terminal will not close it until the user has ended the SSH session themselves. Using the <code>-SIGKILL</code> switch ends the terminal process and SSH session immediately, but still writes the commands run during the session to the user’s <code>.bash_history</code> file.</p>
+
+<p>This is likely because this is the work of <code>sshd</code>, which sees its client kill the connection but itself closes gracefully. If we use <code>kill</code> directly on <code>sshd</code> itself - even with the <code>-SIGKILL</code> switch - commands are still written to the file, which makes me wonder whether there is actually a way around this for SSH sessions.</p>
+
+<p><img src="/wp-content/uploads/2022/02/bash-history_5.png" /></p>
+
+<h3 id="finding-bash-commands-in-memory">Finding Bash commands in memory</h3>
+
+<p>All the tests above showed when commands are and are not written to the on-disk <code>.bash_history</code> file. Now let’s see what we can do when an attacker has an active session (and therefore commands in memory) but either <code>.bash_history</code> has not been written yet or they have cleared its contents. This may also work for recently closed Bash terminal sessions that did not end gracefully.</p>
+
+<p>The first thing we need to do is take a memory image of the Linux system - for this we can use a tool called <a href="https://github.com/504ensicsLabs/LiME" target="_blank">Linux Memory Extractor (LiME)</a>. In a live incident scenario there are mechanisms to push the image to external storage or across the network, but I ran a basic command to create it locally.</p>
+
+<blockquote>
+  <p>sudo insmod lime-4.18.0-240.22.1.el8_3.x86_64.ko “path=/mem-img.mem format=lime”</p>
+</blockquote>
+
+<p>To analyse our new memory image, we’ll use <a href="https://www.volatilityfoundation.org/" target="_blank">Volatility</a>, which is currently considered the pinnacle of memory forensics toolkits. It’s not quite as simple to run Volatility against Linux memory images as it is for Windows images. I won’t go into the full process here, but you need to <a href="https://github.com/volatilityfoundation/volatility/wiki/Linux" target="_blank">create your own profile</a> for the specific Linux distro and kernel version from which the image was captured.</p>
+
+<p>Once the profile is in place and ready to go, we can run Volatility’s <code>linux_bash</code> module with the following command to search for Bash commands held in memory.</p>
+
+<blockquote>
+  <p>python2 vol.py -f mem-img.mem –profile=LinuxCentOSx64 linux_bash</p>
+</blockquote>
+
+<p>In the screenshot below, you can see a small extract from the results, are ordered first by the process ID of the Bash terminal to which the commands belonged and then by the time they were run. This includes commands that were run too recently to have been written to <code>.bash_history</code>, and towards the bottom you’ll even see the commands I ran to set up and run LiME.</p>
+
+<p><img src="/wp-content/uploads/2022/02/bash-history_6.png" /></p>
+
+<p>One small word of warning regarding timestamps… Everything from the <code>ls</code> command at <code>15:59:18</code> downwards appears to be correct, but you’ll probably notice that all the commands above that allegedly ran at exactly the same second, which is obviously not right. Further investigation is needed to work out why exactly that is, but it’s likely that there is some limit to the number of Bash command timestamps stored in memory, or that Volatility cannot always read them accurately.</p>
+
+<h3 id="further-reading">Further reading</h3>
+
+<p>The links below lead to pages that either inspired this post or provided useful information to compile it, including some more in-depth technical information on various features discussed above.</p>
+
+<p>• <a href="https://www.gnu.org/software/bash/manual/html_node/Bash-History-Facilities.html" target="_blank">Bash history manual page</a> (gnu.org)<br />
+• <a href="https://linuxhandbook.com/sigterm-vs-sigkill/" target="_blank">SIGINT vs SIGKILL</a> (linuxhandbook.com)<br />
+• <a href="https://github.com/volatilityfoundation/volatility/wiki/Linux" target="_blank">Volatility Linux documentation</a> (github.com)<br />
+• <a href="https://www.crowdstrike.com/blog/how-to-extract-memory-information-to-spot-linux-malware/" target="_blank">How to extract memory information to spot Linux malware</a> (crowdstrike.com)</p>
+
+		
+		<div id="cta">
+	Looking for the comments? My website doesn't have a comments section because it would take a fair amount of effort to maintain and wouldn't usually present much value to readers. However, if you have thoughts to share I'd love to hear from you - feel free to send me <a href="https://twitter.com/mattcasmith" target="_blank">a tweet</a> or <a href="mailto:mattcasmith@protonmail.com">an email</a>.
+</div>
+		
+		<div id="prev_next">
+			<div class="prev">
+				    
+						<a href="/2022/01/08/sans-holiday-hack-2021-slot-machine">&laquo;&nbsp;SANS Holiday Hack Challenge 2021&#58; Slot machine walkthrough</a>
+					
+			</div>
+			<div class="next">
+				    
+			</div>
+		</div>
+		
+		
+				<div id="footer">
+			&copy; 2016-22 MattCASmith
+			<span class="home-link">Personal blog - does not reflect views of employers past or present</span>
+		</div>
+		
+		<script data-goatcounter="https://mattcasmith.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+		
+		</div>
+	
+	</body>
+</html>

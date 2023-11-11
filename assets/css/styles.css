@@ -655,3 +655,9 @@ nav a:first-of-type {
 #home_posts_list a.current {
 	color: #009688 !important;
 }
+
+hr {
+	float: left;
+	width: 100%;
+	margin: 20px 0 0 0;
+}
