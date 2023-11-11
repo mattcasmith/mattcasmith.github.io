@@ -1,0 +1,173 @@
+<!doctype html>
+<head>
+	<meta name="description" content="" />
+	<meta name="robots" content="index, follow" />
+	<meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+	<meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+	<link rel="canonical" href="https://mattcasmith.net/2022/01/08/sans-holiday-hack-2021-yara-rules" />
+	<meta property="og:locale" content="en_GB" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="SANS Holiday Hack Challenge 2021&#58; Yara rule analysis walkthrough | MattCASmith" />
+	<meta property="og:description" content="" />
+	<meta property="og:url" content="https://mattcasmith.net/2022/01/08/sans-holiday-hack-2021-yara-rules" />
+	<meta property="og:site_name" content="MattCASmith" />
+	<meta property="article:published_time" content="2020-05-02T11:05:40+00:00" />
+	<meta property="og:image" content="https://mattcasmith.net/wp-content/uploads/2022/01/sans-holiday-challenge-yara_9.png" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:creator" content="@mattcasmith" />
+	<meta name="twitter:site" content="@mattcasmith" />
+</head>
+	<head>
+		<style>
+			html {
+				display: none;
+			}
+		</style>
+		<title>SANS Holiday Hack Challenge 2021&#58; Yara rule analysis walkthrough | MattCASmith</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="shortcut icon" href="/assets/images/favicon.png">
+		<link rel="stylesheet" href="/assets/css/styles.css">
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+		
+	</head>
+	
+	<body>
+		<div id="site-container" class="post">
+		<div id="header">
+			<div id="header_left">
+				<a href="/"><img class="site_logo light" src="/assets/images/mcas_site_logo.png"></a>
+				<a href="/"><img class="site_logo dark" src="/assets/images/mcas_site_logo_dark.png"></a>
+				<a href="/"><h2>MattCASmith</h2></a>
+			</div>
+			<div id="header_right">
+				<a target="_blank" href="https://twitter.com/mattcasmith"><img class="link_icon_twitter" src="/assets/images/twitter_icon.png"></a>
+				<a target="_blank" href="mailto:mattcasmith@protonmail.com"><img class="link_icon_email light" src="/assets/images/email_icon.png"></a>
+				<a target="_blank" href="mailto:mattcasmith@protonmail.com"><img class="link_icon_email dark" src="/assets/images/email_icon_dark.png"></a>
+			</div>
+		</div>
+		
+		<div class="title">
+			<h1 class="entry-title">SANS Holiday Hack Challenge 2021&#58; Yara rule analysis walkthrough</h1>
+		</div>
+		
+		<div class="meta">
+			<span class="year_label">2022-01-08</span>&nbsp; 
+				
+				
+					<a href="/category/cyber-security.html">Cyber security</a>
+				
+			
+		</div>
+		
+		<p>Over the Christmas break I took part in an annual tradition - the <a href="https://www.sans.org/mlp/holiday-hack-challenge/" target="_blank">SANS Holiday Hack Challenge</a>! For 2021 the team had put together a fresh set of challenges for this festive CTF, and now that the deadline for submissions and subsequent embargo has passed, I thought I’d share a write-up of a challenge that appeared - from the in-game chat window at least - to catch a few people out.</p>
+
+<p>This challenge is all about Yara rules, which detect malware based on a series of conditions set out in a rule file. As set out in the screenshot below, Santa’s elves are having problems running an application that measures the sweetness levels of the candy they’re manufacturing. It’s heavily hinted that it’s being blocked because it’s matching a Yara rule, and that we might be able to change the program to bypass it.</p>
+
+<p>To start, let’s try running the app using <code>./the_critical_elf_app</code> to see what we get…</p>
+
+<p><img src="/wp-content/uploads/2022/01/sans-holiday-challenge-yara_0.png" /></p>
+
+<p>What exactly are we seeing here? Well, our app has been blocked from executing because it has matched a Yara rule - <code>rule_135</code>, to be precise. To get around this rule-based protection we have two options:</p>
+
+<ol>
+  <li>Change the Yara rule so that it no longer matches on the program</li>
+  <li>Change the program so that it no longer matches the Yara rule</li>
+</ol>
+
+<p>In this challenge our user account does not have the privileges to amend Yara rules, so the second option is our only choice. Our first step will be to work out why the program is matching the rule.</p>
+
+<h3 id="rule_135">rule_135</h3>
+
+<p>If we <code>cd</code> into a folder called <code>yara_rules</code>, we can see a file called <code>rules.yar</code> that contains all the Yara rules in use. Viewing its contents with <code>nano</code> or <code>cat</code> would take an age to scroll through, so instead we can use a <code>grep</code> command that will return the 30 lines following a match on <code>rule_135</code>:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">grep</span> <span class="n">rule_135</span> <span class="n">rules</span><span class="p">.</span><span class="n">yar</span> <span class="o">-</span><span class="n">A</span> <span class="mi">30</span></code></pre></figure>
+
+<p><img src="/wp-content/uploads/2022/01/sans-holiday-challenge-yara_1.png" /></p>
+
+<p>What does this show us? It turns out <code>rule_135</code> is looking for a single string in the file: <code>candycane</code> (in this case the <code>condition</code> clause means it’s searching for this string only - we’ll see some more complex examples later on in the challenge). Now we know what we’re looking for, we can use <code>emacs</code> to open <code>the_critical_elf_app</code> and search for the offending string.</p>
+
+<p><img src="/wp-content/uploads/2022/01/sans-holiday-challenge-yara_2.png" /></p>
+
+<p>With a little patience and scrolling, we can see that the string <code>candycane</code> appears in the file. You might be wondering why in the screenshot above I’ve changed it to <code>candycand</code> rather than deleting it entirely. That’s because we should try to alter the program as little as possible - if we change the number of characters, it is possible that references to sections later in the file may become inaccurate and the program may fail to run at all. Code is fragile stuff (something easily learnt from experience).</p>
+
+<p>Let’s save our changes and try running <code>the_critical_elf_app</code> again…</p>
+
+<p><img src="/wp-content/uploads/2022/01/sans-holiday-challenge-yara_3.png" /></p>
+
+<p>Oh no! While our adjustment has allowed execution to progress beyond the check for <code>rule_135</code>, it’s now being blocked because it matches <code>rule_1056</code>. I guess it’s back to <code>rules.yar</code> for us…</p>
+
+<h3 id="rule_1056">rule_1056</h3>
+
+<p>Running another extended <code>grep</code> on the Yara rule file shows us that <code>rule_1056</code> requires a match on two strings, represented by the hex <code>6c 6962 632e 736f 2e36</code> and <code>726f 6772 616d 2121</code>. This is trickier, because those two don’t appear in their current form in <code>the_critical_elf_app</code>…</p>
+
+<p><img src="/wp-content/uploads/2022/01/sans-holiday-challenge-yara_4.png" /></p>
+
+<p>To find what’s matching the rule, we first need to use <a href="https://gchq.github.io/CyberChef/" target="_blank">GCHQ’s CyberChef tool</a> to convert the hex from <code>rules.yar</code> to ASCII text. As shown below, after being passed through the <code>from hex</code> filter they come out as <code>libc.so.6</code> and <code>rogram!!</code>. If Yara finds both of these strings, execution will be blocked.</p>
+
+<p><img src="/wp-content/uploads/2022/01/sans-holiday-challenge-yara_5.png" /></p>
+
+<p>The important thing to note here is that <em>both</em> strings need to match for Yara to block anything. One is not enough. This works in our favour when we return to <code>emacs</code> and examine the file, because <code>libc.so.6</code> looks like it’ll be required for the program to run.</p>
+
+<p>Meanwhile, <code>This is critical for the execution of this program!!</code> looks like a comment, so as before, let’s try changing a single character and see what happens.</p>
+
+<p><img src="/wp-content/uploads/2022/01/sans-holiday-challenge-yara_6.png" /></p>
+
+<p>Well, we’re a step closer to a solution, at least. When we run the file with <code>./the_critical_elf_app</code>, we now receive an error because the program has matched Yara’s <code>rule_1732</code>. Another rule to investigate…</p>
+
+<p><img src="/wp-content/uploads/2022/01/sans-holiday-challenge-yara_7.png" /></p>
+
+<h3 id="rule_1732">rule_1732</h3>
+
+<p>When we <code>grep</code> for the contents of <code>rule_1732</code>, we can see that this rule is a little more complex than those we’ve seen before. First of all, our eyes are drawn to the 20 different strings this rule looks for. The <code>condition</code> clause says the program must match ten of them to be blocked. But there are more conditions that must be met - including that the file size is less than 50kb.</p>
+
+<p><img src="/wp-content/uploads/2022/01/sans-holiday-challenge-yara_8.png" /></p>
+
+<p>My first thought was to take a similar approach to the previous rules and to change enough of the file to avoid matching ten of the strings, but this proved more challenging than I thought. While strings like <code>its_a_holly_jolly_variable</code> might be easy enough to substitute out, terms like <code>GLIBC_2.2.5</code> are more likely to be essential for the program to run. All my attempts either didn’t change enough to evade detection by Yara, or changed too much and broke the app.</p>
+
+<p>I then turned my attention to the other conditions. The file size was initially about 16kb - could I bump it up to more than 50kb? I decided the best way to do this was to add some padding to the file, but encoding issues meant I couldn’t <code>nano</code> or <code>echo</code> in a bunch of nonsense without breaking the program.</p>
+
+<p>I obviously needed a more creative approach… It was clear I needed to tackle the problem using <code>emacs</code>, but after some Googling regarding the clunky Linux terminal copy and paste options I was no closer to a solution and running out of time. Sure of the answer but not the method, I took some inspiration from an old episode of <em>The Simpsons</em> to come to an outside-the-box but very practical solution…</p>
+
+<p><img src="/wp-content/uploads/2022/01/sans-holiday-challenge-yara_9.png" /></p>
+
+<p>That’s right - I just fired up <code>emacs</code>, scrolled to the end of the document, and left my water bottle resting on the space bar until enough characters had been added to push the file over the 50kb minimum. It took a while (in truth I went and handled some other stuff while it was running), but after saving the file and using <code>ls -l</code> to check it was now more than 50kb, I ran <code>the_critical_elf_app</code> one last time and…</p>
+
+<p><img src="/wp-content/uploads/2022/01/sans-holiday-challenge-yara_10.png" /></p>
+
+<p>Mission accomplished! I’m sure there were more graceful ways to reach the same outcome, but I’ll put this one down as more proof that a decent understanding of the problem and creative thinking can be just as important in cyber security as any deep technical knowledge in many situations.</p>
+
+<p>And if you’re wondering what <em>that</em> hex means, it comes out as <code>Jolly Enough, Overtime Approved</code>.</p>
+
+<p>If you found this walkthrough interesting, please consider <a href="https://twitter.com/mattcasmith" target="_blank">following me on Twitter</a>, and don’t forget to sign up for the next SANS Holiday Hack Challenge circa December 2022!</p>
+
+		
+		<div id="cta">
+	Looking for the comments? My website doesn't have a comments section because it would take a fair amount of effort to maintain and wouldn't usually present much value to readers. However, if you have thoughts to share I'd love to hear from you - feel free to send me <a href="https://twitter.com/mattcasmith" target="_blank">a tweet</a> or <a href="mailto:mattcasmith@protonmail.com">an email</a>.
+</div>
+		
+		<div id="prev_next">
+			<div class="prev">
+				    
+						<a href="/2021/05/03/multiprocessing-python">&laquo;&nbsp;Backutil development&#58; Implementing multiprocessing in Python</a>
+					
+			</div>
+			<div class="next">
+				    
+						<a href="/2022/01/08/sans-holiday-hack-2021-slot-machine">SANS Holiday Hack Challenge 2021&#58; Slot machine walkthrough&nbsp;&raquo;</a>
+					
+			</div>
+		</div>
+		
+		
+				<div id="footer">
+			&copy; 2016-22 MattCASmith
+			<span class="home-link">Personal blog - does not reflect views of employers past or present</span>
+		</div>
+		
+		<script data-goatcounter="https://mattcasmith.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+		
+		</div>
+	
+	</body>
+</html>
