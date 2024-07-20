@@ -234,6 +234,10 @@ body {
 		padding-bottom: 15px !important;
 		margin-bottom: 0px !important;
     }
+
+    img.half {
+    	width: 100% !important;
+    }
 	
 	.home_box:last-of-type {
 		border-bottom: none !important;
@@ -464,6 +468,13 @@ body {
 img {
 	float: left;
 	width: 100%;
+}
+
+img.half {
+	width: 70%;
+	float: none;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 img a {

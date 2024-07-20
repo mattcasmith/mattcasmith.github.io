@@ -1,0 +1,158 @@
+<!doctype html>
+<head>
+	<meta name="description" content="" />
+	<meta name="robots" content="index, follow" />
+	<meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+	<meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+	<link rel="canonical" href="https://mattcasmith.net/2024/07/20/crowdstrike-bug-edr-setting-record-straight" />
+	<meta property="og:locale" content="en_GB" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Endpoint detection and response (EDR) - setting the record straight | MattCASmith" />
+	<meta property="og:description" content="" />
+	<meta property="og:url" content="https://mattcasmith.net/2024/07/20/crowdstrike-bug-edr-setting-record-straight" />
+	<meta property="og:site_name" content="MattCASmith" />
+	<meta property="article:published_time" content="2020-05-02T11:05:40+00:00" />
+	<meta property="og:image" content="https://mattcasmith.net/wp-content/uploads/2023/01/mcas.png" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:creator" content="@mattcasmith" />
+	<meta name="twitter:site" content="@mattcasmith" />
+</head>
+	<head>
+		<style>
+			html {
+				display: none;
+			}
+		</style>
+		<title>Endpoint detection and response (EDR) - setting the record straight | MattCASmith</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="shortcut icon" href="/assets/images/favicon.png">
+		<link rel="stylesheet" href="/assets/css/styles.css">
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+		
+	</head>
+	
+	<body>
+		<div id="site-container" class="post">
+		<div id="header">
+			<div id="header_left">
+				<a href="/"><img class="site_logo light" src="/assets/images/mcas_site_logo.png"></a>
+				<a href="/"><img class="site_logo dark" src="/assets/images/mcas_site_logo_dark.png"></a>
+				<a href="/"><h2>MattCASmith</h2></a>
+			</div>
+			<div id="header_right">
+				<a target="_blank" href="https://twitter.com/mattcasmith"><img class="link_icon_twitter" src="/assets/images/twitter_icon.png"></a>
+				<a target="_blank" href="mailto:mattcasmith@protonmail.com"><img class="link_icon_email light" src="/assets/images/email_icon.png"></a>
+				<a target="_blank" href="mailto:mattcasmith@protonmail.com"><img class="link_icon_email dark" src="/assets/images/email_icon_dark.png"></a>
+			</div>
+		</div>
+		
+		<div class="title">
+			<h1 class="entry-title">Endpoint detection and response (EDR) - setting the record straight</h1>
+		</div>
+		
+		<div class="meta">
+			<span class="year_label">2024-07-20</span>&nbsp; 
+				
+				
+					<a href="/category/cyber-security.html">Cyber Security</a>
+				
+			
+		</div>
+		
+		<p>When I went to bed on the evening of Friday 19th July, I couldn’t sleep. It was a stuffy summer’s night in London, and the adrenaline was still pumping through my veins after one of the more notable days in recent memory for cyber security. Still, laying awake gave me time to reflect on what I’d seen.</p>
+
+<p>Cyber security is a function that normally runs quietly in the background, so when it does make the headlines, it’s often for the wrong reasons. In the past, we’ve seen huge incidents like <a href="https://www.wired.com/story/notpetya-cyberattack-ukraine-russia-code-crashed-the-world/" target="_blank">NotPetya</a> and <a href="https://en.wikipedia.org/wiki/WannaCry_ransomware_attack" target="_blank">Wannacry</a> become global news, but yesterday, it was a security product itself that stole the show.</p>
+
+<h3 id="what-exactly-happened">What exactly happened?</h3>
+
+<p>In short: CrowdStrike pushed a bad update to Falcon, a leading endpoint detection and response (EDR) product, that caused a lot of Windows computers to fail to boot. This triggered chaos due to the number of computers around the world running the software. A workaround was quickly discovered, but it needed to be completed manually on each affected system, causing a huge headache for IT administrators.</p>
+
+<p>President and CEO George Kurtz <a href="https://x.com/George_Kurtz/status/1814235001745027317" target="_blank">took to X</a> to try to reassure the world that no cyber security incident had occurred, and said that CrowdStrike had deployed a fix. He would later share more apologetic posts, including <a href="https://www.crowdstrike.com/blog/our-statement-on-todays-outage/" target="_blank">a letter on the firm’s website</a>, but CrowdStrike as a company is not the focus of this post.</p>
+
+<p style="width:100% !important; text-align: center !important"><img src="/wp-content/uploads/2024/07/crowdstrike-edr_00.png" class="half" /></p>
+
+<p>Cyber security is a cat and mouse game between those who wish to do harm and those who protect our systems, and for this reason security software needs constant updates to detect and prevent the latest attacker techniques. To effectively monitor endpoints, the software must also run in a privileged state, which means that if it fails, it can easily cause more problems than standard user mode applications.</p>
+
+<p>Therefore, although CrowdStrike will certainly want to go over its internal testing and review processes, it’s important to remember that a similar thing could happen if any other security vendor made a similar mistake (for example, we saw <a href="https://www.theregister.com/2019/10/15/blue_screen_of_death_symantec/" target="_blank">a similar incident on a smaller scale</a> with Symantec in 2019).</p>
+
+<h3 id="misconceptions-and-inaccuracies">Misconceptions and inaccuracies</h3>
+
+<p>There are a thousand articles out there about the bug itself, how it was fixed, and what this means for CrowdStrike, so I won’t retread that ground here. After the initial shock of what was happening, the next thing that caught my attention was the way CrowdStrike - and by extension EDR as a whole - was being discussed, which showed a complete lack of understanding of the technology and the entire sector.</p>
+
+<p>The internet is a terrible place to read about things you’re an expert in, but this trend wasn’t limited to the general population on social media. Even on relatively technical forums like <a href="https://news.ycombinator.com/" target="_blank">Hacker News</a> there was a strange tone to the conversations, and experienced technology journalists at respected publications dropped huge inaccuracies into their writing. Broadly, these misconceptions fell into three categories:</p>
+
+<p>      1. “EDR is anti-virus software”<br />
+      2. “EDR is corporate spyware”<br />
+      3. “EDR isn’t worth the risk”</p>
+
+<p>I don’t think any of these inaccuracies were spread maliciously. I think they came more from a lack of understanding of what an EDR tool is and does and what cyber security teams are there to do. Therefore, I thought it would be worth writing an article covering the truth behind each of these sentiments.</p>
+
+<h3 id="1-edr-is-anti-virus-software">1. “EDR is anti-virus software”</h3>
+
+<p>Since home and office computing became mainstream around the 1990s, the vague security threat of “viruses” has loomed. In that era, some of these were actually quite fun. You wouldn’t want them to spread to your PC, but they’d often do quirky things like <a href="https://www.youtube.com/watch?v=z7g-v3d7-Gk" target="_blank">make all the letters fall to the bottom of your screen</a> or challenge you to a game of cards to save the contents of your hard drive.</p>
+
+<p>As malware became more serious, the internet and portable media allowed it to spread more freely, and awareness grew. It became common practice to buy an anti-virus product to identify and stop malicious software, and therefore it was only natural that the name “anti-virus” became a casual synonym for all security software, much like any video game console was sometimes referred to as “a Nintendo”.</p>
+
+<p>But the truth is that traditional anti-virus software is quite limited. It relies on hashes and signatures to detect malware, and therefore if the author finds a way to alter their malicious code slightly each time it spreads (polymorphism), it can evade detection. Because it scans for files, standard anti-virus software can also miss attackers’ abuse of legitimate tools, because the files on disk are all benign.</p>
+
+<p>The other limitation of traditional anti-virus software is that it usually only provides a small set of automated remediation actions. If it detects malware, it will at most usually terminate any associated processes and quarantine the files. Any further action requires manual access to the computer.</p>
+
+<p>EDR tools, including CrowdStrike, do a whole lot more than this. While they <em>do</em> scan files and quarantine them (CrowdStrike even has a component called next-gen anti-virus, or NGAV), to call them “anti-virus” is to sell their capabilities seriously short. EDR products essentially monitor everything that happens on a computer and pick through it with a fine-toothed comb for malicious behaviour - even for threats that do not involve files, like in-memory malware or attackers with direct hands-on-keyboard access.</p>
+
+<p>When malicious activity is detected, EDR also gives cyber security professionals many more options to respond to attacks. If it looks like malware could spread between systems, they can disconnect them from the network with a click to contain the incident. They can reverse changes made by threat actors. And if necessary, they can access the system via a remote prompt to check its current state and perform remediation actions. EDR is an invaluable Swiss army knife of response capabilities for defenders.</p>
+
+<h3 id="2-edr-is-corporate-spyware">2. “EDR is corporate spyware”</h3>
+
+<p>Imagine you’re tasked with protecting your organisation against cyber criminals, ransomware, and other threats - things that if they went unchecked could severely impact operations, cause irrepairable reputational damage, or cost huge sums of money. Ultimately, you and your colleagues’ jobs could all depend on your success. What’s the best tool your could have in your arsenal to detect malicious activity?</p>
+
+<p>The answer is logs. If you can see exactly which files are written and by whom or what, which processes are run and with which command line arguments, who logged in and where from, and which IP addresses systems are communicating with, you’ll have a huge bank of data to review for signs that something is wrong, and to fully investigate any incidents when they do occur to know exactly what happened.</p>
+
+<p>At an endpoint level, this is exactly what CrowdStrike and other EDR products do. They watch everything that’s going on, review it for malicious activity, and provide responders with detailed log data that they can pick through to determine the full scope of an incident in order to clean up the mess and put in place improved security measures to prevent the same thing from happening again in future.</p>
+
+<p>Cyber security professionals sitting in <a href="/2018/06/01/what-a-security-operations-centre-soc-is-and-how-it-works/" target="_blank">security operations centres (SOCs)</a> have no interest in whether Bob from accounting is spending too much time on Facebook, and frankly, they don’t have the time to check. They are interested solely in investigating threats to the organisation - perhaps if Bob clicked a phishing link in an email or downloaded malware from a site claiming to offer free software.</p>
+
+<p>In these cases, the logs provided by an EDR tool are invaluable to working out where the threat came from and how much damage it caused. Analysts can use the information within to find any other malicious files on the system and remove them, as well as identifying the exact domain and URL associated with each threat so they can be blocked and other users can’t fall foul of them in future.</p>
+
+<p>I can understand the confusion when there are so many stories about employers watching workers through webcams and monitoring their mouse movements, but that is not the objective of an EDR product. Cyber security is not HR and it’s not some sort of hi-tech productivity monitoring service - it’s there to protect the company from malicious attacks and to contain any incidents that do occur before they can escalate, and it might well have saved your job at some point without you realising it.</p>
+
+<h3 id="3-edr-isnt-worth-the-risk">3. “EDR isn’t worth the risk”</h3>
+
+<p>This is by far the most subjective item on this list, and perhaps the hardest to weigh up. If EDR products like CrowdStrike require such low-level, privileged access, and one slip from a vendor can render a system unusable, is it worth the risk to run the security software in the first place?</p>
+
+<p>I think there are a couple of misconceptions to address for those who would answer “no”. Firstly, despite what many small business leaders might think, your organisation <em>is</em> a target for cyber criminals. We are past the point where only those holding immense wealth or state secrets are attacked. <em>Your</em> business needs <em>your</em> data to operate. Even if the contents of your files are worthless to the threat actors, they know you’re likely to pay up to restore operations if they can manage to deploy ransomware on your network.</p>
+
+<p>Secondly, this stuff isn’t rare - it happens all the time. For the reasons above, cyber criminals do not need to target specific organisations. Instead, they can scan the internet en masse and fire out “spray-and-pray” campaigns, then work with whatever vulnerabilities are found or whichever users bite. If you’re unaware of any attempts to compromise your organisation then you’re either very lucky or you need to go and pat your security team on the back for the work they’re doing in the background to keep things safe.</p>
+
+<p>Then there’s the fallout and human impact of an incident when a threat does get through. Having worked in and around incident response for years, I can tell you that a significant incident can be a very traumatic event. It’s not just not being able to work - it’s not being able to pay employees because the payroll server is encrypted, not knowing if you’ll be able to support your family, and in same cases lives lost.</p>
+
+<p>Cynics will point out that yesterday’s CrowdStrike incident had similar consequences, but I’d encourage you to weigh that against all the times CrowdStrike and other EDR products have <em>prevented</em> similar scenarios - many instances of which you’re unlikely to be aware of. The bug shouldn’t have made it to production and I’m sure security vendors around the world are now taking a cautious look at their development and deployment processes, but in my opinion we should be careful not to let this one very visible slip-up overshadow all the would-be disasters that were quietly stopped behind the scenes.</p>
+
+		
+		<div id="cta">
+	Looking for the comments? My website doesn't have a comments section because it would take a fair amount of effort to maintain and wouldn't usually present much value to readers. However, if you have thoughts to share I'd love to hear from you - feel free to send me <a href="https://twitter.com/mattcasmith" target="_blank">a tweet</a> or <a href="mailto:mattcasmith@protonmail.com">an email</a>.
+</div>
+		
+		<div id="prev_next">
+			<div class="prev">
+				    
+						<a href="/2023/11/26/modular-soc-centralisation-repeatability-automation">&laquo;&nbsp;Centralisation, repeatability, and automation in a modular SOC</a>
+					
+			</div>
+			<div class="next">
+				    
+			</div>
+		</div>
+		
+		
+				<div id="footer">
+			&copy; 2016-24 MattCASmith
+			<span class="home-link">Personal blog - does not reflect views of employers past or present</span>
+		</div>
+		
+		<script data-goatcounter="https://mattcasmith.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+		
+		</div>
+	
+	</body>
+</html>
