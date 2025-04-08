@@ -712,7 +712,7 @@ article {
 }
 
 .post ol p, .post ul p {
-	padding: 0 !important;
+	padding: 0px !important;
 	margin: 0 !important;
 }
 
@@ -728,10 +728,11 @@ article {
 }
 
 .post ol li:before {
-	content: counter(item) ". ";
+	content: counter(item) ".  ";
 	color: #009688;
 	font-weight: bold;
 	margin-left: -23px;
+	padding-right: 5px;
 	width: 1.2em;
 	text-align: center;
 	display: inline-block;
