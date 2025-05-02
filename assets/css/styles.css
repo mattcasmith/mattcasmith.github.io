@@ -764,7 +764,9 @@ article {
 
 .post ol p, .post ul p {
 	padding: 0px !important;
-	margin: 0 !important;
+	margin: 0 10px 0 0 !important;
+	width: 95% !important;
+	float: right !important;
 }
 
 .post ol {
@@ -1265,12 +1267,23 @@ p code {
 }
 
 #newsletter_post iframe {
-		padding: 0 0 0 45px;
-        -ms-zoom: 0.85;
-        -moz-transform: scale(0.85);
-        -moz-transform-origin: 0 0;
-        -o-transform: scale(0.85);
-        -o-transform-origin: 0 0;
-        -webkit-transform: scale(0.85);
-        -webkit-transform-origin: 0 0;
-    }
+	padding: 0 0 0 45px;
+    -ms-zoom: 0.85;
+    -moz-transform: scale(0.85);
+    -moz-transform-origin: 0 0;
+    -o-transform: scale(0.85);
+    -o-transform-origin: 0 0;
+    -webkit-transform: scale(0.85);
+    -webkit-transform-origin: 0 0;
+}
+
+sup {
+	vertical-align: top;
+	position: relative;
+	top: -0.5em;
+	font-size: 0.6em;
+}
+
+p sup a {
+	border-bottom: none !important;
+}
