@@ -809,6 +809,10 @@ blockquote, .highlight {
 	font-style: italic;
 }
 
+blockquote {
+	margin-top: 30px;
+}
+
 figure {
 	float: left;
 	width: 100%;
