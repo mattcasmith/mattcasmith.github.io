@@ -30,6 +30,10 @@ nav a:first-of-type {
 		color: #ddd !important;
 	}
 
+	hr {
+		background: #444 !important;
+	}
+
 	#newsletter_post {
 		border-top: 1px solid #444 !important;
 	}
@@ -943,7 +947,10 @@ nav {
 hr {
 	float: left;
 	width: 100%;
-	margin: 20px 0 0 0;
+	margin: 20px 0 -10px 0;
+	border: none;
+	background: #ddd;
+	height: 1px;
 }
 
 .home-button {
@@ -1082,10 +1089,16 @@ a.home-index:hover {
 	border-top: none !important;
 }
 
-#home_sidebar p {
+#home_sidebar p, #newsletter_sidebar p {
 	font-size: 10pt !important;
 	padding-left: 5px !important;
 	width: 135px !important;
+}
+
+#newsletter_sidebar p {
+	padding-top: 5px;
+	line-height: 1.4em;
+	font-family: "Roboto", Arial, sans-serif !important;
 }
 
 #home_sidebar .year_label {
@@ -1290,4 +1303,73 @@ sup {
 
 p sup a {
 	border-bottom: none !important;
+}
+
+#newsletter_sidebar {
+	float: right;
+	width: 145px;
+	margin-top: 20px;
+	margin-left: 25px;
+	border-radius: 10px;
+	padding: 15px;
+	background: linear-gradient(to bottom right, #ede1c7, #e6dac0);
+}
+
+#newsletter_sidebar h2, #newsletter_sidebar h3 {
+	float: left;
+	font-size: 10pt;
+	line-height: 1.2em;
+	text-transform: uppercase;
+	width: 100%;
+	padding-bottom: 0px;
+	margin-bottom: 0;
+	padding-top: 0;
+	margin-top: 0;
+}
+
+#newsletter_sidebar h3 {
+	font-size: 20pt;
+	padding-top: 2px;
+	margin-left: -2px;
+	margin-right: 2px;
+}
+
+a #newsletter_sidebar {
+	color: #333 !important;
+}
+
+#newsletter_sidebar table, #newsletter_sidebar tr, #newsletter_sidebar td {
+	background: none !important;
+	padding: 0 !important;
+	margin: 0 !important;
+	color: #333 !important;
+	border-spacing: 0 !important;
+	border: none !important;
+}
+
+#newsletter_sidebar button {
+	float: left;
+	width: 100%;
+	margin-top: 10px;
+	font-family: "Roboto", Arial, sans-serif;
+	padding: 3px;
+	font-size: 10pt;
+	border: none;
+	background: #4b5d75;
+	color: #ddd;
+	border-radius: 5px;
+}
+
+#newsletter_sidebar button:hover {
+	opacity: 0.8;
+	cursor: pointer;
+}
+
+p.newsletter_disclaimer {
+	width: 145px;
+	margin-left: 45px;
+	font-size: 7pt !important;
+	padding-top: 5px !important;
+	font-family: "Roboto", Arial, sans-serif !important;
+	line-height: 1.4em !important;
 }

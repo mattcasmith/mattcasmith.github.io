@@ -1,0 +1,938 @@
+<!doctype html>
+<head>
+	<meta name="description" content="" />
+	<meta name="robots" content="index, follow" />
+	<meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+	<meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+	<link rel="canonical" href="https://mattcasmith.net/2025/06/08/agentic-ai-safety-architecture" />
+	<meta property="og:locale" content="en_GB" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Agentic AI could be the catalyst for safer autonomy | MattCASmith" />
+	<meta property="og:description" content="" />
+	<meta property="og:url" content="https://mattcasmith.net/2025/06/08/agentic-ai-safety-architecture" />
+	<meta property="og:site_name" content="MattCASmith" />
+	<meta property="article:published_time" content="2020-05-02T11:05:40+00:00" />
+	<meta property="og:image" content="https://mattcasmith.net/wp-content/uploads/2025/06/agentic-ai_0.png" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:creator" content="@mattcasmith" />
+	<meta name="twitter:site" content="@mattcasmith" />
+</head>
+	<head>
+		<style>
+			html {
+				display: none;
+			}
+		</style>
+		<title>Agentic AI could be the catalyst for safer autonomy | MattCASmith</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="shortcut icon" href="/assets/images/favicon.png">
+		<link rel="stylesheet" href="/assets/css/styles.css">
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+	</head>
+	
+	<body>
+		<div id="site-container" class="post">
+		<div id="header">
+			<div id="header_left">
+				<a href="/"><img class="site_logo light" src="/assets/images/mcas_site_logo.png" alt="MattCASmith"></a>
+				<a href="/"><img class="site_logo dark" src="/assets/images/mcas_site_logo_dark.png" alt="MattCASmith"></a>
+				<a href="/"><h2>MattCASmith</h2></a>
+			</div>
+			<div id="header_right">
+				<a target="_blank" href="https://x.com/mattcasmith"><img class="link_icon_twitter light" src="/assets/images/x_icon.png" alt="MattCASmith on X"></a>
+				<a target="_blank" href="https://x.com/mattcasmith"><img class="link_icon_twitter dark" src="/assets/images/x_icon_dark.png" alt="MattCASmith on X"></a>
+				<a target="_blank" href="mailto:mattcasmith@protonmail.com"><img class="link_icon_email light" src="/assets/images/email_icon.png" alt="Email MattCASmith"></a>
+				<a target="_blank" href="mailto:mattcasmith@protonmail.com"><img class="link_icon_email dark" src="/assets/images/email_icon_dark.png" alt="Email MattCASmith"></a>
+			</div>
+		</div>
+		
+		<article class="post">
+
+			<div class="title">
+				<h1 class="entry-title">Agentic AI could be the catalyst for safer autonomy</h1>
+			</div>
+			
+			<div class="meta">
+				<span class="year_label">2025-06-08</span>&nbsp; 
+					
+					
+						<a href="/category/technology/">Technology</a>,&nbsp;&nbsp;
+					
+						<a href="/category/cyber-security/">Cyber Security</a>
+					
+				
+			</div>
+
+			<div class="post_content_container_ext">
+
+				<div class="post_content_container_int">
+					<p>Granting artificial intelligence (AI) access to tools capable of taking real-world actions might fill you with a sense of dread - arguably it <em>should</em>. Given the number of inaccuracies most AI models confidently assert as truth, it feels prudent to maintain a watchful human eye over AI-powered workflows.</p>
+
+<p>But agentic AI presents a new proposition. By connecting agents specialised in certain tasks - and enforcing strict controls on accepted input, output, and escalation points - it could be possible to let AI operate autonomously while maintaining confidence that it will call for help when needed.</p>
+
+<figure>
+  <img src="/wp-content/uploads/2025/06/agentic-ai_0.png" alt="Illustration of robots representing AI agents, with one agent rejecting the other's output" />
+  <figcaption>Agentic AI architectures enable the guardrails unreliable AI models sorely need</figcaption>
+</figure>
+
+<h3 id="why-its-hard-to-trust-autonomous-ai">Why it’s hard to trust autonomous AI</h3>
+
+<p>Since the original ChatGPT exploded onto the scene in late 2022, AI has morphed from a fun toy into a useful sidekick. However, those touting it as a revolutionary technology that will put us all out of jobs by running the world autonomously still tend to fall into two categories: they’re either leaders of companies that build or heavily utilise AI models, or they have personal brands that rely on cultivating an image as visionaries and oracles.</p>
+
+<p>Practically, besides being fun to play with, large language models (LLMs) like ChatGPT are now a useful way to discover information. A search engine like Google “helpfully” interprets search terms in a way that often loses sight of the specific query, while AI models generally retain the context and intention of the user’s input, making it easier to reach more relevant results.</p>
+
+<p>I’ve always been a skeptical passenger on the AI bandwagon, and was never completely satisfied with its output. As Dan Sinker noted in <a href="https://dansinker.com/posts/2025-05-23-who-cares/" target="_blank">a recent blog post</a>, AI is by its nature a “mediocrity machine”, because all it’s really doing is calculating the most statistically likely response to a user’s input.<sup><a href="#notes-and-references">1</a></sup> With that in mind, it was never likely to replace great artists or innovators, but I could see its potential in automating more boring tasks than we previously could, thanks to its ability to interpret and produce natural language.</p>
+
+<blockquote class="big_quote">AI is often confidently wrong, even when given the simplest requests. If we can't trust it with basics, how can we trust it with more complex tasks?</blockquote>
+
+<p>However, other than the poor quality of its writing (as Paul Graham put it, LLMs write like <a href="https://x.com/paulg/status/1904146669874110791" target="_blank">a kid targeting an essay word count</a>), the other big issue is how often AI is confidently wrong. If it doesn’t understand the context or no data is available, it rarely admits that.<sup><a href="#notes-and-references">2</a></sup> The internet is full of screenshots of AI models being defiantly incorrect over facts as basic as what year it is.</p>
+
+<p>This unreliability means that even where AI <em>could</em> be useful in automation, it would require constant supervision and review. If I can’t trust it to return a basic fact, how could I possibly trust it to decide whether a customer should be granted a refund, or - <em>gulp</em> - make a change to a production system?</p>
+
+<h3 id="agentic-ai---more-than-marketing-hype">Agentic AI - more than marketing hype</h3>
+
+<p>However, in the last year or so, a new development has emerged that has potential to protect against many of the risks inherent in the very nature of AI. Popularised by Andrew Ng in June 2024, the term “agentic AI” refers to AI systems that are capable of handling multiple process steps, rather than just a simple prompt-response model - but it goes a lot further than that.</p>
+
+<p>Agentic AI <em>felt</em> like another marketing buzzword, and to be honest, the current environment in tech likely pushed me in that direction. Beyond the usual sales hyperbole, we’ve also seen incidents of “<a href="https://mashable.com/article/microsoft-backed-ai-startup-chatbot-human-employees" target="_blank">AI washing</a>”, where companies purport their AI implementations to be much more advanced than they really are. I’ve encountered substantial AI skepticism at some vendor events I’ve attended this year, likely as a result of these tactics.</p>
+
+<p>When agentic AI started cropping up more frequently, I wasn’t convinced. It seemed like a step forward in terms of AI’s capability to <em>integrate</em> with more complex systems, but it wasn’t clear how it would address its underlying reliability problems and make it possible to <em>depend</em> on those systems.</p>
+
+<p>However, I recently encountered <a href="https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf" target="_blank">OpenAI’s guide to building AI agents</a>, and the diagrams and explanations of agentic AI system design had me sold. The way I see it, agentic AI is less a buzzword for a new <em>type</em> of AI, and more a descriptor for an architecture that could finally give AI the structure and oversight it needs to be reliable enough to be more broadly useful.</p>
+
+<div class="box_cols"><h3>Mileage may vary</h3><p>In the spirit of the aforementioned AI washing, there are likely vendors out there exploiting the newfound popularity of the term "agentic AI" within their marketing materials. Unfortunately, AI implementations are usually typically opaque and it can be difficult to validate what's happening under the hood - so buyer beware, unless you can see the workflows with your own eyes.</p></div>
+
+<h3 id="new-architecture-same-problems">New architecture, same problems?</h3>
+
+<p>One might expect to encounter the same reliability issues in an agentic AI system that we see in daily use of LLMs. After all, if the model is unreliable, it would be logical that use of that model would be unreliable regardless of underlying structure, and especially if it was handed greater autonomy.</p>
+
+<p>However, guardrails can be put in place to help the system identify improper use or decisions that require human input. What made things click for me was OpenAI’s description of a decentralised system, with multiple agents specialising in their own tasks with stricter rules of engagement.</p>
+
+<p>Where data is passed between specialist agents, each can operate with a narrower scope of accepted inputs and outputs. While no individual agent is more reliable than the underlying AI model, the system as a whole is more likely to identify errors made at previous steps and flag them for review.</p>
+
+<figure>
+  <img src="/wp-content/uploads/2025/06/agentic-ai_1.png" alt="Example workflow for a customer service system utilising agentic AI" />
+  <figcaption>Example of a simple agentic AI customer service system workflow from OpenAI's guide</figcaption>
+</figure>
+
+<p>Agent-specific guardrails define what those boundaries are, both for user experience and for security. One element is input and output validation, to identify irrelevant or malicious requests, prompt injection attempts, accidentally exposed personally identifiable information, and so on.</p>
+
+<p>Security remains a concern given the broad and often unpredictable attack surface of autonomous AI agents. OpenAI suggests implementing guardrails “to address the risks you’ve already identified… and layer in additional ones as you uncover new vulnerabilities”, which is a potentially infinite task with a trial-and-error element that is hardly reassuring. I would expect this perpetual battle to develop into a whole new vertical in cyber security.</p>
+
+<p>The second layer of guardrails demonstrated in OpenAI’s document identify high-risk scenarios where an agent is out of its depth and requires human intervention. This takes decisions with significant impact - for example, whether a customer is entitled to a sizeable refund - out of the AI system’s hands and escalates them to receive the human attention they need, while avoiding lumbering workers with review of every mundane request.</p>
+
+<h3 id="the-road-ahead">The road ahead</h3>
+
+<p>Equipped with proper guardrails, agentic AI systems address many of the reservations I have about letting autonomous AI loose in a business context. By confining each agent to a narrow scope, the architecture provides review of each agent’s work and it’s more likely that rogue inputs and hallucinations will be detected and flagged for review and correction. Meanwhile, the AI system is still able to execute most of the work under its own steam.</p>
+
+<p>A lot remains to be seen as agentic AI develops in the coming years. <em>Defining</em> guardrails is a critical component - it will be some time before we can be confident they are effective <em>enough</em>, and they will continue to evolve as new abuse techniques and failures come to light. Furthermore, much depends on individual developers’ implementations, and if recent activity in the sector is anything to go by, validating what vendors mean when they promise “agentic AI” in their sales material will remain a challenge well into the future.</p>
+
+<p>Maybe I’ll eat my words in ten years’ time - that’s part of the fun of the tech space - but despite the hurdles yet to be overcome, the advent of agentic AI feels like a turning point, and perhaps the catalyst needed for AI to operate autonomously and reliably in environments where mistakes matter.</p>
+
+<hr />
+
+<h4 id="notes-and-references">Notes and references</h4>
+
+<ol>
+  <li>
+    <p>Coincidentally, just before I published this post, Apple researchers put out a new paper titled <a href="https://machinelearning.apple.com/research/illusion-of-thinking" target="_blank">The Illusion of Thinking</a>, which concludes that current AI models do well at pattern matching, but fall apart when more complex reasoning is required to solve a problem.</p>
+  </li>
+  <li>
+    <p>I wrote a little while ago about how <a href="/2025/04/21/chatgpt-ai-anthropomorphism">the personification of AI models</a> exacerbates this problem, increasing a user’s natural inclination to trust output that if anything they should be <em>more</em> suspicious of.</p>
+  </li>
+</ol>
+
+					<div id="newsletter_post">
+	<h3>Field notes // A monthly newsletter on tech and design</h3>
+	<p>No spam - just thought-provoking articles and useful tidbits</p>
+	<iframe src="https://embeds.beehiiv.com/77e2fe29-a7bd-4886-9f77-4370f9ad2ee9?slim=true" data-test-id="beehiiv-embed" height="53" frameborder="0" scrolling="no" style="margin: 0; border-radius: 0px !important; background-color: transparent;"></iframe>
+</div>
+
+<div id="cta">
+	If this article resonated, feel free to share it with someone who might appreciate it too. If you have thoughts, opinions, or comments to share then I'd love to hear from you - feel free to send me <a href="https://x.com/mattcasmith" target="_blank">a message on X</a> or <a href="mailto:mattcasmith@protonmail.com">an email</a>.
+</div>
+				</div>
+
+				<a href="https://mattcasmith.beehiiv.com/subscribe" target="_blank">
+<div id="newsletter_sidebar">
+	<table>
+		<tr>
+			<td>
+				<h3>📓</h3>
+			</td>
+			<td>	
+				<h2>Field Notes newsletter</h2>
+			</td>
+		</tr>
+	</table>
+	<p>Thoughtful monthly insights on tech and business, without the clickbait and noise</p>
+	<button>Subscribe</button>
+</div>
+</a>
+<p class="newsletter_disclaimer">No spam. Unsubscribe anytime.</p>
+				<div id="home_sidebar">
+					<div id="home_about_boxes">
+						<div class="home_about_box home_box">
+							<h2>Categories</h2>
+							<div id="side_menu">
+	<ul class="side_menu">
+		<a href="/category/technology"><li class="first">Technology</li></a>
+		<a href="/category/business"><li>Business</li></a>
+		<a href="/category/productivity"><li>Productivity</li></a>
+		<a href="/category/design"><li>Design</li></a>
+		<a href="/category/cyber-security"><li>Cyber Security</li></a>
+		<a href="/category/programming"><li>Coding</li></a>
+		<a href="/category/off-topic"><li>Miscellaneous</li></a>
+	</ul>
+</div>
+						</div>
+						<div class="home_about_box home_box">
+							<h2>Index & projects</h2>
+							<a href="/blog-index.htm"><div class="home-button green-button">Blog index</div></a>
+<div id="side_menu">
+	<ul class="side_menu">
+		<a href="/2021/01/01/backutil-windows-backup-utility" class="home-index"><li class="first">Backutil</li></a>
+		<a href="/2022/12/03/parsing-login-sessions-windows-security-event-log-powershell" class="home-index"><li>EVTX login parser</li></a>
+		<a href="/reading-list.htm" class="home-index"><li>Reading list</li></a>
+	</ul>
+</div>
+						</div>
+						<div class="home_about_box home_box">
+							<h2>Other posts</h2>
+							<div id="other_posts_list">
+							<ul class="other_posts_list">
+								
+								
+								
+								
+								
+								
+								
+									
+									
+									
+				                    	
+				                        	
+				                        		<a href="/2020/09/12/cracking-password-protected-zip-file-fcrackzip">
+				                        			<li class="first">Cracking a password-protected ZIP file with fcrackzip</li>
+					    	                	</a>
+					    	                	
+					    	                        
+					                    	
+					                    	
+				                    	
+				                	
+									
+									
+				                    	
+				                        	
+				                        		<a href="/2025/04/16/green-hills-outside-my-window">
+				                        			<li>Finding comfort in the green hills outside my window</li>
+					    	                	</a>
+					    	                          
+				                    		
+					                    	
+					                    
+				                	
+				                	
+									
+									
+				                    	
+				                        	
+				                        		<a href="/2025/04/08/home-network-weak-wifi-slow-speeds">
+				                        			<li>Fixing weak WiFi and slow speeds on my home network</li>
+					    	                	</a>
+					    	                       
+				                    		
+				                    		
+				                    	
+				                	
+				                	
+									
+									
+				                    	
+				                        	
+				                        		<a href="/2024/07/20/crowdstrike-bug-edr-setting-record-straight">
+				                        			<li>Endpoint detection and response (EDR) - setting the record straight</li>
+					    	                	</a>
+					    	                         
+				                    		
+				                    		
+				                    	
+				                	
+						    	
+									
+									
+									
+				                    	
+				                	
+									
+									
+				                    	
+				                	
+				                	
+									
+									
+				                    	
+				                	
+				                	
+									
+									
+				                    	
+				                	
+						    	
+									
+									
+									
+				                    	
+				                        	
+				                        		<a href="/2021/04/02/file-carving-recovering-deleted-file-disk-image">
+				                        			<li>File carving&#58; Recovering a deleted file from a Windows disk image</li>
+					    	                	</a>
+					    	                        
+					                    	
+					                    	
+				                    	
+				                	
+									
+									
+				                    	
+				                        	
+				                        		<a href="/2025/04/21/chatgpt-ai-anthropomorphism">
+				                        			<li>Humanising AI encourages intellectual lethargy</li>
+					    	                	</a>
+					    	                          
+				                    		
+					                    	
+					                    
+				                	
+				                	
+									
+									
+				                    	
+				                	
+				                	
+									
+									
+				                    	
+				                	
+						    	
+									
+									
+									
+				                    	
+				                	
+									
+									
+				                    	
+				                	
+				                	
+									
+									
+				                    	
+				                	
+				                	
+									
+									
+				                    	
+				                	
+						    	
+									
+									
+									
+				                    	
+				                	
+									
+									
+				                    	
+				                	
+				                	
+									
+									
+				                    	
+				                	
+				                	
+									
+									
+				                    	
+				                	
+						    	
+									
+									
+									
+				                    	
+				                	
+									
+									
+				                    	
+				                	
+				                	
+									
+									
+				                    	
+				                	
+				                	
+									
+									
+				                    	
+				                	
+						    	
+									
+									
+									
+				                    	
+				                        	
+				                        		<a href="/2022/12/03/parsing-login-sessions-windows-security-event-log-powershell">
+				                        			<li>Parsing login sessions from the Windows event log with PowerShell</li>
+					    	                	</a>
+					    	                        
+					                    	
+					                    	
+				                    	
+				                	
+									
+									
+				                    	
+				                        	
+				                        		<a href="/2025/05/24/bluesky-x-comparison">
+				                        			<li>Bluesky's nearly there, but it won't replace X just yet</li>
+					    	                	</a>
+					    	                          
+				                    		
+					                    	
+					                    
+				                	
+				                	
+									
+									
+				                    	
+				                        	
+				                        		<a href="/2025/05/10/travel-tourism-photos-experience">
+				                        			<li>When you travel, the real journey isn't photographed</li>
+					    	                	</a>
+					    	                       
+				                    		
+				                    		
+				                    	
+				                	
+				                	
+									
+									
+				                    	
+				                        	
+				                        		<a href="/2025/05/02/time-blocking-productivity">
+				                        			<li>Staying productive when everything feels urgent</li>
+					    	                	</a>
+					    	                         
+				                    		
+				                    		
+				                    	
+				                	
+						    	
+									
+									
+									
+				                    	
+				                        	
+				                        		<a href="/2022/02/22/bash-history-basics-behaviours-forensics">
+				                        			<li>Linux .bash&#95;history&#58; Basics, behaviours, and forensics</li>
+					    	                	</a>
+					    	                        
+					                    	
+					                    	
+				                    	
+				                	
+									
+									
+				                    	
+				                	
+				                	
+									
+									
+				                    	
+				                	
+				                	
+									
+									
+				                    	
+				                	
+						    	
+									
+									
+									
+				                    	
+				                	
+									
+									
+				                    	
+				                	
+				                	
+									
+									
+				                    	
+				                	
+				                	
+									
+									
+				                    	
+				                	
+						    	
+									
+									
+									
+				                    	
+				                	
+									
+									
+				                    	
+				                	
+				                	
+									
+									
+				                    	
+				                	
+				                	
+									
+									
+				                    	
+				                	
+						    	
+									
+									
+									
+				                    	
+				                        	
+				                        		<a href="/2022/12/15/investigating-explorer-temporary-zip-folders">
+				                        			<li>Investigating Explorer's temporary ZIP folders and retrieving files</li>
+					    	                	</a>
+					    	                        
+					                    	
+					                    	
+				                    	
+				                	
+									
+									
+				                    	
+				                        	
+				                        		<a href="/2025/05/31/abstraction-quality-detail-obsessed-leaders">
+				                        			<li>Quality products begin with detail-obsessed leaders</li>
+					    	                	</a>
+					    	                          
+				                    		
+					                    	
+					                    
+				                	
+				                	
+									
+									
+				                    	
+				                	
+				                	
+									
+									
+				                    	
+				                	
+						    	
+									
+									
+									
+				                    	
+				                        	
+				                        		<a href="/2022/01/08/sans-holiday-hack-2021-slot-machine">
+				                        			<li>SANS Holiday Hack Challenge 2021&#58; Slot machine walkthrough</li>
+					    	                	</a>
+					    	                        
+					                    	
+					                    	
+				                    	
+				                	
+									
+									
+				                	
+									
+									
+				                	
+									
+									
+						    	
+									
+									
+									
+									
+									
+				                	
+									
+									
+				                	
+									
+									
+						    	
+									
+									
+									
+									
+									
+				                	
+									
+									
+				                	
+									
+									
+						    	
+									
+									
+									
+									
+									
+				                	
+									
+									
+				                	
+									
+									
+						    	
+									
+									
+									
+									
+									
+				                	
+									
+									
+				                	
+									
+									
+						    	
+									
+									
+									
+									
+									
+				                	
+									
+									
+				                	
+									
+									
+						    	
+									
+									
+									
+									
+									
+				                	
+									
+									
+				                	
+									
+									
+						    	
+									
+									
+									
+									
+									
+				                	
+									
+									
+				                	
+									
+									
+						    	
+									
+									
+									
+									
+									
+				                	
+									
+									
+				                	
+									
+									
+						    	
+									
+									
+									
+									
+									
+				                	
+									
+									
+				                	
+									
+									
+						    	
+									
+									
+									
+									
+									
+				                	
+									
+									
+				                	
+									
+									
+						    	
+									
+									
+									
+									
+									
+				                	
+									
+									
+				                	
+									
+									
+						    	
+									
+									
+									
+									
+									
+				                	
+									
+									
+				                	
+									
+									
+						    	
+									
+									
+									
+									
+									
+				                	
+									
+									
+				                	
+									
+									
+						    	
+									
+									
+									
+									
+									
+				                	
+									
+									
+				                	
+									
+									
+						    	
+									
+									
+									
+									
+									
+				                	
+									
+									
+				                	
+									
+									
+						    	
+									
+									
+									
+									
+									
+				                	
+									
+									
+				                	
+									
+									
+						    	
+									
+									
+									
+									
+									
+				                	
+									
+									
+				                	
+									
+									
+						    	
+									
+									
+									
+									
+									
+				                	
+									
+									
+				                	
+									
+									
+						    	
+									
+									
+									
+									
+									
+				                	
+									
+									
+				                	
+									
+									
+						    	
+									
+									
+									
+									
+									
+				                	
+									
+									
+				                	
+									
+									
+						    	
+									
+									
+									
+									
+									
+				                	
+									
+									
+				                	
+									
+									
+						    	
+									
+									
+									
+									
+									
+				                	
+									
+									
+				                	
+									
+									
+						    	
+									
+									
+									
+									
+									
+				                	
+									
+									
+				                	
+									
+									
+						    	
+									
+									
+									
+									
+									
+				                	
+									
+									
+				                	
+									
+									
+						    	
+									
+									
+									
+									
+									
+				                	
+									
+									
+				                	
+									
+									
+						    	
+									
+									
+									
+									
+									
+				                	
+									
+									
+				                	
+									
+									
+						    	
+									
+									
+									
+									
+									
+				                	
+									
+									
+				                	
+									
+									
+						    	
+									
+									
+									
+									
+									
+				                	
+									
+									
+				                	
+									
+									
+						    	
+									
+									
+									
+									
+									
+				                	
+									
+									
+				                	
+									
+									
+						    	
+					    	</ul>
+				    		</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+		</article>
+
+		<div id="prev_next">
+			<div class="prev">
+				    
+						<a href="/2025/05/31/abstraction-quality-detail-obsessed-leaders">&laquo;&nbsp;Quality products begin with detail-obsessed leaders</a>
+					
+			</div>
+			<div class="next">
+			    
+			</div>
+		</div>
+
+				<div id="footer">
+			&copy; 2016-25 MattCASmith
+			<span class="home-link">Personal blog - does not reflect views of employers past or present</span>
+		</div>
+		
+		<script data-goatcounter="https://mattcasmith.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+		
+		</div>
+	
+	</body>
+</html>

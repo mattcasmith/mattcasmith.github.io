@@ -4,11 +4,20 @@
   <title>MattCASmith</title>
   <link href="https://mattcasmith.net/" rel="self"/>
   <link href="https://mattcasmith.net/feed.xml" rel="alternate" type="application/atom+xml"/>
-  <updated>2025-06-01T18:37:47+00:00</updated>
+  <updated>2025-06-08T18:38:52+00:00</updated>
   <id>https://mattcasmith.net/</id>
   <author>
     <name>MattCASmith</name>
   </author>
+  
+  <entry>
+    <title>Agentic AI could be the catalyst for safer autonomy</title>
+    <link href="https://mattcasmith.net/2025/06/08/agentic-ai-safety-architecture" rel="alternate" type="text/html"/>
+    <published>2025-06-08T00:00:00+00:00</published>
+    <updated>2025-06-08T00:00:00+00:00</updated>
+    <id>https://mattcasmith.net/2025/06/08/agentic-ai-safety-architecture</id>
+    <content type="html"><![CDATA[Granting artificial intelligence (AI) access to tools capable of taking real-world actions might fill you with a sense of dread - arguably it should. Given the number of inaccuracies most AI models confidently assert as truth, it feels prudent to maintain a watchful human eye over AI-powered workflows. But agentic... <a href="https://mattcasmith.net/2025/06/08/agentic-ai-safety-architecture">>>Read more</a>]]></content>
+  </entry>
   
   <entry>
     <title>Quality products begin with detail-obsessed leaders</title>
@@ -89,15 +98,6 @@
     <updated>2023-11-26T00:00:00+00:00</updated>
     <id>https://mattcasmith.net/2023/11/26/modular-soc-centralisation-repeatability-automation</id>
     <content type="html"><![CDATA[The dictionary definition of “modular” leaves a little to be desired: “Employing or involving a module or modules as the basis of design or construction.” What is implied, but that I would make explicit, is that parts of the whole can be swapped out easily while maintaining the functionality of... <a href="https://mattcasmith.net/2023/11/26/modular-soc-centralisation-repeatability-automation">>>Read more</a>]]></content>
-  </entry>
-  
-  <entry>
-    <title>Cyber security sometimes means learning things backwards</title>
-    <link href="https://mattcasmith.net/2023/03/26/cyber-security-learning-things-backwards" rel="alternate" type="text/html"/>
-    <published>2023-03-26T00:00:00+00:00</published>
-    <updated>2023-03-26T00:00:00+00:00</updated>
-    <id>https://mattcasmith.net/2023/03/26/cyber-security-learning-things-backwards</id>
-    <content type="html"><![CDATA[Stick around cyber security Twitter or LinkedIn for long enough and you’ll likely see somebody raise a question about how to get into the industry. You’ll also likely see a reply that describes a kind of rite of passage from sysadmin, to SOC analyst, to just about any other security... <a href="https://mattcasmith.net/2023/03/26/cyber-security-learning-things-backwards">>>Read more</a>]]></content>
   </entry>
   
 </feed>
