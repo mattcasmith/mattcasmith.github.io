@@ -341,7 +341,7 @@ body {
 		margin-bottom: 0px !important;
     }
 
-    #home_sidebar, #newsletter_sidebar, #newsletter_disclaimer {
+    #home_sidebar, #newsletter_sidebar, .newsletter_disclaimer {
     	display: none;
     }
 
