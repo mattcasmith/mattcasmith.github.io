@@ -4,11 +4,20 @@
   <title>MattCASmith</title>
   <link href="https://mattcasmith.net/" rel="self"/>
   <link href="https://mattcasmith.net/feed.xml" rel="alternate" type="application/atom+xml"/>
-  <updated>2025-06-08T18:38:52+00:00</updated>
+  <updated>2025-06-15T15:29:53+00:00</updated>
   <id>https://mattcasmith.net/</id>
   <author>
     <name>MattCASmith</name>
   </author>
+  
+  <entry>
+    <title>AI chatbots are kicking journalism while it's down</title>
+    <link href="https://mattcasmith.net/2025/06/15/ai-chatbots-journalism" rel="alternate" type="text/html"/>
+    <published>2025-06-15T00:00:00+00:00</published>
+    <updated>2025-06-15T00:00:00+00:00</updated>
+    <id>https://mattcasmith.net/2025/06/15/ai-chatbots-journalism</id>
+    <content type="html"><![CDATA[Where do you go when you need to find information online? For decades, my answer to that question would have been Google, but in the past few years I’ve increasingly turned to ChatGPT and other AI services, which - generally speaking - uncover niche information more quickly and reliably. But... <a href="https://mattcasmith.net/2025/06/15/ai-chatbots-journalism">>>Read more</a>]]></content>
+  </entry>
   
   <entry>
     <title>Agentic AI could be the catalyst for safer autonomy</title>
@@ -89,15 +98,6 @@
     <updated>2024-07-20T00:00:00+00:00</updated>
     <id>https://mattcasmith.net/2024/07/20/crowdstrike-bug-edr-setting-record-straight</id>
     <content type="html"><![CDATA[When I went to bed on the evening of Friday 19th July, I couldn’t sleep. It was a stuffy summer’s night in London, and the adrenaline was still pumping through my veins after one of the more notable days in recent memory for cyber security. Still, laying awake gave me... <a href="https://mattcasmith.net/2024/07/20/crowdstrike-bug-edr-setting-record-straight">>>Read more</a>]]></content>
-  </entry>
-  
-  <entry>
-    <title>Centralisation, repeatability, and automation in a modular SOC</title>
-    <link href="https://mattcasmith.net/2023/11/26/modular-soc-centralisation-repeatability-automation" rel="alternate" type="text/html"/>
-    <published>2023-11-26T00:00:00+00:00</published>
-    <updated>2023-11-26T00:00:00+00:00</updated>
-    <id>https://mattcasmith.net/2023/11/26/modular-soc-centralisation-repeatability-automation</id>
-    <content type="html"><![CDATA[The dictionary definition of “modular” leaves a little to be desired: “Employing or involving a module or modules as the basis of design or construction.” What is implied, but that I would make explicit, is that parts of the whole can be swapped out easily while maintaining the functionality of... <a href="https://mattcasmith.net/2023/11/26/modular-soc-centralisation-repeatability-automation">>>Read more</a>]]></content>
   </entry>
   
 </feed>
