@@ -362,6 +362,10 @@ body {
     	padding: 2px 10px !important;
     }
 
+    nav.top_nav a:first-of-type {
+		display:none !Important;
+	}
+
     #home_sidebar, #newsletter_sidebar, .newsletter_disclaimer {
     	display: none;
     }
