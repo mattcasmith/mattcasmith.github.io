@@ -4,11 +4,20 @@
   <title>MattCASmith</title>
   <link href="https://mattcasmith.net/" rel="self"/>
   <link href="https://mattcasmith.net/feed.xml" rel="alternate" type="application/atom+xml"/>
-  <updated>2025-07-06T07:22:56+00:00</updated>
+  <updated>2025-09-14T14:48:44+00:00</updated>
   <id>https://mattcasmith.net/</id>
   <author>
     <name>MattCASmith</name>
   </author>
+  
+  <entry>
+    <title>A reminder that you can just do things... kind of</title>
+    <link href="https://mattcasmith.net/2025/09/13/you-can-just-do-things-kind-of" rel="alternate" type="text/html"/>
+    <published>2025-09-13T00:00:00+00:00</published>
+    <updated>2025-09-13T00:00:00+00:00</updated>
+    <id>https://mattcasmith.net/2025/09/13/you-can-just-do-things-kind-of</id>
+    <content type="html"><![CDATA[“You can just do things” has become common advice online. It’s a modern iteration on the ethos that fortune favours the brave - a proclamation that you’re only one bold move away from the life you’ve always dreamt of. Yeah right, was my initial reaction to the meme. You can’t... <a href="https://mattcasmith.net/2025/09/13/you-can-just-do-things-kind-of">>>Read more</a>]]></content>
+  </entry>
   
   <entry>
     <title>Death Stranding&amp;#58; The journeys lost to life on demand</title>
@@ -89,15 +98,6 @@
     <updated>2025-04-21T00:00:00+00:00</updated>
     <id>https://mattcasmith.net/2025/04/21/chatgpt-ai-anthropomorphism</id>
     <content type="html"><![CDATA[I recently stumbled upon a Hacker News thread around a series of X posts about ChatGPT’s o3 model. Researchers noted that it “frequently fabricates actions it never took, and then elaborately justifies those actions when confronted”, in one case claiming to have received an incorrect result by running code on... <a href="https://mattcasmith.net/2025/04/21/chatgpt-ai-anthropomorphism">>>Read more</a>]]></content>
-  </entry>
-  
-  <entry>
-    <title>Finding comfort in the green hills outside my window</title>
-    <link href="https://mattcasmith.net/2025/04/16/green-hills-outside-my-window" rel="alternate" type="text/html"/>
-    <published>2025-04-16T00:00:00+00:00</published>
-    <updated>2025-04-16T00:00:00+00:00</updated>
-    <id>https://mattcasmith.net/2025/04/16/green-hills-outside-my-window</id>
-    <content type="html"><![CDATA[As I mentioned in a recent post, I moved to a new home a few months ago. My new place sits atop a hill, and the window to the right of my desk happens to look away from the city, over the tops of the houses opposite and off into... <a href="https://mattcasmith.net/2025/04/16/green-hills-outside-my-window">>>Read more</a>]]></content>
   </entry>
   
 </feed>
