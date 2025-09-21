@@ -4,11 +4,20 @@
   <title>MattCASmith</title>
   <link href="https://mattcasmith.net/" rel="self"/>
   <link href="https://mattcasmith.net/feed.xml" rel="alternate" type="application/atom+xml"/>
-  <updated>2025-09-14T14:53:39+00:00</updated>
+  <updated>2025-09-21T17:56:34+00:00</updated>
   <id>https://mattcasmith.net/</id>
   <author>
     <name>MattCASmith</name>
   </author>
+  
+  <entry>
+    <title>Take note&amp;#58; How to waste less time on the internet</title>
+    <link href="https://mattcasmith.net/2025/09/21/note-taking-waste-less-time-online" rel="alternate" type="text/html"/>
+    <published>2025-09-21T00:00:00+00:00</published>
+    <updated>2025-09-21T00:00:00+00:00</updated>
+    <id>https://mattcasmith.net/2025/09/21/note-taking-waste-less-time-online</id>
+    <content type="html"><![CDATA[We all waste far too much time online. There’s overt time wasting, like the mindless auto-queued videos on TikTok, and less obvious time wasting, like time spent browsing Hacker News and reading semi-technical blog posts. “But Matt,” you might say, “those articles are useful. They provide me with information that... <a href="https://mattcasmith.net/2025/09/21/note-taking-waste-less-time-online">>>Read more</a>]]></content>
+  </entry>
   
   <entry>
     <title>A reminder that you can just do things... kind of</title>
@@ -89,15 +98,6 @@
     <updated>2025-05-02T00:00:00+00:00</updated>
     <id>https://mattcasmith.net/2025/05/02/time-blocking-productivity</id>
     <content type="html"><![CDATA[We’ve all been there. One day you’re in control, the next you’re racing from meeting to meeting, unable to focus long enough to move anything forward in any meaningful way - unless, that is, you start protecting your time. When everything feels urgent and your calendar is under siege, the... <a href="https://mattcasmith.net/2025/05/02/time-blocking-productivity">>>Read more</a>]]></content>
-  </entry>
-  
-  <entry>
-    <title>Humanising AI encourages intellectual lethargy</title>
-    <link href="https://mattcasmith.net/2025/04/21/chatgpt-ai-anthropomorphism" rel="alternate" type="text/html"/>
-    <published>2025-04-21T00:00:00+00:00</published>
-    <updated>2025-04-21T00:00:00+00:00</updated>
-    <id>https://mattcasmith.net/2025/04/21/chatgpt-ai-anthropomorphism</id>
-    <content type="html"><![CDATA[I recently stumbled upon a Hacker News thread around a series of X posts about ChatGPT’s o3 model. Researchers noted that it “frequently fabricates actions it never took, and then elaborately justifies those actions when confronted”, in one case claiming to have received an incorrect result by running code on... <a href="https://mattcasmith.net/2025/04/21/chatgpt-ai-anthropomorphism">>>Read more</a>]]></content>
   </entry>
   
 </feed>
