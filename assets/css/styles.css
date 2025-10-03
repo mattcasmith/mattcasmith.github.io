@@ -254,10 +254,10 @@ body {
 }
 
 .site_logo {
-	width: 40px;
-	height: 40px;
+	width: 35px;
+	height: 35px;
 	float: left;
-	padding-top: 1px;
+	padding-top: 3.5px;
 	padding-right: 10px;
 	padding-left:;
 }
@@ -278,6 +278,10 @@ body {
 	border-radius: 10px;
 	margin-bottom: 5px;
 	margin-top: 20px;
+}
+
+a.home_about_bio {
+	color: #333 !important;
 }
 
 #home_about_boxes, #home_content_boxes {
@@ -342,7 +346,7 @@ body {
 	line-height: 1.15em !important;
 	border-bottom: 1px solid #777;
 	padding-bottom: 10px !important;
-	margin-bottom: 7px !important;
+	margin-bottom: 8px !important;
 	font-style: italic;
 }
 
@@ -836,7 +840,6 @@ article, #home_container {
 .post li {
 	float: left;
 	padding-bottom: 15px;
-	padding-left: 10px;
 	width: 100%;
 }
 
@@ -992,7 +995,7 @@ nav.top_nav {
 hr {
 	float: left;
 	width: 100%;
-	margin: 20px 0 -10px 0;
+	margin: 30px 0 -20px 0;
 	border: none;
 	background: #ddd;
 	height: 1px;
@@ -1233,6 +1236,9 @@ nav.top_nav a.current {
 	}
 	.box_cols h3 {
 		border-bottom: 1px solid #ddd;
+	}
+	a.home_about_bio {
+		color: #ddd !important;
 	}
 }
 

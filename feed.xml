@@ -4,11 +4,20 @@
   <title>MattCASmith</title>
   <link href="https://mattcasmith.net/" rel="self"/>
   <link href="https://mattcasmith.net/feed.xml" rel="alternate" type="application/atom+xml"/>
-  <updated>2025-09-21T17:56:34+00:00</updated>
+  <updated>2025-10-03T20:38:15+00:00</updated>
   <id>https://mattcasmith.net/</id>
   <author>
     <name>MattCASmith</name>
   </author>
+  
+  <entry>
+    <title>New York City&amp;#58; Observations and recommendations</title>
+    <link href="https://mattcasmith.net/2025/10/03/new-york-observations-recommendations" rel="alternate" type="text/html"/>
+    <published>2025-10-03T00:00:00+00:00</published>
+    <updated>2025-10-03T00:00:00+00:00</updated>
+    <id>https://mattcasmith.net/2025/10/03/new-york-observations-recommendations</id>
+    <content type="html"><![CDATA[I first visited New York in 2024, and those few rain-drenched days left a deep impression on me. I did my lap of the usual tourist sights, but my affection for the place lay elsewhere. Something excited me about the city at street level - an inspirational energy that I... <a href="https://mattcasmith.net/2025/10/03/new-york-observations-recommendations">>>Read more</a>]]></content>
+  </entry>
   
   <entry>
     <title>Take note&amp;#58; How to waste less time on the internet</title>
@@ -89,15 +98,6 @@
     <updated>2025-05-10T00:00:00+00:00</updated>
     <id>https://mattcasmith.net/2025/05/10/travel-tourism-photos-experience</id>
     <content type="html"><![CDATA[Last week, I played tour guide for some visitors from overseas - first in London, and then in my hometown. It was exhausting, but it came with an unexpected side effect: it made me see those places differently. It’s hard to take your city for granted when you walk familiar... <a href="https://mattcasmith.net/2025/05/10/travel-tourism-photos-experience">>>Read more</a>]]></content>
-  </entry>
-  
-  <entry>
-    <title>Staying productive when everything feels urgent</title>
-    <link href="https://mattcasmith.net/2025/05/02/time-blocking-productivity" rel="alternate" type="text/html"/>
-    <published>2025-05-02T00:00:00+00:00</published>
-    <updated>2025-05-02T00:00:00+00:00</updated>
-    <id>https://mattcasmith.net/2025/05/02/time-blocking-productivity</id>
-    <content type="html"><![CDATA[We’ve all been there. One day you’re in control, the next you’re racing from meeting to meeting, unable to focus long enough to move anything forward in any meaningful way - unless, that is, you start protecting your time. When everything feels urgent and your calendar is under siege, the... <a href="https://mattcasmith.net/2025/05/02/time-blocking-productivity">>>Read more</a>]]></content>
   </entry>
   
 </feed>
