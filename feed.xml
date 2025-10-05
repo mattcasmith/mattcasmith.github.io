@@ -4,11 +4,20 @@
   <title>MattCASmith</title>
   <link href="https://mattcasmith.net/" rel="self"/>
   <link href="https://mattcasmith.net/feed.xml" rel="alternate" type="application/atom+xml"/>
-  <updated>2025-10-03T20:38:15+00:00</updated>
+  <updated>2025-10-05T07:28:17+00:00</updated>
   <id>https://mattcasmith.net/</id>
   <author>
     <name>MattCASmith</name>
   </author>
+  
+  <entry>
+    <title>Claude's café pop-up convinced me to switch LLMs</title>
+    <link href="https://mattcasmith.net/2025/10/05/anthropic-claude-ai-marketing-design" rel="alternate" type="text/html"/>
+    <published>2025-10-05T00:00:00+00:00</published>
+    <updated>2025-10-05T00:00:00+00:00</updated>
+    <id>https://mattcasmith.net/2025/10/05/anthropic-claude-ai-marketing-design</id>
+    <content type="html"><![CDATA[There’s a new cool kid on the AI block, and its name is Anthropic. On my recent trip to New York, I noted the huge poster campaigns for its Claude large language models (LLMs), but it turned out that was just the beginning. Just after I flew back to the... <a href="https://mattcasmith.net/2025/10/05/anthropic-claude-ai-marketing-design">>>Read more</a>]]></content>
+  </entry>
   
   <entry>
     <title>New York City&amp;#58; Observations and recommendations</title>
@@ -89,15 +98,6 @@
     <updated>2025-05-24T00:00:00+00:00</updated>
     <id>https://mattcasmith.net/2025/05/24/bluesky-x-comparison</id>
     <content type="html"><![CDATA[Bluesky was an indirect product of Elon Musk’s controversial 2022 Twitter takeover, pitched as a decentralised, user-first alternative to the site that became X. Originally a side project funded by Twitter itself, its new goal is to stand on its own two feet as a more open, interoperable social network.... <a href="https://mattcasmith.net/2025/05/24/bluesky-x-comparison">>>Read more</a>]]></content>
-  </entry>
-  
-  <entry>
-    <title>When you travel, the real journey isn't photographed</title>
-    <link href="https://mattcasmith.net/2025/05/10/travel-tourism-photos-experience" rel="alternate" type="text/html"/>
-    <published>2025-05-10T00:00:00+00:00</published>
-    <updated>2025-05-10T00:00:00+00:00</updated>
-    <id>https://mattcasmith.net/2025/05/10/travel-tourism-photos-experience</id>
-    <content type="html"><![CDATA[Last week, I played tour guide for some visitors from overseas - first in London, and then in my hometown. It was exhausting, but it came with an unexpected side effect: it made me see those places differently. It’s hard to take your city for granted when you walk familiar... <a href="https://mattcasmith.net/2025/05/10/travel-tourism-photos-experience">>>Read more</a>]]></content>
   </entry>
   
 </feed>
