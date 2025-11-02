@@ -4,11 +4,20 @@
   <title>MattCASmith</title>
   <link href="https://mattcasmith.net/" rel="self"/>
   <link href="https://mattcasmith.net/feed.xml" rel="alternate" type="application/atom+xml"/>
-  <updated>2025-10-26T10:45:06+00:00</updated>
+  <updated>2025-11-02T08:07:38+00:00</updated>
   <id>https://mattcasmith.net/</id>
   <author>
     <name>MattCASmith</name>
   </author>
+  
+  <entry>
+    <title>ChatGPT Atlas positions AI as the internet's gatekeeper</title>
+    <link href="https://mattcasmith.net/2025/11/02/chatgpt-atlas-ai-browser" rel="alternate" type="text/html"/>
+    <published>2025-11-02T00:00:00+00:00</published>
+    <updated>2025-11-02T00:00:00+00:00</updated>
+    <id>https://mattcasmith.net/2025/11/02/chatgpt-atlas-ai-browser</id>
+    <content type="html"><![CDATA[We’re shoehorning AI into everything else, so why not your web browser? That was presumably the thinking when OpenAI launched ChatGPT Atlas, an AI-augmented browser that it says will change the way we use the internet. Launched on macOS on 21st October, Atlas’s main sell is conversational interaction with the... <a href="https://mattcasmith.net/2025/11/02/chatgpt-atlas-ai-browser">>>Read more</a>]]></content>
+  </entry>
   
   <entry>
     <title>EtherHiding&amp;#58; When good blockchains turn bad</title>
@@ -89,15 +98,6 @@
     <updated>2025-06-23T00:00:00+00:00</updated>
     <id>https://mattcasmith.net/2025/06/23/kindle-paperwhite-signature-edition-2024-review</id>
     <content type="html"><![CDATA[An e-reader post in 2025? It feels like most readers who would be interested in devices like the Amazon Kindle were sold on the idea a long time ago. But some - like myself - held on to physical books, preferring the printed word and taking a defiant stand against... <a href="https://mattcasmith.net/2025/06/23/kindle-paperwhite-signature-edition-2024-review">>>Read more</a>]]></content>
-  </entry>
-  
-  <entry>
-    <title>AI chatbots are kicking journalism while it's down</title>
-    <link href="https://mattcasmith.net/2025/06/15/ai-chatbots-journalism" rel="alternate" type="text/html"/>
-    <published>2025-06-15T00:00:00+00:00</published>
-    <updated>2025-06-15T00:00:00+00:00</updated>
-    <id>https://mattcasmith.net/2025/06/15/ai-chatbots-journalism</id>
-    <content type="html"><![CDATA[Where do you go when you need to find information online? For decades, my answer to that question would have been Google, but in the past few years I’ve increasingly turned to ChatGPT and other AI services, which - generally speaking - uncover niche information more quickly and reliably. But... <a href="https://mattcasmith.net/2025/06/15/ai-chatbots-journalism">>>Read more</a>]]></content>
   </entry>
   
 </feed>
