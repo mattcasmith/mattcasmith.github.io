@@ -4,11 +4,20 @@
   <title>MattCASmith</title>
   <link href="https://mattcasmith.net/" rel="self"/>
   <link href="https://mattcasmith.net/feed.xml" rel="alternate" type="application/atom+xml"/>
-  <updated>2025-11-02T08:07:38+00:00</updated>
+  <updated>2025-11-09T09:07:21+00:00</updated>
   <id>https://mattcasmith.net/</id>
   <author>
     <name>MattCASmith</name>
   </author>
+  
+  <entry>
+    <title>Field Notes 5 // ChatGPT Atlas and the Claude café</title>
+    <link href="https://mattcasmith.net/2025/11/09/field-notes-5-november-2025" rel="alternate" type="text/html"/>
+    <published>2025-11-09T00:00:00+00:00</published>
+    <updated>2025-11-09T00:00:00+00:00</updated>
+    <id>https://mattcasmith.net/2025/11/09/field-notes-5-november-2025</id>
+    <content type="html"><![CDATA[This is Field Notes, my monthly newsletter on technology without the hype. Subscribers get it weeks before it goes up on the blog. Subscribe below. Field Notes // A monthly newsletter by MattCASmith A monthly roundup of my latest writing, plus observations and recommendations I don't share anywhere else Welcome... <a href="https://mattcasmith.net/2025/11/09/field-notes-5-november-2025">>>Read more</a>]]></content>
+  </entry>
   
   <entry>
     <title>ChatGPT Atlas positions AI as the internet's gatekeeper</title>
@@ -89,15 +98,6 @@
     <updated>2025-07-06T00:00:00+00:00</updated>
     <id>https://mattcasmith.net/2025/07/06/kojima-death-stranding-world-strand-tour</id>
     <content type="html"><![CDATA[Just before the launch of Death Stranding 2: On the Beach, the latest game from legendary director Hideo Kojima and his team at Kojima Productions, something unusual happened. Tickets started going on sale for small events in Los Angeles, Sydney, Tokyo, Paris, London… 12 locations in total. I bought mine... <a href="https://mattcasmith.net/2025/07/06/kojima-death-stranding-world-strand-tour">>>Read more</a>]]></content>
-  </entry>
-  
-  <entry>
-    <title>Amazon Kindle review&amp;#58; I wish I'd bought one years ago</title>
-    <link href="https://mattcasmith.net/2025/06/23/kindle-paperwhite-signature-edition-2024-review" rel="alternate" type="text/html"/>
-    <published>2025-06-23T00:00:00+00:00</published>
-    <updated>2025-06-23T00:00:00+00:00</updated>
-    <id>https://mattcasmith.net/2025/06/23/kindle-paperwhite-signature-edition-2024-review</id>
-    <content type="html"><![CDATA[An e-reader post in 2025? It feels like most readers who would be interested in devices like the Amazon Kindle were sold on the idea a long time ago. But some - like myself - held on to physical books, preferring the printed word and taking a defiant stand against... <a href="https://mattcasmith.net/2025/06/23/kindle-paperwhite-signature-edition-2024-review">>>Read more</a>]]></content>
   </entry>
   
 </feed>
