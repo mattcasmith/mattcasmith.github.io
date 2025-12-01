@@ -4,11 +4,20 @@
   <title>MattCASmith</title>
   <link href="https://mattcasmith.net/" rel="self"/>
   <link href="https://mattcasmith.net/feed.xml" rel="alternate" type="application/atom+xml"/>
-  <updated>2025-11-09T09:07:21+00:00</updated>
+  <updated>2025-12-01T07:53:21+00:00</updated>
   <id>https://mattcasmith.net/</id>
   <author>
     <name>MattCASmith</name>
   </author>
+  
+  <entry>
+    <title>Self-driving cars are here, but the friction is in the sale</title>
+    <link href="https://mattcasmith.net/2025/12/01/self-driving-cars-buying-broken" rel="alternate" type="text/html"/>
+    <published>2025-12-01T00:00:00+00:00</published>
+    <updated>2025-12-01T00:00:00+00:00</updated>
+    <id>https://mattcasmith.net/2025/12/01/self-driving-cars-buying-broken</id>
+    <content type="html"><![CDATA[On a recent trip to Austin, Texas, I was tempted to take one of the Waymos or Robotaxis that so casually roam the streets. One day, I was even offered one as an alternative to waiting 11 minutes for an Uber driver. I probably would have taken the plunge had... <a href="https://mattcasmith.net/2025/12/01/self-driving-cars-buying-broken">>>Read more</a>]]></content>
+  </entry>
   
   <entry>
     <title>Field Notes 5 // ChatGPT Atlas and the Claude café</title>
@@ -89,15 +98,6 @@
     <updated>2025-09-13T00:00:00+00:00</updated>
     <id>https://mattcasmith.net/2025/09/13/you-can-just-do-things-kind-of</id>
     <content type="html"><![CDATA[“You can just do things” has become common advice online. It’s a modern iteration on the ethos that fortune favours the brave - a proclamation that you’re only one bold move away from the life you’ve always dreamt of. Yeah right, was my initial reaction to the meme. You can’t... <a href="https://mattcasmith.net/2025/09/13/you-can-just-do-things-kind-of">>>Read more</a>]]></content>
-  </entry>
-  
-  <entry>
-    <title>Death Stranding&amp;#58; The journeys lost to life on demand</title>
-    <link href="https://mattcasmith.net/2025/07/06/kojima-death-stranding-world-strand-tour" rel="alternate" type="text/html"/>
-    <published>2025-07-06T00:00:00+00:00</published>
-    <updated>2025-07-06T00:00:00+00:00</updated>
-    <id>https://mattcasmith.net/2025/07/06/kojima-death-stranding-world-strand-tour</id>
-    <content type="html"><![CDATA[Just before the launch of Death Stranding 2: On the Beach, the latest game from legendary director Hideo Kojima and his team at Kojima Productions, something unusual happened. Tickets started going on sale for small events in Los Angeles, Sydney, Tokyo, Paris, London… 12 locations in total. I bought mine... <a href="https://mattcasmith.net/2025/07/06/kojima-death-stranding-world-strand-tour">>>Read more</a>]]></content>
   </entry>
   
 </feed>
