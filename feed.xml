@@ -4,11 +4,20 @@
   <title>MattCASmith</title>
   <link href="https://mattcasmith.net/" rel="self"/>
   <link href="https://mattcasmith.net/feed.xml" rel="alternate" type="application/atom+xml"/>
-  <updated>2025-12-01T07:53:21+00:00</updated>
+  <updated>2025-12-10T17:52:45+00:00</updated>
   <id>https://mattcasmith.net/</id>
   <author>
     <name>MattCASmith</name>
   </author>
+  
+  <entry>
+    <title>AI shopping only works if you give up your privacy</title>
+    <link href="https://mattcasmith.net/2025/12/10/ai-shopping-profiling-privacy" rel="alternate" type="text/html"/>
+    <published>2025-12-10T17:30:00+00:00</published>
+    <updated>2025-12-10T17:30:00+00:00</updated>
+    <id>https://mattcasmith.net/2025/12/10/ai-shopping-profiling-privacy</id>
+    <content type="html"><![CDATA[As I wrote when OpenAI launched its Atlas browser, AI models simply don’t know your preferences well enough to shop on your behalf. The technology firms envision a future where we type “buy trainers” and they arrive at our door, but they don’t account for all the different types of... <a href="https://mattcasmith.net/2025/12/10/ai-shopping-profiling-privacy">>>Read more</a>]]></content>
+  </entry>
   
   <entry>
     <title>Self-driving cars are here, but the friction is in the sale</title>
@@ -89,15 +98,6 @@
     <updated>2025-09-21T00:00:00+00:00</updated>
     <id>https://mattcasmith.net/2025/09/21/note-taking-waste-less-time-online</id>
     <content type="html"><![CDATA[We all waste far too much time online. There’s overt time wasting, like the mindless auto-queued videos on TikTok, and less obvious time wasting, like time spent browsing Hacker News and reading semi-technical blog posts. “But Matt,” you might say, “those articles are useful. They provide me with information that... <a href="https://mattcasmith.net/2025/09/21/note-taking-waste-less-time-online">>>Read more</a>]]></content>
-  </entry>
-  
-  <entry>
-    <title>A reminder that you can just do things... kind of</title>
-    <link href="https://mattcasmith.net/2025/09/13/you-can-just-do-things-kind-of" rel="alternate" type="text/html"/>
-    <published>2025-09-13T00:00:00+00:00</published>
-    <updated>2025-09-13T00:00:00+00:00</updated>
-    <id>https://mattcasmith.net/2025/09/13/you-can-just-do-things-kind-of</id>
-    <content type="html"><![CDATA[“You can just do things” has become common advice online. It’s a modern iteration on the ethos that fortune favours the brave - a proclamation that you’re only one bold move away from the life you’ve always dreamt of. Yeah right, was my initial reaction to the meme. You can’t... <a href="https://mattcasmith.net/2025/09/13/you-can-just-do-things-kind-of">>>Read more</a>]]></content>
   </entry>
   
 </feed>
