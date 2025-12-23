@@ -4,11 +4,20 @@
   <title>MattCASmith</title>
   <link href="https://mattcasmith.net/" rel="self"/>
   <link href="https://mattcasmith.net/feed.xml" rel="alternate" type="application/atom+xml"/>
-  <updated>2025-12-10T17:52:45+00:00</updated>
+  <updated>2025-12-23T09:32:22+00:00</updated>
   <id>https://mattcasmith.net/</id>
   <author>
     <name>MattCASmith</name>
   </author>
+  
+  <entry>
+    <title>Best of Tech 2025&amp;#58; Gadgets, books, games, and more</title>
+    <link href="https://mattcasmith.net/2025/12/23/best-of-tech-2025" rel="alternate" type="text/html"/>
+    <published>2025-12-23T09:30:00+00:00</published>
+    <updated>2025-12-23T09:30:00+00:00</updated>
+    <id>https://mattcasmith.net/2025/12/23/best-of-tech-2025</id>
+    <content type="html"><![CDATA[I was much better at keeping note of things I read, watched, and played in 2025, and one unexpected benefit is that it’s far easier to look back and pick out the highlights. It seemed rude not to share, so here’s a roundup of the best things I found this... <a href="https://mattcasmith.net/2025/12/23/best-of-tech-2025">>>Read more</a>]]></content>
+  </entry>
   
   <entry>
     <title>AI shopping only works if you give up your privacy</title>
@@ -89,15 +98,6 @@
     <updated>2025-10-03T00:00:00+00:00</updated>
     <id>https://mattcasmith.net/2025/10/03/new-york-observations-recommendations</id>
     <content type="html"><![CDATA[I first visited New York in 2024, and those few rain-drenched days left a deep impression on me. I did my lap of the usual tourist sights, but my affection for the place lay elsewhere. Something excited me about the city at street level - an inspirational energy that I... <a href="https://mattcasmith.net/2025/10/03/new-york-observations-recommendations">>>Read more</a>]]></content>
-  </entry>
-  
-  <entry>
-    <title>Take note&amp;#58; How to waste less time on the internet</title>
-    <link href="https://mattcasmith.net/2025/09/21/note-taking-waste-less-time-online" rel="alternate" type="text/html"/>
-    <published>2025-09-21T00:00:00+00:00</published>
-    <updated>2025-09-21T00:00:00+00:00</updated>
-    <id>https://mattcasmith.net/2025/09/21/note-taking-waste-less-time-online</id>
-    <content type="html"><![CDATA[We all waste far too much time online. There’s overt time wasting, like the mindless auto-queued videos on TikTok, and less obvious time wasting, like time spent browsing Hacker News and reading semi-technical blog posts. “But Matt,” you might say, “those articles are useful. They provide me with information that... <a href="https://mattcasmith.net/2025/09/21/note-taking-waste-less-time-online">>>Read more</a>]]></content>
   </entry>
   
 </feed>
