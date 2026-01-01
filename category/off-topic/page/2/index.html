@@ -44,6 +44,11 @@
 				<a target="_blank" href="https://x.com/mattcasmith"><img class="link_icon_twitter dark" src="/assets/images/x_icon_dark.png" alt="MattCASmith on X"></a>
 				<a target="_blank" href="mailto:mattcasmith@protonmail.com"><img class="link_icon_email light" src="/assets/images/email_icon.png" alt="Email MattCASmith"></a>
 				<a target="_blank" href="mailto:mattcasmith@protonmail.com"><img class="link_icon_email dark" src="/assets/images/email_icon_dark.png" alt="Email MattCASmith"></a>
+				<a href="/about.htm"><img class="link_icon_about light" src="/assets/images/about_icon.png" alt="About MattCASmith"></a>
+				<a href="/about.htm"><img class="link_icon_about dark" src="/assets/images/about_icon_dark.png" alt="About MattCASmith"></a>
+			</div>
+			<div id="search_cont">
+				<input id="search" name="search" placeholder="Search site..." value="">
 			</div>
 		</div>
 			<div id="home_container">
@@ -76,6 +81,17 @@
 			</div>
 
 			
+			
+					<a href="/2018/12/01/formula-1-world-championship-2018/">
+						<article class="blog_entry">
+							<div class="blog_entry_title">
+								<span class="post_title">Formula 1 World Championship 2018 review &#8211; the closest race in years</span>
+							</div>
+							<div class="blog_entry_excerpt">
+								<time datetime="2018-12-01T08:00:44+00:00"><span class="year_label">2018-12-01</span></time>&nbsp;-&nbsp;&nbsp;
+							</div>
+						</article>
+					</a>
 			
 					<a href="/2018/07/13/muse-drones-world-tour-a-fast-paced-spectacle-thats-very-very-loud/">
 						<article class="blog_entry">
@@ -168,7 +184,7 @@
 			</td>
 		</tr>
 	</table>
-	<p>A monthly roundup of my latest writing, plus exclusive links and observations</p>
+	<p>A monthly collection of observations, ideas in progress, and the best books, podcasts, and articles I discover</p>
 	<button>Subscribe</button>
 </div>
 </a>
@@ -190,12 +206,11 @@
 </div>
 				</div>
 				<div class="home_about_box home_box">
-					<h2>Index & projects</h2>
+					<h2>Index & pages</h2>
 					<a href="/blog-index.htm"><div class="home-button green-button">Blog index</div></a>
 <div id="side_menu">
 	<ul class="side_menu">
-		<a href="/2021/01/01/backutil-windows-backup-utility" class="home-index"><li class="first">Backutil</li></a>
-		<a href="/2022/12/03/parsing-login-sessions-windows-security-event-log-powershell" class="home-index"><li>EVTX login parser</li></a>
+		<a href="/about.htm" class="home-index"><li class="first">About</li></a>
 		<a href="/recommendations.htm" class="home-index"><li>Recommendations</li></a>
 	</ul>
 </div>
@@ -232,12 +247,29 @@
 		</div>
 					
 				<div id="footer">
-			&copy; 2016-25 MattCASmith
+			&copy; 2016-26 MattCASmith
 			<span class="home-link">Personal blog - does not reflect views of employers past or present</span>
 		</div>
 		
 		<script data-goatcounter="https://mattcasmith.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
+        <script>
+        	/* Search - allow submission using Enter key */
+			document.getElementById("search").addEventListener("keydown", function (e) {
+  				if (e.key === "Enter") {
+    			e.preventDefault();
+    			searchRedirect();
+  				}
+			});
+			/* Search - generate URL and redirect */
+			function searchRedirect() {
+ 				const input = document.getElementById("search");
+  				if (!input) return;
+				const query = encodeURIComponent(input.value.trim());
+  				const url = "https://duckduckgo.com/?q=site%3Amattcasmith.net+" + query;
+				window.open(url, "_blank");
+			}
+        </script>
 		
 		</div>
 	

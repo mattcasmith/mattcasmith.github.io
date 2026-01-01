@@ -4,11 +4,20 @@
   <title>MattCASmith</title>
   <link href="https://mattcasmith.net/" rel="self"/>
   <link href="https://mattcasmith.net/feed.xml" rel="alternate" type="application/atom+xml"/>
-  <updated>2025-12-23T09:40:28+00:00</updated>
+  <updated>2026-01-01T08:29:30+00:00</updated>
   <id>https://mattcasmith.net/</id>
   <author>
     <name>MattCASmith</name>
   </author>
+  
+  <entry>
+    <title>State of the Blog 2026&amp;#58; Following a new direction</title>
+    <link href="https://mattcasmith.net/2026/01/01/state-of-the-blog-2026" rel="alternate" type="text/html"/>
+    <published>2026-01-01T08:00:00+00:00</published>
+    <updated>2026-01-01T08:00:00+00:00</updated>
+    <id>https://mattcasmith.net/2026/01/01/state-of-the-blog-2026</id>
+    <content type="html"><![CDATA[I’ve blogged in one form or another for about 20 years, but never really knew what I wanted this site to be. Since its inception circa 2013, it’s fulfilled the roles of journalism portfolio and online CV, and served as a kind of technical notebook as I honed my trade... <a href="https://mattcasmith.net/2026/01/01/state-of-the-blog-2026">>>Read more</a>]]></content>
+  </entry>
   
   <entry>
     <title>Best of Tech 2025&amp;#58; Gadgets, books, games, and more</title>
@@ -89,15 +98,6 @@
     <updated>2025-10-05T00:00:00+00:00</updated>
     <id>https://mattcasmith.net/2025/10/05/anthropic-claude-ai-marketing-design</id>
     <content type="html"><![CDATA[There’s a new cool kid on the AI block, and its name is Anthropic. On my recent trip to New York, I noted the huge poster campaigns for its Claude large language models (LLMs), but it turned out that was just the beginning. Just after I flew back to the... <a href="https://mattcasmith.net/2025/10/05/anthropic-claude-ai-marketing-design">>>Read more</a>]]></content>
-  </entry>
-  
-  <entry>
-    <title>New York City&amp;#58; Observations and recommendations</title>
-    <link href="https://mattcasmith.net/2025/10/03/new-york-observations-recommendations" rel="alternate" type="text/html"/>
-    <published>2025-10-03T00:00:00+00:00</published>
-    <updated>2025-10-03T00:00:00+00:00</updated>
-    <id>https://mattcasmith.net/2025/10/03/new-york-observations-recommendations</id>
-    <content type="html"><![CDATA[I first visited New York in 2024, and those few rain-drenched days left a deep impression on me. I did my lap of the usual tourist sights, but my affection for the place lay elsewhere. Something excited me about the city at street level - an inspirational energy that I... <a href="https://mattcasmith.net/2025/10/03/new-york-observations-recommendations">>>Read more</a>]]></content>
   </entry>
   
 </feed>

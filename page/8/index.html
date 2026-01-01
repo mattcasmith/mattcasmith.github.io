@@ -1,16 +1,15 @@
 <!doctype html>
 <head>
-	<title>MattCASmith | A blog about cyber security and technology</title>
-	<meta name="description" content="MattCASmith.net is a blog about cyber security, technology, coding, and more." />
+	<title>MattCASmith | Observations on technology, business, and culture</title>
+	<meta name="description" content="A cyber security professional observing technology, business, and culture with a skeptical – but never cynical – eye." />
 	<meta name="robots" content="index, follow" />
 	<meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
 	<meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
 	<link rel="canonical" href="https://mattcasmith.net/" />
-	<link rel="next" href="https://mattcasmith.net/blog.htm" />
 	<meta property="og:locale" content="en_GB" />
 	<meta property="og:type" content="website" />
-	<meta property="og:title" content="MattCASmith | A blog about cyber security and technology" />
-	<meta property="og:description" content="MattCASmith.net is a blog about cyber security, technology, coding, and more." />
+	<meta property="og:title" content="MattCASmith | Observations on technology, business, and culture" />
+	<meta property="og:description" content="A cyber security professional observing technology, business, and culture with a skeptical – but never cynical – eye." />
 	<meta property="og:url" content="https://mattcasmith.net/" />
 	<meta property="og:site_name" content="MattCASmith" />
 	<meta name="twitter:card" content="summary_large_image" />
@@ -44,6 +43,11 @@
 				<a target="_blank" href="https://x.com/mattcasmith"><img class="link_icon_twitter dark" src="/assets/images/x_icon_dark.png" alt="MattCASmith on X"></a>
 				<a target="_blank" href="mailto:mattcasmith@protonmail.com"><img class="link_icon_email light" src="/assets/images/email_icon.png" alt="Email MattCASmith"></a>
 				<a target="_blank" href="mailto:mattcasmith@protonmail.com"><img class="link_icon_email dark" src="/assets/images/email_icon_dark.png" alt="Email MattCASmith"></a>
+				<a href="/about.htm"><img class="link_icon_about light" src="/assets/images/about_icon.png" alt="About MattCASmith"></a>
+				<a href="/about.htm"><img class="link_icon_about dark" src="/assets/images/about_icon_dark.png" alt="About MattCASmith"></a>
+			</div>
+			<div id="search_cont">
+				<input id="search" name="search" placeholder="Search site..." value="">
 			</div>
 		</div>
 
@@ -61,7 +65,7 @@
 			</nav>	
 			
 		<div id="home_about_bio">
-			<span class="year_label">London, UK</span> -&nbsp; I work in cyber security but write about the broader technology landscape, looking past the hype to discover what works, what doesn't, and whether any of it truly improves our lives.
+			<span class="year_label">London, UK</span> >&nbsp; A cyber security professional observing technology, business, and culture with a skeptical – but never cynical – eye, and scratching a writing itch from a previous life as a journalist.
 		</div>
 		
 		<div id="home_posts_list">
@@ -83,6 +87,17 @@
 				</div>
 			</div>
 			
+			
+					<a href="/2018/12/21/sql-joins-inner-left-right-outer/">
+						<article class="blog_entry">
+							<div class="blog_entry_title">
+								<span class="post_title">SQL JOINs: INNER JOIN, LEFT JOIN, RIGHT JOIN and FULL OUTER JOIN</span>
+							</div>
+							<div class="blog_entry_excerpt">
+								<time datetime="2018-12-21T13:19:22+00:00"><span class="year_label">2018-12-21</span></time>&nbsp;-&nbsp;&nbsp;
+							</div>
+						</article>
+					</a>
 			
 					<a href="/2018/12/15/python-windows-forensics-recycle-bin-deleted-files/">
 						<article class="blog_entry">
@@ -183,17 +198,6 @@
 						</article>
 					</a>
 			
-					<a href="/2018/09/14/visualising-connected-hosts-with-a-python-generated-network-diagram/">
-						<article class="blog_entry">
-							<div class="blog_entry_title">
-								<span class="post_title">Visualising connected hosts with a Python-generated network diagram</span>
-							</div>
-							<div class="blog_entry_excerpt">
-								<time datetime="2018-09-14T19:00:29+00:00"><span class="year_label">2018-09-14</span></time>&nbsp;-&nbsp;&nbsp;
-							</div>
-						</article>
-					</a>
-			
 			
 
 			<nav class="pagination">
@@ -219,7 +223,7 @@
 			</td>
 		</tr>
 	</table>
-	<p>A monthly roundup of my latest writing, plus exclusive links and observations</p>
+	<p>A monthly collection of observations, ideas in progress, and the best books, podcasts, and articles I discover</p>
 	<button>Subscribe</button>
 </div>
 </a>
@@ -241,12 +245,11 @@
 </div>
 				</div>
 				<div class="home_about_box home_box">
-					<h2>Index & projects</h2>
+					<h2>Index & pages</h2>
 					<a href="/blog-index.htm"><div class="home-button green-button">Blog index</div></a>
 <div id="side_menu">
 	<ul class="side_menu">
-		<a href="/2021/01/01/backutil-windows-backup-utility" class="home-index"><li class="first">Backutil</li></a>
-		<a href="/2022/12/03/parsing-login-sessions-windows-security-event-log-powershell" class="home-index"><li>EVTX login parser</li></a>
+		<a href="/about.htm" class="home-index"><li class="first">About</li></a>
 		<a href="/recommendations.htm" class="home-index"><li>Recommendations</li></a>
 	</ul>
 </div>
@@ -284,12 +287,29 @@
 		</div>
 					
 				<div id="footer">
-			&copy; 2016-25 MattCASmith
+			&copy; 2016-26 MattCASmith
 			<span class="home-link">Personal blog - does not reflect views of employers past or present</span>
 		</div>
 		
 		<script data-goatcounter="https://mattcasmith.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
+        <script>
+        	/* Search - allow submission using Enter key */
+			document.getElementById("search").addEventListener("keydown", function (e) {
+  				if (e.key === "Enter") {
+    			e.preventDefault();
+    			searchRedirect();
+  				}
+			});
+			/* Search - generate URL and redirect */
+			function searchRedirect() {
+ 				const input = document.getElementById("search");
+  				if (!input) return;
+				const query = encodeURIComponent(input.value.trim());
+  				const url = "https://duckduckgo.com/?q=site%3Amattcasmith.net+" + query;
+				window.open(url, "_blank");
+			}
+        </script>
 		
 		</div>
 	
