@@ -4,11 +4,20 @@
   <title>MattCASmith</title>
   <link href="https://mattcasmith.net/" rel="self"/>
   <link href="https://mattcasmith.net/feed.xml" rel="alternate" type="application/atom+xml"/>
-  <updated>2026-01-01T08:29:30+00:00</updated>
+  <updated>2026-01-11T09:24:36+00:00</updated>
   <id>https://mattcasmith.net/</id>
   <author>
     <name>MattCASmith</name>
   </author>
+  
+  <entry>
+    <title>Enshittified football needs its Steve Jobs moment</title>
+    <link href="https://mattcasmith.net/2026/01/11/enshittification-football-chelsea-man-utd" rel="alternate" type="text/html"/>
+    <published>2026-01-11T09:20:00+00:00</published>
+    <updated>2026-01-11T09:20:00+00:00</updated>
+    <id>https://mattcasmith.net/2026/01/11/enshittification-football-chelsea-man-utd</id>
+    <content type="html"><![CDATA[“My passion has been to build an enduring company where people were motivated to make great products… The products, not the profits, were the motivation. Sculley flipped these priorities to where the goal was to make money. It’s a subtle difference, but it ends up meaning everything.” – Steve Jobs... <a href="https://mattcasmith.net/2026/01/11/enshittification-football-chelsea-man-utd">>>Read more</a>]]></content>
+  </entry>
   
   <entry>
     <title>State of the Blog 2026&amp;#58; Following a new direction</title>
@@ -89,15 +98,6 @@
     <updated>2025-10-11T00:00:00+00:00</updated>
     <id>https://mattcasmith.net/2025/10/11/field-notes-4-october-2025</id>
     <content type="html"><![CDATA[This is Field Notes, my monthly newsletter on technology without the hype. Subscribers get it weeks before it goes up on the blog. Subscribe below. Field Notes // A monthly newsletter by MattCASmith A monthly roundup of my latest writing, plus observations and recommendations I don't share anywhere else Welcome... <a href="https://mattcasmith.net/2025/10/11/field-notes-4-october-2025">>>Read more</a>]]></content>
-  </entry>
-  
-  <entry>
-    <title>Claude's café pop-up convinced me to switch LLMs</title>
-    <link href="https://mattcasmith.net/2025/10/05/anthropic-claude-ai-marketing-design" rel="alternate" type="text/html"/>
-    <published>2025-10-05T00:00:00+00:00</published>
-    <updated>2025-10-05T00:00:00+00:00</updated>
-    <id>https://mattcasmith.net/2025/10/05/anthropic-claude-ai-marketing-design</id>
-    <content type="html"><![CDATA[There’s a new cool kid on the AI block, and its name is Anthropic. On my recent trip to New York, I noted the huge poster campaigns for its Claude large language models (LLMs), but it turned out that was just the beginning. Just after I flew back to the... <a href="https://mattcasmith.net/2025/10/05/anthropic-claude-ai-marketing-design">>>Read more</a>]]></content>
   </entry>
   
 </feed>
