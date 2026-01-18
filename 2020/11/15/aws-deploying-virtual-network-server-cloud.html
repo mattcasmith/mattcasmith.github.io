@@ -1,5 +1,33 @@
 <!doctype html>
 <head>
+	<script type="application/ld+json">
+		{
+		  "@context": "https://schema.org",
+		  "@type": "BlogPosting",
+		  "headline": "AWS&#58; Deploying a virtual network and server in the cloud",
+		  "description": "Having worked on serveral projects involving Amazon Web Services (AWS) recently, but always at arm’s length, I decided to get a bit more hands-on. At worst this would give me a more practical grounding in managing cloud instances, and at best it w...",
+		  "author": {
+		    "@type": "Person",
+		    "name": "Matt C. A. Smith",
+		    "url": "https://mattcasmith.net/about.htm"
+		  },
+		  "datePublished": "2020-11-15",
+		  "dateModified": "2020-11-15",
+		  "image": "https://mattcasmith.net/wp-content/uploads/2023/01/mcas.png",
+		  "publisher": {
+		    "@type": "Organization",
+		    "name": "MattCASmith",
+		    "logo": {
+		      "@type": "ImageObject",
+		      "url": "https://mattcasmith.net/assets/images/mcas_site_logo.png"
+		    }
+		  },
+		  "mainEntityOfPage": {
+		    "@type": "WebPage",
+		    "@id": "https://mattcasmith.net/2020/11/15/aws-deploying-virtual-network-server-cloud"
+		  }
+		}
+	</script>
 	<meta name="description" content="Having worked on serveral projects involving Amazon Web Services (AWS) recently, but always at arm’s length, I decided to get a bit more hands-on. At worst this would give me a more practical grounding in managing cloud instances, and at best it w..." />
 	<meta name="robots" content="index, follow" />
 	<meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
@@ -11,7 +39,7 @@
 	<meta property="og:description" content="Having worked on serveral projects involving Amazon Web Services (AWS) recently, but always at arm’s length, I decided to get a bit more hands-on. At worst this would give me a more practical grounding in managing cloud instances, and at best it w..." />
 	<meta property="og:url" content="https://mattcasmith.net/2020/11/15/aws-deploying-virtual-network-server-cloud" />
 	<meta property="og:site_name" content="MattCASmith" />
-	<meta property="article:published_time" content="2020-05-02T11:05:40+00:00" />
+	<meta property="article:published_time" content="2020-11-15T00:00:00+00:00" />
 	<meta property="og:image" content="https://mattcasmith.net/wp-content/uploads/2023/01/mcas.png" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:creator" content="@mattcasmith" />
@@ -25,6 +53,7 @@
 			}
 		</style>
 		<title>AWS&#58; Deploying a virtual network and server in the cloud | MattCASmith</title>
+		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="shortcut icon" href="/assets/images/favicon.png">
 		<link rel="stylesheet" href="/assets/css/styles.css">
@@ -220,62 +249,10 @@
 									
 				                    	
 				                        	
-				                        		<a href="/2025/10/03/new-york-observations-recommendations">
-				                        			<li class="first">New York City&#58; Observations and recommendations</li>
+				                        		<a href="/2024/07/20/crowdstrike-bug-edr-setting-record-straight">
+				                        			<li class="first">Endpoint detection and response (EDR) - setting the record straight</li>
 					    	                	</a>
 					    	                	
-					    	                        
-					                    	
-					                    	
-				                    	
-				                	
-									
-									
-				                    	
-				                        	
-				                        		<a href="/2025/12/23/best-of-tech-2025">
-				                        			<li>Best of Tech 2025&#58; Gadgets, books, games, and more</li>
-					    	                	</a>
-					    	                          
-				                    		
-					                    	
-					                    
-				                	
-				                	
-									
-									
-				                    	
-				                        	
-				                        		<a href="/2025/12/10/ai-shopping-profiling-privacy">
-				                        			<li>AI shopping only works if you give up your privacy</li>
-					    	                	</a>
-					    	                       
-				                    		
-				                    		
-				                    	
-				                	
-				                	
-									
-									
-				                    	
-				                        	
-				                        		<a href="/2025/12/01/self-driving-cars-buying-broken">
-				                        			<li>Self-driving cars are here, but the friction is in the sale</li>
-					    	                	</a>
-					    	                         
-				                    		
-				                    		
-				                    	
-				                	
-						    	
-									
-									
-									
-				                    	
-				                        	
-				                        		<a href="/2025/04/21/chatgpt-ai-anthropomorphism">
-				                        			<li>Humanising AI encourages intellectual lethargy</li>
-					    	                	</a>
 					    	                        
 					                    	
 					                    	
@@ -357,8 +334,8 @@
 									
 				                    	
 				                        	
-				                        		<a href="/2025/11/02/chatgpt-atlas-ai-browser">
-				                        			<li>ChatGPT Atlas positions AI as the internet's gatekeeper</li>
+				                        		<a href="/2025/11/09/field-notes-5-november-2025">
+				                        			<li>Field Notes 5 // ChatGPT Atlas and the Claude café</li>
 					    	                	</a>
 					    	                          
 				                    		
@@ -370,8 +347,8 @@
 									
 				                    	
 				                        	
-				                        		<a href="/2025/10/26/etherhiding-blockchain-malware">
-				                        			<li>EtherHiding&#58; When good blockchains turn bad</li>
+				                        		<a href="/2025/11/02/chatgpt-atlas-ai-browser">
+				                        			<li>ChatGPT Atlas positions AI as the internet's gatekeeper</li>
 					    	                	</a>
 					    	                       
 				                    		
@@ -382,48 +359,44 @@
 									
 									
 				                    	
-				                	
-						    	
-									
-									
-									
-				                    	
-				                	
-									
-									
-				                    	
-				                	
-				                	
-									
-									
-				                    	
-				                	
-				                	
-									
-									
-				                    	
-				                	
-						    	
-									
-									
-									
-				                    	
 				                        	
-				                        		<a href="/2025/09/21/note-taking-waste-less-time-online">
-				                        			<li>Take note&#58; How to waste less time on the internet</li>
+				                        		<a href="/2025/10/26/etherhiding-blockchain-malware">
+				                        			<li>EtherHiding&#58; When good blockchains turn bad</li>
 					    	                	</a>
-					    	                        
-					                    	
-					                    	
+					    	                         
+				                    		
+				                    		
+				                    	
+				                	
+						    	
+									
+									
+									
 				                    	
 				                	
 									
 									
 				                    	
+				                        	
+				                        		<a href="/2026/01/11/enshittification-football-chelsea-man-utd">
+				                        			<li>Enshittified football needs its Steve Jobs moment</li>
+					    	                	</a>
+					    	                          
+				                    		
+					                    	
+					                    
 				                	
 				                	
 									
 									
+				                    	
+				                        	
+				                        		<a href="/2026/01/01/state-of-the-blog-2026">
+				                        			<li>State of the Blog 2026&#58; Following a new direction</li>
+					    	                	</a>
+					    	                       
+				                    		
+				                    		
 				                    	
 				                	
 				                	
@@ -431,8 +404,8 @@
 									
 				                    	
 				                        	
-				                        		<a href="/2025/11/09/field-notes-5-november-2025">
-				                        			<li>Field Notes 5 // ChatGPT Atlas and the Claude café</li>
+				                        		<a href="/2025/12/23/best-of-tech-2025">
+				                        			<li>Best of Tech 2025&#58; Gadgets, books, games, and more</li>
 					    	                	</a>
 					    	                         
 				                    		
@@ -445,8 +418,8 @@
 									
 				                    	
 				                        	
-				                        		<a href="/2025/09/13/you-can-just-do-things-kind-of">
-				                        			<li>A reminder that you can just do things... kind of</li>
+				                        		<a href="/2025/04/21/chatgpt-ai-anthropomorphism">
+				                        			<li>Humanising AI encourages intellectual lethargy</li>
 					    	                	</a>
 					    	                        
 					                    	
@@ -455,12 +428,74 @@
 				                	
 									
 									
+				                    	
+				                	
 				                	
 									
 									
+				                    	
+				                	
 				                	
 									
 									
+				                    	
+				                	
+						    	
+									
+									
+									
+				                    	
+				                	
+									
+									
+				                    	
+				                	
+				                	
+									
+									
+				                    	
+				                	
+				                	
+									
+									
+				                    	
+				                	
+						    	
+									
+									
+									
+				                    	
+				                        	
+				                        		<a href="/2025/10/03/new-york-observations-recommendations">
+				                        			<li>New York City&#58; Observations and recommendations</li>
+					    	                	</a>
+					    	                        
+					                    	
+					                    	
+				                    	
+				                	
+									
+									
+				                    	
+				                	
+				                	
+									
+									
+				                    	
+				                	
+				                	
+									
+									
+				                    	
+				                        	
+				                        		<a href="/2025/12/10/ai-shopping-profiling-privacy">
+				                        			<li>AI shopping only works if you give up your privacy</li>
+					    	                	</a>
+					    	                         
+				                    		
+				                    		
+				                    	
+				                	
 						    	
 									
 									

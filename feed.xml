@@ -4,11 +4,20 @@
   <title>MattCASmith</title>
   <link href="https://mattcasmith.net/" rel="self"/>
   <link href="https://mattcasmith.net/feed.xml" rel="alternate" type="application/atom+xml"/>
-  <updated>2026-01-11T09:24:36+00:00</updated>
+  <updated>2026-01-18T09:10:50+00:00</updated>
   <id>https://mattcasmith.net/</id>
   <author>
     <name>MattCASmith</name>
   </author>
+  
+  <entry>
+    <title>How to opt out of X's engagement-first algorithm</title>
+    <link href="https://mattcasmith.net/2026/01/18/x-algorithm-lists" rel="alternate" type="text/html"/>
+    <published>2026-01-18T09:05:00+00:00</published>
+    <updated>2026-01-18T09:05:00+00:00</updated>
+    <id>https://mattcasmith.net/2026/01/18/x-algorithm-lists</id>
+    <content type="html"><![CDATA[Although I follow him, it’s usually bad news when X head of product Nikita Bier appears in my feed. While he provides some useful insight into what happens behind the scenes at the social media giant, his high-performing posts are often defences of unpopular changes to the platform. This time,... <a href="https://mattcasmith.net/2026/01/18/x-algorithm-lists">>>Read more</a>]]></content>
+  </entry>
   
   <entry>
     <title>Enshittified football needs its Steve Jobs moment</title>
@@ -89,15 +98,6 @@
     <updated>2025-10-19T00:00:00+00:00</updated>
     <id>https://mattcasmith.net/2025/10/19/ai-security-operations-untapped-potential</id>
     <content type="html"><![CDATA[In August 2025, Anthropic announced it had caught a threat actor using Claude in a series of cyber attacks. The large language model (LLM) helped the attacker in their reconnaissance and network compromise, but also in more strategic tasks: choosing which data to exfiltrate, crafting persuasive ransom notes, and even... <a href="https://mattcasmith.net/2025/10/19/ai-security-operations-untapped-potential">>>Read more</a>]]></content>
-  </entry>
-  
-  <entry>
-    <title>Field Notes 4 // New York, note taking, and Blindr</title>
-    <link href="https://mattcasmith.net/2025/10/11/field-notes-4-october-2025" rel="alternate" type="text/html"/>
-    <published>2025-10-11T00:00:00+00:00</published>
-    <updated>2025-10-11T00:00:00+00:00</updated>
-    <id>https://mattcasmith.net/2025/10/11/field-notes-4-october-2025</id>
-    <content type="html"><![CDATA[This is Field Notes, my monthly newsletter on technology without the hype. Subscribers get it weeks before it goes up on the blog. Subscribe below. Field Notes // A monthly newsletter by MattCASmith A monthly roundup of my latest writing, plus observations and recommendations I don't share anywhere else Welcome... <a href="https://mattcasmith.net/2025/10/11/field-notes-4-october-2025">>>Read more</a>]]></content>
   </entry>
   
 </feed>
