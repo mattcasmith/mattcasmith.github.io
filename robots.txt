@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.mattcasmith.net/sitemap.xml
+Sitemap: https://mattcasmith.net/sitemap.xml
+Sitemap: https://mattcasmith.net/feed.xml
