@@ -4,11 +4,20 @@
   <title>MattCASmith</title>
   <link href="https://mattcasmith.net/" rel="self"/>
   <link href="https://mattcasmith.net/feed.xml" rel="alternate" type="application/atom+xml"/>
-  <updated>2026-01-18T09:25:35+00:00</updated>
+  <updated>2026-01-25T09:09:58+00:00</updated>
   <id>https://mattcasmith.net/</id>
   <author>
     <name>MattCASmith</name>
   </author>
+  
+  <entry>
+    <title>Field Notes 6 // Christmas, reflection, and bowling</title>
+    <link href="https://mattcasmith.net/2026/01/25/field-notes-6-january-2026" rel="alternate" type="text/html"/>
+    <published>2026-01-25T09:00:00+00:00</published>
+    <updated>2026-01-25T09:00:00+00:00</updated>
+    <id>https://mattcasmith.net/2026/01/25/field-notes-6-january-2026</id>
+    <content type="html"><![CDATA[This is Field Notes, my monthly newsletter on technology without the hype. Subscribers get it weeks before it goes up on the blog. Subscribe below. Field Notes // A newsletter by MattCASmith A monthly collection of observations, ideas in progress, and the best books, podcasts, and articles I discover Happy... <a href="https://mattcasmith.net/2026/01/25/field-notes-6-january-2026">>>Read more</a>]]></content>
+  </entry>
   
   <entry>
     <title>How to opt out of X's engagement-first algorithm</title>
@@ -89,15 +98,6 @@
     <updated>2025-10-26T00:00:00+00:00</updated>
     <id>https://mattcasmith.net/2025/10/26/etherhiding-blockchain-malware</id>
     <content type="html"><![CDATA[With AI stealing the limelight over the last few years, it’s been a while since it was fashionable to talk about the blockchain. But it’s still out there, most famously used to track cryptocurrency transactions and hold smart contracts. Part of what makes the blockchain suitable for this job is... <a href="https://mattcasmith.net/2025/10/26/etherhiding-blockchain-malware">>>Read more</a>]]></content>
-  </entry>
-  
-  <entry>
-    <title>The untapped potential of AI for security operations</title>
-    <link href="https://mattcasmith.net/2025/10/19/ai-security-operations-untapped-potential" rel="alternate" type="text/html"/>
-    <published>2025-10-19T00:00:00+00:00</published>
-    <updated>2025-10-19T00:00:00+00:00</updated>
-    <id>https://mattcasmith.net/2025/10/19/ai-security-operations-untapped-potential</id>
-    <content type="html"><![CDATA[In August 2025, Anthropic announced it had caught a threat actor using Claude in a series of cyber attacks. The large language model (LLM) helped the attacker in their reconnaissance and network compromise, but also in more strategic tasks: choosing which data to exfiltrate, crafting persuasive ransom notes, and even... <a href="https://mattcasmith.net/2025/10/19/ai-security-operations-untapped-potential">>>Read more</a>]]></content>
   </entry>
   
 </feed>
