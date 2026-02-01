@@ -4,7 +4,7 @@
   <title>MattCASmith</title>
   <link href="https://mattcasmith.net/" rel="self"/>
   <link href="https://mattcasmith.net/feed.xml" rel="alternate" type="application/atom+xml"/>
-  <updated>2026-02-01T17:11:33+00:00</updated>
+  <updated>2026-02-01T17:13:37+00:00</updated>
   <id>https://mattcasmith.net/</id>
   <author>
     <name>MattCASmith</name>
@@ -13,8 +13,8 @@
   <entry>
     <title>AI could commodify thinking and destroy deep work</title>
     <link href="https://mattcasmith.net/2026/02/01/ai-deep-work-craftsmanship" rel="alternate" type="text/html"/>
-    <published>2026-02-01T00:00:00+00:00</published>
-    <updated>2026-02-01T00:00:00+00:00</updated>
+    <published>2026-02-01T17:10:00+00:00</published>
+    <updated>2026-02-01T17:10:00+00:00</updated>
     <id>https://mattcasmith.net/2026/02/01/ai-deep-work-craftsmanship</id>
     <content type="html"><![CDATA[Anthropic recently launched Claude Cowork in preview, and it looks to be the most directly useful implementation of AI yet outside of coding. By giving Claude access to a folder on your computer, you can have it organise files, summarise notes, or create a report from a set of expense... <a href="https://mattcasmith.net/2026/02/01/ai-deep-work-craftsmanship">>>Read more</a>]]></content>
   </entry>
