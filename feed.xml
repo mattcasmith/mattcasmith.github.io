@@ -4,11 +4,20 @@
   <title>MattCASmith</title>
   <link href="https://mattcasmith.net/" rel="self"/>
   <link href="https://mattcasmith.net/feed.xml" rel="alternate" type="application/atom+xml"/>
-  <updated>2026-02-01T17:13:37+00:00</updated>
+  <updated>2026-02-05T22:00:08+00:00</updated>
   <id>https://mattcasmith.net/</id>
   <author>
     <name>MattCASmith</name>
   </author>
+  
+  <entry>
+    <title>Field Notes 7 // Caffeine, meditation, and Japan</title>
+    <link href="https://mattcasmith.net/2026/02/05/field-notes-7-february-2026" rel="alternate" type="text/html"/>
+    <published>2026-02-05T21:00:00+00:00</published>
+    <updated>2026-02-05T21:00:00+00:00</updated>
+    <id>https://mattcasmith.net/2026/02/05/field-notes-7-february-2026</id>
+    <content type="html"><![CDATA[This is Field Notes, my monthly newsletter on technology without the hype. Subscribers get it weeks before it goes up on the blog. Subscribe below. Field Notes // A newsletter by MattCASmith A monthly collection of observations, ideas in progress, and the best books, podcasts, and articles I discover Welcome... <a href="https://mattcasmith.net/2026/02/05/field-notes-7-february-2026">>>Read more</a>]]></content>
+  </entry>
   
   <entry>
     <title>AI could commodify thinking and destroy deep work</title>
@@ -89,15 +98,6 @@
     <updated>2025-11-09T00:00:00+00:00</updated>
     <id>https://mattcasmith.net/2025/11/09/field-notes-5-november-2025</id>
     <content type="html"><![CDATA[This is Field Notes, my monthly newsletter on technology without the hype. Subscribers get it weeks before it goes up on the blog. Subscribe below. Field Notes // A monthly newsletter by MattCASmith A monthly roundup of my latest writing, plus observations and recommendations I don't share anywhere else Welcome... <a href="https://mattcasmith.net/2025/11/09/field-notes-5-november-2025">>>Read more</a>]]></content>
-  </entry>
-  
-  <entry>
-    <title>ChatGPT Atlas positions AI as the internet's gatekeeper</title>
-    <link href="https://mattcasmith.net/2025/11/02/chatgpt-atlas-ai-browser" rel="alternate" type="text/html"/>
-    <published>2025-11-02T00:00:00+00:00</published>
-    <updated>2025-11-02T00:00:00+00:00</updated>
-    <id>https://mattcasmith.net/2025/11/02/chatgpt-atlas-ai-browser</id>
-    <content type="html"><![CDATA[We’re shoehorning AI into everything else, so why not your web browser? That was presumably the thinking when OpenAI launched ChatGPT Atlas, an AI-augmented browser that it says will change the way we use the internet. Launched on macOS on 21st October, Atlas’s main sell is conversational interaction with the... <a href="https://mattcasmith.net/2025/11/02/chatgpt-atlas-ai-browser">>>Read more</a>]]></content>
   </entry>
   
 </feed>
