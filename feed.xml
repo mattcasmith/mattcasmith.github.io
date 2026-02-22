@@ -4,11 +4,20 @@
   <title>MattCASmith</title>
   <link href="https://mattcasmith.net/" rel="self"/>
   <link href="https://mattcasmith.net/feed.xml" rel="alternate" type="application/atom+xml"/>
-  <updated>2026-02-15T12:56:58+00:00</updated>
+  <updated>2026-02-22T09:03:06+00:00</updated>
   <id>https://mattcasmith.net/</id>
   <author>
     <name>MattCASmith</name>
   </author>
+  
+  <entry>
+    <title>Good business writing makes the reader's life easier</title>
+    <link href="https://mattcasmith.net/2026/02/22/business-writing-empathy" rel="alternate" type="text/html"/>
+    <published>2026-02-22T09:00:00+00:00</published>
+    <updated>2026-02-22T09:00:00+00:00</updated>
+    <id>https://mattcasmith.net/2026/02/22/business-writing-empathy</id>
+    <content type="html"><![CDATA[When I trained as a journalist, it was always drilled into me that writing must be clear, concise, and easy for the reader to digest. We were taught to keep the lowest common denominator in mind – news writing needed to be accessible. Simple sentence structures and common words won... <a href="https://mattcasmith.net/2026/02/22/business-writing-empathy">>>Read more</a>]]></content>
+  </entry>
   
   <entry>
     <title>Notepad flaw shows why software bloat matters</title>
@@ -89,15 +98,6 @@
     <updated>2025-12-10T17:30:00+00:00</updated>
     <id>https://mattcasmith.net/2025/12/10/ai-shopping-profiling-privacy</id>
     <content type="html"><![CDATA[As I wrote when OpenAI launched its Atlas browser, AI models simply don’t know your preferences well enough to shop on your behalf. The technology firms envision a future where we type “buy trainers” and they arrive at our door, but they don’t account for all the different types of... <a href="https://mattcasmith.net/2025/12/10/ai-shopping-profiling-privacy">>>Read more</a>]]></content>
-  </entry>
-  
-  <entry>
-    <title>Self-driving cars are here, but the friction is in the sale</title>
-    <link href="https://mattcasmith.net/2025/12/01/self-driving-cars-buying-broken" rel="alternate" type="text/html"/>
-    <published>2025-12-01T00:00:00+00:00</published>
-    <updated>2025-12-01T00:00:00+00:00</updated>
-    <id>https://mattcasmith.net/2025/12/01/self-driving-cars-buying-broken</id>
-    <content type="html"><![CDATA[On a recent trip to Austin, Texas, I was tempted to take one of the Waymos or Robotaxis that so casually roam the streets. One day, I was even offered one as an alternative to waiting 11 minutes for an Uber driver. I probably would have taken the plunge had... <a href="https://mattcasmith.net/2025/12/01/self-driving-cars-buying-broken">>>Read more</a>]]></content>
   </entry>
   
 </feed>
