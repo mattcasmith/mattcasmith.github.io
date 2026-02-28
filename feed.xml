@@ -4,11 +4,20 @@
   <title>MattCASmith</title>
   <link href="https://mattcasmith.net/" rel="self"/>
   <link href="https://mattcasmith.net/feed.xml" rel="alternate" type="application/atom+xml"/>
-  <updated>2026-02-22T09:03:06+00:00</updated>
+  <updated>2026-02-28T15:01:01+00:00</updated>
   <id>https://mattcasmith.net/</id>
   <author>
     <name>MattCASmith</name>
   </author>
+  
+  <entry>
+    <title>New Xbox boss Asha Sharma inherits an identity crisis</title>
+    <link href="https://mattcasmith.net/2026/02/28/asha-sharma-xbox-identity-crisis" rel="alternate" type="text/html"/>
+    <published>2026-02-28T14:59:00+00:00</published>
+    <updated>2026-02-28T14:59:00+00:00</updated>
+    <id>https://mattcasmith.net/2026/02/28/asha-sharma-xbox-identity-crisis</id>
+    <content type="html"><![CDATA[There was huge change at Microsoft this week, as Xbox boss Phil Spencer retired after 12 years at the helm, to be replaced by CoreAI lead Asha Sharma. The switch sparked widespread debate about the state of the modern gaming industry and the future direction of one of the world’s... <a href="https://mattcasmith.net/2026/02/28/asha-sharma-xbox-identity-crisis">>>Read more</a>]]></content>
+  </entry>
   
   <entry>
     <title>Good business writing makes the reader's life easier</title>
@@ -89,15 +98,6 @@
     <updated>2025-12-23T09:30:00+00:00</updated>
     <id>https://mattcasmith.net/2025/12/23/best-of-tech-2025</id>
     <content type="html"><![CDATA[I was much better at keeping note of things I read, watched, and played in 2025, and one unexpected benefit is that it’s far easier to look back and pick out the highlights. It seemed rude not to share, so here’s a roundup of the best things I found this... <a href="https://mattcasmith.net/2025/12/23/best-of-tech-2025">>>Read more</a>]]></content>
-  </entry>
-  
-  <entry>
-    <title>AI shopping only works if you give up your privacy</title>
-    <link href="https://mattcasmith.net/2025/12/10/ai-shopping-profiling-privacy" rel="alternate" type="text/html"/>
-    <published>2025-12-10T17:30:00+00:00</published>
-    <updated>2025-12-10T17:30:00+00:00</updated>
-    <id>https://mattcasmith.net/2025/12/10/ai-shopping-profiling-privacy</id>
-    <content type="html"><![CDATA[As I wrote when OpenAI launched its Atlas browser, AI models simply don’t know your preferences well enough to shop on your behalf. The technology firms envision a future where we type “buy trainers” and they arrive at our door, but they don’t account for all the different types of... <a href="https://mattcasmith.net/2025/12/10/ai-shopping-profiling-privacy">>>Read more</a>]]></content>
   </entry>
   
 </feed>
