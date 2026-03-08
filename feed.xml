@@ -4,11 +4,20 @@
   <title>MattCASmith</title>
   <link href="https://mattcasmith.net/" rel="self"/>
   <link href="https://mattcasmith.net/feed.xml" rel="alternate" type="application/atom+xml"/>
-  <updated>2026-02-28T15:01:01+00:00</updated>
+  <updated>2026-03-08T09:14:51+00:00</updated>
   <id>https://mattcasmith.net/</id>
   <author>
     <name>MattCASmith</name>
   </author>
+  
+  <entry>
+    <title>The MacBook Neo is a laptop built for a different era</title>
+    <link href="https://mattcasmith.net/2026/03/08/apple-macbook-neo-target-market" rel="alternate" type="text/html"/>
+    <published>2026-03-08T09:13:00+00:00</published>
+    <updated>2026-03-08T09:13:00+00:00</updated>
+    <id>https://mattcasmith.net/2026/03/08/apple-macbook-neo-target-market</id>
+    <content type="html"><![CDATA[This week, Apple announced the MacBook Neo. The headline features sound viable: it’s small, light, colourful, and available from £599 – a fraction of the cost of the next-in-line MacBook Air (£1,099). On the face of it, it seems like a solid entry-level option for those without the budget to... <a href="https://mattcasmith.net/2026/03/08/apple-macbook-neo-target-market">>>Read more</a>]]></content>
+  </entry>
   
   <entry>
     <title>New Xbox boss Asha Sharma inherits an identity crisis</title>
@@ -89,15 +98,6 @@
     <updated>2026-01-01T08:00:00+00:00</updated>
     <id>https://mattcasmith.net/2026/01/01/state-of-the-blog-2026</id>
     <content type="html"><![CDATA[I’ve blogged in one form or another for about 20 years, but never really knew what I wanted this site to be. Since its inception circa 2013, it’s fulfilled the roles of journalism portfolio and online CV, and served as a kind of technical notebook as I honed my trade... <a href="https://mattcasmith.net/2026/01/01/state-of-the-blog-2026">>>Read more</a>]]></content>
-  </entry>
-  
-  <entry>
-    <title>Best of Tech 2025&amp;#58; Gadgets, books, games, and more</title>
-    <link href="https://mattcasmith.net/2025/12/23/best-of-tech-2025" rel="alternate" type="text/html"/>
-    <published>2025-12-23T09:30:00+00:00</published>
-    <updated>2025-12-23T09:30:00+00:00</updated>
-    <id>https://mattcasmith.net/2025/12/23/best-of-tech-2025</id>
-    <content type="html"><![CDATA[I was much better at keeping note of things I read, watched, and played in 2025, and one unexpected benefit is that it’s far easier to look back and pick out the highlights. It seemed rude not to share, so here’s a roundup of the best things I found this... <a href="https://mattcasmith.net/2025/12/23/best-of-tech-2025">>>Read more</a>]]></content>
   </entry>
   
 </feed>
