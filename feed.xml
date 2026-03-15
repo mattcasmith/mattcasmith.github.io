@@ -4,11 +4,20 @@
   <title>MattCASmith</title>
   <link href="https://mattcasmith.net/" rel="self"/>
   <link href="https://mattcasmith.net/feed.xml" rel="alternate" type="application/atom+xml"/>
-  <updated>2026-03-08T09:14:51+00:00</updated>
+  <updated>2026-03-15T09:13:31+00:00</updated>
   <id>https://mattcasmith.net/</id>
   <author>
     <name>MattCASmith</name>
   </author>
+  
+  <entry>
+    <title>Field Notes 8 // Malta and the art of needing less</title>
+    <link href="https://mattcasmith.net/2026/03/15/field-notes-8-march-2026" rel="alternate" type="text/html"/>
+    <published>2026-03-15T09:13:00+00:00</published>
+    <updated>2026-03-15T09:13:00+00:00</updated>
+    <id>https://mattcasmith.net/2026/03/15/field-notes-8-march-2026</id>
+    <content type="html"><![CDATA[This is Field Notes, my monthly newsletter on technology without the hype. Subscribers get it weeks before it goes up on the blog. Subscribe below. 📓 Field Notes // A newsletter by MattCASmith A monthly collection of observations, ideas in progress, and the best books, podcasts, and articles I discover... <a href="https://mattcasmith.net/2026/03/15/field-notes-8-march-2026">>>Read more</a>]]></content>
+  </entry>
   
   <entry>
     <title>The MacBook Neo is a laptop built for a different era</title>
@@ -89,15 +98,6 @@
     <updated>2026-01-11T09:20:00+00:00</updated>
     <id>https://mattcasmith.net/2026/01/11/enshittification-football-chelsea-man-utd</id>
     <content type="html"><![CDATA[“My passion has been to build an enduring company where people were motivated to make great products… The products, not the profits, were the motivation. Sculley flipped these priorities to where the goal was to make money. It’s a subtle difference, but it ends up meaning everything.” – Steve Jobs... <a href="https://mattcasmith.net/2026/01/11/enshittification-football-chelsea-man-utd">>>Read more</a>]]></content>
-  </entry>
-  
-  <entry>
-    <title>State of the Blog 2026&amp;#58; Following a new direction</title>
-    <link href="https://mattcasmith.net/2026/01/01/state-of-the-blog-2026" rel="alternate" type="text/html"/>
-    <published>2026-01-01T08:00:00+00:00</published>
-    <updated>2026-01-01T08:00:00+00:00</updated>
-    <id>https://mattcasmith.net/2026/01/01/state-of-the-blog-2026</id>
-    <content type="html"><![CDATA[I’ve blogged in one form or another for about 20 years, but never really knew what I wanted this site to be. Since its inception circa 2013, it’s fulfilled the roles of journalism portfolio and online CV, and served as a kind of technical notebook as I honed my trade... <a href="https://mattcasmith.net/2026/01/01/state-of-the-blog-2026">>>Read more</a>]]></content>
   </entry>
   
 </feed>
