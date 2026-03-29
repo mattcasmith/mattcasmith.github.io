@@ -4,11 +4,20 @@
   <title>MattCASmith</title>
   <link href="https://mattcasmith.net/" rel="self"/>
   <link href="https://mattcasmith.net/feed.xml" rel="alternate" type="application/atom+xml"/>
-  <updated>2026-03-20T21:30:30+00:00</updated>
+  <updated>2026-03-29T08:32:53+00:00</updated>
   <id>https://mattcasmith.net/</id>
   <author>
     <name>MattCASmith</name>
   </author>
+  
+  <entry>
+    <title>F1's new regulations deliver spectacle without soul</title>
+    <link href="https://mattcasmith.net/2026/03/29/formula-1-2026-regulations" rel="alternate" type="text/html"/>
+    <published>2026-03-29T08:30:00+00:00</published>
+    <updated>2026-03-29T08:30:00+00:00</updated>
+    <id>https://mattcasmith.net/2026/03/29/formula-1-2026-regulations</id>
+    <content type="html"><![CDATA[How do you enshittify an entire sport? Certain football clubs are having a go, but they can’t match a whole governing body prioritising cash over the sport itself, as FIFA is competently demonstrating ahead of this year’s World Cup. Those extortionate ticket prices and mid-game breaks to allow additional advertising... <a href="https://mattcasmith.net/2026/03/29/formula-1-2026-regulations">>>Read more</a>]]></content>
+  </entry>
   
   <entry>
     <title>Nvidia's DLSS 5 swaps artistic vision for AI guesswork</title>
@@ -89,15 +98,6 @@
     <updated>2026-01-25T09:00:00+00:00</updated>
     <id>https://mattcasmith.net/2026/01/25/field-notes-6-january-2026</id>
     <content type="html"><![CDATA[This is Field Notes, my monthly newsletter on technology without the hype. Subscribers get it weeks before it goes up on the blog. Subscribe below. Field Notes // A newsletter by MattCASmith A monthly collection of observations, ideas in progress, and the best books, podcasts, and articles I discover Happy... <a href="https://mattcasmith.net/2026/01/25/field-notes-6-january-2026">>>Read more</a>]]></content>
-  </entry>
-  
-  <entry>
-    <title>How to opt out of X's engagement-first algorithm</title>
-    <link href="https://mattcasmith.net/2026/01/18/x-algorithm-lists" rel="alternate" type="text/html"/>
-    <published>2026-01-18T09:05:00+00:00</published>
-    <updated>2026-01-18T09:05:00+00:00</updated>
-    <id>https://mattcasmith.net/2026/01/18/x-algorithm-lists</id>
-    <content type="html"><![CDATA[Although I follow him, it’s usually bad news when X head of product Nikita Bier appears in my feed. While he provides some useful insight into what happens behind the scenes at the social media giant, his high-performing posts are often defences of unpopular changes to the platform. This time,... <a href="https://mattcasmith.net/2026/01/18/x-algorithm-lists">>>Read more</a>]]></content>
   </entry>
   
 </feed>
