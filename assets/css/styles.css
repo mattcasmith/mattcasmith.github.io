@@ -451,7 +451,7 @@ a.home_about_bio {
 		margin: 0 !important;
 	}
 		
-	blockquote {
+	blockquote, #newsletter_mid {
 		margin-left: 0 !important;
 		width: 90% !important;
 		padding-left: 4% !important;
@@ -886,7 +886,7 @@ article, #home_container {
 	width: 100%;
 }
 
-blockquote, .highlight {
+blockquote, .highlight, #newsletter_mid {
 	float: left;
 	font-size: 12pt;
 	line-height: 1.4em;
@@ -895,6 +895,24 @@ blockquote, .highlight {
 	width: 495px;
 	margin: 20px 0 10px 20px;
 	font-style: italic;
+}
+
+#newsletter_mid {
+	border-left: 5px solid #ddd;
+	margin-top: 35px;
+	margin-bottom: 15px;
+}
+
+#newsletter_mid button {
+	float: left;
+	background: none;
+	color: #333;
+	margin: 10px auto 0;
+	padding: 3px 8px;
+	border: 2px solid #009688;
+	border-radius: 5px;
+	font-family: Roboto, Arial;
+	font-size: 10pt;
 }
 
 blockquote {
@@ -936,7 +954,7 @@ figcaption {
 	padding-bottom: 5px;
 }
 
-blockquote p:first-of-type {
+blockquote p:first-of-type, #newsletter_mid p:first-of-type {
 	padding-top: 0 !important;
 }
 
@@ -1307,6 +1325,15 @@ nav.top_nav a.current {
 	a.home_about_bio {
 		color: #ddd !important;
 	}
+	#newsletter_mid {
+		border-left: 5px solid #333 !important;
+	}
+	#newsletter_mid button {
+		background: #009688 !important;
+		color: white !important;
+		padding: 5px 10px !important;
+		border: none !important;
+	}
 }
 
 .pagination {
@@ -1483,7 +1510,7 @@ a #newsletter_sidebar {
 	border-radius: 5px;
 }
 
-#newsletter_sidebar button:hover {
+#newsletter_sidebar button:hover, #newsletter_mid button:hover {
 	opacity: 0.8;
 	cursor: pointer;
 }

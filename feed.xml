@@ -4,11 +4,20 @@
   <title>MattCASmith</title>
   <link href="https://mattcasmith.net/" rel="self"/>
   <link href="https://mattcasmith.net/feed.xml" rel="alternate" type="application/atom+xml"/>
-  <updated>2026-04-12T07:20:18+00:00</updated>
+  <updated>2026-04-19T09:34:35+00:00</updated>
   <id>https://mattcasmith.net/</id>
   <author>
     <name>MattCASmith</name>
   </author>
+  
+  <entry>
+    <title>Ticketmaster randomly cancelled my gig tickets &amp;mdash; twice</title>
+    <link href="https://mattcasmith.net/2026/04/19/ticketmaster-cancelled-tickets-bot" rel="alternate" type="text/html"/>
+    <published>2026-04-19T09:34:00+00:00</published>
+    <updated>2026-04-19T09:34:00+00:00</updated>
+    <id>https://mattcasmith.net/2026/04/19/ticketmaster-cancelled-tickets-bot</id>
+    <content type="html"><![CDATA[My Muse tickets were cancelled three days before the show because Ticketmaster claimed I was a bot. To make things right, I had to navigate a Kafkaesque web of chatbots, generic responses, and delays. | <a href="https://mattcasmith.net/2026/04/19/ticketmaster-cancelled-tickets-bot">Read full post >></a>]]></content>
+  </entry>
   
   <entry>
     <title>Kagi &amp;ndash; a paid search engine that supports the small web</title>
@@ -16,7 +25,7 @@
     <published>2026-04-12T07:20:00+00:00</published>
     <updated>2026-04-12T07:20:00+00:00</updated>
     <id>https://mattcasmith.net/2026/04/12/kagi-search-small-web</id>
-    <content type="html"><![CDATA[I write a lot about enshittification and products in decline, but the reason I care about that is because I really love it when people care about the things they do. I’ve realised that’s the common thread that ties everything on this blog together, and therefore I’ve made a commitment... <a href="https://mattcasmith.net/2026/04/12/kagi-search-small-web">>>Read more</a>]]></content>
+    <content type="html"><![CDATA[Before algorithmic bias and advertising took over, search felt different. Kagi is trying to take us back — stripping out ads and SEO spam, and actively promoting the small web that most engines quietly suppress. | <a href="https://mattcasmith.net/2026/04/12/kagi-search-small-web">Read full post >></a>]]></content>
   </entry>
   
   <entry>
@@ -25,7 +34,7 @@
     <published>2026-04-06T07:58:00+00:00</published>
     <updated>2026-04-06T07:58:00+00:00</updated>
     <id>https://mattcasmith.net/2026/04/06/field-notes-9-april-2026</id>
-    <content type="html"><![CDATA[This is Field Notes, my monthly newsletter on technology without the hype. Subscribers get it weeks before it goes up on the blog. Subscribe below. 📓 Field Notes // A newsletter by MattCASmith A monthly collection of observations, ideas in progress, and the best books, podcasts, and articles I discover... <a href="https://mattcasmith.net/2026/04/06/field-notes-9-april-2026">>>Read more</a>]]></content>
+    <content type="html"><![CDATA[An 18th Century plate that keeps returning to mind, Sarah Wynn-Williams' damning account of life inside Facebook, and new music from Muse that takes me back to summer nights in the 2000s. | <a href="https://mattcasmith.net/2026/04/06/field-notes-9-april-2026">Read full post >></a>]]></content>
   </entry>
   
   <entry>
@@ -34,7 +43,7 @@
     <published>2026-03-29T08:30:00+00:00</published>
     <updated>2026-03-29T08:30:00+00:00</updated>
     <id>https://mattcasmith.net/2026/03/29/formula-1-2026-regulations</id>
-    <content type="html"><![CDATA[How do you enshittify an entire sport? Certain football clubs are having a go, but they can’t match a whole governing body prioritising cash over the sport itself, as FIFA is competently demonstrating ahead of this year’s World Cup. Those extortionate ticket prices and mid-game breaks to allow additional advertising... <a href="https://mattcasmith.net/2026/03/29/formula-1-2026-regulations">>>Read more</a>]]></content>
+    <content type="html"><![CDATA[F1's new rules have given us surface-level entertainment – but the racing feels artificial, the drivers are managing batteries instead of pushing limits, and its leaders seem reluctant to admit there's a problem. | <a href="https://mattcasmith.net/2026/03/29/formula-1-2026-regulations">Read full post >></a>]]></content>
   </entry>
   
   <entry>
@@ -43,7 +52,7 @@
     <published>2026-03-20T21:29:00+00:00</published>
     <updated>2026-03-20T21:29:00+00:00</updated>
     <id>https://mattcasmith.net/2026/03/20/nvidia-dlss-5-ai</id>
-    <content type="html"><![CDATA[It’s said that AI will bring about the era of taste as a differentiator. When production is fully democratised, anybody can generate what they envision without a huge team to support them, the playing field will finally level out, and the products that rise to the top will be the... <a href="https://mattcasmith.net/2026/03/20/nvidia-dlss-5-ai">>>Read more</a>]]></content>
+    <content type="html"><![CDATA[By redrawing every frame of gameplay using AI, Nvidia's new DLSS 5 technology makes assumptions about what your games should look like and overrides the developers' creative vision in favour of hyperrealism. | <a href="https://mattcasmith.net/2026/03/20/nvidia-dlss-5-ai">Read full post >></a>]]></content>
   </entry>
   
   <entry>
@@ -52,7 +61,7 @@
     <published>2026-03-15T09:13:00+00:00</published>
     <updated>2026-03-15T09:13:00+00:00</updated>
     <id>https://mattcasmith.net/2026/03/15/field-notes-8-march-2026</id>
-    <content type="html"><![CDATA[This is Field Notes, my monthly newsletter on technology without the hype. Subscribers get it weeks before it goes up on the blog. Subscribe below. 📓 Field Notes // A newsletter by MattCASmith A monthly collection of observations, ideas in progress, and the best books, podcasts, and articles I discover... <a href="https://mattcasmith.net/2026/03/15/field-notes-8-march-2026">>>Read more</a>]]></content>
+    <content type="html"><![CDATA[Between a trip to Malta and a novel about memory-eating monsters, I thought a lot this month about what we actually need. The answer, it turns out, fits in a hotel room with a book and an espresso. | <a href="https://mattcasmith.net/2026/03/15/field-notes-8-march-2026">Read full post >></a>]]></content>
   </entry>
   
   <entry>
@@ -61,7 +70,7 @@
     <published>2026-03-08T09:13:00+00:00</published>
     <updated>2026-03-08T09:13:00+00:00</updated>
     <id>https://mattcasmith.net/2026/03/08/apple-macbook-neo-target-market</id>
-    <content type="html"><![CDATA[This week, Apple announced the MacBook Neo. The headline features sound viable: it’s small, light, colourful, and available from £599 – a fraction of the cost of the next-in-line MacBook Air (£1,099). On the face of it, it seems like a solid entry-level option for those without the budget to... <a href="https://mattcasmith.net/2026/03/08/apple-macbook-neo-target-market">>>Read more</a>]]></content>
+    <content type="html"><![CDATA[At £599, the MacBook Neo is Apple's most affordable laptop in years. The package is stylish, colourful, and compact – but the 8GB RAM cap restricts it to users for whom an iPhone may already be enough. | <a href="https://mattcasmith.net/2026/03/08/apple-macbook-neo-target-market">Read full post >></a>]]></content>
   </entry>
   
   <entry>
@@ -70,7 +79,7 @@
     <published>2026-02-28T14:59:00+00:00</published>
     <updated>2026-02-28T14:59:00+00:00</updated>
     <id>https://mattcasmith.net/2026/02/28/asha-sharma-xbox-identity-crisis</id>
-    <content type="html"><![CDATA[There was huge change at Microsoft this week, as Xbox boss Phil Spencer retired after 12 years at the helm, to be replaced by CoreAI lead Asha Sharma. The switch sparked widespread debate about the state of the modern gaming industry and the future direction of one of the world’s... <a href="https://mattcasmith.net/2026/02/28/asha-sharma-xbox-identity-crisis">>>Read more</a>]]></content>
+    <content type="html"><![CDATA[For a decade, Xbox built its identity on edge, attitude, and hardcore gaming. Recent attempts to chase broader appeal have muddied the waters, and new CEO Asha Sharma must decide what Xbox actually is. | <a href="https://mattcasmith.net/2026/02/28/asha-sharma-xbox-identity-crisis">Read full post >></a>]]></content>
   </entry>
   
   <entry>
@@ -79,7 +88,7 @@
     <published>2026-02-22T09:00:00+00:00</published>
     <updated>2026-02-22T09:00:00+00:00</updated>
     <id>https://mattcasmith.net/2026/02/22/business-writing-empathy</id>
-    <content type="html"><![CDATA[When I trained as a journalist, it was always drilled into me that writing must be clear, concise, and easy for the reader to digest. We were taught to keep the lowest common denominator in mind – news writing needed to be accessible. Simple sentence structures and common words won... <a href="https://mattcasmith.net/2026/02/22/business-writing-empathy">>>Read more</a>]]></content>
+    <content type="html"><![CDATA[The key to good business writing is empathy – not emotional, but practical. Put yourself in the recipient's shoes to make action effortless and eliminate painful back-and-forths, making for more efficient business. | <a href="https://mattcasmith.net/2026/02/22/business-writing-empathy">Read full post >></a>]]></content>
   </entry>
   
   <entry>
@@ -88,16 +97,7 @@
     <published>2026-02-15T12:30:00+00:00</published>
     <updated>2026-02-15T12:30:00+00:00</updated>
     <id>https://mattcasmith.net/2026/02/15/notepad-vulnerability-software-bloat</id>
-    <content type="html"><![CDATA[I’m a fan of simplicity. Give me a paragraph and I’ll strip out unnecessary words and clauses. I often go to lengths refactoring my own code to avoid repetition. And I like any process I design to involve as few decision points as possible to minimise the scope for human... <a href="https://mattcasmith.net/2026/02/15/notepad-vulnerability-software-bloat">>>Read more</a>]]></content>
-  </entry>
-  
-  <entry>
-    <title>Field Notes 7 // Caffeine, meditation, and Japan</title>
-    <link href="https://mattcasmith.net/2026/02/05/field-notes-7-february-2026" rel="alternate" type="text/html"/>
-    <published>2026-02-05T21:00:00+00:00</published>
-    <updated>2026-02-05T21:00:00+00:00</updated>
-    <id>https://mattcasmith.net/2026/02/05/field-notes-7-february-2026</id>
-    <content type="html"><![CDATA[This is Field Notes, my monthly newsletter on technology without the hype. Subscribers get it weeks before it goes up on the blog. Subscribe below. Field Notes // A newsletter by MattCASmith A monthly collection of observations, ideas in progress, and the best books, podcasts, and articles I discover Welcome... <a href="https://mattcasmith.net/2026/02/05/field-notes-7-february-2026">>>Read more</a>]]></content>
+    <content type="html"><![CDATA[Notepad used to do one thing&#58; edit plain text. Microsoft's insistence on adding formatting and Copilot led to a perfect example of why simplicity matters – an RCE vulnerability in its Markdown rendering. | <a href="https://mattcasmith.net/2026/02/15/notepad-vulnerability-software-bloat">Read full post >></a>]]></content>
   </entry>
   
 </feed>
