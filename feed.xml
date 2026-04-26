@@ -4,11 +4,20 @@
   <title>MattCASmith</title>
   <link href="https://mattcasmith.net/" rel="self"/>
   <link href="https://mattcasmith.net/feed.xml" rel="alternate" type="application/atom+xml"/>
-  <updated>2026-04-19T09:34:35+00:00</updated>
+  <updated>2026-04-26T10:50:12+00:00</updated>
   <id>https://mattcasmith.net/</id>
   <author>
     <name>MattCASmith</name>
   </author>
+  
+  <entry>
+    <title>Cheap AI got us hooked &amp;mdash; now it wants its Uber moment</title>
+    <link href="https://mattcasmith.net/2026/04/26/ai-price-rises-resilience" rel="alternate" type="text/html"/>
+    <published>2026-04-26T10:49:00+00:00</published>
+    <updated>2026-04-26T10:49:00+00:00</updated>
+    <id>https://mattcasmith.net/2026/04/26/ai-price-rises-resilience</id>
+    <content type="html"><![CDATA[Big Tech spent years subsidising AI access to build the habit. Now those subsidies are ending. With prices rising and AI embedded in core processes, businesses need to plan for continuity if it becomes unaffordable. | <a href="https://mattcasmith.net/2026/04/26/ai-price-rises-resilience">Read full post >></a>]]></content>
+  </entry>
   
   <entry>
     <title>Ticketmaster randomly cancelled my gig tickets &amp;mdash; twice</title>
@@ -89,15 +98,6 @@
     <updated>2026-02-22T09:00:00+00:00</updated>
     <id>https://mattcasmith.net/2026/02/22/business-writing-empathy</id>
     <content type="html"><![CDATA[The key to good business writing is empathy – not emotional, but practical. Put yourself in the recipient's shoes to make action effortless and eliminate painful back-and-forths, making for more efficient business. | <a href="https://mattcasmith.net/2026/02/22/business-writing-empathy">Read full post >></a>]]></content>
-  </entry>
-  
-  <entry>
-    <title>Notepad flaw shows why software bloat matters</title>
-    <link href="https://mattcasmith.net/2026/02/15/notepad-vulnerability-software-bloat" rel="alternate" type="text/html"/>
-    <published>2026-02-15T12:30:00+00:00</published>
-    <updated>2026-02-15T12:30:00+00:00</updated>
-    <id>https://mattcasmith.net/2026/02/15/notepad-vulnerability-software-bloat</id>
-    <content type="html"><![CDATA[Notepad used to do one thing&#58; edit plain text. Microsoft's insistence on adding formatting and Copilot led to a perfect example of why simplicity matters – an RCE vulnerability in its Markdown rendering. | <a href="https://mattcasmith.net/2026/02/15/notepad-vulnerability-software-bloat">Read full post >></a>]]></content>
   </entry>
   
 </feed>
