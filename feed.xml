@@ -4,11 +4,20 @@
   <title>MattCASmith</title>
   <link href="https://mattcasmith.net/" rel="self"/>
   <link href="https://mattcasmith.net/feed.xml" rel="alternate" type="application/atom+xml"/>
-  <updated>2026-05-10T08:16:10+00:00</updated>
+  <updated>2026-05-17T11:16:18+00:00</updated>
   <id>https://mattcasmith.net/</id>
   <author>
     <name>MattCASmith</name>
   </author>
+  
+  <entry>
+    <title>Mixtape is unique, but nowhere near a perfect game</title>
+    <link href="https://mattcasmith.net/2026/05/17/mixtape-unique-not-perfect-game" rel="alternate" type="text/html"/>
+    <published>2026-05-17T11:15:00+00:00</published>
+    <updated>2026-05-17T11:15:00+00:00</updated>
+    <id>https://mattcasmith.net/2026/05/17/mixtape-unique-not-perfect-game</id>
+    <content type="html"><![CDATA[IGN's perfect review score for Mixtape sparked a debate about gameplay, interactivity, and what a video game actually is. Having finished it, I think a ten out of ten is hard to justify no matter which definition you use. | <a href="https://mattcasmith.net/2026/05/17/mixtape-unique-not-perfect-game">Read full post >></a>]]></content>
+  </entry>
   
   <entry>
     <title>Coinbase restructure is a huge bet on AI productivity</title>
@@ -89,15 +98,6 @@
     <updated>2026-03-15T09:13:00+00:00</updated>
     <id>https://mattcasmith.net/2026/03/15/field-notes-8-march-2026</id>
     <content type="html"><![CDATA[Between a trip to Malta and a novel about memory-eating monsters, I thought a lot this month about what we actually need. The answer, it turns out, fits in a hotel room with a book and an espresso. | <a href="https://mattcasmith.net/2026/03/15/field-notes-8-march-2026">Read full post >></a>]]></content>
-  </entry>
-  
-  <entry>
-    <title>The MacBook Neo is a laptop built for a different era</title>
-    <link href="https://mattcasmith.net/2026/03/08/apple-macbook-neo-target-market" rel="alternate" type="text/html"/>
-    <published>2026-03-08T09:13:00+00:00</published>
-    <updated>2026-03-08T09:13:00+00:00</updated>
-    <id>https://mattcasmith.net/2026/03/08/apple-macbook-neo-target-market</id>
-    <content type="html"><![CDATA[At £599, the MacBook Neo is Apple's most affordable laptop in years. The package is stylish, colourful, and compact – but the 8GB RAM cap restricts it to users for whom an iPhone may already be enough. | <a href="https://mattcasmith.net/2026/03/08/apple-macbook-neo-target-market">Read full post >></a>]]></content>
   </entry>
   
 </feed>
