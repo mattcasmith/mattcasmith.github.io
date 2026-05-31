@@ -885,7 +885,7 @@ h3 {
 p {
 	float: left;
 	width: 100%;
-	padding: 20px 0 0;
+	padding: 25px 0 0;
 	margin: 0;
 }
 
@@ -903,12 +903,18 @@ article, #home_container {
 .post p, #home_posts_list .blog_entry_excerpt {
 	font-family: "PT Serif", Georgia;
 	font-size: 12pt;
-	line-height: 1.5em;
+	line-height: 1.7em;
+}
+
+.blog_entry_excerpt {
+	line-height: 1.5em !important;
 }
 
 .post h3 {
 	font-size: 18pt;
 	width: 100%;
+	line-height: 1.2em;
+	margin-bottom: -2px;
 }
 
 .post h4 {
@@ -924,7 +930,7 @@ article, #home_container {
 	margin: 30px 0 -5px;
 	padding: 0 0 0 5%;
 	font-size: 12pt;
-	line-height: 1.5em;
+	line-height: 1.7em;
 	width: 95%;
 	font-family: 'PT Serif', 'Georgia', serif;
 }
@@ -967,7 +973,7 @@ article, #home_container {
 blockquote, .highlight, #newsletter_mid {
 	float: left;
 	font-size: 12pt;
-	line-height: 1.4em;
+	line-height: 1.4em !important;
 	border-left: 5px solid #009688;
 	padding-left: 15px;
 	width: 495px;
@@ -979,6 +985,10 @@ blockquote, .highlight, #newsletter_mid {
 	border-left: 5px solid #ddd;
 	margin-top: 35px;
 	margin-bottom: 15px;
+}
+
+#newsletter_mid p {
+	line-height: 1.5em !important;
 }
 
 #newsletter_mid button {
@@ -1509,6 +1519,7 @@ p code {
 
 #newsletter_post p {
 	padding: 5px 0 15px 0 !important;
+	line-height: 1.5em !important;
 }
 
 #newsletter_post iframe {
