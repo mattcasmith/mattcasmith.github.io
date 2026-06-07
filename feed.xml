@@ -4,11 +4,20 @@
   <title>MattCASmith</title>
   <link href="https://mattcasmith.net/" rel="self"/>
   <link href="https://mattcasmith.net/feed.xml" rel="alternate" type="application/atom+xml"/>
-  <updated>2026-05-31T07:00:53+00:00</updated>
+  <updated>2026-06-07T08:40:43+00:00</updated>
   <id>https://mattcasmith.net/</id>
   <author>
     <name>MattCASmith</name>
   </author>
+  
+  <entry>
+    <title>AI costs are rising, but proving value is still a challenge</title>
+    <link href="https://mattcasmith.net/2026/06/07/ai-costs-value" rel="alternate" type="text/html"/>
+    <published>2026-06-07T08:40:00+00:00</published>
+    <updated>2026-06-07T08:40:00+00:00</updated>
+    <id>https://mattcasmith.net/2026/06/07/ai-costs-value</id>
+    <content type="html"><![CDATA[As AI prices rise, companies' unchecked spending is coming under scrutiny. AI has removed speed constraints from development, but faster code doesn't automatically translate to revenue or business value. | <a href="https://mattcasmith.net/2026/06/07/ai-costs-value">Read full post >></a>]]></content>
+  </entry>
   
   <entry>
     <title>Care about what you do &amp;mdash; even when nobody's watching</title>
@@ -89,15 +98,6 @@
     <updated>2026-04-06T07:58:00+00:00</updated>
     <id>https://mattcasmith.net/2026/04/06/field-notes-9-april-2026</id>
     <content type="html"><![CDATA[An 18th Century plate that keeps returning to mind, Sarah Wynn-Williams' damning account of life inside Facebook, and new music from Muse that takes me back to summer nights in the 2000s. | <a href="https://mattcasmith.net/2026/04/06/field-notes-9-april-2026">Read full post >></a>]]></content>
-  </entry>
-  
-  <entry>
-    <title>F1's new regulations deliver spectacle without soul</title>
-    <link href="https://mattcasmith.net/2026/03/29/formula-1-2026-regulations" rel="alternate" type="text/html"/>
-    <published>2026-03-29T08:30:00+00:00</published>
-    <updated>2026-03-29T08:30:00+00:00</updated>
-    <id>https://mattcasmith.net/2026/03/29/formula-1-2026-regulations</id>
-    <content type="html"><![CDATA[F1's new rules have given us surface-level entertainment – but the racing feels artificial, the drivers are managing batteries instead of pushing limits, and its leaders seem reluctant to admit there's a problem. | <a href="https://mattcasmith.net/2026/03/29/formula-1-2026-regulations">Read full post >></a>]]></content>
   </entry>
   
 </feed>
