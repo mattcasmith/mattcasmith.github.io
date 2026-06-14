@@ -991,16 +991,44 @@ blockquote, .highlight, #newsletter_mid {
 	line-height: 1.5em !important;
 }
 
-#newsletter_mid button {
-	float: left;
+#newsletter_mid button, #newsletter_post button {
 	background: none;
 	color: #333;
 	margin: 10px auto 0;
-	padding: 3px 8px;
-	border: 2px solid #009688;
-	border-radius: 5px;
+	padding: 5px 10px;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
 	font-family: Roboto, Arial;
 	font-size: 10pt;
+	background: #009688;
+	color: white;
+	border: 1px solid #009688;
+}
+
+#newsletter_mid input, #newsletter_post input {
+	font-family: Roboto, Arial;
+	font-size: 10pt;
+	margin-top: 10px;
+	padding: 5px;
+	border: 1px solid #ddd;
+	border-right: none;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+
+#newsletter_mid input, #newsletter_mid button {
+	float: left;
+}
+
+#newsletter_mid input:focus, #newsletter_post input:focus {
+	border: 1px solid #ddd;
+	border-right: none;
+ 	outline: none;
+}
+
+#newsletter_mid p#message, #newsletter_post p#message {
+	font-weight: bold;
+	padding-top: 10px !important;
 }
 
 blockquote {
@@ -1420,7 +1448,6 @@ nav.top_nav a.current {
 		background: #009688 !important;
 		color: white !important;
 		padding: 5px 10px !important;
-		border: none !important;
 	}
 }
 
@@ -1518,7 +1545,7 @@ p code {
 }
 
 #newsletter_post p {
-	padding: 5px 0 15px 0 !important;
+	padding: 5px 0 5px 0 !important;
 	line-height: 1.5em !important;
 }
 
@@ -1616,7 +1643,7 @@ a #newsletter_sidebar {
   	border-bottom: 1px solid #009688 !important;
 }
 
-#newsletter_sidebar button:hover, #newsletter_mid button:hover, #home_about_newsletter button:hover {
+#newsletter_sidebar button:hover, #newsletter_mid button:hover, #home_about_newsletter button:hover, #newsletter_post button:hover {
 	opacity: 0.8;
 	cursor: pointer;
 }

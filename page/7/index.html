@@ -100,6 +100,20 @@
 			</div>
 			
 			
+					<a href="/2021/04/02/file-carving-recovering-deleted-file-disk-image">
+						<article class="blog_entry">
+							<div class="blog_entry_thumbnail">
+								<img src="/wp-content/uploads/2021/04/deletedfile_hex.png" loading="lazy" alt="File carving&#58; Recovering a deleted file from a Windows disk image">
+							</div>
+							<div class="blog_entry_title">
+								<span class="post_title">File carving&#58; Recovering a deleted file from a Windows disk image</span>
+							</div>
+							<div class="blog_entry_excerpt">
+								<time datetime="2021-04-02T00:00:00+00:00"><span class="year_label">2021-04-02</span></time>&nbsp;-&nbsp;&nbsp;Most computer users assume that when they delete a file and empty the Recycle Bin, it’s gone forever. After all, if Windows doesn’t show us a file, it doesn’t exist anymore, right? Wrong. With the right tools and knowledge, forensics experts can f...
+							</div>
+						</article>
+					</a>
+			
 					<a href="/2021/03/26/sqlite-databases-python">
 						<article class="blog_entry">
 							<div class="blog_entry_thumbnail">
@@ -226,20 +240,6 @@
 						</article>
 					</a>
 			
-					<a href="/2020/05/02/virtual-cyber-security-conferences-new-normal/">
-						<article class="blog_entry">
-							<div class="blog_entry_thumbnail">
-								<img src="/wp-content/uploads/2020/05/zoom.jpg" loading="lazy" alt="Why virtual cyber security conferences should be the new normal">
-							</div>
-							<div class="blog_entry_title">
-								<span class="post_title">Why virtual cyber security conferences should be the new normal</span>
-							</div>
-							<div class="blog_entry_excerpt">
-								<time datetime="2020-05-02T11:05:40+00:00"><span class="year_label">2020-05-02</span></time>&nbsp;-&nbsp;&nbsp;
-							</div>
-						</article>
-					</a>
-			
 			
 
 			<nav class="pagination">
@@ -328,6 +328,44 @@
 				button.addEventListener("click", () => {
   					mobileNav.classList.remove("open");
   				});
+			});
+
+			/* Newsletter signups */
+			document.querySelectorAll(".subscribe-form").forEach((form) => {
+			  form.addEventListener("submit", async (e) => {
+			    e.preventDefault();
+			    const emailInput = form.querySelector('input[type="email"]');
+			    const honeypot = form.querySelector('input[name="company"]');
+			    const message = form.querySelector(".message");
+			    const email = emailInput.value.trim();
+			    const company = honeypot ? honeypot.value : "";
+
+			    // Client-side email validation
+			    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+			    if (!emailRegex.test(email)) {
+			      message.textContent = "Please enter a valid email address.";
+			      message.style.display = "block";
+			      return;
+			    }
+
+			    try {
+			      const res = await fetch("https://beehiiv-subscribe.tight-disk-ec50.workers.dev", {
+			        method: "POST",
+			        headers: {
+			          "Content-Type": "application/json"
+			        },
+			        body: JSON.stringify({ email, company })
+			      });
+			      if (!res.ok) throw new Error("Request failed");
+			      form.innerHTML = `<p id="message">Thank you for subscribing!</p>`;
+			    } catch (err) {
+			      console.error(err);
+			      if (message) {
+			        message.textContent = "Something went wrong. Please try again.";
+			        message.style.display = "block";
+			      }
+			    }
+			  });
 			});
         </script>
 		

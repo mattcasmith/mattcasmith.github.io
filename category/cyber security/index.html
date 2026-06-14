@@ -91,6 +91,20 @@
 
 			
 			
+					<a href="/2026/06/14/uk-government-online-privacy">
+						<article class="blog_entry">
+							<div class="blog_entry_thumbnail">
+								<img src="/wp-content/uploads/2026/06/uk-government-online-privacy_0.jpg" loading="lazy" alt="The UK government is quietly eroding online anonymity">
+							</div>
+							<div class="blog_entry_title">
+								<span class="post_title">The UK government is quietly eroding online anonymity</span>
+							</div>
+							<div class="blog_entry_excerpt">
+								<time datetime="2026-06-14T08:11:00+00:00"><span class="year_label">2026-06-14</span></time>&nbsp;-&nbsp;&nbsp;The Online Safety Act brought age checks to websites. Now the government wants them built into your devices – removing anonymity that protects whistleblowers, dissidents, and honest personal writing.
+							</div>
+						</article>
+					</a>
+			
 					<a href="/2025/12/10/ai-shopping-profiling-privacy">
 						<article class="blog_entry">
 							<div class="blog_entry_thumbnail">
@@ -207,6 +221,44 @@
 				button.addEventListener("click", () => {
   					mobileNav.classList.remove("open");
   				});
+			});
+
+			/* Newsletter signups */
+			document.querySelectorAll(".subscribe-form").forEach((form) => {
+			  form.addEventListener("submit", async (e) => {
+			    e.preventDefault();
+			    const emailInput = form.querySelector('input[type="email"]');
+			    const honeypot = form.querySelector('input[name="company"]');
+			    const message = form.querySelector(".message");
+			    const email = emailInput.value.trim();
+			    const company = honeypot ? honeypot.value : "";
+
+			    // Client-side email validation
+			    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+			    if (!emailRegex.test(email)) {
+			      message.textContent = "Please enter a valid email address.";
+			      message.style.display = "block";
+			      return;
+			    }
+
+			    try {
+			      const res = await fetch("https://beehiiv-subscribe.tight-disk-ec50.workers.dev", {
+			        method: "POST",
+			        headers: {
+			          "Content-Type": "application/json"
+			        },
+			        body: JSON.stringify({ email, company })
+			      });
+			      if (!res.ok) throw new Error("Request failed");
+			      form.innerHTML = `<p id="message">Thank you for subscribing!</p>`;
+			    } catch (err) {
+			      console.error(err);
+			      if (message) {
+			        message.textContent = "Something went wrong. Please try again.";
+			        message.style.display = "block";
+			      }
+			    }
+			  });
 			});
         </script>
 		

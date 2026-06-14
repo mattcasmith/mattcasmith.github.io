@@ -91,6 +91,20 @@
 
 			
 			
+					<a href="/2025/11/09/field-notes-5-november-2025">
+						<article class="blog_entry">
+							<div class="blog_entry_thumbnail">
+								<img src="/wp-content/uploads/2023/01/mcas.png" loading="lazy" alt="Field Notes 5 // ChatGPT Atlas and the Claude café">
+							</div>
+							<div class="blog_entry_title">
+								<span class="post_title">Field Notes 5 // ChatGPT Atlas and the Claude café</span>
+							</div>
+							<div class="blog_entry_excerpt">
+								<time datetime="2025-11-09T00:00:00+00:00"><span class="year_label">2025-11-09</span></time>&nbsp;-&nbsp;&nbsp;I'm feeling bullish on technology in a way I haven't since the mid-2010s. I'm still not fully convinced on the AI non(?)-bubble, but it feels like the sector has regained some of its soul recently. At least in my circles, there's been pushback aga...
+							</div>
+						</article>
+					</a>
+			
 					<a href="/2025/11/02/chatgpt-atlas-ai-browser">
 						<article class="blog_entry">
 							<div class="blog_entry_thumbnail">
@@ -217,20 +231,6 @@
 						</article>
 					</a>
 			
-					<a href="/2025/04/21/chatgpt-ai-anthropomorphism">
-						<article class="blog_entry">
-							<div class="blog_entry_thumbnail">
-								<img src="/wp-content/uploads/2025/04/ai-humanisation_0.png" loading="lazy" alt="Humanising AI encourages intellectual lethargy">
-							</div>
-							<div class="blog_entry_title">
-								<span class="post_title">Humanising AI encourages intellectual lethargy</span>
-							</div>
-							<div class="blog_entry_excerpt">
-								<time datetime="2025-04-21T00:00:00+00:00"><span class="year_label">2025-04-21</span></time>&nbsp;-&nbsp;&nbsp;I recently stumbled upon a Hacker News thread around a series of X posts about ChatGPT’s o3 model. Researchers noted that it “frequently fabricates actions it never took, and then elaborately justifies those actions when confronted”, in one case c...
-							</div>
-						</article>
-					</a>
-			
 			
 
 			<nav class="pagination">
@@ -319,6 +319,44 @@
 				button.addEventListener("click", () => {
   					mobileNav.classList.remove("open");
   				});
+			});
+
+			/* Newsletter signups */
+			document.querySelectorAll(".subscribe-form").forEach((form) => {
+			  form.addEventListener("submit", async (e) => {
+			    e.preventDefault();
+			    const emailInput = form.querySelector('input[type="email"]');
+			    const honeypot = form.querySelector('input[name="company"]');
+			    const message = form.querySelector(".message");
+			    const email = emailInput.value.trim();
+			    const company = honeypot ? honeypot.value : "";
+
+			    // Client-side email validation
+			    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+			    if (!emailRegex.test(email)) {
+			      message.textContent = "Please enter a valid email address.";
+			      message.style.display = "block";
+			      return;
+			    }
+
+			    try {
+			      const res = await fetch("https://beehiiv-subscribe.tight-disk-ec50.workers.dev", {
+			        method: "POST",
+			        headers: {
+			          "Content-Type": "application/json"
+			        },
+			        body: JSON.stringify({ email, company })
+			      });
+			      if (!res.ok) throw new Error("Request failed");
+			      form.innerHTML = `<p id="message">Thank you for subscribing!</p>`;
+			    } catch (err) {
+			      console.error(err);
+			      if (message) {
+			        message.textContent = "Something went wrong. Please try again.";
+			        message.style.display = "block";
+			      }
+			    }
+			  });
 			});
         </script>
 		

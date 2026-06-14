@@ -100,6 +100,20 @@
 			</div>
 			
 			
+					<a href="/2025/05/31/abstraction-quality-detail-obsessed-leaders">
+						<article class="blog_entry">
+							<div class="blog_entry_thumbnail">
+								<img src="/wp-content/uploads/2025/05/abstraction_0.png" loading="lazy" alt="Quality products begin with detail-obsessed leaders">
+							</div>
+							<div class="blog_entry_title">
+								<span class="post_title">Quality products begin with detail-obsessed leaders</span>
+							</div>
+							<div class="blog_entry_excerpt">
+								<time datetime="2025-05-31T00:00:00+00:00"><span class="year_label">2025-05-31</span></time>&nbsp;-&nbsp;&nbsp;It often feels like modern business is stuck in a loop. An idea is successful, there is a push to scale it as far and quickly as possible, and it’s optimised to within an inch of its life - but normally only in the name of profit. Usually this res...
+							</div>
+						</article>
+					</a>
+			
 					<a href="/2025/05/24/bluesky-x-comparison">
 						<article class="blog_entry">
 							<div class="blog_entry_thumbnail">
@@ -226,20 +240,6 @@
 						</article>
 					</a>
 			
-					<a href="/2023/02/17/winget-automate-software-deployment-new-laptop">
-						<article class="blog_entry">
-							<div class="blog_entry_thumbnail">
-								<img src="/wp-content/uploads/2023/02/winget_1.png" loading="lazy" alt="Using winget to automate software deployment to a new laptop">
-							</div>
-							<div class="blog_entry_title">
-								<span class="post_title">Using winget to automate software deployment to a new laptop</span>
-							</div>
-							<div class="blog_entry_excerpt">
-								<time datetime="2023-02-17T00:00:00+00:00"><span class="year_label">2023-02-17</span></time>&nbsp;-&nbsp;&nbsp;I got my first new laptop in six years this week! The new hardware is definitely exciting, but reviews aren’t really my thing, so while I’ll inevitably tweet about how the Microsoft Surface Laptop fares, that’s not the purpose of this post. This i...
-							</div>
-						</article>
-					</a>
-			
 			
 
 			<nav class="pagination">
@@ -328,6 +328,44 @@
 				button.addEventListener("click", () => {
   					mobileNav.classList.remove("open");
   				});
+			});
+
+			/* Newsletter signups */
+			document.querySelectorAll(".subscribe-form").forEach((form) => {
+			  form.addEventListener("submit", async (e) => {
+			    e.preventDefault();
+			    const emailInput = form.querySelector('input[type="email"]');
+			    const honeypot = form.querySelector('input[name="company"]');
+			    const message = form.querySelector(".message");
+			    const email = emailInput.value.trim();
+			    const company = honeypot ? honeypot.value : "";
+
+			    // Client-side email validation
+			    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+			    if (!emailRegex.test(email)) {
+			      message.textContent = "Please enter a valid email address.";
+			      message.style.display = "block";
+			      return;
+			    }
+
+			    try {
+			      const res = await fetch("https://beehiiv-subscribe.tight-disk-ec50.workers.dev", {
+			        method: "POST",
+			        headers: {
+			          "Content-Type": "application/json"
+			        },
+			        body: JSON.stringify({ email, company })
+			      });
+			      if (!res.ok) throw new Error("Request failed");
+			      form.innerHTML = `<p id="message">Thank you for subscribing!</p>`;
+			    } catch (err) {
+			      console.error(err);
+			      if (message) {
+			        message.textContent = "Something went wrong. Please try again.";
+			        message.style.display = "block";
+			      }
+			    }
+			  });
 			});
         </script>
 		

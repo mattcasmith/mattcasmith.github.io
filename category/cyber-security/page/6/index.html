@@ -306,6 +306,44 @@
   					mobileNav.classList.remove("open");
   				});
 			});
+
+			/* Newsletter signups */
+			document.querySelectorAll(".subscribe-form").forEach((form) => {
+			  form.addEventListener("submit", async (e) => {
+			    e.preventDefault();
+			    const emailInput = form.querySelector('input[type="email"]');
+			    const honeypot = form.querySelector('input[name="company"]');
+			    const message = form.querySelector(".message");
+			    const email = emailInput.value.trim();
+			    const company = honeypot ? honeypot.value : "";
+
+			    // Client-side email validation
+			    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+			    if (!emailRegex.test(email)) {
+			      message.textContent = "Please enter a valid email address.";
+			      message.style.display = "block";
+			      return;
+			    }
+
+			    try {
+			      const res = await fetch("https://beehiiv-subscribe.tight-disk-ec50.workers.dev", {
+			        method: "POST",
+			        headers: {
+			          "Content-Type": "application/json"
+			        },
+			        body: JSON.stringify({ email, company })
+			      });
+			      if (!res.ok) throw new Error("Request failed");
+			      form.innerHTML = `<p id="message">Thank you for subscribing!</p>`;
+			    } catch (err) {
+			      console.error(err);
+			      if (message) {
+			        message.textContent = "Something went wrong. Please try again.";
+			        message.style.display = "block";
+			      }
+			    }
+			  });
+			});
         </script>
 		
 		</div>

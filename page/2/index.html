@@ -100,6 +100,20 @@
 			</div>
 			
 			
+					<a href="/2026/04/06/field-notes-9-april-2026">
+						<article class="blog_entry">
+							<div class="blog_entry_thumbnail">
+								<img src="/wp-content/uploads/2026/04/field-notes-9-april-2026_0.jpg" loading="lazy" alt="Field Notes 9 // Museums, Facebook, and new Muse">
+							</div>
+							<div class="blog_entry_title">
+								<span class="post_title">Field Notes 9 // Museums, Facebook, and new Muse</span>
+							</div>
+							<div class="blog_entry_excerpt">
+								<time datetime="2026-04-06T07:58:00+00:00"><span class="year_label">2026-04-06</span></time>&nbsp;-&nbsp;&nbsp;An 18th Century plate that keeps returning to mind, Sarah Wynn-Williams' damning account of life inside Facebook, and new music from Muse that takes me back to summer nights in the 2000s.
+							</div>
+						</article>
+					</a>
+			
 					<a href="/2026/03/29/formula-1-2026-regulations">
 						<article class="blog_entry">
 							<div class="blog_entry_thumbnail">
@@ -226,20 +240,6 @@
 						</article>
 					</a>
 			
-					<a href="/2026/01/25/field-notes-6-january-2026">
-						<article class="blog_entry">
-							<div class="blog_entry_thumbnail">
-								<img src="/wp-content/uploads/2026/01/field-notes-6-christmas_0.png" loading="lazy" alt="Field Notes 6 // Christmas, reflection, and bowling">
-							</div>
-							<div class="blog_entry_title">
-								<span class="post_title">Field Notes 6 // Christmas, reflection, and bowling</span>
-							</div>
-							<div class="blog_entry_excerpt">
-								<time datetime="2026-01-25T09:00:00+00:00"><span class="year_label">2026-01-25</span></time>&nbsp;-&nbsp;&nbsp;I took some time off this Christmas to relax, reflect, and review my notebooks from 2025, and came away with inspiration about where to take the blog in 2026. I also did a lot of ten-pin bowling.
-							</div>
-						</article>
-					</a>
-			
 			
 
 			<nav class="pagination">
@@ -328,6 +328,44 @@
 				button.addEventListener("click", () => {
   					mobileNav.classList.remove("open");
   				});
+			});
+
+			/* Newsletter signups */
+			document.querySelectorAll(".subscribe-form").forEach((form) => {
+			  form.addEventListener("submit", async (e) => {
+			    e.preventDefault();
+			    const emailInput = form.querySelector('input[type="email"]');
+			    const honeypot = form.querySelector('input[name="company"]');
+			    const message = form.querySelector(".message");
+			    const email = emailInput.value.trim();
+			    const company = honeypot ? honeypot.value : "";
+
+			    // Client-side email validation
+			    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+			    if (!emailRegex.test(email)) {
+			      message.textContent = "Please enter a valid email address.";
+			      message.style.display = "block";
+			      return;
+			    }
+
+			    try {
+			      const res = await fetch("https://beehiiv-subscribe.tight-disk-ec50.workers.dev", {
+			        method: "POST",
+			        headers: {
+			          "Content-Type": "application/json"
+			        },
+			        body: JSON.stringify({ email, company })
+			      });
+			      if (!res.ok) throw new Error("Request failed");
+			      form.innerHTML = `<p id="message">Thank you for subscribing!</p>`;
+			    } catch (err) {
+			      console.error(err);
+			      if (message) {
+			        message.textContent = "Something went wrong. Please try again.";
+			        message.style.display = "block";
+			      }
+			    }
+			  });
 			});
         </script>
 		
