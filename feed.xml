@@ -4,11 +4,20 @@
   <title>MattCASmith</title>
   <link href="https://mattcasmith.net/" rel="self"/>
   <link href="https://mattcasmith.net/feed.xml" rel="alternate" type="application/atom+xml"/>
-  <updated>2026-06-14T19:22:28+00:00</updated>
+  <updated>2026-06-21T06:07:49+00:00</updated>
   <id>https://mattcasmith.net/</id>
   <author>
     <name>MattCASmith</name>
   </author>
+  
+  <entry>
+    <title>Alternatives to the UK government’s social media ban</title>
+    <link href="https://mattcasmith.net/2026/06/21/uk-social-media-ban-alternatives" rel="alternate" type="text/html"/>
+    <published>2026-06-21T06:07:00+00:00</published>
+    <updated>2026-06-21T06:07:00+00:00</updated>
+    <id>https://mattcasmith.net/2026/06/21/uk-social-media-ban-alternatives</id>
+    <content type="html"><![CDATA[The UK government wants to ban social media for under-16s. The goal is reasonable, but there are more effective alternatives that don't require sacrificing privacy and anonymity for the rest of the population. | <a href="https://mattcasmith.net/2026/06/21/uk-social-media-ban-alternatives">Read full post >></a>]]></content>
+  </entry>
   
   <entry>
     <title>The UK government is quietly eroding online anonymity</title>
@@ -89,15 +98,6 @@
     <updated>2026-04-19T09:34:00+00:00</updated>
     <id>https://mattcasmith.net/2026/04/19/ticketmaster-cancelled-tickets-bot</id>
     <content type="html"><![CDATA[My Muse tickets were cancelled three days before the show because Ticketmaster claimed I was a bot. To make things right, I had to navigate a Kafkaesque web of chatbots, generic responses, and delays. | <a href="https://mattcasmith.net/2026/04/19/ticketmaster-cancelled-tickets-bot">Read full post >></a>]]></content>
-  </entry>
-  
-  <entry>
-    <title>Kagi &amp;ndash; a paid search engine that supports the small web</title>
-    <link href="https://mattcasmith.net/2026/04/12/kagi-search-small-web" rel="alternate" type="text/html"/>
-    <published>2026-04-12T07:20:00+00:00</published>
-    <updated>2026-04-12T07:20:00+00:00</updated>
-    <id>https://mattcasmith.net/2026/04/12/kagi-search-small-web</id>
-    <content type="html"><![CDATA[Before algorithmic bias and advertising took over, search felt different. Kagi is trying to take us back — stripping out ads and SEO spam, and actively promoting the small web that most engines quietly suppress. | <a href="https://mattcasmith.net/2026/04/12/kagi-search-small-web">Read full post >></a>]]></content>
   </entry>
   
 </feed>
