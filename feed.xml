@@ -4,11 +4,20 @@
   <title>MattCASmith</title>
   <link href="https://mattcasmith.net/" rel="self"/>
   <link href="https://mattcasmith.net/feed.xml" rel="alternate" type="application/atom+xml"/>
-  <updated>2026-06-21T06:07:49+00:00</updated>
+  <updated>2026-06-28T09:02:35+00:00</updated>
   <id>https://mattcasmith.net/</id>
   <author>
     <name>MattCASmith</name>
   </author>
+  
+  <entry>
+    <title>Field Notes 11 // Trailblazers, Totoro, and dolls' houses</title>
+    <link href="https://mattcasmith.net/2026/06/28/field-notes-11-june-2026" rel="alternate" type="text/html"/>
+    <published>2026-06-28T09:00:00+00:00</published>
+    <updated>2026-06-28T09:00:00+00:00</updated>
+    <id>https://mattcasmith.net/2026/06/28/field-notes-11-june-2026</id>
+    <content type="html"><![CDATA[This month's Field Notes flows from Formula 1 commentary to a Studio Ghibli stage adaptation to an elaborate royal dolls' house. What connects them all is craft, care, and people who refuse to cut corners. | <a href="https://mattcasmith.net/2026/06/28/field-notes-11-june-2026">Read full post >></a>]]></content>
+  </entry>
   
   <entry>
     <title>Alternatives to the UK government’s social media ban</title>
@@ -89,15 +98,6 @@
     <updated>2026-04-26T10:49:00+00:00</updated>
     <id>https://mattcasmith.net/2026/04/26/ai-price-rises-resilience</id>
     <content type="html"><![CDATA[Big Tech spent years subsidising AI access to build the habit. Now those subsidies are ending. With prices rising and AI embedded in core processes, businesses need to plan for continuity if it becomes unaffordable. | <a href="https://mattcasmith.net/2026/04/26/ai-price-rises-resilience">Read full post >></a>]]></content>
-  </entry>
-  
-  <entry>
-    <title>Ticketmaster randomly cancelled my gig tickets &amp;mdash; twice</title>
-    <link href="https://mattcasmith.net/2026/04/19/ticketmaster-cancelled-tickets-bot" rel="alternate" type="text/html"/>
-    <published>2026-04-19T09:34:00+00:00</published>
-    <updated>2026-04-19T09:34:00+00:00</updated>
-    <id>https://mattcasmith.net/2026/04/19/ticketmaster-cancelled-tickets-bot</id>
-    <content type="html"><![CDATA[My Muse tickets were cancelled three days before the show because Ticketmaster claimed I was a bot. To make things right, I had to navigate a Kafkaesque web of chatbots, generic responses, and delays. | <a href="https://mattcasmith.net/2026/04/19/ticketmaster-cancelled-tickets-bot">Read full post >></a>]]></content>
   </entry>
   
 </feed>
