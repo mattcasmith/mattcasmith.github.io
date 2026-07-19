@@ -4,11 +4,20 @@
   <title>MattCASmith</title>
   <link href="https://mattcasmith.net/" rel="self"/>
   <link href="https://mattcasmith.net/feed.xml" rel="alternate" type="application/atom+xml"/>
-  <updated>2026-07-12T10:46:07+00:00</updated>
+  <updated>2026-07-19T05:58:44+00:00</updated>
   <id>https://mattcasmith.net/</id>
   <author>
     <name>MattCASmith</name>
   </author>
+  
+  <entry>
+    <title>Field Notes 12 // Heatwaves, agency, and the Kindle</title>
+    <link href="https://mattcasmith.net/2026/07/19/field-notes-12-july-2026" rel="alternate" type="text/html"/>
+    <published>2026-07-19T00:00:00+00:00</published>
+    <updated>2026-07-19T00:00:00+00:00</updated>
+    <id>https://mattcasmith.net/2026/07/19/field-notes-12-july-2026</id>
+    <content type="html"><![CDATA[June in the UK was something of an endurance test, with temperatures regularly hitting the 30s. Also – reflections on my Amazon Kindle review a year on, and how to zero in on your most valuable work. | <a href="https://mattcasmith.net/2026/07/19/field-notes-12-july-2026">Read full post >></a>]]></content>
+  </entry>
   
   <entry>
     <title>Your new feature is clever &amp;mdash; but does it work in real life?</title>
@@ -89,15 +98,6 @@
     <updated>2026-05-17T11:15:00+00:00</updated>
     <id>https://mattcasmith.net/2026/05/17/mixtape-unique-not-perfect-game</id>
     <content type="html"><![CDATA[IGN's perfect review score for Mixtape sparked a debate about gameplay, interactivity, and what a video game actually is. Having finished it, I think a ten out of ten is hard to justify no matter which definition you use. | <a href="https://mattcasmith.net/2026/05/17/mixtape-unique-not-perfect-game">Read full post >></a>]]></content>
-  </entry>
-  
-  <entry>
-    <title>Coinbase restructure is a huge bet on AI productivity</title>
-    <link href="https://mattcasmith.net/2026/05/10/coinbase-ai-layoffs-restructure" rel="alternate" type="text/html"/>
-    <published>2026-05-10T08:15:00+00:00</published>
-    <updated>2026-05-10T08:15:00+00:00</updated>
-    <id>https://mattcasmith.net/2026/05/10/coinbase-ai-layoffs-restructure</id>
-    <content type="html"><![CDATA[Brian Armstrong is bracing against market volatility with a flatter org chart, hands-on managers, and fleets of AI agents. But Coinbase's pivot comes with its own contradictions – and exposes it to new risks. | <a href="https://mattcasmith.net/2026/05/10/coinbase-ai-layoffs-restructure">Read full post >></a>]]></content>
   </entry>
   
 </feed>
