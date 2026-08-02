@@ -4,11 +4,20 @@
   <title>MattCASmith</title>
   <link href="https://mattcasmith.net/" rel="self"/>
   <link href="https://mattcasmith.net/feed.xml" rel="alternate" type="application/atom+xml"/>
-  <updated>2026-07-26T05:56:26+00:00</updated>
+  <updated>2026-08-02T06:45:30+00:00</updated>
   <id>https://mattcasmith.net/</id>
   <author>
     <name>MattCASmith</name>
   </author>
+  
+  <entry>
+    <title>FIFA's failed sell-off and the duty of custodianship</title>
+    <link href="https://mattcasmith.net/2026/08/02/fifa-world-cup-custodianship" rel="alternate" type="text/html"/>
+    <published>2026-08-02T06:44:00+00:00</published>
+    <updated>2026-08-02T06:44:00+00:00</updated>
+    <id>https://mattcasmith.net/2026/08/02/fifa-world-cup-custodianship</id>
+    <content type="html"><![CDATA[Gianni Infantino has scrapped his plan to sell stakes in FIFA's competitions, including the World Cup, to investors. It was always the wrong idea – custodians don't get to sell what they're only trusted to protect. | <a href="https://mattcasmith.net/2026/08/02/fifa-world-cup-custodianship">Read full post >></a>]]></content>
+  </entry>
   
   <entry>
     <title>Will the RAM crunch force a return to optimisation?</title>
@@ -89,15 +98,6 @@
     <updated>2026-05-31T06:58:00+00:00</updated>
     <id>https://mattcasmith.net/2026/05/31/care-about-what-you-do</id>
     <content type="html"><![CDATA[I've spent years writing about technology without identifying the thread connecting it all. Then I realised&colon; I'm obsessed with people who care about the things they do – and frustrated by those who don't. | <a href="https://mattcasmith.net/2026/05/31/care-about-what-you-do">Read full post >></a>]]></content>
-  </entry>
-  
-  <entry>
-    <title>Google's AI push could break the information economy</title>
-    <link href="https://mattcasmith.net/2026/05/21/google-ai-information-economy" rel="alternate" type="text/html"/>
-    <published>2026-05-21T15:38:00+00:00</published>
-    <updated>2026-05-21T15:38:00+00:00</updated>
-    <id>https://mattcasmith.net/2026/05/21/google-ai-information-economy</id>
-    <content type="html"><![CDATA[If Google's new AI features stop traffic flowing to websites, fewer people will bother running them. That could disrupt the entire online information economy – and deprive AI models of the data they use to learn. | <a href="https://mattcasmith.net/2026/05/21/google-ai-information-economy">Read full post >></a>]]></content>
   </entry>
   
 </feed>
