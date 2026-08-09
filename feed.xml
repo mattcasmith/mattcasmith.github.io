@@ -4,11 +4,20 @@
   <title>MattCASmith</title>
   <link href="https://mattcasmith.net/" rel="self"/>
   <link href="https://mattcasmith.net/feed.xml" rel="alternate" type="application/atom+xml"/>
-  <updated>2026-08-02T06:45:30+00:00</updated>
+  <updated>2026-08-09T07:04:20+00:00</updated>
   <id>https://mattcasmith.net/</id>
   <author>
     <name>MattCASmith</name>
   </author>
+  
+  <entry>
+    <title>We are witnessing the death of the games console</title>
+    <link href="https://mattcasmith.net/2026/08/09/death-of-the-games-console" rel="alternate" type="text/html"/>
+    <published>2026-08-09T07:02:00+00:00</published>
+    <updated>2026-08-09T07:02:00+00:00</updated>
+    <id>https://mattcasmith.net/2026/08/09/death-of-the-games-console</id>
+    <content type="html"><![CDATA[Rising prices, diminishing generational leaps, and the slow death of physical media have stripped games consoles of their advantages. The days of PlayStation and Xbox as we know them may be numbered. | <a href="https://mattcasmith.net/2026/08/09/death-of-the-games-console">Read full post >></a>]]></content>
+  </entry>
   
   <entry>
     <title>FIFA's failed sell-off and the duty of custodianship</title>
@@ -89,15 +98,6 @@
     <updated>2026-06-07T08:40:00+00:00</updated>
     <id>https://mattcasmith.net/2026/06/07/ai-costs-value</id>
     <content type="html"><![CDATA[As AI prices rise, companies' unchecked spending is coming under scrutiny. AI has removed speed constraints from development, but faster code doesn't automatically translate to revenue or business value. | <a href="https://mattcasmith.net/2026/06/07/ai-costs-value">Read full post >></a>]]></content>
-  </entry>
-  
-  <entry>
-    <title>Care about what you do &amp;mdash; even when nobody's watching</title>
-    <link href="https://mattcasmith.net/2026/05/31/care-about-what-you-do" rel="alternate" type="text/html"/>
-    <published>2026-05-31T06:58:00+00:00</published>
-    <updated>2026-05-31T06:58:00+00:00</updated>
-    <id>https://mattcasmith.net/2026/05/31/care-about-what-you-do</id>
-    <content type="html"><![CDATA[I've spent years writing about technology without identifying the thread connecting it all. Then I realised&colon; I'm obsessed with people who care about the things they do – and frustrated by those who don't. | <a href="https://mattcasmith.net/2026/05/31/care-about-what-you-do">Read full post >></a>]]></content>
   </entry>
   
 </feed>
