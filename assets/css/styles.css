@@ -1786,6 +1786,12 @@ p.newsletter_disclaimer {
 	#mobile_nav a {
 		color: #ddd;		
 	}
+	.about_cols .col {
+		width: 100% !important;
+	}
+	.about_cols .col:last-of-type {
+		display: none !important;
+	}
 }
 
 .inline-featured-post {
@@ -1847,6 +1853,21 @@ p.inline-featured-post_caption {
 
 .inline-featured-post a {
 	color: #333;
+}
+
+.about_cols, .about_cols .col {
+	float: left;
+}
+
+.about_cols .col:first-of-type {
+	width: 345px;
+}
+
+.about_profile {
+	float: right;
+	width: 190px;
+	padding: 67px 5px 20px 10px;
+	border-radius: 100px;
 }
 
 @media screen and (max-width: 625px) {
