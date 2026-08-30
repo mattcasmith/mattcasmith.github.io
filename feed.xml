@@ -4,11 +4,20 @@
   <title>MattCASmith</title>
   <link href="https://mattcasmith.net/" rel="self"/>
   <link href="https://mattcasmith.net/feed.xml" rel="alternate" type="application/atom+xml"/>
-  <updated>2026-08-23T09:21:00+00:00</updated>
+  <updated>2026-08-30T17:01:22+00:00</updated>
   <id>https://mattcasmith.net/</id>
   <author>
     <name>MattCASmith</name>
   </author>
+  
+  <entry>
+    <title>Optimism isn't naive – pessimism is just the easy option</title>
+    <link href="https://mattcasmith.net/2026/08/30/relentless-optimism" rel="alternate" type="text/html"/>
+    <published>2026-08-30T17:00:00+00:00</published>
+    <updated>2026-08-30T17:00:00+00:00</updated>
+    <id>https://mattcasmith.net/2026/08/30/relentless-optimism</id>
+    <content type="html"><![CDATA[As long as you've prepared for the challenge ahead, try to be relentlessly optimistic about your chances of success. There's no downside to absolute belief in yourself, and worry can become a self-fulfilling prophecy. | <a href="https://mattcasmith.net/2026/08/30/relentless-optimism">Read full post >></a>]]></content>
+  </entry>
   
   <entry>
     <title>There's no substitute for real-world experience</title>
@@ -16,7 +25,7 @@
     <published>2026-08-23T09:20:00+00:00</published>
     <updated>2026-08-23T09:20:00+00:00</updated>
     <id>https://mattcasmith.net/2026/08/23/no-substitute-real-world-experience</id>
-    <content type="html"><![CDATA[From the CEO who once drove a forklift to game developers taking 250,000 photos of New York, real experience beats abstraction every time and can make the difference between good and groundbreaking. | <a href="https://mattcasmith.net/2026/08/23/no-substitute-real-world-experience">Read full post >></a>]]></content>
+    <content type="html"><![CDATA[From the CEO who once drove a forklift to game developers taking 250,000 photos of New York, real experience beats abstraction every time, and can make the difference between good and groundbreaking. | <a href="https://mattcasmith.net/2026/08/23/no-substitute-real-world-experience">Read full post >></a>]]></content>
   </entry>
   
   <entry>
@@ -89,15 +98,6 @@
     <updated>2026-06-28T09:00:00+00:00</updated>
     <id>https://mattcasmith.net/2026/06/28/field-notes-11-june-2026</id>
     <content type="html"><![CDATA[This month's Field Notes flows from Formula 1 commentary to a Studio Ghibli stage adaptation to an elaborate royal dolls' house. What connects them all is craft, care, and people who refuse to cut corners. | <a href="https://mattcasmith.net/2026/06/28/field-notes-11-june-2026">Read full post >></a>]]></content>
-  </entry>
-  
-  <entry>
-    <title>Alternatives to the UK government’s social media ban</title>
-    <link href="https://mattcasmith.net/2026/06/21/uk-social-media-ban-alternatives" rel="alternate" type="text/html"/>
-    <published>2026-06-21T06:07:00+00:00</published>
-    <updated>2026-06-21T06:07:00+00:00</updated>
-    <id>https://mattcasmith.net/2026/06/21/uk-social-media-ban-alternatives</id>
-    <content type="html"><![CDATA[The UK government wants to ban social media for under-16s. The goal is reasonable, but there are more effective alternatives that don't require sacrificing privacy and anonymity for the rest of the population. | <a href="https://mattcasmith.net/2026/06/21/uk-social-media-ban-alternatives">Read full post >></a>]]></content>
   </entry>
   
 </feed>
