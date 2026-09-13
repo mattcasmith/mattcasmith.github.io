@@ -904,6 +904,7 @@ article, #home_container {
 	font-family: "PT Serif", Georgia;
 	font-size: 12pt;
 	line-height: 1.7em;
+	hyphens: auto;
 }
 
 .blog_entry_excerpt {

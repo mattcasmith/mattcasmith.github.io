@@ -4,11 +4,20 @@
   <title>MattCASmith</title>
   <link href="https://mattcasmith.net/" rel="self"/>
   <link href="https://mattcasmith.net/feed.xml" rel="alternate" type="application/atom+xml"/>
-  <updated>2026-09-06T10:42:44+00:00</updated>
+  <updated>2026-09-13T10:24:25+00:00</updated>
   <id>https://mattcasmith.net/</id>
   <author>
     <name>MattCASmith</name>
   </author>
+  
+  <entry>
+    <title>AI labs make their case to humanity as agents run amok</title>
+    <link href="https://mattcasmith.net/2026/09/13/ai-safety-contradictions" rel="alternate" type="text/html"/>
+    <published>2026-09-13T10:23:00+00:00</published>
+    <updated>2026-09-13T10:23:00+00:00</updated>
+    <id>https://mattcasmith.net/2026/09/13/ai-safety-contradictions</id>
+    <content type="html"><![CDATA[AI has entered the age of the contradiction. Just as the major labs dropped their doomer takes to focus on human-agent coexistence, a string of incidents caused by out-of-control models have damaged trust. | <a href="https://mattcasmith.net/2026/09/13/ai-safety-contradictions">Read full post >></a>]]></content>
+  </entry>
   
   <entry>
     <title>You will never own another PlayStation game again</title>
@@ -89,15 +98,6 @@
     <updated>2026-07-12T10:44:00+00:00</updated>
     <id>https://mattcasmith.net/2026/07/12/feature-design-testing</id>
     <content type="html"><![CDATA[Great products are built for users – not to chase new trends, save a few extra pennies, or restrict customer choice. Sometimes what seem like good ideas to executives and designers simply don’t stand up in real life. | <a href="https://mattcasmith.net/2026/07/12/feature-design-testing">Read full post >></a>]]></content>
-  </entry>
-  
-  <entry>
-    <title>Muse's The Wow! Signal is an unexpected resurgence</title>
-    <link href="https://mattcasmith.net/2026/07/05/muse-the-wow-signal-review" rel="alternate" type="text/html"/>
-    <published>2026-07-05T09:15:00+00:00</published>
-    <updated>2026-07-05T09:15:00+00:00</updated>
-    <id>https://mattcasmith.net/2026/07/05/muse-the-wow-signal-review</id>
-    <content type="html"><![CDATA[After two recent albums that felt like pale imitations, Muse have returned to their space rock roots with something raw, coherent, and genuinely emotional. A track-by-track review from a long-haul flight. | <a href="https://mattcasmith.net/2026/07/05/muse-the-wow-signal-review">Read full post >></a>]]></content>
   </entry>
   
 </feed>
