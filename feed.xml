@@ -4,11 +4,20 @@
   <title>MattCASmith</title>
   <link href="https://mattcasmith.net/" rel="self"/>
   <link href="https://mattcasmith.net/feed.xml" rel="alternate" type="application/atom+xml"/>
-  <updated>2026-09-13T10:24:25+00:00</updated>
+  <updated>2026-09-20T08:03:27+00:00</updated>
   <id>https://mattcasmith.net/</id>
   <author>
     <name>MattCASmith</name>
   </author>
+  
+  <entry>
+    <title>Field Notes 14 // Hospitals, grindset cafés, and Weezer</title>
+    <link href="https://mattcasmith.net/2026/09/20/field-notes-14-september-2026" rel="alternate" type="text/html"/>
+    <published>2026-09-20T08:03:00+00:00</published>
+    <updated>2026-09-20T08:03:00+00:00</updated>
+    <id>https://mattcasmith.net/2026/09/20/field-notes-14-september-2026</id>
+    <content type="html"><![CDATA[We can't stop bad things from happening to us, but we can change how we react. This month&#58; Hospital visits, LLMs that struggle to identify a car, London's new 24/7 grindset café, and a new Weezer album. | <a href="https://mattcasmith.net/2026/09/20/field-notes-14-september-2026">Read full post >></a>]]></content>
+  </entry>
   
   <entry>
     <title>AI labs make their case to humanity as agents run amok</title>
@@ -89,15 +98,6 @@
     <updated>2026-07-19T00:00:00+00:00</updated>
     <id>https://mattcasmith.net/2026/07/19/field-notes-12-july-2026</id>
     <content type="html"><![CDATA[June in the UK was something of an endurance test, with temperatures regularly hitting the 30s. Also – reflections on my Amazon Kindle review a year on, and how to zero in on your most valuable work. | <a href="https://mattcasmith.net/2026/07/19/field-notes-12-july-2026">Read full post >></a>]]></content>
-  </entry>
-  
-  <entry>
-    <title>Your new feature is clever &amp;mdash; but does it work in real life?</title>
-    <link href="https://mattcasmith.net/2026/07/12/feature-design-testing" rel="alternate" type="text/html"/>
-    <published>2026-07-12T10:44:00+00:00</published>
-    <updated>2026-07-12T10:44:00+00:00</updated>
-    <id>https://mattcasmith.net/2026/07/12/feature-design-testing</id>
-    <content type="html"><![CDATA[Great products are built for users – not to chase new trends, save a few extra pennies, or restrict customer choice. Sometimes what seem like good ideas to executives and designers simply don’t stand up in real life. | <a href="https://mattcasmith.net/2026/07/12/feature-design-testing">Read full post >></a>]]></content>
   </entry>
   
 </feed>
