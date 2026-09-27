@@ -4,11 +4,20 @@
   <title>MattCASmith</title>
   <link href="https://mattcasmith.net/" rel="self"/>
   <link href="https://mattcasmith.net/feed.xml" rel="alternate" type="application/atom+xml"/>
-  <updated>2026-09-20T08:57:03+00:00</updated>
+  <updated>2026-09-27T16:21:37+00:00</updated>
   <id>https://mattcasmith.net/</id>
   <author>
     <name>MattCASmith</name>
   </author>
+  
+  <entry>
+    <title>The hidden cost of punishing customers for mistakes</title>
+    <link href="https://mattcasmith.net/2026/09/27/free-trials-psychology" rel="alternate" type="text/html"/>
+    <published>2026-09-27T16:21:00+00:00</published>
+    <updated>2026-09-27T16:21:00+00:00</updated>
+    <id>https://mattcasmith.net/2026/09/27/free-trials-psychology</id>
+    <content type="html"><![CDATA[Free trials are all the rage, but paid auto-renewals pose real risks to users' relationship with your brand. Is the short-term revenue boost worth giving customers a negative feeling that could last much longer? | <a href="https://mattcasmith.net/2026/09/27/free-trials-psychology">Read full post >></a>]]></content>
+  </entry>
   
   <entry>
     <title>Field Notes 14 // Hospitals, grindset cafés, and Weezer</title>
@@ -89,15 +98,6 @@
     <updated>2026-07-26T05:55:00+00:00</updated>
     <id>https://mattcasmith.net/2026/07/26/ram-crunch-optimisation</id>
     <content type="html"><![CDATA[Software bloat went unchecked for decades because memory was cheap. Now it isn't, and consumers can't afford those same specs. Which way the industry turns next depends on values, not just technology. | <a href="https://mattcasmith.net/2026/07/26/ram-crunch-optimisation">Read full post >></a>]]></content>
-  </entry>
-  
-  <entry>
-    <title>Field Notes 12 // Heatwaves, agency, and the Kindle</title>
-    <link href="https://mattcasmith.net/2026/07/19/field-notes-12-july-2026" rel="alternate" type="text/html"/>
-    <published>2026-07-19T00:00:00+00:00</published>
-    <updated>2026-07-19T00:00:00+00:00</updated>
-    <id>https://mattcasmith.net/2026/07/19/field-notes-12-july-2026</id>
-    <content type="html"><![CDATA[June in the UK was something of an endurance test, with temperatures regularly hitting the 30s. Also – reflections on my Amazon Kindle review a year on, and how to zero in on your most valuable work. | <a href="https://mattcasmith.net/2026/07/19/field-notes-12-july-2026">Read full post >></a>]]></content>
   </entry>
   
 </feed>
