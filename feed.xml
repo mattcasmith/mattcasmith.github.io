@@ -4,11 +4,20 @@
   <title>MattCASmith</title>
   <link href="https://mattcasmith.net/" rel="self"/>
   <link href="https://mattcasmith.net/feed.xml" rel="alternate" type="application/atom+xml"/>
-  <updated>2026-09-27T16:21:37+00:00</updated>
+  <updated>2026-10-04T10:29:53+00:00</updated>
   <id>https://mattcasmith.net/</id>
   <author>
     <name>MattCASmith</name>
   </author>
+  
+  <entry>
+    <title>Manchester City and the para-realities of the powerful</title>
+    <link href="https://mattcasmith.net/2026/10/04/manchester-city-premier-league-verdict" rel="alternate" type="text/html"/>
+    <published>2026-10-04T10:28:00+00:00</published>
+    <updated>2026-10-04T10:28:00+00:00</updated>
+    <id>https://mattcasmith.net/2026/10/04/manchester-city-premier-league-verdict</id>
+    <content type="html"><![CDATA[In the biggest scandal in football history, an independent commission has found Man City guilty of breaking Premier League financial rules. With the verdict out, the battle of the narratives has commenced. | <a href="https://mattcasmith.net/2026/10/04/manchester-city-premier-league-verdict">Read full post >></a>]]></content>
+  </entry>
   
   <entry>
     <title>The hidden cost of punishing customers for mistakes</title>
@@ -89,15 +98,6 @@
     <updated>2026-08-02T06:44:00+00:00</updated>
     <id>https://mattcasmith.net/2026/08/02/fifa-world-cup-custodianship</id>
     <content type="html"><![CDATA[Gianni Infantino has scrapped his plan to sell stakes in FIFA's competitions, including the World Cup, to investors. It was always the wrong idea – custodians don't get to sell what they're only trusted to protect. | <a href="https://mattcasmith.net/2026/08/02/fifa-world-cup-custodianship">Read full post >></a>]]></content>
-  </entry>
-  
-  <entry>
-    <title>Will the RAM crunch force a return to optimisation?</title>
-    <link href="https://mattcasmith.net/2026/07/26/ram-crunch-optimisation" rel="alternate" type="text/html"/>
-    <published>2026-07-26T05:55:00+00:00</published>
-    <updated>2026-07-26T05:55:00+00:00</updated>
-    <id>https://mattcasmith.net/2026/07/26/ram-crunch-optimisation</id>
-    <content type="html"><![CDATA[Software bloat went unchecked for decades because memory was cheap. Now it isn't, and consumers can't afford those same specs. Which way the industry turns next depends on values, not just technology. | <a href="https://mattcasmith.net/2026/07/26/ram-crunch-optimisation">Read full post >></a>]]></content>
   </entry>
   
 </feed>
