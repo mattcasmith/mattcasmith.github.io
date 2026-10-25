@@ -4,11 +4,20 @@
   <title>MattCASmith</title>
   <link href="https://mattcasmith.net/" rel="self"/>
   <link href="https://mattcasmith.net/feed.xml" rel="alternate" type="application/atom+xml"/>
-  <updated>2026-10-19T05:48:49+00:00</updated>
+  <updated>2026-10-25T07:01:08+00:00</updated>
   <id>https://mattcasmith.net/</id>
   <author>
     <name>MattCASmith</name>
   </author>
+  
+  <entry>
+    <title>How I turned my iPhone into a modern feature phone</title>
+    <link href="https://mattcasmith.net/2026/10/25/iphone-shortcuts-less-addictive" rel="alternate" type="text/html"/>
+    <published>2026-10-25T06:56:00+00:00</published>
+    <updated>2026-10-25T06:56:00+00:00</updated>
+    <id>https://mattcasmith.net/2026/10/25/iphone-shortcuts-less-addictive</id>
+    <content type="html"><![CDATA[Neither Screen Time nor folders could stop me reaching for social apps. Now I avoid them entirely with a custom menu that combines the functionality of an iPhone with the user interface of a Nokia 3310. | <a href="https://mattcasmith.net/2026/10/25/iphone-shortcuts-less-addictive">Read full post >></a>]]></content>
+  </entry>
   
   <entry>
     <title>Field Notes 15 // Monotasking and the lost art of focus</title>
@@ -89,15 +98,6 @@
     <updated>2026-08-23T09:20:00+00:00</updated>
     <id>https://mattcasmith.net/2026/08/23/no-substitute-real-world-experience</id>
     <content type="html"><![CDATA[From the CEO who once drove a forklift to game developers taking 250,000 photos of New York, real experience beats abstraction every time, and can make the difference between good and groundbreaking. | <a href="https://mattcasmith.net/2026/08/23/no-substitute-real-world-experience">Read full post >></a>]]></content>
-  </entry>
-  
-  <entry>
-    <title>Field Notes 13 // Hotel life, Waymo, and the World Cup</title>
-    <link href="https://mattcasmith.net/2026/08/15/field-notes-13-august-2026" rel="alternate" type="text/html"/>
-    <published>2026-08-15T07:17:00+00:00</published>
-    <updated>2026-08-15T07:17:00+00:00</updated>
-    <id>https://mattcasmith.net/2026/08/15/field-notes-13-august-2026</id>
-    <content type="html"><![CDATA[From Thomas Tuchel's dissatisfaction with a winning England performance to a man running in the 35-degree Austin sun – this month's Field Notes is about doing things properly, even in difficult conditions. | <a href="https://mattcasmith.net/2026/08/15/field-notes-13-august-2026">Read full post >></a>]]></content>
   </entry>
   
 </feed>
