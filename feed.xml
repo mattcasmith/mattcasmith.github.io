@@ -4,11 +4,20 @@
   <title>MattCASmith</title>
   <link href="https://mattcasmith.net/" rel="self"/>
   <link href="https://mattcasmith.net/feed.xml" rel="alternate" type="application/atom+xml"/>
-  <updated>2026-10-25T07:01:08+00:00</updated>
+  <updated>2026-11-01T00:27:11+00:00</updated>
   <id>https://mattcasmith.net/</id>
   <author>
     <name>MattCASmith</name>
   </author>
+  
+  <entry>
+    <title>Dispatch from Japan&amp;#58; Onsen hotels, busy UIs, and value</title>
+    <link href="https://mattcasmith.net/2026/11/01/japan-dispatch-onsen-ui-value" rel="alternate" type="text/html"/>
+    <published>2026-11-01T00:24:00+00:00</published>
+    <updated>2026-11-01T00:24:00+00:00</updated>
+    <id>https://mattcasmith.net/2026/11/01/japan-dispatch-onsen-ui-value</id>
+    <content type="html"><![CDATA[Japan’s in-person service is warm and its software is a maze. From an onsen hotel in Mie prefecture to a ¥9,000 sushi dinner for four, my first post from this trip looks at care, clutter, and life off the beaten track. | <a href="https://mattcasmith.net/2026/11/01/japan-dispatch-onsen-ui-value">Read full post >></a>]]></content>
+  </entry>
   
   <entry>
     <title>How I turned my iPhone into a modern feature phone</title>
@@ -89,15 +98,6 @@
     <updated>2026-08-30T17:00:00+00:00</updated>
     <id>https://mattcasmith.net/2026/08/30/relentless-optimism</id>
     <content type="html"><![CDATA[As long as you've prepared for the challenge ahead, try to be relentlessly optimistic about your chances of success. There's no downside to absolute belief in yourself, and worry can become a self-fulfilling prophecy. | <a href="https://mattcasmith.net/2026/08/30/relentless-optimism">Read full post >></a>]]></content>
-  </entry>
-  
-  <entry>
-    <title>There's no substitute for real-world experience</title>
-    <link href="https://mattcasmith.net/2026/08/23/no-substitute-real-world-experience" rel="alternate" type="text/html"/>
-    <published>2026-08-23T09:20:00+00:00</published>
-    <updated>2026-08-23T09:20:00+00:00</updated>
-    <id>https://mattcasmith.net/2026/08/23/no-substitute-real-world-experience</id>
-    <content type="html"><![CDATA[From the CEO who once drove a forklift to game developers taking 250,000 photos of New York, real experience beats abstraction every time, and can make the difference between good and groundbreaking. | <a href="https://mattcasmith.net/2026/08/23/no-substitute-real-world-experience">Read full post >></a>]]></content>
   </entry>
   
 </feed>
