@@ -4,11 +4,20 @@
   <title>MattCASmith</title>
   <link href="https://mattcasmith.net/" rel="self"/>
   <link href="https://mattcasmith.net/feed.xml" rel="alternate" type="application/atom+xml"/>
-  <updated>2026-11-08T08:21:48+00:00</updated>
+  <updated>2026-11-15T07:29:42+00:00</updated>
   <id>https://mattcasmith.net/</id>
   <author>
     <name>MattCASmith</name>
   </author>
+  
+  <entry>
+    <title>Field Notes 16 // Half marathons and everyday wonder</title>
+    <link href="https://mattcasmith.net/2026/11/15/field-notes-16-november-2026" rel="alternate" type="text/html"/>
+    <published>2026-11-15T07:29:00+00:00</published>
+    <updated>2026-11-15T07:29:00+00:00</updated>
+    <id>https://mattcasmith.net/2026/11/15/field-notes-16-november-2026</id>
+    <content type="html"><![CDATA[This month's Field Notes explores how we can adopt a more positive mindset by controlling inputs and seeking out wonder in the world around us – against the backdrop of my latest half marathon. | <a href="https://mattcasmith.net/2026/11/15/field-notes-16-november-2026">Read full post >></a>]]></content>
+  </entry>
   
   <entry>
     <title>Dispatch from Japan&amp;#58; Courtesy, character, and Kojima</title>
@@ -89,15 +98,6 @@
     <updated>2026-09-13T10:23:00+00:00</updated>
     <id>https://mattcasmith.net/2026/09/13/ai-safety-contradictions</id>
     <content type="html"><![CDATA[AI has entered the age of the contradiction. Just as the major labs dropped their doomer takes to focus on human-agent coexistence, a string of incidents caused by out-of-control models have damaged trust. | <a href="https://mattcasmith.net/2026/09/13/ai-safety-contradictions">Read full post >></a>]]></content>
-  </entry>
-  
-  <entry>
-    <title>You will never own another PlayStation game again</title>
-    <link href="https://mattcasmith.net/2026/09/06/sony-playstation-digital-games-ownership" rel="alternate" type="text/html"/>
-    <published>2026-09-06T10:42:00+00:00</published>
-    <updated>2026-09-06T10:42:00+00:00</updated>
-    <id>https://mattcasmith.net/2026/09/06/sony-playstation-digital-games-ownership</id>
-    <content type="html"><![CDATA[Sony already doubled down on its unpopular decision to end the production of PlayStation game discs – now it's locking in the concept of digital games as temporary licences, with no real ownership for players. | <a href="https://mattcasmith.net/2026/09/06/sony-playstation-digital-games-ownership">Read full post >></a>]]></content>
   </entry>
   
 </feed>
